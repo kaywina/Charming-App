@@ -200,4 +200,9 @@ public class Charms : MonoBehaviour {
 			break;
 		}
 	}
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
