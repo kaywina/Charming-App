@@ -70,6 +70,63 @@ public class Charms : MonoBehaviour {
 	void GetTapStarted() {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hit)) {
+            if (hit.transform.name == "Charm_Love")
+            {
+                SetCharm("Love");
+                //Debug.Log("Love!");
+            }
+            if (hit.transform.name == "Charm_Grace")
+            {
+                SetCharm("Grace");
+                //Debug.Log("Grace!");
+            }
+            if (hit.transform.name == "Charm_Patience")
+            {
+                SetCharm("Patience");
+                //Debug.Log("Patience!");
+            }
+            if (hit.transform.name == "Charm_Wisdom")
+            {
+                SetCharm("Wisdom");
+                //Debug.Log("Wisdom!");
+            }
+            if (hit.transform.name == "Charm_Joy")
+            {
+                SetCharm("Joy");
+                //Debug.Log("Joy!");
+            }
+            if (hit.transform.name == "Charm_Focus")
+            {
+                SetCharm("Focus");
+                //Debug.Log("Focus!");
+            }
+            if (hit.transform.name == "Charm_Will")
+            {
+                SetCharm("Will");
+                //Debug.Log("Will!");
+            }
+            if (hit.transform.name == "Charm_Guile")
+            {
+                SetCharm("Guile");
+                //Debug.Log("Guile!");
+            }
+            if (hit.transform.name == "Charm_Power")
+            {
+                SetCharm("Power");
+                //Debug.Log("Power!");
+            }
+            if (hit.transform.name == "Charm_Fortune")
+            {
+                SetCharm("Fortune");
+                //Debug.Log("Fortune!");
+            }
+		}
+	}
+
+	// Start animations on button tap/click
+	void GetTapEnded() {
+		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		if (Physics.Raycast (ray, out hit)) {
             if (hit.transform.name == "Charm_Love") { }
             if (hit.transform.name == "Charm_Grace") { }
             if (hit.transform.name == "Charm_Patience") { }
@@ -79,55 +136,8 @@ public class Charms : MonoBehaviour {
             if (hit.transform.name == "Charm_Will") { }
             if (hit.transform.name == "Charm_Guile") { }
             if (hit.transform.name == "Charm_Power") { }
-			if (hit.transform.name == "Charm_Fortune") { }
-		}
-	}
-
-	// Start animations on button tap/click
-	void GetTapEnded() {
-		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		if (Physics.Raycast (ray, out hit)) {
-			if (hit.transform.name == "Charm_Love") {
-				SetCharm ("Love");
-				Debug.Log ("Love!");
-			}
-            if (hit.transform.name == "Charm_Grace") {
-                SetCharm("Grace");
-                Debug.Log("Grace!");
-            }
-            if (hit.transform.name == "Charm_Patience") {
-                SetCharm("Patience");
-                Debug.Log("Patience!");
-            }
-            if (hit.transform.name == "Charm_Wisdom") {
-                SetCharm("Wisdom");
-                Debug.Log("Wisdom!");
-            }
-            if (hit.transform.name == "Charm_Joy") {
-                SetCharm("Joy");
-                Debug.Log("Joy!");
-            }
-            if (hit.transform.name == "Charm_Focus") {
-                SetCharm("Focus");
-                Debug.Log("Focus!");
-            }
-            if (hit.transform.name == "Charm_Will") {
-                SetCharm("Will");
-                Debug.Log("Will!");
-            }
-            if (hit.transform.name == "Charm_Guile") {
-                SetCharm("Guile");
-                Debug.Log("Guile!");
-            }
-            if (hit.transform.name == "Charm_Power") {
-				SetCharm ("Power");
-				Debug.Log ("Power!");
-			}
-			if (hit.transform.name == "Charm_Fortune") {
-				SetCharm ("Fortune");
-				Debug.Log ("Fortune!");
-			}
-		}
+            if (hit.transform.name == "Charm_Fortune") { }
+        }
 	}
 
 	void SetCharm(string charm) {
@@ -203,7 +213,7 @@ public class Charms : MonoBehaviour {
 
     public void Quit()
     {
-        Debug.Log("Quit");
+        //Debug.Log("Quit");
         Application.Quit();
     }
 }
