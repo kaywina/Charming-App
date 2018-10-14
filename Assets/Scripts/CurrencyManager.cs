@@ -43,7 +43,7 @@ public class CurrencyManager : MonoBehaviour {
 	
     void AddCurrencyOnStart(int amount)
     {
-        PlayerPrefs.SetInt("Currency", amount)
+        PlayerPrefs.SetInt("Currency", amount);
     }
 
 	void GiveBonus(int bonus)
