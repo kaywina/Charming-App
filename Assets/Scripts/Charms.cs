@@ -30,7 +30,7 @@ public class Charms : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PlayerPrefs.SetString("Charm", "");
+        //PlayerPrefs.SetString("Charm", "");
         if (String.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
             PlayerPrefs.SetString("Charm", "Love"); // default is Love
         }
