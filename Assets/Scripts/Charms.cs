@@ -145,6 +145,11 @@ public class Charms : MonoBehaviour {
 
 	void SetCharm(string charm) {
 
+        if (charm == PlayerPrefs.GetString("Charm"))
+        {
+            return;
+        }
+
         int costPerChange = 5;
         if (!onFirstLoad && !CurrencyManager.WithdrawAmount(costPerChange))
         {
