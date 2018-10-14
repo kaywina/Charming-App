@@ -28,6 +28,8 @@ public class Charms : MonoBehaviour {
 
 	private float swapSpeed = 0.5f;
 
+    private bool onFirstLoad = true;
+
 	// Use this for initialization
 	void Start () {
         //PlayerPrefs.SetString("Charm", "");
@@ -35,6 +37,7 @@ public class Charms : MonoBehaviour {
             PlayerPrefs.SetString("Charm", "Love"); // default is Love
         }
 		SetCharm (PlayerPrefs.GetString ("Charm"));
+        onFirstLoad = false;
 	}
 	
 	// Update is called once per frame
@@ -141,7 +144,15 @@ public class Charms : MonoBehaviour {
 	}
 
 	void SetCharm(string charm) {
-		switch (charm) {
+
+        int costPerChange = 5;
+        if (!onFirstLoad && !CurrencyManager.WithdrawAmount(costPerChange))
+        {
+            //Debug.Log("Not enough kisses");
+            return;
+        }
+
+        switch (charm) {
 		case "Love":
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
 			charmNameText.text = "Love";

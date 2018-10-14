@@ -6,18 +6,22 @@ using UnityEngine.UI;
 
 public class CurrencyManager : MonoBehaviour {
 
+    public static CurrencyManager instance;
+
     public GameObject bonusPanel;
     public Text currencyText;
 
     private int dailyBonusAmount = 10;
 
     public static int currencyInBank = 0;
-    private int storedDayOfYear = 0;
-    private int storedYear = 0;
 
 	// Use this for initialization
 	void Start ()
     {
+        instance = this;
+
+        PlayerPrefs.SetInt("Currency", 30);
+
         currencyInBank = PlayerPrefs.GetInt("Currency");
         CloseBonusPanel();
         SetCurrencyText();
@@ -25,19 +29,22 @@ public class CurrencyManager : MonoBehaviour {
         int currentDayOfYear = currentDateTime.DayOfYear;
         int currentYear = currentDateTime.Year;
 
-        if (currentDayOfYear > PlayerPrefs.GetInt("Day") && currentYear >= PlayerPrefs.GetInt("Year"))
+        int storedDayOfYear = PlayerPrefs.GetInt("Day");
+        int storedYear = PlayerPrefs.GetInt("Year");
+
+        if (currentDayOfYear >  storedDayOfYear && currentYear >= storedYear)
         {
-            GiveBonus();
+            GiveBonus(dailyBonusAmount);
         }
 
         PlayerPrefs.SetInt("Day", currentDayOfYear);
         PlayerPrefs.SetInt("Year", currentYear);
     }
 	
-	void GiveBonus()
+	void GiveBonus(int bonus)
     {
         bonusPanel.SetActive(true);
-        currencyInBank += dailyBonusAmount;
+        currencyInBank += bonus;
         PlayerPrefs.SetInt("Currency", currencyInBank);
         SetCurrencyText();
     }
@@ -47,8 +54,20 @@ public class CurrencyManager : MonoBehaviour {
         bonusPanel.SetActive(false);
     }
 
-    public void SetCurrencyText()
+    public static void SetCurrencyText()
     {
-        currencyText.text = currencyInBank.ToString();
+
+        instance.currencyText.text = currencyInBank.ToString();
+    }
+
+    public static bool WithdrawAmount(int amount)
+    {
+        if (amount <= currencyInBank)
+        {
+            currencyInBank = currencyInBank - amount;
+            SetCurrencyText();
+            return true;
+        }
+        return false;
     }
 }
