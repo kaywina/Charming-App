@@ -20,7 +20,11 @@ public class CurrencyManager : MonoBehaviour {
     {
         instance = this;
 
-        //AddCurrencyOnStart(30);
+        if (PlayerPrefs.GetString("FirstRun") != "False")
+        {
+            AddCurrencyOnStart(100);
+            PlayerPrefs.SetString("FirstRun", "False");
+        }
 
         currencyInBank = PlayerPrefs.GetInt("Currency");
         CloseBonusPanel();
