@@ -20,7 +20,7 @@ public class CurrencyManager : MonoBehaviour {
     {
         instance = this;
 
-        PlayerPrefs.SetInt("Currency", 30);
+        //AddCurrencyOnStart(30);
 
         currencyInBank = PlayerPrefs.GetInt("Currency");
         CloseBonusPanel();
@@ -41,6 +41,11 @@ public class CurrencyManager : MonoBehaviour {
         PlayerPrefs.SetInt("Year", currentYear);
     }
 	
+    void AddCurrencyOnStart(int amount)
+    {
+        PlayerPrefs.SetInt("Currency", amount)
+    }
+
 	void GiveBonus(int bonus)
     {
         bonusPanel.SetActive(true);
