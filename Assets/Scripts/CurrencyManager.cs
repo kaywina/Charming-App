@@ -65,12 +65,18 @@ public class CurrencyManager : MonoBehaviour {
         instance.currencyText.text = currencyInBank.ToString();
     }
 
+    public static void SetCurrencyInBank(int amount)
+    {
+        currencyInBank = amount;
+        PlayerPrefs.SetInt("Currency", currencyInBank);
+        SetCurrencyText();
+    }
+
     public static bool WithdrawAmount(int amount)
     {
         if (amount <= currencyInBank)
         {
-            currencyInBank = currencyInBank - amount;
-            SetCurrencyText();
+            SetCurrencyInBank(currencyInBank - amount);
             return true;
         }
         return false;
