@@ -38,7 +38,9 @@ public class CurrencyManager : MonoBehaviour {
 
         if (currentDayOfYear >  storedDayOfYear && currentYear >= storedYear)
         {
-            GiveBonus(dailyBonusAmount);
+            if (PlayerPrefs.GetString("FirstRun") != "False") {
+                GiveBonus(dailyBonusAmount);
+            }  
         }
 
         PlayerPrefs.SetInt("Day", currentDayOfYear);
