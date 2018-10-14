@@ -145,7 +145,7 @@ public class Charms : MonoBehaviour {
 
 	void SetCharm(string charm) {
 
-        if (charm == PlayerPrefs.GetString("Charm"))
+        if (!onFirstLoad && charm == PlayerPrefs.GetString("Charm"))
         {
             return;
         }
