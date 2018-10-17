@@ -19,9 +19,10 @@ public class CurrencyManager : MonoBehaviour {
 	void Start ()
     {
         instance = this;
-
+        PlayerPrefs.SetInt("Day", 200);
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
+            //Debug.Log("Give currency bonus on first run");
             AddCurrencyOnStart(100);
             PlayerPrefs.SetString("FirstRun", "False");
         }
@@ -33,12 +34,19 @@ public class CurrencyManager : MonoBehaviour {
         int currentDayOfYear = currentDateTime.DayOfYear;
         int currentYear = currentDateTime.Year;
 
+        //Debug.Log("currentDayOfYear = " + currentDayOfYear);
+        //Debug.Log("currentYear = " + currentYear);
+
         int storedDayOfYear = PlayerPrefs.GetInt("Day");
         int storedYear = PlayerPrefs.GetInt("Year");
 
+        //Debug.Log("storedDayOfYear = " + storedDayOfYear);
+        //Debug.Log("storedYear = " + storedYear);
+
         if (currentDayOfYear >  storedDayOfYear && currentYear >= storedYear)
         {
-            if (PlayerPrefs.GetString("FirstRun") != "False") {
+            //Debug.Log("Give bonus");
+            if (PlayerPrefs.GetString("FirstRun") == "False") {
                 GiveBonus(dailyBonusAmount);
             }  
         }
