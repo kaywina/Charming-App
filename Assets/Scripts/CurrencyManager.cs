@@ -19,7 +19,6 @@ public class CurrencyManager : MonoBehaviour {
 	void Start ()
     {
         instance = this;
-        PlayerPrefs.SetInt("Day", 200);
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             //Debug.Log("Give currency bonus on first run");
