@@ -22,7 +22,7 @@ public class CurrencyManager : MonoBehaviour {
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             //Debug.Log("Give currency bonus on first run");
-            AddCurrencyOnStart(100);
+            AddCurrencyOnStart(15);
             PlayerPrefs.SetString("FirstRun", "False");
         }
 
