@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnlockGameObject : MonoBehaviour {
 
     public GameObject go;
     public int cost;
-    public bool lockOnPlay = false;
+    private bool lockOnPlay = false;
+    public Text priceText;
     
 	// Use this for initialization
 	void Start () {
+
+        priceText.text = cost.ToString();
 
         if (lockOnPlay)
         {
