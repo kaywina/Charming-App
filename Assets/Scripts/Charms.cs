@@ -150,12 +150,14 @@ public class Charms : MonoBehaviour {
             return;
         }
 
+        /* Uncomment to add a cost to every time the player changes charms
         int costPerChange = 5;
         if (!onFirstLoad && !CurrencyManager.WithdrawAmount(costPerChange))
         {
             //Debug.Log("Not enough kisses");
             return;
         }
+        */
 
         switch (charm) {
 		case "Love":
