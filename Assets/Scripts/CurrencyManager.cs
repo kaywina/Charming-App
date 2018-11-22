@@ -11,7 +11,8 @@ public class CurrencyManager : MonoBehaviour {
     public GameObject bonusPanel;
     public Text currencyText;
 
-    private int dailyBonusAmount = 10;
+    private static int welcomeBonus = 16;
+    private int dailyBonusAmount = 8;
 
     public static int currencyInBank = 0;
 
@@ -22,7 +23,7 @@ public class CurrencyManager : MonoBehaviour {
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             //Debug.Log("Give currency bonus on first run");
-            AddCurrencyOnStart(15);
+            AddCurrencyOnStart(welcomeBonus);
             PlayerPrefs.SetString("FirstRun", "False");
         }
 

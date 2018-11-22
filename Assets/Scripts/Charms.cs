@@ -7,6 +7,8 @@ public class Charms : MonoBehaviour {
 
 	public Camera mainCamera;
 
+    public GameObject welcomeScreen;
+
 	public TextMesh charmNameText;
 	public TextMesh charmDescriptionText;
 
@@ -33,6 +35,13 @@ public class Charms : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //PlayerPrefs.SetString("Charm", "");
+
+        // show welcome screen on first time running
+        if (PlayerPrefs.GetString("FirstRun") != "False")
+        {
+            welcomeScreen.SetActive(true);
+        }
+
         if (String.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
             PlayerPrefs.SetString("Charm", "Love"); // default is Love
         }
@@ -233,5 +242,10 @@ public class Charms : MonoBehaviour {
     {
         //Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void CloseWelcomeScreen()
+    {
+        welcomeScreen.SetActive(false);
     }
 }
