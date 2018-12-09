@@ -11,8 +11,8 @@ public class CurrencyManager : MonoBehaviour {
     public GameObject bonusPanel;
     public Text currencyText;
 
-    private static int welcomeBonus = 16;
-    private int dailyBonusAmount = 8;
+    private static int welcomeBonus = 10;
+    private int dailyBonusAmount = 16;
 
     public static int currencyInBank = 0;
 
