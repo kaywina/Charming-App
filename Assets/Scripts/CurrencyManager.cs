@@ -8,11 +8,14 @@ public class CurrencyManager : MonoBehaviour {
 
     public static CurrencyManager instance;
 
+    public GameObject welcomePanel;
     public GameObject bonusPanel;
     public Text currencyText;
 
     private static int welcomeBonus = 10;
-    private int dailyBonusAmount = 16;
+    public Text welcomeBonusText;
+    private int dailyBonus = 16;
+    public Text dailyBonusText;
 
     public static int currencyInBank = 0;
 
@@ -20,6 +23,31 @@ public class CurrencyManager : MonoBehaviour {
 	void Start ()
     {
         instance = this;
+
+        CloseBonusPanel();
+        CloseWelcomePanel();
+
+        welcomeBonusText.text = welcomeBonus.ToString();
+        dailyBonusText.text = dailyBonus.ToString();
+
+        currencyInBank = PlayerPrefs.GetInt("Currency");
+        SetCurrencyText();
+        DateTime currentDateTime = System.DateTime.Now;
+        int currentDayOfYear = currentDateTime.DayOfYear;
+        int currentYear = currentDateTime.Year;
+
+        int storedDayOfYear = PlayerPrefs.GetInt("Day");
+        int storedYear = PlayerPrefs.GetInt("Year");
+
+        if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
+        {
+            //Debug.Log("Give bonus");
+            if (PlayerPrefs.GetString("FirstRun") == "False")
+            {
+                GiveBonus(dailyBonus);
+            }
+        }
+
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             //Debug.Log("Give currency bonus on first run");
@@ -27,37 +55,16 @@ public class CurrencyManager : MonoBehaviour {
             PlayerPrefs.SetString("FirstRun", "False");
         }
 
-        currencyInBank = PlayerPrefs.GetInt("Currency");
-        CloseBonusPanel();
-        SetCurrencyText();
-        DateTime currentDateTime = System.DateTime.Now;
-        int currentDayOfYear = currentDateTime.DayOfYear;
-        int currentYear = currentDateTime.Year;
-
-        //Debug.Log("currentDayOfYear = " + currentDayOfYear);
-        //Debug.Log("currentYear = " + currentYear);
-
-        int storedDayOfYear = PlayerPrefs.GetInt("Day");
-        int storedYear = PlayerPrefs.GetInt("Year");
-
-        //Debug.Log("storedDayOfYear = " + storedDayOfYear);
-        //Debug.Log("storedYear = " + storedYear);
-
-        if (currentDayOfYear >  storedDayOfYear && currentYear >= storedYear)
-        {
-            //Debug.Log("Give bonus");
-            if (PlayerPrefs.GetString("FirstRun") == "False") {
-                GiveBonus(dailyBonusAmount);
-            }  
-        }
-
         PlayerPrefs.SetInt("Day", currentDayOfYear);
         PlayerPrefs.SetInt("Year", currentYear);
     }
-	
+
     void AddCurrencyOnStart(int amount)
     {
-        PlayerPrefs.SetInt("Currency", amount);
+        currencyInBank = amount;
+        PlayerPrefs.SetInt("Currency", currencyInBank);
+        welcomePanel.SetActive(true);
+        SetCurrencyText();
     }
 
 	void GiveBonus(int bonus)
@@ -71,6 +78,11 @@ public class CurrencyManager : MonoBehaviour {
     public void CloseBonusPanel()
     {
         bonusPanel.SetActive(false);
+    }
+
+    public void CloseWelcomePanel()
+    {
+        welcomePanel.SetActive(false);
     }
 
     public static void SetCurrencyText()
