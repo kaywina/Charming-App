@@ -72,6 +72,7 @@ public class CurrencyManager : MonoBehaviour {
         bonusPanel.SetActive(true);
         currencyInBank += bonus;
         PlayerPrefs.SetInt("Currency", currencyInBank);
+        dailyBonusText.text = bonus.ToString();
         SetCurrencyText();
     }
 
