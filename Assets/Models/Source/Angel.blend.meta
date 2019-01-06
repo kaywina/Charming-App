@@ -3,6 +3,26 @@ guid: 39cf5f196c11dd041bd2767244628225
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: Cylinder
+    100004: Icosphere
+    100006: Plane
+    400000: //RootNode
+    400002: Cylinder
+    400004: Icosphere
+    400006: Plane
+    2100000: Material
+    2300000: Cylinder
+    2300002: Icosphere
+    2300004: Plane
+    3300000: Cylinder
+    3300002: Icosphere
+    3300004: Plane
+    4300000: Plane
+    4300002: Icosphere
+    4300004: Cylinder
+    7400000: Default Take
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -56,7 +76,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

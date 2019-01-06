@@ -67,7 +67,7 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
-	void GiveBonus(int bonus)
+	public void GiveBonus(int bonus)
     {
         bonusPanel.SetActive(true);
         currencyInBank += bonus;

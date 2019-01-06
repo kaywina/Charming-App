@@ -49,22 +49,32 @@ public class Charms : MonoBehaviour {
 	void GetInput() {
 		// Mouse Input
 		#if UNITY_EDITOR
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0))
+        {
 			GetTapStarted ();
 		}
-		if (Input.GetMouseButtonUp (0)) {
+		if (Input.GetMouseButtonUp (0))
+        {
 			GetTapEnded ();
 		}
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            CurrencyManager.instance.GiveBonus(100);
+        }
+
 		#endif
 		// Touch Input
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
 			GetTapStarted();
 		}
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) {
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
 			GetTapEnded();
 		}
 		
-		if (Input.GetKeyDown ("escape")) {
+		if (Input.GetKeyDown ("escape"))
+        {
 			Application.Quit ();
 		}
 		
@@ -73,7 +83,8 @@ public class Charms : MonoBehaviour {
 	// Start animations on button tap/click
 	void GetTapStarted() {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if (Physics.Raycast(ray, out hit)) {
+		if (Physics.Raycast(ray, out hit))
+        {
             if (hit.transform.name == "Charm_Love")
             {
                 SetCharm("Love");
@@ -164,7 +175,7 @@ public class Charms : MonoBehaviour {
 		case "Love":
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
 			charmNameText.text = "Love";
-			charmDescriptionText.text = "Make sweet love";
+			charmDescriptionText.text = "Good luck friend";
 			PlayerPrefs.SetString ("Charm", "Love");
 			break;
         case "Grace":
