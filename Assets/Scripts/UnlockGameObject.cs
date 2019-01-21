@@ -7,17 +7,17 @@ public class UnlockGameObject : MonoBehaviour {
 
     public GameObject go;
     public int cost;
-    private bool lockOnPlay = true;
+    private bool lockOnPlay = false;
     public Text priceText;
-    
-	// Use this for initialization
-	void Start () {
+
+    void Start () {
 
         priceText.text = cost.ToString();
 
         if (lockOnPlay)
         {
             PlayerPrefs.SetString(go.name, "locked");
+            Debug.LogWarning("Warning! lockOnPlay is true");
         }
 
         if (PlayerPrefs.GetString(go.name) == "unlocked")

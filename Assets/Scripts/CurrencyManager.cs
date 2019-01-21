@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CurrencyManager : MonoBehaviour {
 
-    public static CurrencyManager instance;
+    public static CurrencyManager Instance;
 
     public GameObject welcomePanel;
     public GameObject bonusPanel;
@@ -22,7 +22,7 @@ public class CurrencyManager : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        instance = this;
+        Instance = this;
 
         CloseBonusPanel();
         CloseWelcomePanel();
@@ -76,6 +76,13 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
+    public void ClearCurrency()
+    {
+        currencyInBank = 0;
+        PlayerPrefs.SetInt("Currency", currencyInBank);
+        SetCurrencyText();
+    }
+
     public void CloseBonusPanel()
     {
         bonusPanel.SetActive(false);
@@ -89,7 +96,7 @@ public class CurrencyManager : MonoBehaviour {
     public static void SetCurrencyText()
     {
 
-        instance.currencyText.text = currencyInBank.ToString();
+        Instance.currencyText.text = currencyInBank.ToString();
     }
 
     public static void SetCurrencyInBank(int amount)
