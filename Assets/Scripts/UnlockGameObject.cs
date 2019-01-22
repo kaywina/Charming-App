@@ -7,7 +7,7 @@ public class UnlockGameObject : MonoBehaviour {
 
     public GameObject go;
     public int cost;
-    private bool lockOnPlay = true;
+    private bool lockOnPlay = false;
     public Text priceText;
 
     void Start () {
