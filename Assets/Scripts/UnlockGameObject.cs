@@ -33,7 +33,6 @@ public class UnlockGameObject : MonoBehaviour {
 
     public void Unlock()
     {
-        Debug.Log("Clicked");
         if (CurrencyManager.WithdrawAmount(cost))
         {
             PlayerPrefs.SetString(go.name, "unlocked");
