@@ -7,7 +7,7 @@ public class UnlockGameObject : MonoBehaviour {
 
     public GameObject go;
     public int cost;
-    private bool lockOnPlay = false;
+    private bool lockOnPlay = true;
     public Text priceText;
 
     void Start () {
@@ -33,6 +33,7 @@ public class UnlockGameObject : MonoBehaviour {
 
     public void Unlock()
     {
+        Debug.Log("Clicked");
         if (CurrencyManager.WithdrawAmount(cost))
         {
             PlayerPrefs.SetString(go.name, "unlocked");
