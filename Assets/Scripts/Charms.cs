@@ -14,6 +14,8 @@ public class Charms : MonoBehaviour {
 	private Ray ray;
 	private RaycastHit hit;
 
+    private string[] charmNames = {"Love", "Grace", "Patience", "Wisdom", "Joy", "Focus", "Will", "Guile", "Power" };
+
 	// For swappable icons on stand
 	public GameObject love;
     public GameObject grace;
@@ -24,7 +26,6 @@ public class Charms : MonoBehaviour {
     public GameObject will;
     public GameObject guile;
     public GameObject power;
-	public GameObject fortune;
 
 	private float swapSpeed = 0.5f;
 
@@ -35,7 +36,7 @@ public class Charms : MonoBehaviour {
         //PlayerPrefs.SetString("Charm", "");
 
         if (String.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
-            PlayerPrefs.SetString("Charm", "Love"); // default is Love
+            PlayerPrefs.SetString("Charm", charmNames[0]); // default is Love
         }
 		SetCharm (PlayerPrefs.GetString ("Charm"));
         onFirstLoad = false;
@@ -89,57 +90,15 @@ public class Charms : MonoBehaviour {
 	// Start animations on button tap/click
 	void GetTapStarted() {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform.name == "Love")
+            for (int i = 0; i < charmNames.Length; i++)
             {
-                SetCharm("Love");
-                //Debug.Log("Love!");
-            }
-            if (hit.transform.name == "Grace")
-            {
-                SetCharm("Grace");
-                //Debug.Log("Grace!");
-            }
-            if (hit.transform.name == "Patience")
-            {
-                SetCharm("Patience");
-                //Debug.Log("Patience!");
-            }
-            if (hit.transform.name == "Wisdom")
-            {
-                SetCharm("Wisdom");
-                //Debug.Log("Wisdom!");
-            }
-            if (hit.transform.name == "Joy")
-            {
-                SetCharm("Joy");
-                //Debug.Log("Joy!");
-            }
-            if (hit.transform.name == "Focus")
-            {
-                SetCharm("Focus");
-                //Debug.Log("Focus!");
-            }
-            if (hit.transform.name == "Will")
-            {
-                SetCharm("Will");
-                //Debug.Log("Will!");
-            }
-            if (hit.transform.name == "Guile")
-            {
-                SetCharm("Guile");
-                //Debug.Log("Guile!");
-            }
-            if (hit.transform.name == "Power")
-            {
-                SetCharm("Power");
-                //Debug.Log("Power!");
-            }
-            if (hit.transform.name == "Fortune")
-            {
-                SetCharm("Fortune");
-                //Debug.Log("Fortune!");
+               if (hit.transform.name == charmNames[i])
+                {
+                    SetCharm(charmNames[i]);
+                    break;
+                }
             }
 		}
 	}
@@ -232,12 +191,6 @@ public class Charms : MonoBehaviour {
 		    charmDescriptionText.text = "Grow your might";
 		    PlayerPrefs.SetString ("Charm", "Power");
 		    break;
-		case "Fortune":
-			mainCamera.transform.DOMoveX(fortune.transform.position.x, swapSpeed);
-			charmNameText.text = "Fortune";
-			charmDescriptionText.text = "Let it rain";
-			PlayerPrefs.SetString ("Charm", "Fortune");
-			break;
 		default:
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
 			charmNameText.text = "Love";
