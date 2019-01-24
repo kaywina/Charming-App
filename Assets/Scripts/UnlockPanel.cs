@@ -8,9 +8,9 @@ public class UnlockPanel : MonoBehaviour
     public GameObject notEnoughText;
     public Button yesButton;
     public Text costText;
-    public int cost;
-    public GameObject toUnlock;
-    public GameObject unlockButton;
+    private int cost;
+    private GameObject toUnlock;
+    private GameObject unlockButton;
 
     private void OnEnable()
     {
