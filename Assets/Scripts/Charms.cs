@@ -29,16 +29,17 @@ public class Charms : MonoBehaviour {
 
 	private float swapSpeed = 0.5f;
 
-    private bool onFirstLoad = true;
+    private bool loaded = false;
 
 	// Use this for initialization
 	void Start () {
-        if (String.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
+        if (PlayerPrefs.GetString("FirstRun") != "False")
+        {
             PlayerPrefs.SetString("Charm", charmNames[0]); // default is Love
         }
-		SetCharm (PlayerPrefs.GetString ("Charm"));
-        onFirstLoad = false;
-	}
+        SetCharm(PlayerPrefs.GetString("Charm"));
+        loaded = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -49,11 +50,11 @@ public class Charms : MonoBehaviour {
         #if UNITY_EDITOR // Mouse Input
         if (Input.GetMouseButtonDown (0))
         {
-			GetTapStarted();
+			GetTapStarted(Input.mousePosition);
 		}
 		if (Input.GetMouseButtonUp (0))
         {
-			GetTapEnded ();
+			GetTapEnded (Input.mousePosition);
 		}
         #endif
 
@@ -71,11 +72,11 @@ public class Charms : MonoBehaviour {
         // Touch Input
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-			GetTapStarted();
+			GetTapStarted(Input.GetTouch(0).position);
 		}
 		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-			GetTapEnded();
+			GetTapEnded(Input.GetTouch(0).position);
 		}
 		
 		if (Input.GetKeyDown (KeyCode.Escape))
@@ -86,8 +87,8 @@ public class Charms : MonoBehaviour {
 	}
 	
 	// Start animations on button tap/click
-	void GetTapStarted() {
-		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+	void GetTapStarted(Vector2 position) {
+		ray = Camera.main.ScreenPointToRay(position);
         if (Physics.Raycast(ray, out hit))
         {
             for (int i = 0; i < charmNames.Length; i++)
@@ -102,14 +103,14 @@ public class Charms : MonoBehaviour {
 	}
 
 	// Start animations on button tap/click
-	void GetTapEnded() {
+	void GetTapEnded(Vector2 position) {
 
 	}
 
 	public void SetCharm(string charmName) {
 
         // don't try to set charm if it hasn't changed
-        if (!onFirstLoad && charmName == PlayerPrefs.GetString("Charm"))
+        if (loaded && charmName == PlayerPrefs.GetString("Charm"))
         {
             return;
         }
@@ -167,7 +168,7 @@ public class Charms : MonoBehaviour {
 		}
 
         charmNameText.text = charmName;
-        PlayerPrefs.SetString("Charm",charmName);
+        PlayerPrefs.SetString("Charm", charmName);
     }
 
     public void Quit()
