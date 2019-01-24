@@ -91,52 +91,52 @@ public class Charms : MonoBehaviour {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform.name == "Charm_Love")
+            if (hit.transform.name == "Love")
             {
                 SetCharm("Love");
                 //Debug.Log("Love!");
             }
-            if (hit.transform.name == "Charm_Grace")
+            if (hit.transform.name == "Grace")
             {
                 SetCharm("Grace");
                 //Debug.Log("Grace!");
             }
-            if (hit.transform.name == "Charm_Patience")
+            if (hit.transform.name == "Patience")
             {
                 SetCharm("Patience");
                 //Debug.Log("Patience!");
             }
-            if (hit.transform.name == "Charm_Wisdom")
+            if (hit.transform.name == "Wisdom")
             {
                 SetCharm("Wisdom");
                 //Debug.Log("Wisdom!");
             }
-            if (hit.transform.name == "Charm_Joy")
+            if (hit.transform.name == "Joy")
             {
                 SetCharm("Joy");
                 //Debug.Log("Joy!");
             }
-            if (hit.transform.name == "Charm_Focus")
+            if (hit.transform.name == "Focus")
             {
                 SetCharm("Focus");
                 //Debug.Log("Focus!");
             }
-            if (hit.transform.name == "Charm_Will")
+            if (hit.transform.name == "Will")
             {
                 SetCharm("Will");
                 //Debug.Log("Will!");
             }
-            if (hit.transform.name == "Charm_Guile")
+            if (hit.transform.name == "Guile")
             {
                 SetCharm("Guile");
                 //Debug.Log("Guile!");
             }
-            if (hit.transform.name == "Charm_Power")
+            if (hit.transform.name == "Power")
             {
                 SetCharm("Power");
                 //Debug.Log("Power!");
             }
-            if (hit.transform.name == "Charm_Fortune")
+            if (hit.transform.name == "Fortune")
             {
                 SetCharm("Fortune");
                 //Debug.Log("Fortune!");
@@ -148,20 +148,20 @@ public class Charms : MonoBehaviour {
 	void GetTapEnded() {
 		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		if (Physics.Raycast (ray, out hit)) {
-            if (hit.transform.name == "Charm_Love") { }
-            if (hit.transform.name == "Charm_Grace") { }
-            if (hit.transform.name == "Charm_Patience") { }
-            if (hit.transform.name == "Charm_Wisdom") { }
-            if (hit.transform.name == "Charm_Joy") { }
-            if (hit.transform.name == "Charm_Focus") { }
-            if (hit.transform.name == "Charm_Will") { }
-            if (hit.transform.name == "Charm_Guile") { }
-            if (hit.transform.name == "Charm_Power") { }
-            if (hit.transform.name == "Charm_Fortune") { }
+            if (hit.transform.name == "Love") { }
+            if (hit.transform.name == "Grace") { }
+            if (hit.transform.name == "Patience") { }
+            if (hit.transform.name == "Wisdom") { }
+            if (hit.transform.name == "Joy") { }
+            if (hit.transform.name == "Focus") { }
+            if (hit.transform.name == "Will") { }
+            if (hit.transform.name == "Guile") { }
+            if (hit.transform.name == "Power") { }
+            if (hit.transform.name == "Fortune") { }
         }
 	}
 
-	void SetCharm(string charm) {
+	public void SetCharm(string charm) {
 
         if (!onFirstLoad && charm == PlayerPrefs.GetString("Charm"))
         {

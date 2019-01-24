@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UnlockPanel : MonoBehaviour
-{ 
+{
+    public Charms charms;
     public GameObject notEnoughText;
     public Button yesButton;
     public Text costText;
@@ -57,6 +58,7 @@ public class UnlockPanel : MonoBehaviour
     public void UnlockObject()
     {
         PlayerPrefs.SetString(toUnlock.name, "unlocked");
+        charms.SetCharm(toUnlock.name);
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);
         HidePanel();
