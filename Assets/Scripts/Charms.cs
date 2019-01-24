@@ -48,11 +48,10 @@ public class Charms : MonoBehaviour {
 	}
 	
 	void GetInput() {
-		// Mouse Input
-		#if UNITY_EDITOR
-		if (Input.GetMouseButtonDown (0))
+        #if UNITY_EDITOR // Mouse Input
+        if (Input.GetMouseButtonDown (0))
         {
-			GetTapStarted ();
+			GetTapStarted();
 		}
 		if (Input.GetMouseButtonUp (0))
         {
@@ -69,7 +68,8 @@ public class Charms : MonoBehaviour {
         {
             CurrencyManager.Instance.ClearCurrency();
         }
-#endif
+        #endif
+
         // Touch Input
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -80,7 +80,7 @@ public class Charms : MonoBehaviour {
 			GetTapEnded();
 		}
 		
-		if (Input.GetKeyDown ("escape"))
+		if (Input.GetKeyDown (KeyCode.Escape))
         {
 			Application.Quit ();
 		}
@@ -105,24 +105,12 @@ public class Charms : MonoBehaviour {
 
 	// Start animations on button tap/click
 	void GetTapEnded() {
-		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		if (Physics.Raycast (ray, out hit)) {
-            if (hit.transform.name == "Love") { }
-            if (hit.transform.name == "Grace") { }
-            if (hit.transform.name == "Patience") { }
-            if (hit.transform.name == "Wisdom") { }
-            if (hit.transform.name == "Joy") { }
-            if (hit.transform.name == "Focus") { }
-            if (hit.transform.name == "Will") { }
-            if (hit.transform.name == "Guile") { }
-            if (hit.transform.name == "Power") { }
-            if (hit.transform.name == "Fortune") { }
-        }
+
 	}
 
-	public void SetCharm(string charm) {
+	public void SetCharm(string charmName) {
 
-        if (!onFirstLoad && charm == PlayerPrefs.GetString("Charm"))
+        if (!onFirstLoad && charmName == PlayerPrefs.GetString("Charm"))
         {
             return;
         }
@@ -136,69 +124,52 @@ public class Charms : MonoBehaviour {
         }
         */
 
-        switch (charm) {
+        switch (charmName) {
 		case "Love":
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
-			charmNameText.text = "Love";
 			charmDescriptionText.text = "Good luck friend";
-			PlayerPrefs.SetString ("Charm", "Love");
 			break;
         case "Grace":
             mainCamera.transform.DOMoveX(grace.transform.position.x, swapSpeed);
-            charmNameText.text = "Grace";
             charmDescriptionText.text = "Flow like water";
-            PlayerPrefs.SetString("Charm", "Grace");
             break;
         case "Patience":
             mainCamera.transform.DOMoveX(patience.transform.position.x, swapSpeed);
-            charmNameText.text = "Patience";
             charmDescriptionText.text = "Wait for change";
-            PlayerPrefs.SetString("Charm", "Patience");
             break;
         case "Wisdom":
             mainCamera.transform.DOMoveX(wisdom.transform.position.x, swapSpeed);
-            charmNameText.text = "Wisdom";
             charmDescriptionText.text = "Know what's right";
-            PlayerPrefs.SetString("Charm", "Wisdom");
             break;
         case "Joy":
             mainCamera.transform.DOMoveX(joy.transform.position.x, swapSpeed);
-            charmNameText.text = "Joy";
             charmDescriptionText.text = "Witness the good";
-            PlayerPrefs.SetString("Charm", "Joy");
             break;
         case "Focus":
             mainCamera.transform.DOMoveX(focus.transform.position.x, swapSpeed);
-            charmNameText.text = "Focus";
             charmDescriptionText.text = "Stay on task";
-            PlayerPrefs.SetString("Charm", "Focus");
             break;
         case "Will":
             mainCamera.transform.DOMoveX(will.transform.position.x, swapSpeed);
-            charmNameText.text = "Will";
             charmDescriptionText.text = "Endure hard times";
-            PlayerPrefs.SetString("Charm", "Will");
             break;
         case "Guile":
             mainCamera.transform.DOMoveX(guile.transform.position.x, swapSpeed);
-            charmNameText.text = "Guile";
             charmDescriptionText.text = "Act the part";
-            PlayerPrefs.SetString("Charm", "Guile");
             break;
         case "Power":
 		    mainCamera.transform.DOMoveX(power.transform.position.x, swapSpeed);
-		    charmNameText.text = "Power";
 		    charmDescriptionText.text = "Grow your might";
-		    PlayerPrefs.SetString ("Charm", "Power");
 		    break;
 		default:
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
-			charmNameText.text = "Love";
 			charmDescriptionText.text = "Make sweet love";
-			PlayerPrefs.SetString ("Charm", "Love");
 			break;
 		}
-	}
+
+        charmNameText.text = charmName;
+        PlayerPrefs.SetString("Charm",charmName);
+    }
 
     public void Quit()
     {
