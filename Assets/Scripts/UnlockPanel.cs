@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnlockPanel : MonoBehaviour
+public class UnlockPanel : CharmsPanel
 {
     public Charms charms;
     public GameObject notEnoughText;
@@ -13,8 +13,9 @@ public class UnlockPanel : MonoBehaviour
     private GameObject toUnlock;
     private GameObject unlockButton;
 
-    private void OnEnable()
+    new void OnEnable()
     {
+        base.OnEnable();
         if (CurrencyManager.WithdrawAmount(cost))
         {
             yesButton.interactable = true;
@@ -27,8 +28,9 @@ public class UnlockPanel : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    new void OnDisable()
     {
+        base.OnDisable();
         cost = 0;
         toUnlock = null;
     }
@@ -58,9 +60,10 @@ public class UnlockPanel : MonoBehaviour
     public void UnlockObject()
     {
         PlayerPrefs.SetString(toUnlock.name, "unlocked");
-        charms.SetCharm(toUnlock.name);
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);
+        charms.SetCharm(toUnlock.name);
         HidePanel();
+        
     }
 }
