@@ -110,6 +110,7 @@ public class Charms : MonoBehaviour {
 
 	public void SetCharm(string charmName) {
 
+        // don't try to set charm if it hasn't changed
         if (!onFirstLoad && charmName == PlayerPrefs.GetString("Charm"))
         {
             return;

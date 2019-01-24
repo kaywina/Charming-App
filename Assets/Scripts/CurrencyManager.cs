@@ -106,11 +106,15 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
-    public static bool WithdrawAmount(int amount)
+    public static void WithdrawAmount(int amount)
+    {
+        SetCurrencyInBank(currencyInBank - amount);
+    }
+
+    public static bool CanWithdrawAmount(int amount)
     {
         if (amount <= currencyInBank)
         {
-            SetCurrencyInBank(currencyInBank - amount);
             return true;
         }
         return false;

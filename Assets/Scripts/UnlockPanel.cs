@@ -16,7 +16,7 @@ public class UnlockPanel : CharmsPanel
     new void OnEnable()
     {
         base.OnEnable();
-        if (CurrencyManager.WithdrawAmount(cost))
+        if (CurrencyManager.CanWithdrawAmount(cost))
         {
             yesButton.interactable = true;
             notEnoughText.SetActive(false);
@@ -59,11 +59,11 @@ public class UnlockPanel : CharmsPanel
 
     public void UnlockObject()
     {
+        CurrencyManager.WithdrawAmount(cost);
         PlayerPrefs.SetString(toUnlock.name, "unlocked");
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);
         charms.SetCharm(toUnlock.name);
         HidePanel();
-        
     }
 }
