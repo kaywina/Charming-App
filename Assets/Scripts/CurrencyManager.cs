@@ -39,27 +39,28 @@ public class CurrencyManager : MonoBehaviour {
         int storedDayOfYear = PlayerPrefs.GetInt("Day");
         int storedYear = PlayerPrefs.GetInt("Year");
 
-        if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
-        {
-            //Debug.Log("Give bonus");
-            if (PlayerPrefs.GetString("FirstRun") == "False")
-            {
-                GiveBonus(dailyBonus);
-            }
-        }
-
+        // on first time running app
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             //Debug.Log("Give currency bonus on first run");
-            AddCurrencyOnStart(welcomeBonus);
+            SetCurrencyOnStart(welcomeBonus);
             PlayerPrefs.SetString("FirstRun", "False");
+        }
+
+        // not first time running app
+        else
+        {
+            if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
+            {
+                GiveBonus(dailyBonus);
+            }
         }
 
         PlayerPrefs.SetInt("Day", currentDayOfYear);
         PlayerPrefs.SetInt("Year", currentYear);
     }
 
-    void AddCurrencyOnStart(int amount)
+    void SetCurrencyOnStart(int amount)
     {
         currencyInBank = amount;
         PlayerPrefs.SetInt("Currency", currencyInBank);

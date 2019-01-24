@@ -33,8 +33,6 @@ public class Charms : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //PlayerPrefs.SetString("Charm", "");
-
         if (String.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
             PlayerPrefs.SetString("Charm", charmNames[0]); // default is Love
         }
@@ -164,7 +162,7 @@ public class Charms : MonoBehaviour {
 		    break;
 		default:
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
-			charmDescriptionText.text = "Make sweet love";
+			charmDescriptionText.text = "Good luck friend";
 			break;
 		}
 
