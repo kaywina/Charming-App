@@ -8,11 +8,17 @@ public class CharmsPanel : MonoBehaviour
 
     protected void OnEnable()
     {
-        worldSpaceUI.SetActive(false);
+        if (worldSpaceUI != null)
+        {
+            worldSpaceUI.SetActive(false);
+        }
     }
 
     protected void OnDisable()
     {
-        worldSpaceUI.SetActive(true);
+        if (worldSpaceUI != null)
+        {
+            worldSpaceUI.SetActive(true);
+        }
     }
 }

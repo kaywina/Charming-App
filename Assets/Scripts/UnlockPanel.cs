@@ -9,6 +9,7 @@ public class UnlockPanel : CharmsPanel
     public GameObject notEnoughText;
     public Button yesButton;
     public Text costText;
+    public CongratsPanel congratsPanel;
     private int cost;
     private GameObject toUnlock;
     private GameObject unlockButton;
@@ -64,6 +65,8 @@ public class UnlockPanel : CharmsPanel
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);
         charms.SetCharm(toUnlock.name);
+        congratsPanel.SetUnlockedObject(toUnlock);
+        congratsPanel.ShowPanel();
         HidePanel();
     }
 }
