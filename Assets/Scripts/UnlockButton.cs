@@ -7,7 +7,7 @@ public class UnlockButton : MonoBehaviour {
 
     public GameObject go;
     public int cost;
-    private bool lockOnPlay = false;
+    private bool lockOnPlay = true;
     public Text priceText;
     public UnlockPanel unlockPanel;
 

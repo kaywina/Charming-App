@@ -31,7 +31,6 @@ public class UnlockPanel : CharmsPanel
 
     new void OnDisable()
     {
-        base.OnDisable();
         cost = 0;
         toUnlock = null;
     }
