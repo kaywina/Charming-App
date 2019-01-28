@@ -6,7 +6,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class SetQualitySetting : MonoBehaviour
 {
-    public Slider slider;
+    private Slider slider;
+    public Text sliderText;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class SetQualitySetting : MonoBehaviour
             slider = gameObject.GetComponent<Slider>();
         }
         slider.value = QualitySettings.GetQualityLevel();
-        
+        sliderText.text = slider.value.ToString();
     }
 
     private void OnDisable()
@@ -31,5 +32,6 @@ public class SetQualitySetting : MonoBehaviour
     public void SetQualityLevelFromSlider()
     {
         QualitySettings.SetQualityLevel((int)slider.value, true);
+        sliderText.text = slider.value.ToString();
     }
 }
