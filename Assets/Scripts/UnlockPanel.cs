@@ -42,6 +42,7 @@ public class UnlockPanel : CharmsPanel
 
     public void HidePanel()
     {
+        base.OnDisable();
         gameObject.SetActive(false);
     }
 
@@ -66,6 +67,6 @@ public class UnlockPanel : CharmsPanel
         charms.SetCharm(toUnlock.name);
         congratsPanel.SetUnlockedObject(toUnlock);
         congratsPanel.ShowPanel();
-        HidePanel();
+        gameObject.SetActive(false);
     }
 }

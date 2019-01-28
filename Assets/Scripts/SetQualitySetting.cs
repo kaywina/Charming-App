@@ -17,7 +17,6 @@ public class SetQualitySetting : MonoBehaviour
     {
         if (slider == null)
         {
-            Debug.Log("Get slider");
             slider = gameObject.GetComponent<Slider>();
         }
         slider.value = QualitySettings.GetQualityLevel();
@@ -32,7 +31,5 @@ public class SetQualitySetting : MonoBehaviour
     public void SetQualityLevelFromSlider()
     {
         QualitySettings.SetQualityLevel((int)slider.value, true);
-        Debug.Log("quality level = " + QualitySettings.GetQualityLevel());
-        Debug.Log("soft particles = " + QualitySettings.softParticles);
     }
 }
