@@ -8,12 +8,12 @@ public class CongratsPanel : CharmsPanel
     public Text charmText; 
     public List<GameObject> rigModels;
     private GameObject unlocked;
-    public GameObject currencyIndicator;
+    public GameObject headerControls;
     public GameObject standIcons;
 
     new void OnEnable()
     {
-        currencyIndicator.SetActive(false);
+        headerControls.SetActive(false);
         standIcons.SetActive(false);
 
         base.OnEnable();
@@ -22,7 +22,7 @@ public class CongratsPanel : CharmsPanel
     new void OnDisable()
     {
         DisableRigModels();
-        if (currencyIndicator != null) { currencyIndicator.SetActive(true); }
+        if (headerControls != null) { headerControls.SetActive(true); }
         if (standIcons != null) { standIcons.SetActive(true); }
         base.OnDisable();
     }
