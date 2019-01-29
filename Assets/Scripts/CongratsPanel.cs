@@ -22,8 +22,8 @@ public class CongratsPanel : CharmsPanel
     new void OnDisable()
     {
         DisableRigModels();
-        currencyIndicator.SetActive(true);
-        standIcons.SetActive(true);
+        if (currencyIndicator != null) { currencyIndicator.SetActive(true); }
+        if (standIcons != null) { standIcons.SetActive(true); }
         base.OnDisable();
     }
 
