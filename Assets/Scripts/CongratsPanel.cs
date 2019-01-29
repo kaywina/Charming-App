@@ -63,7 +63,10 @@ public class CongratsPanel : CharmsPanel
     {
         for (int i = 0; i < rigModels.Count; i++)
         {
-            rigModels[i].SetActive(false);
+            if (rigModels[i] != null)
+            {
+                rigModels[i].SetActive(false);
+            }
         }
     }
 }
