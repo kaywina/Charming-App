@@ -131,39 +131,39 @@ public class Charms : MonoBehaviour {
 			break;
         case "Grace":
             mainCamera.transform.DOMoveX(grace.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("JOY_DESC");
+            charmDescriptionLocText.SetLocalizationKey("GRACE_DESC");
             break;
         case "Patience":
             mainCamera.transform.DOMoveX(patience.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("GRACE_DESC");
+            charmDescriptionLocText.SetLocalizationKey("PATIENCE_DESC");
             break;
         case "Wisdom":
             mainCamera.transform.DOMoveX(wisdom.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("PATIENCE_DESC");
+            charmDescriptionLocText.SetLocalizationKey("WISDOM_DESC");
             break;
         case "Joy":
             mainCamera.transform.DOMoveX(joy.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("WISDOM_DESC");
+            charmDescriptionLocText.SetLocalizationKey("JOY_DESC");
             break;
         case "Focus":
             mainCamera.transform.DOMoveX(focus.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("JOY_DESC");
+            charmDescriptionLocText.SetLocalizationKey("FOCUS_DESC");
             break;
         case "Will":
             mainCamera.transform.DOMoveX(will.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("FOCUS_DESC");
+            charmDescriptionLocText.SetLocalizationKey("WILL_DESC");
             break;
         case "Guile":
             mainCamera.transform.DOMoveX(guile.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("WILL_DESC");
+            charmDescriptionLocText.SetLocalizationKey("GUILE_DESC");
             break;
         case "Force":
 		    mainCamera.transform.DOMoveX(force.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("GUILE_DESC");
+            charmDescriptionLocText.SetLocalizationKey("FORCE_DESC");
             break;
 		default:
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
-            charmDescriptionLocText.SetLocalizationKey("FORCE_DESC");
+            charmDescriptionLocText.SetLocalizationKey("LOVE_DESC");
             break;
 		}
 
