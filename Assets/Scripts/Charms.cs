@@ -8,7 +8,7 @@ public class Charms : MonoBehaviour {
 	public Camera mainCamera;
 
 	public LocalizationTextMesh charmNameLocText;
-	public TextMesh charmDescriptionText;
+	public LocalizationTextMesh charmDescriptionLocText;
 
 	// For Tap Interface
 	private Ray ray;
@@ -127,44 +127,44 @@ public class Charms : MonoBehaviour {
         switch (charmName) {
 		case "Love":
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
-			charmDescriptionText.text = "Good luck friend";
+            charmDescriptionLocText.SetLocalizationKey("LOVE_DESC");
 			break;
         case "Grace":
             mainCamera.transform.DOMoveX(grace.transform.position.x, swapSpeed);
-            charmDescriptionText.text = "Flow like water";
+            charmDescriptionLocText.SetLocalizationKey("JOY_DESC");
             break;
         case "Patience":
             mainCamera.transform.DOMoveX(patience.transform.position.x, swapSpeed);
-            charmDescriptionText.text = "Wait for change";
+            charmDescriptionLocText.SetLocalizationKey("GRACE_DESC");
             break;
         case "Wisdom":
             mainCamera.transform.DOMoveX(wisdom.transform.position.x, swapSpeed);
-            charmDescriptionText.text = "Know what's right";
+            charmDescriptionLocText.SetLocalizationKey("PATIENCE_DESC");
             break;
         case "Joy":
             mainCamera.transform.DOMoveX(joy.transform.position.x, swapSpeed);
-            charmDescriptionText.text = "Witness the good";
+            charmDescriptionLocText.SetLocalizationKey("WISDOM_DESC");
             break;
         case "Focus":
             mainCamera.transform.DOMoveX(focus.transform.position.x, swapSpeed);
-            charmDescriptionText.text = "Stay on task";
+            charmDescriptionLocText.SetLocalizationKey("JOY_DESC");
             break;
         case "Will":
             mainCamera.transform.DOMoveX(will.transform.position.x, swapSpeed);
-            charmDescriptionText.text = "Endure hard times";
+            charmDescriptionLocText.SetLocalizationKey("FOCUS_DESC");
             break;
         case "Guile":
             mainCamera.transform.DOMoveX(guile.transform.position.x, swapSpeed);
-            charmDescriptionText.text = "Act the part";
+            charmDescriptionLocText.SetLocalizationKey("WILL_DESC");
             break;
         case "Force":
 		    mainCamera.transform.DOMoveX(force.transform.position.x, swapSpeed);
-		    charmDescriptionText.text = "Grow your might";
-		    break;
+            charmDescriptionLocText.SetLocalizationKey("GUILE_DESC");
+            break;
 		default:
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
-			charmDescriptionText.text = "Good luck friend";
-			break;
+            charmDescriptionLocText.SetLocalizationKey("FORCE_DESC");
+            break;
 		}
 
         charmNameLocText.SetLocalizationKey(charmName.ToUpper());
