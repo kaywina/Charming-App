@@ -14,7 +14,7 @@ public class Charms : MonoBehaviour {
 	private Ray ray;
 	private RaycastHit hit;
 
-    private string[] charmNames = {"Love", "Grace", "Patience", "Wisdom", "Joy", "Focus", "Will", "Guile", "Power" };
+    private string[] charmNames = {"Love", "Grace", "Patience", "Wisdom", "Joy", "Focus", "Will", "Guile", "Force" };
 
 	// For swappable icons on stand
 	public GameObject love;
@@ -25,7 +25,7 @@ public class Charms : MonoBehaviour {
     public GameObject focus;
     public GameObject will;
     public GameObject guile;
-    public GameObject power;
+    public GameObject force;
 
 	private float swapSpeed = 0.5f;
 
@@ -157,8 +157,8 @@ public class Charms : MonoBehaviour {
             mainCamera.transform.DOMoveX(guile.transform.position.x, swapSpeed);
             charmDescriptionText.text = "Act the part";
             break;
-        case "Power":
-		    mainCamera.transform.DOMoveX(power.transform.position.x, swapSpeed);
+        case "Force":
+		    mainCamera.transform.DOMoveX(force.transform.position.x, swapSpeed);
 		    charmDescriptionText.text = "Grow your might";
 		    break;
 		default:
