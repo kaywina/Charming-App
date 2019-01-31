@@ -1,3 +1,4 @@
 [submodule "Assets/Unity_CSV_Localization"]
 	path = Assets/Unity_CSV_Localization
 	url = https://github.com/xacalite/Unity_CSV_Localization.git
+	branch = charmingapp
