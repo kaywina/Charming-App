@@ -7,7 +7,7 @@ public class Charms : MonoBehaviour {
 
 	public Camera mainCamera;
 
-	public TextMesh charmNameText;
+	public LocalizationTextMesh charmNameLocText;
 	public TextMesh charmDescriptionText;
 
 	// For Tap Interface
@@ -167,7 +167,7 @@ public class Charms : MonoBehaviour {
 			break;
 		}
 
-        charmNameText.text = charmName;
+        charmNameLocText.SetLocalizationKey(charmName.ToUpper());
         PlayerPrefs.SetString("Charm", charmName);
     }
 
