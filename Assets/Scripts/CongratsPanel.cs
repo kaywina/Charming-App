@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class CongratsPanel : CharmsPanel
 {
-    public Text charmText; 
+    public LocalizationText charmText; 
     public List<GameObject> rigModels;
-    private GameObject unlocked;
+    public GameObject unlocked;
     public GameObject headerControls;
     public GameObject standIcons;
 
@@ -29,7 +29,7 @@ public class CongratsPanel : CharmsPanel
 
     public void ShowPanel()
     {
-        charmText.text = unlocked.name;
+        charmText.SetLocalizationKey(unlocked.name.ToUpper());
         SetCharmRig(unlocked.name);
         gameObject.SetActive(true);
     }
