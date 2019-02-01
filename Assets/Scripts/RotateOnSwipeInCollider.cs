@@ -6,8 +6,9 @@ using UnityEngine;
 public class RotateOnSwipeInCollider : MonoBehaviour
 {
     private Vector3 lastPosition = Vector3.zero;
-    public Collider2D boxCollider2D;
+    private Collider2D boxCollider2D;
     private Camera mainCamera;
+    public GameObject objectToRotate;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class RotateOnSwipeInCollider : MonoBehaviour
             if (boxCollider2D.bounds.Contains(worldMousePos2D))
             {
                 Vector3 mousePositionDelta = Input.mousePosition - lastPosition;
-                gameObject.transform.Rotate(0f, mousePositionDelta.x, 0f);
+                objectToRotate.transform.Rotate(0f, mousePositionDelta.x, 0f);
             }
 
             lastPosition = newPosition;
@@ -48,7 +49,7 @@ public class RotateOnSwipeInCollider : MonoBehaviour
             // APPLY ROTATION
             if (touch0.phase == TouchPhase.Moved && boxCollider2D.bounds.Contains(worldTouchPos2D))
             {
-                gameObject.transform.Rotate(0f, touch0.deltaPosition.x, 0f);
+                objectToRotate.transform.Rotate(0f, touch0.deltaPosition.x, 0f);
             }
         }
 #endif
