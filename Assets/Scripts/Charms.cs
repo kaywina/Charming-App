@@ -31,8 +31,13 @@ public class Charms : MonoBehaviour {
 
     private bool loaded = false;
 
+    public bool clearPlayerPrefsOnPlayInEditor = false;
+
 	// Use this for initialization
 	void Start () {
+#if UNITY_EDITOR
+        if (clearPlayerPrefsOnPlayInEditor == true) { PlayerPrefs.DeleteAll(); }
+#endif
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             PlayerPrefs.SetString("Charm", charmNames[0]); // default is Love
