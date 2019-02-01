@@ -35,13 +35,16 @@ public class Charms : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 #if UNITY_EDITOR
         if (clearPlayerPrefsOnPlayInEditor == true) { PlayerPrefs.DeleteAll(); }
 #endif
-        if (PlayerPrefs.GetString("FirstRun") != "False")
-        {
-            PlayerPrefs.SetString("Charm", charmNames[0]); // default is Love
+
+        // set a default so don't get loc error when data cleared on Android
+        if (string.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
+            PlayerPrefs.SetString("Charm", "Love");
         }
+
         SetCharm(PlayerPrefs.GetString("Charm"));
         loaded = true;
     }

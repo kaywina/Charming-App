@@ -50,7 +50,7 @@ public class CurrencyManager : MonoBehaviour {
         int storedYear = PlayerPrefs.GetInt("Year");
 
         
-        // not first time running app
+        // not first time running app then daily bonus applies
         if (PlayerPrefs.GetString("FirstRun") == "False")
         {
             if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
@@ -58,9 +58,9 @@ public class CurrencyManager : MonoBehaviour {
                 GiveBonus(dailyBonus);
             }
         }
-        PlayerPrefs.SetString("FirstRun", "False");
         PlayerPrefs.SetInt("Day", currentDayOfYear);
         PlayerPrefs.SetInt("Year", currentYear);
+        PlayerPrefs.SetString("FirstRun", "False");
     }
 
     void SetCurrencyOnStart(int amount)
