@@ -7,12 +7,14 @@ public class BonusWheel : MonoBehaviour
 {
     public bool randomStartingPosition;
     public Text prizeText;
+    public Text spinTimeText;
+
     public List<int> prize;
     public List<AnimationCurve> animationCurves;
 
     private bool spinning;
     private float anglePerItem;
-    private int randomTime;
+    private float randomTimeMultiplier;
     private int itemNumber;
 
     void Start()
@@ -40,14 +42,16 @@ public class BonusWheel : MonoBehaviour
     {
         if (spinning) { return; }
 
-        int minRan = 1;
-        int maxRan = 4;
-        randomTime = Random.Range(minRan, maxRan);
+        float minRandomTimeMultiplier = 1f;
+        float maxRandomTimeMultiplier = 3f;
+        randomTimeMultiplier = Random.Range(minRandomTimeMultiplier, maxRandomTimeMultiplier);
         itemNumber = Random.Range(0, prize.Count);
-        float maxAngle = 360 * randomTime + (itemNumber * anglePerItem);
+        float maxAngle = 360 * maxRandomTimeMultiplier + (itemNumber * anglePerItem);
 
-        int baseTime = 7;
-        StartCoroutine(SpinTheWheel(baseTime * randomTime, maxAngle));
+        float baseTime = 10f;
+        float adjustedTime = baseTime * randomTimeMultiplier;
+        spinTimeText.text = adjustedTime.ToString();
+        StartCoroutine(SpinTheWheel(adjustedTime, maxAngle));
     }
 
     IEnumerator SpinTheWheel(float time, float maxAngle)
