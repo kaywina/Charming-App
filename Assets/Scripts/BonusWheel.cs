@@ -63,7 +63,7 @@ public class BonusWheel : MonoBehaviour
         maxAngle = maxAngle - startAngle;
 
         int animationCurveNumber = Random.Range(0, animationCurves.Count);
-        Debug.Log("Animation Curve No. : " + animationCurveNumber);
+        //Debug.Log("Animation Curve No. : " + animationCurveNumber);
 
         while (timer < time)
         {
