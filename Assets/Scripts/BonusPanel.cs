@@ -29,14 +29,14 @@ public class BonusPanel : CharmsPanel
     {
         if (hasSpun) { return; }
 
-        Debug.Log("Spin bonus wheel!");
+        //Debug.Log("Spin bonus wheel!");
         tip.SetActive(false);
         bonusWheel.Spin();
     }
 
     public void CompleteSpin(int bonus)
     {
-        Debug.Log("Complete bonus wheel spin");
+        //Debug.Log("Complete bonus wheel spin");
         prizeText.text = bonus.ToString();
         prize.SetActive(true);
         CurrencyManager.Instance.GiveBonus(bonus);

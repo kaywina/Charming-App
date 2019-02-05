@@ -84,7 +84,7 @@ public class BonusWheel : MonoBehaviour
         wheelModel.eulerAngles = new Vector3(0.0f, 0.0f, maxAngle + startAngle);
         spinning = false;
 
-        Debug.Log("Prize: " + prize[itemNumber]);//use prize[itemNumnber] as per requirement
+        //Debug.Log("Prize: " + prize[itemNumber]);//use prize[itemNumnber] as per requirement
         if (prizeText != null)
         {
             prizeText.text = prize[itemNumber].ToString();
