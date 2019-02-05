@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class CongratsPanel : CharmsPanel
 {
-    public LocalizationText charmText; 
+    public LocalizationText charmText;
+
+    // this is janky, but make sure these lists match up
     public List<GameObject> rigModels;
+    public List<GameObject> fireworks;
+
+
     public GameObject unlocked;
     public GameObject headerControls;
     public GameObject standIcons;
@@ -51,10 +56,12 @@ public class CongratsPanel : CharmsPanel
             if (rigModels[i].name == nameOfCharm)
             {
                 rigModels[i].SetActive(true);
+                fireworks[i].SetActive(true);
             }
             else
             {
                 rigModels[i].SetActive(false);
+                fireworks[i].SetActive(false);
             }
         }
     }
@@ -66,6 +73,7 @@ public class CongratsPanel : CharmsPanel
             if (rigModels[i] != null)
             {
                 rigModels[i].SetActive(false);
+                fireworks[i].SetActive(false);
             }
         }
     }
