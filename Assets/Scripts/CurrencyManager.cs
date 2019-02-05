@@ -15,7 +15,6 @@ public class CurrencyManager : MonoBehaviour {
     private static int welcomeBonus = 10;
     public Text welcomeBonusText;
     private int dailyBonus = 16;
-    public Text dailyBonusText;
 
     public static int currencyInBank = 0;
 
@@ -28,7 +27,6 @@ public class CurrencyManager : MonoBehaviour {
         CloseWelcomePanel();
 
         welcomeBonusText.text = welcomeBonus.ToString();
-        dailyBonusText.text = dailyBonus.ToString();
 
         // on first time running app
         if (PlayerPrefs.GetString("FirstRun") != "False")
@@ -55,7 +53,7 @@ public class CurrencyManager : MonoBehaviour {
         {
             if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
             {
-                GiveBonus(dailyBonus);
+                OpenBonusPanel();
             }
         }
         PlayerPrefs.SetInt("Day", currentDayOfYear);
@@ -71,12 +69,15 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
-	public void GiveBonus(int bonus)
+	public void OpenBonusPanel()
     {
         bonusPanel.SetActive(true);
+    }
+
+    public void GiveBonus(int bonus)
+    {
         currencyInBank += bonus;
         PlayerPrefs.SetInt("Currency", currencyInBank);
-        dailyBonusText.text = bonus.ToString();
         SetCurrencyText();
     }
 

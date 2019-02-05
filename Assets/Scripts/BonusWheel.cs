@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BonusWheel : MonoBehaviour
 {
+    public BonusPanel bonusPanel;
     public Transform wheelModel;
     public bool randomStartingPosition;
     public Text prizeText;
@@ -88,6 +89,8 @@ public class BonusWheel : MonoBehaviour
         {
             prizeText.text = prize[itemNumber].ToString();
         }
+
+        bonusPanel.CompleteSpin(prize[itemNumber]);
         
     }
 }
