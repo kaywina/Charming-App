@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BonusWheel : MonoBehaviour
 {
+    public Transform wheelModel;
     public bool randomStartingPosition;
     public Text prizeText;
     public Text spinTimeText;
@@ -24,7 +25,7 @@ public class BonusWheel : MonoBehaviour
 
         if (randomStartingPosition)
         {
-            transform.eulerAngles = new Vector3(0,0,Random.Range(0, 360));
+            wheelModel.eulerAngles = new Vector3(0,0,Random.Range(0, 360));
         }
     }
 
@@ -50,7 +51,12 @@ public class BonusWheel : MonoBehaviour
 
         float baseTime = 10f;
         float adjustedTime = baseTime * randomTimeMultiplier;
-        spinTimeText.text = adjustedTime.ToString();
+
+
+        if (spinTimeText != null)
+        {
+            spinTimeText.text = adjustedTime.ToString();
+        }
         StartCoroutine(SpinTheWheel(adjustedTime, maxAngle));
     }
 
@@ -59,7 +65,7 @@ public class BonusWheel : MonoBehaviour
         spinning = true;
 
         float timer = 0.0f;
-        float startAngle = transform.eulerAngles.z;
+        float startAngle = wheelModel.eulerAngles.z;
         maxAngle = maxAngle - startAngle;
 
         int animationCurveNumber = Random.Range(0, animationCurves.Count);
@@ -69,15 +75,19 @@ public class BonusWheel : MonoBehaviour
         {
             //to calculate rotation
             float angle = maxAngle * animationCurves[animationCurveNumber].Evaluate(timer / time);
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, angle + startAngle);
+            wheelModel.eulerAngles = new Vector3(0.0f, 0.0f, angle + startAngle);
             timer += Time.deltaTime;
             yield return 0;
         }
 
-        transform.eulerAngles = new Vector3(0.0f, 0.0f, maxAngle + startAngle);
+        wheelModel.eulerAngles = new Vector3(0.0f, 0.0f, maxAngle + startAngle);
         spinning = false;
 
         Debug.Log("Prize: " + prize[itemNumber]);//use prize[itemNumnber] as per requirement
-        prizeText.text = prize[itemNumber].ToString();
+        if (prizeText != null)
+        {
+            prizeText.text = prize[itemNumber].ToString();
+        }
+        
     }
 }
