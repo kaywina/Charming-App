@@ -8,7 +8,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public Text charmsText;
     private bool isFocus = false;
 
-    private string shareSubject, shareMessage;
+    private string shareSubject, shareMessage, shareLink;
     private bool isProcessing = false;
     private string screenshotName;
 
@@ -26,8 +26,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
     {
 
         screenshotName = string.Format("{0}.png", charmsText.text);
-        shareSubject = string.Format("I just unlocked the virtue {0}", charmsText.text);
-        shareMessage = string.Format("Try out {0} for yourself on Google Play and Apple App Store", Application.productName);
+        shareSubject = string.Format("We just gained {0}", charmsText.text);
+        shareLink = "www.charmingapp.com";
+
+        shareMessage = string.Format("Try {0} on Google Play and Apple App Store {1}", Application.productName, shareLink);
         ShareScreenshot();
     }
 
@@ -79,7 +81,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
             AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
-            AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, "Share your high score");
+            AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, "Share your success!");
             currentActivity.Call("startActivity", chooser);
         }
 
