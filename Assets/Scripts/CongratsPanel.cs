@@ -12,7 +12,7 @@ public class CongratsPanel : CharmsPanel
     public List<GameObject> fireworks;
 
 
-    public GameObject unlocked;
+    private GameObject unlocked;
     public GameObject headerControls;
     public GameObject standIcons;
 
@@ -32,7 +32,7 @@ public class CongratsPanel : CharmsPanel
         base.OnDisable();
     }
 
-    public void ShowPanel()
+    public void ShowPanel(bool isCharm)
     {
         charmText.SetLocalizationKey(unlocked.name.ToUpper());
         SetCharmRig(unlocked.name);

@@ -11,8 +11,9 @@ public class UnlockPanel : CharmsPanel
     public Text costText;
     public CongratsPanel congratsPanel;
     private int cost;
-    private GameObject toUnlock;
+    public GameObject toUnlock;
     private GameObject unlockButton;
+    private bool isCharm;
 
     new void OnEnable()
     {
@@ -52,10 +53,11 @@ public class UnlockPanel : CharmsPanel
         costText.text = cost.ToString();
     }
 
-    public void SetObjectToUnlock(GameObject toSet, GameObject button)
+    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm)
     {
         toUnlock = toSet;
         unlockButton = button;
+        isCharm = charm;
     }
 
     public void UnlockObject()
@@ -64,9 +66,14 @@ public class UnlockPanel : CharmsPanel
         PlayerPrefs.SetString(toUnlock.name, "unlocked");
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);
-        charms.SetCharm(toUnlock.name);
+
+        if (isCharm)
+        {
+            charms.SetCharm(toUnlock.name);
+        }
+        
         congratsPanel.SetUnlockedObject(toUnlock);
-        congratsPanel.ShowPanel();
+        congratsPanel.ShowPanel(isCharm);
         gameObject.SetActive(false);
     }
 }

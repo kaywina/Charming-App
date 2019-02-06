@@ -10,6 +10,7 @@ public class UnlockButton : MonoBehaviour {
     private bool lockOnPlay = false;
     public Text priceText;
     public UnlockPanel unlockPanel;
+    public GameObject options;
 
     void Start () {
 
@@ -32,10 +33,17 @@ public class UnlockButton : MonoBehaviour {
         }
 	}
 
-    public void GoToConfirmation()
+    public void GoToConfirmation(bool isCharm = true)
     {
-        unlockPanel.SetObjectToUnlock(go, gameObject); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
+        Debug.Log(gameObject.name);
+
+        unlockPanel.SetObjectToUnlock(go, gameObject, isCharm); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
+
+        if (options != null)
+        {
+            options.SetActive(false);
+        }
     }
 }
