@@ -28,10 +28,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
     {
 
         screenshotName = string.Format("{0}.png", charmsText.text);
-        shareSubject = string.Format("We just gained {0}", charmsText.text);
+        shareSubject = charmsText.text;
         shareLink = "www.charmingapp.com";
 
-        shareMessage = string.Format("Try {0} on Google Play and Apple App Store {1}", Application.productName, shareLink);
+        shareMessage = string.Format("{0} - {1}", Application.productName, shareLink);
         ShareScreenshot();
     }
 
