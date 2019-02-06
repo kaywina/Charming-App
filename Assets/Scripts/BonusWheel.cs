@@ -7,7 +7,7 @@ public class BonusWheel : MonoBehaviour
 {
     public BonusPanel bonusPanel;
     public Transform wheelModel;
-    public bool randomStartingPosition;
+    private bool randomStartingPosition = true;
     public Text prizeText;
     public Text spinTimeText;
 
@@ -19,14 +19,14 @@ public class BonusWheel : MonoBehaviour
     private float randomTimeMultiplier;
     private int itemNumber;
 
-    void Start()
+    void OnEnable()
     {
         spinning = false;
         anglePerItem = 360 / prize.Count;
 
         if (randomStartingPosition)
         {
-            wheelModel.eulerAngles = new Vector3(0,0,Random.Range(0, 360));
+            RandomizeStartRotation();
         }
     }
 
@@ -38,6 +38,13 @@ public class BonusWheel : MonoBehaviour
             Spin();
         }
 #endif
+    }
+
+    private void RandomizeStartRotation()
+    {
+        int randomAngle = Random.Range(0, 360);
+        wheelModel.eulerAngles = new Vector3(0, 0, randomAngle);
+        //Debug.Log("Randomize start rotation to " + randomAngle);
     }
 
     public void Spin()
