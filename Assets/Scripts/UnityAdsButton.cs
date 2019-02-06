@@ -49,11 +49,11 @@ public class UnityAdsButton : MonoBehaviour
     {
         if (result == ShowResult.Finished)
         {
-            // Reward the player
+            Debug.LogWarning("User completed the video");
         }
         else if (result == ShowResult.Skipped)
         {
-            Debug.LogWarning("The player skipped the video - DO NOT REWARD!");
+            Debug.LogWarning("The user skipped the video");
         }
         else if (result == ShowResult.Failed)
         {

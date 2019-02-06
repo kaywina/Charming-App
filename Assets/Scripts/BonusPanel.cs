@@ -6,11 +6,8 @@ using UnityEngine.UI;
 public class BonusPanel : CharmsPanel
 {
     public BonusWheel bonusWheel;
-
     public GameObject tip;
-    public GameObject prize;
-    public GameObject yesButton;
-
+    public GameObject[] activateAfterSpin;
     public Text prizeText;
 
     private bool hasSpun;
@@ -19,8 +16,11 @@ public class BonusPanel : CharmsPanel
     {
         hasSpun = false;
         tip.SetActive(true);
-        prize.SetActive(false);
-        yesButton.SetActive(false);
+
+        for (int i = 0; i < activateAfterSpin.Length; i++)
+        {
+            activateAfterSpin[i].SetActive(false);
+        }
 
         base.OnEnable();
     }
@@ -38,9 +38,11 @@ public class BonusPanel : CharmsPanel
     {
         //Debug.Log("Complete bonus wheel spin");
         prizeText.text = bonus.ToString();
-        prize.SetActive(true);
+        for (int i = 0; i < activateAfterSpin.Length; i++)
+        {
+            activateAfterSpin[i].SetActive(true);
+        }
         CurrencyManager.Instance.GiveBonus(bonus);
-        yesButton.SetActive(true);
         hasSpun = true;
     }
 }

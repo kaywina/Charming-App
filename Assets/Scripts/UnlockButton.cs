@@ -35,8 +35,6 @@ public class UnlockButton : MonoBehaviour {
 
     public void GoToConfirmation(bool isCharm = true)
     {
-        Debug.Log(gameObject.name);
-
         unlockPanel.SetObjectToUnlock(go, gameObject, isCharm); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
