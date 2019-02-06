@@ -6,9 +6,11 @@ public class BonusButton : MonoBehaviour
 {
 
     public GameObject bonusPanel;
+    public GameObject optionsPanel;
 
-    public void OpenBonusWheelScene()
+    public void ShowBonusPanel()
     {
         bonusPanel.SetActive(true);
+        optionsPanel.SetActive(false);
     }
 }
