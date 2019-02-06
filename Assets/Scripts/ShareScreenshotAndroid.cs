@@ -12,6 +12,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
     private bool isProcessing = false;
     private string screenshotName;
 
+    public GameObject[] objectsToHide;
+
     void Start()
     {
         shareButton.onClick.AddListener(OnShareButtonClick);
@@ -55,6 +57,19 @@ public class ShareScreenshotAndroid : MonoBehaviour
     {
 
         isProcessing = true;
+
+        // hide some objects while taking screenshot
+        for (int i = 0; i < objectsToHide.Length; i++)
+        {
+            objectsToHide[i].SetActive(false);
+        }
+
+        // hide the share button and make it non-interactable
+        Image shareButtonImage = GetComponent<Image>();
+        Button shareButton = GetComponent<Button>();
+        shareButtonImage.enabled = false;
+        shareButton.interactable = false;
+
         // wait for graphics to render
         yield return new WaitForEndOfFrame();
 
@@ -83,9 +98,22 @@ public class ShareScreenshotAndroid : MonoBehaviour
             AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
             AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, "Share your success!");
             currentActivity.Call("startActivity", chooser);
+
+            yield return new WaitUntil(() => isFocus);
         }
 
-        yield return new WaitUntil(() => isFocus);
+        
+
+        // show the share button again and make it interactable
+        shareButtonImage.enabled = true;
+        shareButton.interactable = true;
+
+        // show the hidden objects again
+        for (int i = 0; i < objectsToHide.Length; i++)
+        {
+            objectsToHide[i].SetActive(true);
+        }
+
         isProcessing = false;
     }
 #endif
