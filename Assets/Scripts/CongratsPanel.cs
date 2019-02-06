@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CongratsPanel : CharmsPanel
 {
-    public LocalizationText charmText;
+    public LocalizationText unlockText;
 
     // this is janky, but make sure these lists match up
     public List<GameObject> rigModels;
@@ -34,8 +34,8 @@ public class CongratsPanel : CharmsPanel
 
     public void ShowPanel(bool isCharm)
     {
-        charmText.SetLocalizationKey(unlocked.name.ToUpper());
-        SetCharmRig(unlocked.name);
+        unlockText.SetLocalizationKey(unlocked.name.ToUpper());
+        SetRig(unlocked.name);
         gameObject.SetActive(true);
     }
 
@@ -49,7 +49,7 @@ public class CongratsPanel : CharmsPanel
         unlocked = toSet;
     }
 
-    public void SetCharmRig(string nameOfCharm)
+    public void SetRig(string nameOfCharm)
     {
         for (int i = 0; i < rigModels.Count; i++)
         {
