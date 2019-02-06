@@ -102,8 +102,6 @@ public class ShareScreenshotAndroid : MonoBehaviour
             yield return new WaitUntil(() => isFocus);
         }
 
-        
-
         // show the share button again and make it interactable
         shareButtonImage.enabled = true;
         shareButton.interactable = true;
@@ -113,6 +111,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
         {
             objectsToHide[i].SetActive(true);
         }
+
+        // give share bonus kisses
+        int bonusAmount = 16;
+        CurrencyManager.Instance.GiveBonus(bonusAmount);
 
         isProcessing = false;
     }
