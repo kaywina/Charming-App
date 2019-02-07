@@ -12,7 +12,7 @@ public class UnityRewardedAdsButton : MonoBehaviour
     public BonusPanel bonusPanel;
 
 #if UNITY_IOS
-   private string gameId = "1234567";
+    private string gameId = "1234567";
 #elif UNITY_ANDROID
     private string gameId = "7654321";
 #endif
