@@ -11,6 +11,7 @@ public class BonusPanel : CharmsPanel
     public Text prizeText;
     public GameObject doubleBonus;
     public Text doubleBonusText;
+    public GameObject prizeIndicator;
 
     private bool hasSpun;
     private int storedBonus;
@@ -61,6 +62,7 @@ public class BonusPanel : CharmsPanel
     {
         storedBonus = storedBonus * 2;
         doubleBonusText.text = storedBonus.ToString();
+        prizeIndicator.SetActive(false);
         doubleBonus.SetActive(true);
     }
 }
