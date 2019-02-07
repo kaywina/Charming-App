@@ -11,29 +11,20 @@ public class UnityRewardedAdsButton : MonoBehaviour
     public BonusPanel bonusPanel;
     private bool watched;
 
-#if UNITY_IOS
-    private string gameId = "3033752";
-#elif UNITY_ANDROID
-    private string gameId = "3033753";
-#endif
-
     void Start()
     {
         adButton = GetComponent<Button>();
-        if (adButton)
-        {
-            adButton.onClick.AddListener(ShowRewardedAd);
-        }
-
-        if (Advertisement.isSupported)
-        {
-            Advertisement.Initialize(gameId, true);
-        }
     }
 
     private void OnEnable()
     {
+        adButton.onClick.AddListener(ShowRewardedAd);
         watched = false; // can only use button once during bonus wheel session
+    }
+
+    private void OnDisable()
+    {
+        adButton.onClick.RemoveListener(ShowRewardedAd);
     }
 
     void Update()
