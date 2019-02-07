@@ -11,13 +11,9 @@ public class UnityRewardedAdsButton : MonoBehaviour
     public BonusPanel bonusPanel;
     private bool watched;
 
-    void Start()
-    {
-        adButton = GetComponent<Button>();
-    }
-
     private void OnEnable()
     {
+        adButton = GetComponent<Button>();
         adButton.onClick.AddListener(ShowRewardedAd);
         watched = false; // can only use button once during bonus wheel session
     }
