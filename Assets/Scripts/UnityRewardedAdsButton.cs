@@ -8,8 +8,8 @@ public class UnityRewardedAdsButton : MonoBehaviour
 
     public string placementId = "rewardedVideo";
     private Button adButton;
-
     public BonusPanel bonusPanel;
+    private bool watched;
 
 #if UNITY_IOS
     private string gameId = "1234567";
@@ -31,11 +31,16 @@ public class UnityRewardedAdsButton : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        watched = false; // can only use button once during bonus wheel session
+    }
+
     void Update()
     {
         if (adButton)
         {
-            adButton.interactable = Advertisement.IsReady(placementId);
+            adButton.interactable = (!watched && Advertisement.IsReady(placementId));
         }
     }
 
@@ -55,6 +60,8 @@ public class UnityRewardedAdsButton : MonoBehaviour
         {
             case ShowResult.Finished:
                 bonusPanel.DoubleBonus();
+                watched = true;
+                gameObject.SetActive(false); // deactivate button after completion
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:

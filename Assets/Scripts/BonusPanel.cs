@@ -9,6 +9,8 @@ public class BonusPanel : CharmsPanel
     public GameObject tip;
     public GameObject[] activateAfterSpin;
     public Text prizeText;
+    public GameObject doubleBonus;
+    public Text doubleBonusText;
 
     private bool hasSpun;
     private int storedBonus;
@@ -16,6 +18,7 @@ public class BonusPanel : CharmsPanel
     new void OnEnable()
     {
         hasSpun = false;
+        doubleBonus.SetActive(false);
         tip.SetActive(true);
 
         for (int i = 0; i < activateAfterSpin.Length; i++)
@@ -57,5 +60,7 @@ public class BonusPanel : CharmsPanel
     public void DoubleBonus()
     {
         storedBonus = storedBonus * 2;
+        doubleBonusText.text = storedBonus.ToString();
+        doubleBonus.SetActive(true);
     }
 }
