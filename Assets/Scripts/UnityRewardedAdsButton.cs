@@ -12,9 +12,9 @@ public class UnityRewardedAdsButton : MonoBehaviour
     private bool watched;
 
 #if UNITY_IOS
-    private string gameId = "1234567";
+    private string gameId = "3033752";
 #elif UNITY_ANDROID
-    private string gameId = "7654321";
+    private string gameId = "3033753";
 #endif
 
     void Start()
