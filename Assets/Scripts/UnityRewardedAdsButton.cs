@@ -9,6 +9,8 @@ public class UnityRewardedAdsButton : MonoBehaviour
     public string placementId = "rewardedVideo";
     private Button adButton;
 
+    public BonusPanel bonusPanel;
+
 #if UNITY_IOS
    private string gameId = "1234567";
 #elif UNITY_ANDROID
@@ -52,16 +54,14 @@ public class UnityRewardedAdsButton : MonoBehaviour
         switch (result)
         {
             case ShowResult.Finished:
-                Debug.Log("The ad was successfully shown.");
-                //
-                // YOUR CODE TO REWARD THE GAMER
-                // Give coins etc.
+                bonusPanel.DoubleBonus();
+                //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:
-                Debug.Log("The ad was skipped before reaching the end.");
+                //Debug.Log("The ad was skipped before reaching the end.");
                 break;
             case ShowResult.Failed:
-                Debug.LogError("The ad failed to be shown.");
+                //Debug.LogError("The ad failed to be shown.");
                 break;
         }
     }

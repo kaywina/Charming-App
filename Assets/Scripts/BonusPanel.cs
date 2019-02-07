@@ -11,6 +11,7 @@ public class BonusPanel : CharmsPanel
     public Text prizeText;
 
     private bool hasSpun;
+    private int storedBonus;
 
     new void OnEnable()
     {
@@ -25,6 +26,12 @@ public class BonusPanel : CharmsPanel
         base.OnEnable();
     }
 
+    new void OnDisable()
+    {
+        CurrencyManager.Instance.GiveBonus(storedBonus);
+        base.OnDisable();
+    }
+
     public void Spin()
     {
         if (hasSpun) { return; }
@@ -36,13 +43,19 @@ public class BonusPanel : CharmsPanel
 
     public void CompleteSpin(int bonus)
     {
+        storedBonus = bonus;
         //Debug.Log("Complete bonus wheel spin");
         prizeText.text = bonus.ToString();
         for (int i = 0; i < activateAfterSpin.Length; i++)
         {
             activateAfterSpin[i].SetActive(true);
         }
-        CurrencyManager.Instance.GiveBonus(bonus);
+        
         hasSpun = true;
+    }
+
+    public void DoubleBonus()
+    {
+        storedBonus = storedBonus * 2;
     }
 }
