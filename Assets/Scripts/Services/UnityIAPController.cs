@@ -23,7 +23,7 @@ namespace CompleteProject
         // when defining the Product Identifiers on the store. Except, for illustration purposes, the 
         // kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
         // specific mapping to Unity Purchasing's AddProduct, below.
-        public static string kProductIDConsumable = "consumable";
+        public static string smallConsumableId = "small";
 
         /*
         public static string kProductIDNonConsumable = "nonconsumable";
@@ -60,7 +60,7 @@ namespace CompleteProject
 
             // Add a product to sell / restore by way of its identifier, associating the general identifier
             // with its store-specific identifiers.
-            builder.AddProduct(kProductIDConsumable, ProductType.Consumable);
+            builder.AddProduct(smallConsumableId, ProductType.Consumable);
 
             // Continue adding the non-consumable product.
             //builder.AddProduct(kProductIDNonConsumable, ProductType.NonConsumable);
@@ -89,11 +89,11 @@ namespace CompleteProject
         }
 
 
-        public void BuyConsumable()
+        public void BuySmall()
         {
             // Buy the consumable product using its general identifier. Expect a response either 
             // through ProcessPurchase or OnPurchaseFailed asynchronously.
-            BuyProductID(kProductIDConsumable);
+            BuyProductID(smallConsumableId);
         }
 
         /*
@@ -213,7 +213,7 @@ namespace CompleteProject
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
         {
             // A consumable product has been purchased by this user.
-            if (String.Equals(args.purchasedProduct.definition.id, kProductIDConsumable, StringComparison.Ordinal))
+            if (String.Equals(args.purchasedProduct.definition.id, smallConsumableId, StringComparison.Ordinal))
             {
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
