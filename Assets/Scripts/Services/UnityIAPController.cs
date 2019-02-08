@@ -23,7 +23,11 @@ namespace CompleteProject
         // when defining the Product Identifiers on the store. Except, for illustration purposes, the 
         // kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
         // specific mapping to Unity Purchasing's AddProduct, below.
-        public static string smallConsumableId = "small";
+        public static string consumable16 = "16";
+        public static string consumable32 = "32";
+        public static string consumable64 = "64";
+        public static string consumable128 = "128";
+        public static string consumable256 = "256";
 
         /*
         public static string kProductIDNonConsumable = "nonconsumable";
@@ -60,7 +64,11 @@ namespace CompleteProject
 
             // Add a product to sell / restore by way of its identifier, associating the general identifier
             // with its store-specific identifiers.
-            builder.AddProduct(smallConsumableId, ProductType.Consumable);
+            builder.AddProduct(consumable16, ProductType.Consumable);
+            builder.AddProduct(consumable32, ProductType.Consumable);
+            builder.AddProduct(consumable64, ProductType.Consumable);
+            builder.AddProduct(consumable128, ProductType.Consumable);
+            builder.AddProduct(consumable256, ProductType.Consumable);
 
             // Continue adding the non-consumable product.
             //builder.AddProduct(kProductIDNonConsumable, ProductType.NonConsumable);
@@ -81,20 +89,49 @@ namespace CompleteProject
             UnityPurchasing.Initialize(this, builder);
         }
 
-
         private bool IsInitialized()
         {
             // Only say we are initialized if both the Purchasing references are set.
             return m_StoreController != null && m_StoreExtensionProvider != null;
         }
 
-
-        public void BuySmall()
+        /*
+         * Methods called by store buttons
+         * */
+        public void BuyConsumable16()
         {
             // Buy the consumable product using its general identifier. Expect a response either 
             // through ProcessPurchase or OnPurchaseFailed asynchronously.
-            BuyProductID(smallConsumableId);
+            BuyProductID(consumable16);
         }
+        public void BuyConsumable32()
+        {
+            // Buy the consumable product using its general identifier. Expect a response either 
+            // through ProcessPurchase or OnPurchaseFailed asynchronously.
+            BuyProductID(consumable32);
+        }
+        public void BuyConsumable64()
+        {
+            // Buy the consumable product using its general identifier. Expect a response either 
+            // through ProcessPurchase or OnPurchaseFailed asynchronously.
+            BuyProductID(consumable64);
+        }
+        public void BuyConsumable128()
+        {
+            // Buy the consumable product using its general identifier. Expect a response either 
+            // through ProcessPurchase or OnPurchaseFailed asynchronously.
+            BuyProductID(consumable128);
+        }
+        public void BuyConsumable256()
+        {
+            // Buy the consumable product using its general identifier. Expect a response either 
+            // through ProcessPurchase or OnPurchaseFailed asynchronously.
+            BuyProductID(consumable256);
+        }
+
+        /*
+         * Additional button methods for non-consumable products
+         * */
 
         /*
         public void BuyNonConsumable()
@@ -103,8 +140,13 @@ namespace CompleteProject
             // through ProcessPurchase or OnPurchaseFailed asynchronously.
             BuyProductID(kProductIDNonConsumable);
         }
+        */
 
+        /*
+         * Additional button methods for subscription products
+         * */
 
+        /*
         public void BuySubscription()
         {
             // Buy the subscription product using its the general identifier. Expect a response either 
@@ -113,7 +155,7 @@ namespace CompleteProject
             // custom store-specific identifiers above.
             BuyProductID(kProductIDSubscription);
         }
-        '*/
+        */
 
         void BuyProductID(string productId)
         {
@@ -212,13 +254,42 @@ namespace CompleteProject
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
         {
-            // A consumable product has been purchased by this user.
-            if (String.Equals(args.purchasedProduct.definition.id, smallConsumableId, StringComparison.Ordinal))
+            // Cases where a consumable product has been purchased by this user.
+            if (String.Equals(args.purchasedProduct.definition.id, consumable16, StringComparison.Ordinal))
             {
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
                 CurrencyManager.Instance.GiveBonus(16);
             }
+            // A consumable product has been purchased by this user.
+            if (String.Equals(args.purchasedProduct.definition.id, consumable32, StringComparison.Ordinal))
+            {
+                Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+                // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
+                CurrencyManager.Instance.GiveBonus(32);
+            }
+            // A consumable product has been purchased by this user.
+            if (String.Equals(args.purchasedProduct.definition.id, consumable64, StringComparison.Ordinal))
+            {
+                Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+                // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
+                CurrencyManager.Instance.GiveBonus(64);
+            }
+            // A consumable product has been purchased by this user.
+            if (String.Equals(args.purchasedProduct.definition.id, consumable128, StringComparison.Ordinal))
+            {
+                Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+                // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
+                CurrencyManager.Instance.GiveBonus(128);
+            }
+            // A consumable product has been purchased by this user.
+            if (String.Equals(args.purchasedProduct.definition.id, consumable256, StringComparison.Ordinal))
+            {
+                Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+                // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
+                CurrencyManager.Instance.GiveBonus(256);
+            }
+
             /*
             // Or ... a non-consumable product has been purchased by this user.
             else if (String.Equals(args.purchasedProduct.definition.id, kProductIDNonConsumable, StringComparison.Ordinal))
@@ -226,6 +297,7 @@ namespace CompleteProject
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // TODO: The non-consumable item has been successfully purchased, grant this item to the player.
             }
+
             // Or ... a subscription product has been purchased by this user.
             else if (String.Equals(args.purchasedProduct.definition.id, kProductIDSubscription, StringComparison.Ordinal))
             {
@@ -234,6 +306,8 @@ namespace CompleteProject
             }
             // Or ... an unknown product has been purchased by this user. Fill in additional products here....
             */
+
+            // else if product not found
             else
             {
                 Debug.Log(string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id));
