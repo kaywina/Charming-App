@@ -9,20 +9,9 @@ public class UnityBannerAd : MonoBehaviour
 
     void OnEnable()
     {
-        //StartCoroutine(ShowBannerWhenReady());
-        showing = false;
+        StartCoroutine(ShowBannerWhenReady());
     }
 
-    private void Update()
-    {
-        if (!showing && Advertisement.IsReady(bannerPlacement))
-        {
-            Debug.Log("Show banner ad");
-            Advertisement.Show(bannerPlacement);
-            showing = true;
-        }
-    }
-    /*
     IEnumerator ShowBannerWhenReady()
     {
         while (!Advertisement.IsReady(bannerPlacement))
@@ -31,5 +20,4 @@ public class UnityBannerAd : MonoBehaviour
         }
         Advertisement.Show(bannerPlacement);
     }
-    */
 }
