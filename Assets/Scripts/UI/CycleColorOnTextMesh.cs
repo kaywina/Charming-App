@@ -58,7 +58,7 @@ public class CycleColorOnTextMesh : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldMousePos2D = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
@@ -72,12 +72,16 @@ public class CycleColorOnTextMesh : MonoBehaviour
 #if UNITY_ANDROID || UNITY_IOS
         if (Input.touchCount > 0)
         {
-            Touch touch0 = Input.GetTouch(0);
-            Vector2 worldTouchPos2D = (Vector2)mainCamera.ScreenToWorldPoint(touch0.position);
+            Touch touch = Input.GetTouch(0);
 
-            if (boxCollider2D.bounds.Contains(worldTouchPos2D))
+            if (touch.phase == TouchPhase.Began)
             {
-                NextColor();
+                Vector2 worldTouchPos2D = (Vector2)mainCamera.ScreenToWorldPoint(touch.position);
+
+                if (boxCollider2D.bounds.Contains(worldTouchPos2D))
+                {
+                    NextColor();
+                }
             }
         }
 #endif
