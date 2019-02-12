@@ -14,9 +14,18 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
     public GameObject[] objectsToHide;
 
+    private int bonusAmount = 8;
+    private bool bonusGiven;
+
     void Start()
     {
+        
+    }
+
+    private void OnEnable()
+    {
         shareButton.onClick.AddListener(OnShareButtonClick);
+        bonusGiven = false;
     }
 
     void OnApplicationFocus(bool focus)
@@ -113,9 +122,11 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
 
         // give share bonus kisses
-        int bonusAmount = 16;
-        CurrencyManager.Instance.GiveBonus(bonusAmount);
-
+        if (!bonusGiven)
+        {
+            CurrencyManager.Instance.GiveBonus(bonusAmount);
+            bonusGiven = true;
+        }
         isProcessing = false;
     }
 #endif
