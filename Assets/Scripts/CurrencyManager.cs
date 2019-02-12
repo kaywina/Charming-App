@@ -14,7 +14,6 @@ public class CurrencyManager : MonoBehaviour {
 
     private static int welcomeBonus = 10;
     public Text welcomeBonusText;
-    private int dailyBonus = 16;
 
     public static int currencyInBank = 0;
 
