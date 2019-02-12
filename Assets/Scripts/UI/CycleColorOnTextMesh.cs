@@ -16,15 +16,12 @@ public class CycleColorOnTextMesh : MonoBehaviour
     private Camera mainCamera;
     private string playerPrefName;
 
-    // Update is called once per frame
-    private void Start()
-    {
-        playerPrefName = gameObject.name + "-Color";
-        mainCamera = Camera.main;
-    }
-
     void OnEnable()
     {
+        playerPrefName = gameObject.name + "-Color";
+        Debug.Log("set playerPrefName to " + playerPrefName);
+        mainCamera = Camera.main;
+
         if (defaultIndex >= hexStrings.Length)
         {
             Debug.LogWarning("Default index in CycleColorOnTextMesh is invalid; using default 0");
@@ -40,7 +37,7 @@ public class CycleColorOnTextMesh : MonoBehaviour
         {
             Debug.Log("there is a stored player pref for this color");
             index = int.Parse(PlayerPrefs.GetString(playerPrefName));
-            Debug.Log(PlayerPrefs.GetString(playerPrefName));
+            Debug.Log("Player pref value is " + PlayerPrefs.GetString(playerPrefName));
         }
         
         textMesh = GetComponent<TextMesh>();
