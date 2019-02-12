@@ -21,7 +21,8 @@ public class BonusWheel : MonoBehaviour
     void OnEnable()
     {
         spinning = false;
-        anglePerItem = 360 / prize.Count;       
+        anglePerItem = 360 / prize.Count;
+        wheelModel.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     void Update()
