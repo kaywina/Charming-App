@@ -12,6 +12,7 @@ public class BonusPanel : CharmsPanel
     public GameObject doubleBonus;
     public Text doubleBonusText;
     public GameObject prizeIndicator;
+    public GameObject skipButton;
 
     private bool hasSpun;
     private int storedBonus;
@@ -28,6 +29,7 @@ public class BonusPanel : CharmsPanel
         }
 
         base.OnEnable();
+        skipButton.SetActive(true);
     }
 
     new void OnDisable()
@@ -43,6 +45,7 @@ public class BonusPanel : CharmsPanel
         //Debug.Log("Spin bonus wheel!");
         tip.SetActive(false);
         bonusWheel.Spin();
+        skipButton.SetActive(false);
     }
 
     public void CompleteSpin(int bonus)
