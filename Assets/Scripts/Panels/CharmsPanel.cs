@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharmsPanel : MonoBehaviour
 {
     public GameObject worldSpaceUI;
+    public GameObject standIcons;
+
 
     protected void OnEnable()
     {
@@ -12,6 +14,12 @@ public class CharmsPanel : MonoBehaviour
         {
             worldSpaceUI.SetActive(false);
         }
+
+        if (standIcons != null)
+        {
+            standIcons.SetActive(false);
+        }
+
     }
 
     protected void OnDisable()
@@ -19,6 +27,11 @@ public class CharmsPanel : MonoBehaviour
         if (worldSpaceUI != null)
         {
             worldSpaceUI.SetActive(true);
+        }
+
+        if (standIcons != null)
+        {
+            standIcons.SetActive(false);
         }
     }
 }
