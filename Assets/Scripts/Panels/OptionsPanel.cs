@@ -5,6 +5,13 @@ using UnityEngine;
 public class OptionsPanel : CharmsPanel
 {
 
+    public static bool returnToMain = false;
+
+    public static void SetReturnToMain(bool newValue)
+    {
+        returnToMain = newValue;
+    }
+
     new private void OnEnable()
     {
         base.OnEnable();
@@ -12,11 +19,15 @@ public class OptionsPanel : CharmsPanel
 
     new private void OnDisable()
     {
-        base.OnDisable();
+        if (returnToMain)
+        {
+            base.OnDisable(); // only call base class method when returning to main charms screen, not if going to bonus wheel scene
+        }
     }
 
     public void ShowPanel()
     {
+        returnToMain = true;
         gameObject.SetActive(true);
     }
 

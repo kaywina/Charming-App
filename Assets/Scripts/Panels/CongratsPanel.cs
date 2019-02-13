@@ -14,7 +14,6 @@ public class CongratsPanel : CharmsPanel
 
     private GameObject unlocked;
     public GameObject headerControls;
-    public GameObject standIcons;
 
     new void OnEnable()
     {
@@ -28,7 +27,6 @@ public class CongratsPanel : CharmsPanel
     {
         DisableRigModels();
         if (headerControls != null) { headerControls.SetActive(true); }
-        if (standIcons != null) { standIcons.SetActive(true); }
         base.OnDisable();
     }
 

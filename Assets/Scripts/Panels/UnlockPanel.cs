@@ -11,7 +11,7 @@ public class UnlockPanel : CharmsPanel
     public Text costText;
     public CongratsPanel congratsPanel;
     private int cost;
-    public GameObject toUnlock;
+    private GameObject toUnlock;
     private GameObject unlockButton;
     private bool isCharm;
 
@@ -34,6 +34,8 @@ public class UnlockPanel : CharmsPanel
     {
         cost = 0;
         toUnlock = null;
+
+        // do not call base.OnDisable here because we go to congrats panel after not back to main UI
     }
 
     public void ShowPanel()

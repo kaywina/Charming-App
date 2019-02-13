@@ -27,9 +27,10 @@ public class BonusPanel : CharmsPanel
         {
             activateAfterSpin[i].SetActive(false);
         }
+        skipButton.SetActive(true);
 
         base.OnEnable();
-        skipButton.SetActive(true);
+        
     }
 
     new void OnDisable()

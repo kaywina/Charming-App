@@ -11,6 +11,7 @@ public class BonusButton : MonoBehaviour
     public void ShowBonusPanel()
     {
         bonusPanel.SetActive(true);
+        OptionsPanel.SetReturnToMain(false);
         optionsPanel.SetActive(false);
     }
 }
