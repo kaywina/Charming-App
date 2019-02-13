@@ -10,8 +10,6 @@ public class CharmsPanel : MonoBehaviour
 
     protected void OnEnable()
     {
-        Debug.Log("On enable in CharmsPanel");
-
         if (worldSpaceUI != null)
         {
             worldSpaceUI.SetActive(false);

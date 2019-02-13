@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BonusPanel : CharmsPanel
 {
+    public GameObject header;
     public BonusWheel bonusWheel;
     public GameObject tip;
     public GameObject[] activateAfterSpin;
@@ -19,6 +20,7 @@ public class BonusPanel : CharmsPanel
 
     new void OnEnable()
     {
+        header.SetActive(false);
         hasSpun = false;
         doubleBonus.SetActive(false);
         tip.SetActive(true);
@@ -35,6 +37,7 @@ public class BonusPanel : CharmsPanel
 
     new void OnDisable()
     {
+        header.SetActive(true);
         CurrencyManager.Instance.GiveBonus(storedBonus);
         base.OnDisable();
     }
