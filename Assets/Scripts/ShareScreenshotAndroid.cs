@@ -13,6 +13,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     private string screenshotName;
 
     public GameObject[] objectsToHide;
+    public GameObject url;
 
     private int bonusAmount = 8;
     private bool bonusGiven;
@@ -67,6 +68,9 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
         isProcessing = true;
 
+        // show the url
+        url.SetActive(true);
+
         // hide some objects while taking screenshot
         for (int i = 0; i < objectsToHide.Length; i++)
         {
@@ -114,6 +118,9 @@ public class ShareScreenshotAndroid : MonoBehaviour
         // show the share button again and make it interactable
         shareButtonImage.enabled = true;
         shareButton.interactable = true;
+
+        // hide url object
+        url.SetActive(false);
 
         // show the hidden objects again
         for (int i = 0; i < objectsToHide.Length; i++)
