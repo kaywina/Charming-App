@@ -11,22 +11,11 @@ public class CongratsPanel : CharmsPanel
     public List<GameObject> rigModels;
     public List<GameObject> fireworks;
 
-
     private GameObject unlocked;
-    public GameObject headerControls;
-
-    new void OnEnable()
-    {
-        headerControls.SetActive(false);
-        standIcons.SetActive(false);
-
-        base.OnEnable();
-    }
 
     new void OnDisable()
     {
         DisableRigModels();
-        if (headerControls != null) { headerControls.SetActive(true); }
         base.OnDisable();
     }
 

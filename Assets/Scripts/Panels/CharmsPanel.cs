@@ -6,6 +6,7 @@ public class CharmsPanel : MonoBehaviour
 {
     public GameObject worldSpaceUI;
     public GameObject standIcons;
+    public GameObject headerControls;
 
 
     protected void OnEnable()
@@ -20,6 +21,11 @@ public class CharmsPanel : MonoBehaviour
             standIcons.SetActive(false);
         }
 
+        if (headerControls != null)
+        {
+            headerControls.SetActive(false);
+        }
+
     }
 
     protected void OnDisable()
@@ -32,6 +38,11 @@ public class CharmsPanel : MonoBehaviour
         if (standIcons != null)
         {
             standIcons.SetActive(true);
+        }
+
+        if (headerControls != null)
+        {
+            headerControls.SetActive(true);
         }
     }
 }
