@@ -10,7 +10,7 @@ public class UnlockButton : MonoBehaviour {
     private bool lockOnPlay = false;
     public Text priceText;
     public UnlockPanel unlockPanel;
-    public GameObject options;
+    public OptionsPanel options;
 
     void Start () {
 
@@ -41,7 +41,8 @@ public class UnlockButton : MonoBehaviour {
 
         if (options != null)
         {
-            options.SetActive(false);
+            OptionsPanel.SetReturnToMain(false);
+            options.HidePanel();
         }
     }
 }

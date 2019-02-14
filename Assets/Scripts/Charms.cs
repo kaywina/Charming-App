@@ -37,7 +37,9 @@ public class Charms : MonoBehaviour {
 	void Start () {
 
 #if UNITY_EDITOR
-        if (clearPlayerPrefsOnPlayInEditor == true) { PlayerPrefs.DeleteAll(); }
+        if (clearPlayerPrefsOnPlayInEditor == true) {
+            PlayerPrefs.DeleteAll();
+        }
 #endif
 
         // set a default so don't get loc error when data cleared on Android
