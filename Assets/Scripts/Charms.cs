@@ -14,9 +14,11 @@ public class Charms : MonoBehaviour {
 	private Ray ray;
 	private RaycastHit hit;
 
-    private string[] charmNames = {"Love", "Grace", "Patience", "Wisdom", "Joy", "Focus", "Will", "Guile", "Force" };
+    private string[] charmNames = {"Love", "Grace", "Patience", "Wisdom", "Joy", "Focus", "Will", "Guile", "Force",                 // set zero
+                                    "Honor", "Faith", "Vision", "Balance", "Harmony", "Regard", "Insight", "Plenty", "Influence" }; // set one
 
-	// For swappable icons on stand
+	// For swappable icons on stand"
+
 	public GameObject love;
     public GameObject grace;
     public GameObject patience;
@@ -27,7 +29,17 @@ public class Charms : MonoBehaviour {
     public GameObject guile;
     public GameObject force;
 
-	private float swapSpeed = 0.5f;
+    public GameObject honor;
+    public GameObject faith;
+    public GameObject vision;
+    public GameObject balance;
+    public GameObject harmony;
+    public GameObject regard;
+    public GameObject insight;
+    public GameObject plenty;
+    public GameObject influence;
+
+    private float swapSpeed = 0.5f;
 
     private bool loaded = false;
 
@@ -171,7 +183,43 @@ public class Charms : MonoBehaviour {
 		    mainCamera.transform.DOMoveX(force.transform.position.x, swapSpeed);
             charmDescriptionLocText.SetLocalizationKey("FORCE_DESC");
             break;
-		default:
+        case "Honor":
+            mainCamera.transform.DOMoveX(honor.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("HONOR_DESC");
+            break;
+        case "Faith":
+            mainCamera.transform.DOMoveX(faith.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("FAITH_DESC");
+            break;
+        case "Vision":
+            mainCamera.transform.DOMoveX(vision.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("VISION_DESC");
+            break;
+        case "Balance":
+            mainCamera.transform.DOMoveX(balance.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("BALANCE_DESC");
+            break;
+        case "Harmony":
+            mainCamera.transform.DOMoveX(harmony.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("HARMONY_DESC");
+            break;
+        case "Regard":
+            mainCamera.transform.DOMoveX(regard.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("REGARD_DESC");
+            break;
+        case "Insight":
+            mainCamera.transform.DOMoveX(insight.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("INSIGHT_DESC");
+            break;
+        case "Plenty":
+            mainCamera.transform.DOMoveX(plenty.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("PLENTY_DESC");
+            break;
+        case "Influence":
+            mainCamera.transform.DOMoveX(influence.transform.position.x, swapSpeed);
+            charmDescriptionLocText.SetLocalizationKey("INFLUENCE_DESC");
+            break;
+        default:
 			mainCamera.transform.DOMoveX(love.transform.position.x, swapSpeed);
             charmDescriptionLocText.SetLocalizationKey("LOVE_DESC");
             break;
