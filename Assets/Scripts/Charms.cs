@@ -45,6 +45,10 @@ public class Charms : MonoBehaviour {
 
     public bool clearPlayerPrefsOnPlayInEditor = false;
 
+    public GameObject[] charmSets;
+    public GameObject[] unlockButtonSets;
+    private static string charmSetPrefName = "CharmSet";
+
 	// Use this for initialization
 	void Start () {
 
@@ -53,6 +57,9 @@ public class Charms : MonoBehaviour {
             PlayerPrefs.DeleteAll();
         }
 #endif
+
+        // set the correct charm set depending on pref
+        CheckCharmSet();
 
         // set a default so don't get loc error when data cleared on Android
         if (string.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
@@ -68,6 +75,38 @@ public class Charms : MonoBehaviour {
 		GetInput ();
 	}
 	
+    public static string GetCharmSetPlayerPrefName()
+    {
+        return charmSetPrefName;
+    }
+
+    // enables/disables correct charm world ui button set and unlock buttons parent object based on playerpref
+    void CheckCharmSet()
+    {
+        int charmSet = PlayerPrefs.GetInt(charmSetPrefName);
+        if (charmSet < 0)
+        {
+            Debug.LogError("Error - stored charm set is invalid - less than zero");
+        }
+        if (charmSet >= charmSets.Length || charmSet >= unlockButtonSets.Length)
+        {
+            Debug.LogError("Error - stored charm set is invalid - longer than charmset and/or unlock buttons array");
+        }
+        for (int i = 0; i < charmSets.Length; i++)
+        {
+            if (i == charmSet)
+            {
+                charmSets[i].SetActive(true);
+                unlockButtonSets[i].SetActive(true);
+            }
+            else
+            {
+                charmSets[i].SetActive(false);
+                unlockButtonSets[i].SetActive(false);
+            }
+        }
+    }
+
 	void GetInput() {
         #if UNITY_EDITOR // Mouse Input
         if (Input.GetMouseButtonDown (0))
