@@ -6,7 +6,14 @@ public class CharmSetButton : EnableDisableObjects
 {
     public int setToOpen = 0;
 
-    // Update is called once per frame
+    void Start()
+    {
+        // ensure buttons are deactivated correctly when app starts up
+        if (setToOpen == PlayerPrefs.GetInt(Charms.GetCharmSetPlayerPrefName())) {
+            gameObject.SetActive(false);
+        }
+    }
+
     public void OpenCharmSet()
     {
         base.EnableDisableGameObjects();
