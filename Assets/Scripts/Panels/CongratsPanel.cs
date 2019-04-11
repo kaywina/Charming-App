@@ -43,12 +43,12 @@ public class CongratsPanel : CharmsPanel
             if (rigModels[i].name == nameOfCharm)
             {
                 rigModels[i].SetActive(true);
-                fireworks[i].SetActive(true);
+                //fireworks[i].SetActive(true);
             }
             else
             {
                 rigModels[i].SetActive(false);
-                fireworks[i].SetActive(false);
+                //fireworks[i].SetActive(false);
             }
         }
     }
@@ -60,7 +60,7 @@ public class CongratsPanel : CharmsPanel
             if (rigModels[i] != null)
             {
                 rigModels[i].SetActive(false);
-                fireworks[i].SetActive(false);
+                //fireworks[i].SetActive(false);
             }
         }
     }
