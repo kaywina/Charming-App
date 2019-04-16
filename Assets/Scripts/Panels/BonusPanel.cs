@@ -40,12 +40,15 @@ public class BonusPanel : CharmsPanel
         base.OnDisable();
     }
 
+    public void ReadySpin()
+    {
+        if (hasSpun) { return; }
+        tip.SetActive(false);
+    }
+
     public void Spin()
     {
         if (hasSpun) { return; }
-
-        //Debug.Log("Spin bonus wheel!");
-        tip.SetActive(false);
         bonusWheel.Spin();
         skipButton.SetActive(false);
     }
