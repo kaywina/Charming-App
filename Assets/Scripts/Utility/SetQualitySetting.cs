@@ -11,7 +11,7 @@ public class SetQualitySetting : MonoBehaviour
 
     private void Start()
     {
-        QualitySettings.SetQualityLevel(5); // max quality by default
+        QualitySettings.SetQualityLevel(1); // Fast quality by default
     }
 
     private void OnEnable()
