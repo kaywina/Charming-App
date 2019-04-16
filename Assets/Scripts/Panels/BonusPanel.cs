@@ -44,13 +44,13 @@ public class BonusPanel : CharmsPanel
     {
         if (hasSpun) { return; }
         tip.SetActive(false);
+        skipButton.SetActive(false);
     }
 
     public void Spin()
     {
         if (hasSpun) { return; }
         bonusWheel.Spin();
-        skipButton.SetActive(false);
     }
 
     public void CompleteSpin(int bonus)
