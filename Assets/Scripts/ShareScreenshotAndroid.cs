@@ -131,7 +131,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         // give share bonus kisses
         if (!bonusGiven)
         {
-            CurrencyManager.Instance.GiveBonus(bonusAmount);
+            CurrencyManager.Instance.GivePremiumBonus(bonusAmount);
             bonusGiven = true;
         }
         isProcessing = false;
