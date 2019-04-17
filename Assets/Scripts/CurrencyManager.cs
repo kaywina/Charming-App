@@ -86,7 +86,14 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
-    #if UNITY_EDITOR // disable cheats in builds
+    public void GivePremiumBonus(int bonus)
+    {
+        currencyInBankGold += bonus;
+        PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
+        SetCurrencyText();
+    }
+
+#if UNITY_EDITOR // disable cheats in builds
     public void ClearCurrency()
     {
         currencyInBankSilver = 0;
