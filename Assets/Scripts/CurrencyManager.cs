@@ -10,12 +10,15 @@ public class CurrencyManager : MonoBehaviour {
 
     public GameObject welcomePanel;
     public GameObject bonusPanel;
-    public Text currencyText;
+    public Text currencyTextSilver;
+    public Text currencyTextGold;
 
-    private static int welcomeBonus = 10;
+    private static int welcomeBonusSilver = 10;
+    private static int welcomeBonusGold = 0;
     public Text welcomeBonusText;
 
-    public static int currencyInBank = 0;
+    public static int currencyInBankSilver = 0;
+    public static int currencyInBankGold = 0;
 
 	// Use this for initialization
 	void Start ()
@@ -25,20 +28,21 @@ public class CurrencyManager : MonoBehaviour {
         CloseBonusPanel();
         CloseWelcomePanel();
 
-        welcomeBonusText.text = welcomeBonus.ToString();
+        welcomeBonusText.text = welcomeBonusSilver.ToString();
 
         // on first time running app
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             //Debug.Log("Give currency bonus on first run");
-            SetCurrencyOnStart(welcomeBonus);
+            SetCurrencyOnStart(welcomeBonusSilver, welcomeBonusGold);
         }
         else
         {
-            currencyInBank = PlayerPrefs.GetInt("Currency");
-            SetCurrencyText();
+            currencyInBankSilver = PlayerPrefs.GetInt("Currency");
+            currencyInBankGold = PlayerPrefs.GetInt("PremiumCurrency");
         }
 
+        SetCurrencyText();
         DateTime currentDateTime = System.DateTime.Now;
         int currentDayOfYear = currentDateTime.DayOfYear;
         int currentYear = currentDateTime.Year;
@@ -60,10 +64,12 @@ public class CurrencyManager : MonoBehaviour {
         PlayerPrefs.SetString("FirstRun", "False");
     }
 
-    void SetCurrencyOnStart(int amount)
+    void SetCurrencyOnStart(int amountSilver, int amountGold)
     {
-        currencyInBank = amount;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        currencyInBankSilver = amountSilver;
+        currencyInBankGold = amountGold;
+        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
+        PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
         welcomePanel.SetActive(true);
         SetCurrencyText();
     }
@@ -75,17 +81,21 @@ public class CurrencyManager : MonoBehaviour {
 
     public void GiveBonus(int bonus)
     {
-        currencyInBank += bonus;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        currencyInBankSilver += bonus;
+        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
         SetCurrencyText();
     }
 
+    #if UNITY_EDITOR // disable cheats in builds
     public void ClearCurrency()
     {
-        currencyInBank = 0;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        currencyInBankSilver = 0;
+        currencyInBankGold = 0;
+        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
+        PlayerPrefs.SetInt("PemiumCurrency", currencyInBankGold);
         SetCurrencyText();
     }
+    #endif
 
     public void CloseBonusPanel()
     {
@@ -100,24 +110,25 @@ public class CurrencyManager : MonoBehaviour {
     public static void SetCurrencyText()
     {
 
-        Instance.currencyText.text = currencyInBank.ToString();
+        Instance.currencyTextSilver.text = currencyInBankSilver.ToString();
+        Instance.currencyTextGold.text = currencyInBankGold.ToString();
     }
 
-    public static void SetCurrencyInBank(int amount)
+    public static void SetCurrencyInBankSilver(int amount)
     {
-        currencyInBank = amount;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        currencyInBankSilver = amount;
+        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
         SetCurrencyText();
     }
 
-    public static void WithdrawAmount(int amount)
+    public static void WithdrawAmountSilver(int amount)
     {
-        SetCurrencyInBank(currencyInBank - amount);
+        SetCurrencyInBankSilver(currencyInBankSilver - amount);
     }
 
-    public static bool CanWithdrawAmount(int amount)
+    public static bool CanWithdrawAmountSilver(int amount)
     {
-        if (amount <= currencyInBank)
+        if (amount <= currencyInBankSilver)
         {
             return true;
         }
