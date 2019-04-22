@@ -15,6 +15,8 @@ public class UnlockPanel : CharmsPanel
     private GameObject unlockButton;
     private bool isCharm;
     private bool premiumCurrency;
+    public GameObject goldKeyImage;
+    public GameObject silverKeyImage;
 
     new void OnEnable()
     {
@@ -23,10 +25,14 @@ public class UnlockPanel : CharmsPanel
         if (premiumCurrency)
         {
             canWithdraw = CurrencyManager.CanWithdrawAmountGold(cost);
+            goldKeyImage.SetActive(true);
+            silverKeyImage.SetActive(false);
         }
         else
         {
             canWithdraw = CurrencyManager.CanWithdrawAmountSilver(cost);
+            goldKeyImage.SetActive(false);
+            silverKeyImage.SetActive(true);
         }
         
         if (canWithdraw)

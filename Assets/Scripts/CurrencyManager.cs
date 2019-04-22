@@ -64,6 +64,21 @@ public class CurrencyManager : MonoBehaviour {
         PlayerPrefs.SetString("FirstRun", "False");
     }
 
+    private void Update()
+    {
+#if UNITY_EDITOR // disable cheats in builds
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            CurrencyManager.Instance.GiveBonus(100);
+            CurrencyManager.Instance.GivePremiumBonus(100);
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            CurrencyManager.Instance.ClearCurrency();
+        }
+#endif
+    }
+
     void SetCurrencyOnStart(int amountSilver, int amountGold)
     {
         currencyInBankSilver = amountSilver;

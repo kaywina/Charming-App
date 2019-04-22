@@ -119,17 +119,6 @@ public class Charms : MonoBehaviour {
 		}
         #endif
 
-        #if UNITY_EDITOR // disable cheats in builds
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            CurrencyManager.Instance.GiveBonus(100);
-        }
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
-        {
-            CurrencyManager.Instance.ClearCurrency();
-        }
-        #endif
-
         // Touch Input
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
