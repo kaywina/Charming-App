@@ -13,7 +13,20 @@ public class UnlockButton : MonoBehaviour {
     public OptionsPanel options;
     public bool usePremiumCurrency = false;
 
+    public MeshRenderer meshRenderer;
+    public Material silverMat;
+    public Material goldMat;
+
     void Start () {
+
+        if (usePremiumCurrency)
+        {
+            meshRenderer.material = goldMat;
+        }
+        else
+        {
+            meshRenderer.material = silverMat;
+        }
 
         priceText.text = cost.ToString();
 
