@@ -7,25 +7,36 @@ public class UnlockPanel : CharmsPanel
 {
     public Charms charms;
     public GameObject notEnoughText;
-    public Button yesButton;
+    public Button buyButton;
     public Text costText;
     public CongratsPanel congratsPanel;
     private int cost;
     private GameObject toUnlock;
     private GameObject unlockButton;
     private bool isCharm;
+    private bool premiumCurrency;
 
     new void OnEnable()
     {
         base.OnEnable();
-        if (CurrencyManager.CanWithdrawAmountSilver(cost))
+        bool canWithdraw = false;
+        if (premiumCurrency)
         {
-            yesButton.interactable = true;
+            canWithdraw = CurrencyManager.CanWithdrawAmountGold(cost);
+        }
+        else
+        {
+            canWithdraw = CurrencyManager.CanWithdrawAmountSilver(cost);
+        }
+        
+        if (canWithdraw)
+        {
+            buyButton.interactable = true;
             notEnoughText.SetActive(false);
         }
         else
         {
-            yesButton.interactable = false;
+            buyButton.interactable = false;
             notEnoughText.SetActive(true);
         }
     }
@@ -55,16 +66,24 @@ public class UnlockPanel : CharmsPanel
         costText.text = cost.ToString();
     }
 
-    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm)
+    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm, bool usePremiumCurrency)
     {
         toUnlock = toSet;
         unlockButton = button;
         isCharm = charm;
+        premiumCurrency = usePremiumCurrency;
     }
 
     public void UnlockObject()
     {
-        CurrencyManager.WithdrawAmountSilver(cost);
+        if (premiumCurrency)
+        {
+            CurrencyManager.WithdrawAmountGold(cost);
+        }
+        else
+        {
+            CurrencyManager.WithdrawAmountSilver(cost);
+        }
         PlayerPrefs.SetString(toUnlock.name, "unlocked");
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);

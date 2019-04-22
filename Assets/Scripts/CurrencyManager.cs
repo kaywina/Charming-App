@@ -17,8 +17,8 @@ public class CurrencyManager : MonoBehaviour {
     private static int welcomeBonusGold = 0;
     public Text welcomeBonusText;
 
-    public static int currencyInBankSilver = 0;
-    public static int currencyInBankGold = 0;
+    private static int currencyInBankSilver = 0;
+    private static int currencyInBankGold = 0;
 
 	// Use this for initialization
 	void Start ()
@@ -128,6 +128,13 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
+    public static void SetCurrencyInBankGold(int amount)
+    {
+        currencyInBankGold = amount;
+        PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
+        SetCurrencyText();
+    }
+
     public static void WithdrawAmountSilver(int amount)
     {
         SetCurrencyInBankSilver(currencyInBankSilver - amount);
@@ -136,6 +143,20 @@ public class CurrencyManager : MonoBehaviour {
     public static bool CanWithdrawAmountSilver(int amount)
     {
         if (amount <= currencyInBankSilver)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static void WithdrawAmountGold(int amount)
+    {
+        SetCurrencyInBankGold(currencyInBankGold - amount);
+    }
+
+    public static bool CanWithdrawAmountGold(int amount)
+    {
+        if (amount <= currencyInBankGold)
         {
             return true;
         }
