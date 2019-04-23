@@ -21,11 +21,11 @@ public class UnlockButton : MonoBehaviour {
 
         if (usePremiumCurrency)
         {
-            meshRenderer.material = goldMat;
+            if (meshRenderer != null) { meshRenderer.material = goldMat; }
         }
         else
         {
-            meshRenderer.material = silverMat;
+            if (meshRenderer != null) { meshRenderer.material = silverMat; }
         }
 
         priceText.text = cost.ToString();
