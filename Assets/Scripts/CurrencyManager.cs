@@ -13,7 +13,7 @@ public class CurrencyManager : MonoBehaviour {
     public Text currencyTextSilver;
     public Text currencyTextGold;
 
-    private static int welcomeBonusSilver = 10;
+    private static int welcomeBonusSilver = 8;
     private static int welcomeBonusGold = 0;
     public Text welcomeBonusText;
 
