@@ -7,7 +7,7 @@ public class CharmsPanel : MonoBehaviour
     public GameObject worldSpaceUI;
     public GameObject standIcons;
     public GameObject headerControls;
-    public GameObject footerControls;
+    public GameObject arrowControls;
 
 
     protected void OnEnable()
@@ -27,9 +27,9 @@ public class CharmsPanel : MonoBehaviour
             headerControls.SetActive(false);
         }
 
-        if (footerControls != null)
+        if (arrowControls != null)
         {
-            footerControls.SetActive(false);
+            arrowControls.SetActive(false);
         }
 
     }
@@ -51,9 +51,9 @@ public class CharmsPanel : MonoBehaviour
             headerControls.SetActive(true);
         }
 
-        if (footerControls != null)
+        if (arrowControls != null)
         {
-            footerControls.SetActive(true);
+            arrowControls.SetActive(true);
         }
     }
 }
