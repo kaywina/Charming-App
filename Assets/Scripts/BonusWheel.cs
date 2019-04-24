@@ -71,7 +71,14 @@ public class BonusWheel : MonoBehaviour
             prizeText.text = prize[itemNumber].ToString();
         }
 
-        bonusPanel.CompleteSpin(prize[itemNumber]);
-        
+        // prize is premium currency for certain bonus wheel segments
+        if (itemNumber > 3 && itemNumber < 8)
+        {
+            bonusPanel.CompleteSpin(prize[itemNumber], true); // premium currency prize
+        }
+        else
+        {
+            bonusPanel.CompleteSpin(prize[itemNumber], false); // regular currency prize
+        }        
     }
 }

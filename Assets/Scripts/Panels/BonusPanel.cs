@@ -15,6 +15,7 @@ public class BonusPanel : CharmsPanel
 
     private bool hasSpun;
     private int storedBonus;
+    private bool prizeIsPremium;
 
     new void OnEnable()
     {
@@ -36,7 +37,14 @@ public class BonusPanel : CharmsPanel
     new void OnDisable()
     {
         header.SetActive(true);
-        CurrencyManager.Instance.GiveBonus(storedBonus);
+        if (prizeIsPremium)
+        {
+            CurrencyManager.Instance.GivePremiumBonus(storedBonus);
+        }
+        else
+        {
+            CurrencyManager.Instance.GiveRegularBonus(storedBonus);
+        }
         base.OnDisable();
     }
 
@@ -53,8 +61,9 @@ public class BonusPanel : CharmsPanel
         bonusWheel.Spin();
     }
 
-    public void CompleteSpin(int bonus)
+    public void CompleteSpin(int bonus, bool premiumPrize)
     {
+        prizeIsPremium = premiumPrize;
         storedBonus = bonus;
         //Debug.Log("Complete bonus wheel spin");
         prizeText.text = bonus.ToString();

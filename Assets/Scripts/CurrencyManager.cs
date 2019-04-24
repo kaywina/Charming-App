@@ -69,7 +69,7 @@ public class CurrencyManager : MonoBehaviour {
 #if UNITY_EDITOR // disable cheats in builds
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            CurrencyManager.Instance.GiveBonus(100);
+            CurrencyManager.Instance.GiveRegularBonus(100);
             CurrencyManager.Instance.GivePremiumBonus(100);
         }
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
@@ -94,7 +94,7 @@ public class CurrencyManager : MonoBehaviour {
         bonusPanel.SetActive(true);
     }
 
-    public void GiveBonus(int bonus)
+    public void GiveRegularBonus(int bonus)
     {
         currencyInBankSilver += bonus;
         PlayerPrefs.SetInt("Currency", currencyInBankSilver);
