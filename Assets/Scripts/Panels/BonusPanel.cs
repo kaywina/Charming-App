@@ -13,6 +13,9 @@ public class BonusPanel : CharmsPanel
     public GameObject skipButton;
     public GameObject doubleBonusText;
 
+    public GameObject[] regularCurrencyImages;
+    public GameObject[] premiumCurrencyImages;
+
     private bool hasSpun;
     private int storedBonus;
     private bool prizeIsPremium;
@@ -64,6 +67,14 @@ public class BonusPanel : CharmsPanel
     public void CompleteSpin(int bonus, bool premiumPrize)
     {
         prizeIsPremium = premiumPrize;
+
+        // enable the correct images for regular or premium currency
+        for (int i = 0; i < premiumCurrencyImages.Length; i++)
+        {
+            premiumCurrencyImages[i].SetActive(prizeIsPremium);
+            regularCurrencyImages[i].SetActive(!prizeIsPremium);
+        }
+
         storedBonus = bonus;
         //Debug.Log("Complete bonus wheel spin");
         prizeText.text = bonus.ToString();
