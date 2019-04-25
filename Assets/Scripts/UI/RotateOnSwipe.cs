@@ -26,7 +26,7 @@ public class RotateOnSwipe : MonoBehaviour
         }
         lastPosition = Input.mousePosition;
 #endif
-
+#if UNITY_IOS || UNITY_ANDROID
         if (Input.touchCount == 1)
         {
             // GET TOUCH 0
@@ -39,4 +39,5 @@ public class RotateOnSwipe : MonoBehaviour
             }
         }
     }
+#endif
 }
