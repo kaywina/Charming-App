@@ -80,6 +80,12 @@ public class Charms : MonoBehaviour {
         return charmSetPrefName;
     }
 
+    public static int GetCharmSet()
+    {
+        int charmSet = PlayerPrefs.GetInt(charmSetPrefName);
+        return charmSet;
+    }
+
     // enables/disables correct charm world ui button set and unlock buttons parent object based on playerpref
     void CheckCharmSet()
     {
