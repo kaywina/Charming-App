@@ -14,7 +14,11 @@ public class UnityAdsController : MonoBehaviour
 
     public static string GetGameId()
     {
+#if UNITY_IOS || UNITY_ANDROID
         return gameId;
+#else
+        return null;
+#endif
     }
 
     private void Start()
