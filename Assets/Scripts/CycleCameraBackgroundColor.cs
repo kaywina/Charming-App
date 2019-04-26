@@ -7,7 +7,7 @@ public class CycleCameraBackgroundColor : MonoBehaviour
     public Camera cam;
 
     // black should be first color for all palettes
-    private string[] hexStrings = { "#000000", "#ff00bf", "#9500ff", "#4800ff", "#00b7ff", "#00fffb" }; // cyan to magenta palette
+    private string[] hexStrings = { "#000000", "#4B0038", "#2D004D", "#16004B", "#023A50", "#004645" }; // cyan to magenta palette
 
     private int defaultIndex = 0;
     private int index = 0;
