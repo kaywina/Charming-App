@@ -12,8 +12,8 @@ public class SwipeCharmControls : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 endPosition;
 
-    private float maxVertical = 30f;
-    private float minHorizontal = 100f;
+    private float maxVertical = 100f;
+    private float minHorizontal = 30f;
 
     private int charmSet;
 
