@@ -21,7 +21,11 @@ public class CycleCameraBackgroundColor : MonoBehaviour
         {
             defaultIndex = 0;
         }
+        CheckPlayerPref();
+    }
 
+    public void CheckPlayerPref()
+    {
         if (string.IsNullOrEmpty(PlayerPrefs.GetString(playerPrefName)))
         {
             index = defaultIndex;
@@ -30,11 +34,9 @@ public class CycleCameraBackgroundColor : MonoBehaviour
         {
             index = int.Parse(PlayerPrefs.GetString(playerPrefName));
         }
-
-        SetColor();
     }
 
-    void SetColor()
+    public void SetColor()
     {
         Color newColor = new Color();
         ColorUtility.TryParseHtmlString(hexStrings[index], out newColor);
