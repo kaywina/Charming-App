@@ -7,12 +7,10 @@ public class BonusPanel : CharmsPanel
 {
     public GameObject header;
     public BonusWheel bonusWheel;
-    public GameObject tip;
+    public GameObject[] deactivateOnReadySpin;
     public GameObject[] activateAfterSpin;
     public Text prizeText;
-    public GameObject skipButton;
     public GameObject doubleBonusText;
-
     public GameObject[] regularCurrencyImages;
     public GameObject[] premiumCurrencyImages;
 
@@ -25,13 +23,16 @@ public class BonusPanel : CharmsPanel
         header.SetActive(false);
         doubleBonusText.SetActive(false);
         hasSpun = false;
-        tip.SetActive(true);
 
         for (int i = 0; i < activateAfterSpin.Length; i++)
         {
             activateAfterSpin[i].SetActive(false);
         }
-        skipButton.SetActive(true);
+
+        for (int i = 0; i < deactivateOnReadySpin.Length; i++)
+        {
+            deactivateOnReadySpin[i].SetActive(true);
+        }
 
         base.OnEnable();
         
@@ -54,8 +55,10 @@ public class BonusPanel : CharmsPanel
     public void ReadySpin()
     {
         if (hasSpun) { return; }
-        tip.SetActive(false);
-        skipButton.SetActive(false);
+        for (int i = 0; i < deactivateOnReadySpin.Length; i++)
+        {
+            deactivateOnReadySpin[i].SetActive(false);
+        }
     }
 
     public void Spin()
