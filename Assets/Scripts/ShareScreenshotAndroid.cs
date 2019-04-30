@@ -12,7 +12,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
     private bool isProcessing = false;
     private string screenshotName;
 
-    public GameObject[] objectsToHide;
+    public GameObject shareBonusIndicator;
+    public GameObject[] hideDuringShare;
     public GameObject url;
 
     private int bonusAmount = 8;
@@ -72,9 +73,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
         url.SetActive(true);
 
         // hide some objects while taking screenshot
-        for (int i = 0; i < objectsToHide.Length; i++)
+        shareBonusIndicator.SetActive(false);
+        for (int i = 0; i < hideDuringShare.Length; i++)
         {
-            objectsToHide[i].SetActive(false);
+            hideDuringShare[i].SetActive(false);
         }
 
         // hide the share button and make it non-interactable
@@ -123,12 +125,12 @@ public class ShareScreenshotAndroid : MonoBehaviour
         url.SetActive(false);
 
         // show the hidden objects again
-        for (int i = 0; i < objectsToHide.Length; i++)
+        for (int i = 0; i < hideDuringShare.Length; i++)
         {
-            objectsToHide[i].SetActive(true);
+            hideDuringShare[i].SetActive(true);
         }
 
-        // give share bonus kisses
+        // give share bonus kisses one time only
         if (!bonusGiven)
         {
             CurrencyManager.Instance.GivePremiumBonus(bonusAmount);
