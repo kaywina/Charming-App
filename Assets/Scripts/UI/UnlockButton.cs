@@ -10,7 +10,7 @@ public class UnlockButton : MonoBehaviour {
     private bool lockOnPlay = false;
     public Text priceText;
     public UnlockPanel unlockPanel;
-    public OptionsPanel options;
+    public CharmsPanel optionsPanel;
     public bool usePremiumCurrency = false;
 
     public MeshRenderer meshRenderer;
@@ -53,10 +53,10 @@ public class UnlockButton : MonoBehaviour {
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
 
-        if (options != null)
+        if (optionsPanel != null)
         {
-            OptionsPanel.SetReturnToMain(false);
-            options.HidePanel();
+            optionsPanel.SetReturnToMain(false);
+            optionsPanel.gameObject.SetActive(false);
         }
     }
 }

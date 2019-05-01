@@ -8,6 +8,7 @@ public class CharmsPanel : MonoBehaviour
     public GameObject standIcons;
     public GameObject headerControls;
     public GameObject arrowControls;
+    public bool returnToMain = true;
 
 
     protected void OnEnable()
@@ -36,6 +37,8 @@ public class CharmsPanel : MonoBehaviour
 
     protected void OnDisable()
     {
+        if (!returnToMain) { return; }
+
         if (worldSpaceUI != null)
         {
             worldSpaceUI.SetActive(true);
@@ -55,5 +58,15 @@ public class CharmsPanel : MonoBehaviour
         {
             arrowControls.SetActive(true);
         }
+    }
+
+    public void SetReturnToMain (bool toSet)
+    {
+        returnToMain = toSet;
+    }
+    // hmmm
+    public void DisableCharmsPanel()
+    {
+        OnDisable();
     }
 }

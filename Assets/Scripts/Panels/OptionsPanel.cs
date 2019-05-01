@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class OptionsPanel : CharmsPanel
 {
-
-    public static bool returnToMain = false;
-
-    public static void SetReturnToMain(bool newValue)
-    {
-        returnToMain = newValue;
-    }
-
     new private void OnEnable()
     {
         base.OnEnable();
@@ -27,7 +19,6 @@ public class OptionsPanel : CharmsPanel
 
     public void ShowPanel()
     {
-        returnToMain = true;
         gameObject.SetActive(true);
     }
 

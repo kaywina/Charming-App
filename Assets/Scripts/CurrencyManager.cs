@@ -9,6 +9,7 @@ public class CurrencyManager : MonoBehaviour {
     public static CurrencyManager Instance;
 
     public GameObject welcomePanel;
+    public GameObject infoPanel;
     public GameObject bonusPanel;
     public Text currencyTextSilver;
     public Text currencyTextGold;
@@ -25,24 +26,30 @@ public class CurrencyManager : MonoBehaviour {
     {
         Instance = this;
 
-        CloseBonusPanel();
-        CloseWelcomePanel();
-
         welcomeBonusText.text = welcomeBonusSilver.ToString();
+
+        Debug.Log(PlayerPrefs.GetString("FirstRun"));
 
         // on first time running app
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
             //Debug.Log("Give currency bonus on first run");
             SetCurrencyOnStart(welcomeBonusSilver, welcomeBonusGold);
+            welcomePanel.SetActive(true);
         }
         else
         {
             currencyInBankSilver = PlayerPrefs.GetInt("Currency");
             currencyInBankGold = PlayerPrefs.GetInt("PremiumCurrency");
+            infoPanel.SetActive(true);
         }
 
         SetCurrencyText();
+        PlayerPrefs.SetString("FirstRun", "False");
+    }
+
+    public void TryOpenBonusPanel()
+    {
         DateTime currentDateTime = System.DateTime.Now;
         int currentDayOfYear = currentDateTime.DayOfYear;
         int currentYear = currentDateTime.Year;
@@ -50,18 +57,21 @@ public class CurrencyManager : MonoBehaviour {
         int storedDayOfYear = PlayerPrefs.GetInt("Day");
         int storedYear = PlayerPrefs.GetInt("Year");
 
-        
-        // not first time running app then daily bonus applies
-        if (PlayerPrefs.GetString("FirstRun") == "False")
+        if (PlayerPrefs.GetString("FirstRun") != "False" || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
         {
-            if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
-            {
-                OpenBonusPanel();
-            }
+            //Debug.Log("Show bonus panel");
+            bonusPanel.SetActive(true);
         }
+        else
+        {
+            //Debug.Log("Do not show bonus panel");
+            CharmsPanel charmsPanel = bonusPanel.GetComponent<CharmsPanel>();
+            charmsPanel.SetReturnToMain(true);
+            charmsPanel.DisableCharmsPanel();
+        }
+
         PlayerPrefs.SetInt("Day", currentDayOfYear);
         PlayerPrefs.SetInt("Year", currentYear);
-        PlayerPrefs.SetString("FirstRun", "False");
     }
 
     private void Update()
@@ -85,13 +95,7 @@ public class CurrencyManager : MonoBehaviour {
         currencyInBankGold = amountGold;
         PlayerPrefs.SetInt("Currency", currencyInBankSilver);
         PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
-        welcomePanel.SetActive(true);
         SetCurrencyText();
-    }
-
-	public void OpenBonusPanel()
-    {
-        bonusPanel.SetActive(true);
     }
 
     public void GiveRegularBonus(int bonus)
@@ -118,16 +122,6 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
     #endif
-
-    public void CloseBonusPanel()
-    {
-        bonusPanel.SetActive(false);
-    }
-
-    public void CloseWelcomePanel()
-    {
-        welcomePanel.SetActive(false);
-    }
 
     public static void SetCurrencyText()
     {

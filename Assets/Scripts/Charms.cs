@@ -45,21 +45,12 @@ public class Charms : MonoBehaviour {
 
     private bool loaded = false;
 
-    public bool clearPlayerPrefsOnPlayInEditor = false;
-
     public GameObject[] charmSets;
     public GameObject[] unlockButtonSets;
     private static string charmSetPrefName = "CharmSet";
 
 	// Use this for initialization
 	void Start () {
-
-#if UNITY_EDITOR
-        if (clearPlayerPrefsOnPlayInEditor == true) {
-            PlayerPrefs.DeleteAll();
-        }
-#endif
-
         // set the correct charm set depending on pref
         CheckCharmSet();
 
@@ -266,6 +257,11 @@ public class Charms : MonoBehaviour {
 
         charmNameLocText.SetLocalizationKey(charmName.ToUpper());
         PlayerPrefs.SetString("Charm", charmName);
+    }
+
+    public void DeletePlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     public void Quit()
