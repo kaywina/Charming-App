@@ -62,6 +62,7 @@ public class UnlockPanel : CharmsPanel
 
     public void HidePanel()
     {
+        returnToMain = true;
         base.OnDisable();
         gameObject.SetActive(false);
     }
