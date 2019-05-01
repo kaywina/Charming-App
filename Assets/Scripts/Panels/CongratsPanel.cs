@@ -6,12 +6,19 @@ using UnityEngine.UI;
 public class CongratsPanel : CharmsPanel
 {
     public LocalizationText unlockText;
+    public GameObject shareBonusIndicator;
 
     // this is janky, but make sure these lists match up
     public List<GameObject> rigModels;
     public List<GameObject> fireworks;
 
     private GameObject unlocked;
+
+    new void OnEnable()
+    {
+        shareBonusIndicator.SetActive(true);
+        base.OnEnable();
+    }
 
     new void OnDisable()
     {
