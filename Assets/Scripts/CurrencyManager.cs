@@ -28,8 +28,6 @@ public class CurrencyManager : MonoBehaviour {
 
         welcomeBonusText.text = welcomeBonusSilver.ToString();
 
-        Debug.Log(PlayerPrefs.GetString("FirstRun"));
-
         // on first time running app
         if (PlayerPrefs.GetString("FirstRun") != "False")
         {
