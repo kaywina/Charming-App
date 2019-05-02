@@ -10,6 +10,7 @@ public class UnlockPanel : CharmsPanel
     public Button buyButton;
     public Text costText;
     public CongratsPanel congratsPanel;
+    public OptionsPanel optionsPanel;
     private int cost;
     private GameObject toUnlock;
     private GameObject unlockButton;
@@ -62,6 +63,7 @@ public class UnlockPanel : CharmsPanel
 
     public void HidePanel()
     {
+        optionsPanel.SetReturnToMain(true);
         returnToMain = true;
         base.OnDisable();
         gameObject.SetActive(false);
