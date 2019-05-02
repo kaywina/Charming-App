@@ -10,7 +10,7 @@ public class BonusButton : MonoBehaviour
 
     public void ShowBonusPanel()
     {
-        bonusPanel.SetActive(true);
         optionsPanel.SetActive(false);
+        bonusPanel.SetActive(true);
     }
 }
