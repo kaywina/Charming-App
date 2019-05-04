@@ -9,7 +9,7 @@ public class CharmsPanel : MonoBehaviour
     public GameObject headerControls;
     public GameObject arrowControls;
     public bool returnToMain = true;
-
+    public GameObject[] setActiveOnEnable;
 
     protected void OnEnable()
     {
@@ -33,6 +33,7 @@ public class CharmsPanel : MonoBehaviour
             arrowControls.SetActive(false);
         }
 
+        ActivateObjects();
     }
 
     protected void OnDisable()
@@ -58,6 +59,25 @@ public class CharmsPanel : MonoBehaviour
         {
             arrowControls.SetActive(true);
         }
+
+        DeactivateObjects();
+        
+    }
+
+    public void ActivateObjects()
+    {
+        for (int i = 0; i < setActiveOnEnable.Length; i++)
+        {
+            setActiveOnEnable[i].SetActive(true);
+        }
+    }
+
+    public void DeactivateObjects()
+    {
+        for (int i = 0; i < setActiveOnEnable.Length; i++)
+        {
+            setActiveOnEnable[i].SetActive(false);
+        }
     }
 
     public void SetReturnToMain (bool toSet)
@@ -67,6 +87,6 @@ public class CharmsPanel : MonoBehaviour
     // hmmm
     public void DisableCharmsPanel()
     {
-        OnDisable();
+        gameObject.SetActive(false);
     }
 }

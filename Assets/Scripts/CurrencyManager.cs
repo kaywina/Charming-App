@@ -46,7 +46,7 @@ public class CurrencyManager : MonoBehaviour {
         PlayerPrefs.SetString("FirstRun", "False");
     }
 
-    public void TryOpenBonusPanel()
+    public bool CanOpenBonusPanel()
     {
         DateTime currentDateTime = System.DateTime.Now;
         int currentDayOfYear = currentDateTime.DayOfYear;
@@ -54,22 +54,17 @@ public class CurrencyManager : MonoBehaviour {
 
         int storedDayOfYear = PlayerPrefs.GetInt("Day");
         int storedYear = PlayerPrefs.GetInt("Year");
+        PlayerPrefs.SetInt("Day", currentDayOfYear);
+        PlayerPrefs.SetInt("Year", currentYear);
 
         if (PlayerPrefs.GetString("FirstRun") != "False" || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
         {
-            //Debug.Log("Show bonus panel");
-            bonusPanel.SetActive(true);
+            return true;
         }
         else
         {
-            //Debug.Log("Do not show bonus panel");
-            CharmsPanel charmsPanel = bonusPanel.GetComponent<CharmsPanel>();
-            charmsPanel.SetReturnToMain(true);
-            charmsPanel.DisableCharmsPanel();
-        }
-
-        PlayerPrefs.SetInt("Day", currentDayOfYear);
-        PlayerPrefs.SetInt("Year", currentYear);
+            return false;
+        }   
     }
 
     private void Update()
