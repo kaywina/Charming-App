@@ -29,7 +29,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     {
         shareButton.onClick.AddListener(OnShareButtonClick);
         bonusGiven = false;
-        thanksText.SetActive(false);
+        if (thanksText != null) { thanksText.SetActive(false); }
     }
 
     void OnApplicationFocus(bool focus)
@@ -72,10 +72,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
         isProcessing = true;
 
         // show the url
-        url.SetActive(true);
+        if (url != null) { url.SetActive(true); }
 
         // hide some objects while taking screenshot
-        shareBonusIndicator.SetActive(false);
+        if (shareBonusIndicator != null) { shareBonusIndicator.SetActive(false); }
         for (int i = 0; i < hideDuringShare.Length; i++)
         {
             hideDuringShare[i].SetActive(false);
@@ -124,7 +124,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         shareButton.interactable = true;
 
         // hide url object
-        url.SetActive(false);
+        if (url != null) { url.SetActive(false); }
 
         // show the hidden objects again
         for (int i = 0; i < hideDuringShare.Length; i++)
@@ -137,7 +137,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         {
             CurrencyManager.Instance.GivePremiumBonus(bonusAmount);
             bonusGiven = true;
-            thanksText.SetActive(true);
+            if (thanksText != null) { thanksText.SetActive(true); }
         }
         isProcessing = false;
     }
