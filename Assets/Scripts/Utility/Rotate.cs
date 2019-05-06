@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-
+    public bool yAxis = true;
+    public bool xAxis = false;
+    public bool zAxis = false;
     public float speed = 1.0f;
     
     // Start is called before the first frame update
@@ -17,6 +19,8 @@ public class Rotate : MonoBehaviour
     void Update()
     {
         float step = speed * Time.deltaTime;
-        transform.Rotate(Vector3.up * step);
+        if (yAxis) { transform.Rotate(Vector3.up * step); }
+        if (xAxis) { transform.Rotate(Vector3.right * step); }
+        if (zAxis) { transform.Rotate(Vector3.back * step); }
     }
 }
