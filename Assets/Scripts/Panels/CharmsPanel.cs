@@ -84,7 +84,7 @@ public class CharmsPanel : MonoBehaviour
     {
         returnToMain = toSet;
     }
-    // hmmm
+
     public void DisableCharmsPanel()
     {
         gameObject.SetActive(false);
