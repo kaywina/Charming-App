@@ -42,7 +42,6 @@ public class BonusPanel : CharmsPanel
 
     new void OnDisable()
     {
-        header.SetActive(true);
         if (prizeIsPremium)
         {
             CurrencyManager.Instance.GivePremiumBonus(storedBonus);
@@ -51,6 +50,7 @@ public class BonusPanel : CharmsPanel
         {
             CurrencyManager.Instance.GiveRegularBonus(storedBonus);
         }
+        header.SetActive(true);
         base.OnDisable();
     }
 

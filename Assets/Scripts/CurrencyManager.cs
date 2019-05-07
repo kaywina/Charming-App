@@ -21,8 +21,14 @@ public class CurrencyManager : MonoBehaviour {
     private static int currencyInBankSilver = 0;
     private static int currencyInBankGold = 0;
 
-	// Use this for initialization
-	void Start ()
+    public delegate void CurrencyAddedAction(int n);
+    public static event  CurrencyAddedAction OnCurrencyAdded;
+
+    public delegate void PremiumCurrencyAddedAction(int n);
+    public static event PremiumCurrencyAddedAction OnPremiumCurrencyAdded;
+
+    // Use this for initialization
+    void Start ()
     {
         Instance = this;
 
@@ -96,6 +102,8 @@ public class CurrencyManager : MonoBehaviour {
         currencyInBankSilver += bonus;
         PlayerPrefs.SetInt("Currency", currencyInBankSilver);
         SetCurrencyText();
+        if (OnCurrencyAdded != null) { OnCurrencyAdded(bonus); }
+        else { Debug.Log("delegate is null");  }
     }
 
     public void GivePremiumBonus(int bonus)
@@ -103,6 +111,8 @@ public class CurrencyManager : MonoBehaviour {
         currencyInBankGold += bonus;
         PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
         SetCurrencyText();
+        if (OnPremiumCurrencyAdded != null) { OnPremiumCurrencyAdded(bonus); }
+        else { Debug.Log("delegate is null"); }
     }
 
 #if UNITY_EDITOR // disable cheats in builds
