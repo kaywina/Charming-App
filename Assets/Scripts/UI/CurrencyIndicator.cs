@@ -82,6 +82,7 @@ public class CurrencyIndicator : MonoBehaviour
             updatedByAmountRegular = 0;
         }
         bonusGivenText.gameObject.SetActive(false);
+        totalAmountText.color = storedColor;
     }
 
     public static void UpdateRegularBonusData(int newValue)
