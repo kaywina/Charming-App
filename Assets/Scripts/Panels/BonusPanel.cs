@@ -13,6 +13,7 @@ public class BonusPanel : CharmsPanel
     public GameObject doubleBonusText;
     public GameObject[] regularCurrencyImages;
     public GameObject[] premiumCurrencyImages;
+    public GameObject watchedRewardedAdText;
 
     private bool hasSpun;
     private int storedBonus;
@@ -20,6 +21,7 @@ public class BonusPanel : CharmsPanel
 
     new void OnEnable()
     {
+        watchedRewardedAdText.SetActive(false);
         header.SetActive(false);
         doubleBonusText.SetActive(false);
         hasSpun = false;

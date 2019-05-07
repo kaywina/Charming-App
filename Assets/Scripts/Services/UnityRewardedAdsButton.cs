@@ -10,6 +10,7 @@ public class UnityRewardedAdsButton : MonoBehaviour
     private Button adButton;
     public BonusPanel bonusPanel;
     private bool watched;
+    public GameObject watchedRewardedAdText;
 
     private void OnEnable()
     {
@@ -48,6 +49,7 @@ public class UnityRewardedAdsButton : MonoBehaviour
             case ShowResult.Finished:
                 bonusPanel.DoubleBonus();
                 watched = true;
+                watchedRewardedAdText.SetActive(true);
                 gameObject.SetActive(false); // deactivate button after completion
                 //Debug.Log("The ad was successfully shown.");
                 break;
