@@ -7,6 +7,7 @@ public class CurrencyIndicator : MonoBehaviour
 {
 
     public Text bonusGivenText;
+    public Text totalAmountText;
 
     private static bool currencyWasUpdated = false;
     private static int updatedByAmountRegular = 0;
@@ -16,6 +17,8 @@ public class CurrencyIndicator : MonoBehaviour
 
     public bool isForPremiumCurrency = false;
     private float secondsBeforeHide = 3f;
+
+    private Color storedColor;
 
     void Start()
     {
@@ -45,11 +48,14 @@ public class CurrencyIndicator : MonoBehaviour
 
     void OnEnable()
     {
+        storedColor = totalAmountText.color;
+        
         //Debug.Log("OnEnable in " + gameObject.name);
         if (isForPremiumCurrency && premiumCurrencyWasUpdated)
         {
             bonusGivenText.text = "+" + updatedByAmountPremium.ToString();
             bonusGivenText.gameObject.SetActive(true);
+            totalAmountText.color = bonusGivenText.color;
             Invoke("HideBonusGivenText", secondsBeforeHide);
         }
 
@@ -57,6 +63,7 @@ public class CurrencyIndicator : MonoBehaviour
         {
             bonusGivenText.text = "+" + updatedByAmountRegular.ToString();
             bonusGivenText.gameObject.SetActive(true);
+            totalAmountText.color = bonusGivenText.color;
             Invoke("HideBonusGivenText", secondsBeforeHide);
         } 
     }
@@ -94,6 +101,7 @@ public class CurrencyIndicator : MonoBehaviour
     private void HideBonusGivenText()
     {
         bonusGivenText.gameObject.SetActive(false);
+        totalAmountText.color = storedColor;
     }
 
 }
