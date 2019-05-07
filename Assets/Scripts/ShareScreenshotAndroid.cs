@@ -5,6 +5,7 @@ using System.Collections;
 public class ShareScreenshotAndroid : MonoBehaviour
 {
     public Button shareButton;
+    public Image shareButtonImage;
     public Text charmsText;
     private bool isFocus = false;
 
@@ -82,7 +83,6 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
 
         // hide the share button and make it non-interactable
-        Image shareButtonImage = GetComponent<Image>();
         Button shareButton = GetComponent<Button>();
         shareButtonImage.enabled = false;
         shareButton.interactable = false;
