@@ -38,6 +38,6 @@ public class RotateOnSwipe : MonoBehaviour
                 gameObject.transform.Rotate(0f, touch0.deltaPosition.x, 0f);
             }
         }
-    }
 #endif
+    }
 }
