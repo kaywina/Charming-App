@@ -80,7 +80,7 @@ public class CharmsPanel : MonoBehaviour
     {
         for (int i = 0; i < setActiveOnEnable.Length; i++)
         {
-            setActiveOnEnable[i].SetActive(true);
+            if (setActiveOnEnable[i] != null) { setActiveOnEnable[i].SetActive(true);  }
         }
     }
 
@@ -88,7 +88,7 @@ public class CharmsPanel : MonoBehaviour
     {
         for (int i = 0; i < setActiveOnEnable.Length; i++)
         {
-            setActiveOnEnable[i].SetActive(false);
+            if (setActiveOnEnable[i] != null) { setActiveOnEnable[i].SetActive(false);  }
         }
     }
 
