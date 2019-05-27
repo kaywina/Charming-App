@@ -55,58 +55,58 @@ public class MeditatePanel : CharmsPanel
         switch (charmName)
         {
             case "Love":
-                love.SetActive(enable);
+                if (love != null) { love.SetActive(enable); }
                 break;
             case "Grace":
-                grace.SetActive(enable);
+                if (grace != null) { grace.SetActive(enable); }
                 break;
             case "Patience":
-                patience.SetActive(enable);
+                if (patience != null) { patience.SetActive(enable); }
                 break;
             case "Wisdom":
-                wisdom.SetActive(enable);
+                if (wisdom != null) { wisdom.SetActive(enable); }
                 break;
             case "Joy":
-                joy.SetActive(enable);
+                if (joy != null) { joy.SetActive(enable); }
                 break;
             case "Focus":
-                focus.SetActive(enable);
+                if (focus != null) { focus.SetActive(enable); }
                 break;
             case "Will":
-                will.SetActive(enable);
+                if (will != null) { will.SetActive(enable); }
                 break;
             case "Guile":
-                guile.SetActive(enable);
+                if (guile != null) { guile.SetActive(enable); }
                 break;
             case "Force":
-                force.SetActive(enable);
+                if (force != null) { force.SetActive(enable); }
                 break;
             case "Honor":
-                honor.SetActive(enable);
+                if (honor != null) { honor.SetActive(enable); }
                 break;
             case "Faith":
-                faith.SetActive(enable);
+                if (faith != null) { faith.SetActive(enable); }
                 break;
             case "Vision":
-                vision.SetActive(enable);
+                if (vision != null) { vision.SetActive(enable); }
                 break;
             case "Balance":
-                balance.SetActive(enable);
+                if (balance != null) { balance.SetActive(enable); }
                 break;
             case "Harmony":
-                harmony.SetActive(enable);
+                if (harmony != null) { harmony.SetActive(enable); }
                 break;
             case "Regard":
-                regard.SetActive(enable);
+                if (regard != null) { regard.SetActive(enable); }
                 break;
             case "Insight":
-                insight.SetActive(enable);
+                if (insight != null) { insight.SetActive(enable); }
                 break;
             case "Plenty":
-                plenty.SetActive(enable);
+                if (plenty != null) { plenty.SetActive(enable); }
                 break;
             case "Influence":
-                influence.SetActive(enable);
+                if (influence != null) { influence.SetActive(enable); }
                 break;
             default:
                 Debug.Log("This is not the case you are looking for");
