@@ -41,7 +41,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public void OnShareButtonClick()
     {
 
-        screenshotName = string.Format("{0}.png", charmsText.text);
+        screenshotName = string.Format("{0}.png", PlayerPrefs.GetString("Charm"));
         shareSubject = charmsText.text;
         shareLink = "www.charmingapp.com";
 
