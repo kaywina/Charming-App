@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CharmsPanel : MonoBehaviour
 {
-    public GameObject worldSpaceUI;
+    public GameObject portraitLayout;
+    public GameObject charmText;
     public GameObject standIcons;
     public GameObject headerControls;
     public GameObject arrowControls;
@@ -13,9 +14,14 @@ public class CharmsPanel : MonoBehaviour
 
     protected void OnEnable()
     {
-        if (worldSpaceUI != null)
+        if (charmText != null)
         {
-            worldSpaceUI.SetActive(false);
+            charmText.SetActive(false);
+        }
+
+        if (portraitLayout != null)
+        {
+            portraitLayout.SetActive(false);
         }
 
         if (standIcons != null)
@@ -38,11 +44,17 @@ public class CharmsPanel : MonoBehaviour
 
     protected void OnDisable()
     {
+
         if (!returnToMain) { return; }
 
-        if (worldSpaceUI != null)
+        if (charmText != null)
         {
-            worldSpaceUI.SetActive(true);
+            charmText.SetActive(true);
+        }
+
+        if (portraitLayout != null)
+        {
+            portraitLayout.SetActive(true);
         }
 
         if (standIcons != null)
