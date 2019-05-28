@@ -12,13 +12,14 @@ public class UnlockPanel : CharmsPanel
     public Text costText;
     public CongratsPanel congratsPanel;
     public OptionsPanel optionsPanel;
-    private int cost;
-    private GameObject toUnlock;
+    private static int cost;
+    private static GameObject toUnlock;
     private GameObject unlockButton;
     private bool isCharm;
     private bool premiumCurrency;
     public GameObject goldKeyImage;
     public GameObject silverKeyImage;
+    public StorePanel storePanel;
 
     new void OnEnable()
     {
@@ -53,9 +54,6 @@ public class UnlockPanel : CharmsPanel
 
     new void OnDisable()
     {
-        cost = 0;
-        toUnlock = null;
-
         // do not call base.OnDisable here because we go to congrats panel after not back to main UI
     }
 
@@ -108,5 +106,12 @@ public class UnlockPanel : CharmsPanel
         congratsPanel.SetUnlockedObject(toUnlock);
         congratsPanel.ShowPanel(isCharm);
         gameObject.SetActive(false);
+    }
+
+
+    public void OpenStore()
+    {
+        storePanel.SetFromUnlock(true);
+        storePanel.gameObject.SetActive(true);
     }
 }
