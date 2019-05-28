@@ -7,6 +7,7 @@ public class UnlockPanel : CharmsPanel
 {
     public Charms charms;
     public GameObject notEnoughText;
+    public GameObject storeButton;
     public Button buyButton;
     public Text costText;
     public CongratsPanel congratsPanel;
@@ -39,11 +40,13 @@ public class UnlockPanel : CharmsPanel
         if (canWithdraw)
         {
             buyButton.interactable = true;
+            storeButton.SetActive(false);
             notEnoughText.SetActive(false);
         }
         else
         {
             buyButton.interactable = false;
+            storeButton.SetActive(true);
             notEnoughText.SetActive(true);
         }
     }
