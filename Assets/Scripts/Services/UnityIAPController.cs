@@ -260,6 +260,7 @@ namespace CompleteProject
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
                 CurrencyManager.Instance.GivePremiumBonus(16);
+                CurrencyManager.Instance.GiveRegularBonus(4);
             }
             // A consumable product has been purchased by this user.
             if (String.Equals(args.purchasedProduct.definition.id, consumable32, StringComparison.Ordinal))
@@ -267,6 +268,7 @@ namespace CompleteProject
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
                 CurrencyManager.Instance.GivePremiumBonus(32);
+                CurrencyManager.Instance.GiveRegularBonus(8);
             }
             // A consumable product has been purchased by this user.
             if (String.Equals(args.purchasedProduct.definition.id, consumable64, StringComparison.Ordinal))
@@ -274,6 +276,7 @@ namespace CompleteProject
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
                 CurrencyManager.Instance.GivePremiumBonus(64);
+                CurrencyManager.Instance.GiveRegularBonus(16);
             }
             // A consumable product has been purchased by this user.
             if (String.Equals(args.purchasedProduct.definition.id, consumable128, StringComparison.Ordinal))
@@ -281,6 +284,7 @@ namespace CompleteProject
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
                 CurrencyManager.Instance.GivePremiumBonus(128);
+                CurrencyManager.Instance.GiveRegularBonus(32);
             }
             // A consumable product has been purchased by this user.
             if (String.Equals(args.purchasedProduct.definition.id, consumable256, StringComparison.Ordinal))
@@ -288,6 +292,7 @@ namespace CompleteProject
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
                 CurrencyManager.Instance.GivePremiumBonus(256);
+                CurrencyManager.Instance.GiveRegularBonus(64);
             }
 
             /*
