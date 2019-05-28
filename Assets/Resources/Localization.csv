@@ -24,7 +24,7 @@ FOCUS_DESC*Stay on task*Rester sur la tâche*Concéntrate*Fique na tarefa*Bleib 
 WILL_DESC*Endure hard times*Endurer des temps difficiles*Soportar tiempos difíciles*Suportar tempos difíceis*Harte Zeiten ertragen*忍受困难时期*苦難に耐える*어려운시기를 참아 라.*Bertahan dalam masa-masa sulit*कठिन समय का अंत करें*Пережить трудные времена*تحمل الأوقات الصعبة
 GUILE_DESC*Act the part*Jouer le rôle*Actuar la parte*Aja a parte*Handeln Sie den Teil*行动的部分*役を演じる*부분을 ​​행동*Lakukan bagian itu*भूमिका निभाएं*играть роль*التصرف الجزء
 FORCE_DESC*Grow your power*Développe ton pouvoir*Crece tu poder*Cresça seu poder*Steigern Sie Ihre Kraft*增加你的力量*あなたの力を育てる*당신의 힘을 키우십시오.*Tumbuhkan kekuatan Anda*अपनी शक्ति बढ़ाओ*Вырасти свою силу*تنمو قوتك
-BONUSWELCOME*Doing great!*Fait bien!*¡Haciéndolo bien!*Indo bem!*Gut machen!*做得好*すごい*훌륭한 일*Bagus sekali!*अच्छा कर रहे हो*отлично сработано*أحسنت
+DOING_GREAT*Doing great!*Fait bien!*¡Haciéndolo bien!*Indo bem!*Gut machen!*做得好*すごい*훌륭한 일*Bagus sekali!*अच्छा कर रहे हो*отлично сработано*أحسنت
 DAILYBONUS*Daily bonus*Bonus quotidien*Bonus diario*Bônus diário*Täglicher bonus*每日奖金*毎日のご褒美*일일 보너스*Bonus Harian*प्रतिदिन लाभ*Ежедневный бонус*أحسنت
 YES*YES*OUI*SÍ*SIM*JA*是*はい*예*YA*हाँ*да*بلى
 WELCOME*Welcome*Bienvenue*Bienvenido*Bem vinda*Willkommen*你好*こんにちは*여보세요*Selamat datang*नमस्ते*желанный*أهلا بك
@@ -67,3 +67,4 @@ CHOOSE_CHARM*Choose a charm*Choisissez un charme*Elige un encanto*Escolha um enc
 SHARING_THANKS*Thank you for sharing. You got gold keys!*Merci pour le partage. Vous avez des clés en or!*Gracias por compartir. ¡Tienes llaves de oro!*Obrigado por compartilhar. Você tem chaves de ouro!*Ich danke Ihnen für das Teilen. Du hast goldene Schlüssel!*谢谢你的分享。你有金钥匙！*共有してくれてありがとう。あなたは金の鍵を手に入れました！*공유해 주셔서 감사합니다. 금 열쇠있어!*Terima kasih sudah berbagi. Anda punya kunci emas!*साझा करने के लिए धन्यवाद। आपको सोने की चाबी मिली!*Спасибо, что поделились. У тебя золотые ключи!*شكرا لك للمشاركة. لديك مفاتيح ذهبية!
 DOUBLE_PRIZE*Double your prize!*Double ton prix!*¡Doble su premio!*Duplique seu prêmio!*Verdoppeln Sie Ihren Preis!*奖金倍增！*賞金を2倍にしましょう。*상금을 두 배로하십시오!*Gandakan hadiah Anda!*अपना पुरस्कार दोगुना करें!*Удвой свой приз!*ضاعف جائزتك!
 WATCHED_REWARDED_AD*You get double keys!*Vous obtenez des doubles clés!*Tienes doble llaves!*Você recebe chaves duplas!*Du bekommst doppelte Schlüssel!*你得到双键！*あなたは二重の鍵を手に入れます！*당신은 이중 열쇠를 얻습니다!*Anda mendapatkan kunci ganda!*आपको डबल कीज़ मिलती हैं!*Вы получаете двойные ключи!*تحصل على مفاتيح مزدوجة!
+WELCOME*Welcome!*Bienvenue!*¡Bienvenido!*Bem vinda!*Herzlich willkommen!*欢迎！*ようこそ！*환영!*Selamat datang!*स्वागत हे!*Добро пожаловать!*أهلا بك!
