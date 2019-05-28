@@ -10,7 +10,7 @@ public class BonusPanel : CharmsPanel
     public GameObject[] deactivateOnReadySpin;
     public GameObject[] activateAfterSpin;
     public Text prizeText;
-    public GameObject doubleBonusText;
+    public GameObject strikeoutText;
     public GameObject[] regularCurrencyImages;
     public GameObject[] premiumCurrencyImages;
     public GameObject watchedRewardedAdText;
@@ -24,7 +24,7 @@ public class BonusPanel : CharmsPanel
     {
         watchedRewardedAdText.SetActive(false);
         header.SetActive(false);
-        doubleBonusText.SetActive(false);
+        strikeoutText.SetActive(false);
         totalBonusText.gameObject.SetActive(false);
         hasSpun = false;
 
@@ -95,7 +95,7 @@ public class BonusPanel : CharmsPanel
 
     public void DoubleBonus()
     {
-        doubleBonusText.SetActive(true);
+        strikeoutText.SetActive(true);
         storedBonus = storedBonus * 2;
         totalBonusText.text = storedBonus.ToString();
         totalBonusText.gameObject.SetActive(true);
