@@ -11,19 +11,22 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
     private void OnEnable()
     {
         string prefString = PlayerPrefs.GetString(playerPrefName);
+        Debug.Log(prefString);
         if (prefString == "false")
         {
+            PlayerPrefs.SetString(playerPrefName, "false");
             toggle.isOn = false;
         }
         else
         {
+            PlayerPrefs.SetString(playerPrefName, "true");
             toggle.isOn = true;
         }
     }
 
     public void TogglePlayerPref()
     {
-    string prefString = PlayerPrefs.GetString(playerPrefName);
+        string prefString = PlayerPrefs.GetString(playerPrefName);
         if (prefString == "false")
         {
             PlayerPrefs.SetString(playerPrefName, "true");
