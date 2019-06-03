@@ -31,6 +31,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         shareButton.onClick.AddListener(OnShareButtonClick);
         bonusGiven = false;
         if (thanksText != null) { thanksText.SetActive(false); }
+        if (url != null) { url.SetActive(false); }
     }
 
     void OnApplicationFocus(bool focus)
@@ -72,9 +73,6 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
         isProcessing = true;
 
-        // show the url
-        if (url != null) { url.SetActive(true); }
-
         // hide some objects while taking screenshot
         if (shareBonusIndicator != null) { shareBonusIndicator.SetActive(false); }
         for (int i = 0; i < hideDuringShare.Length; i++)
@@ -86,6 +84,9 @@ public class ShareScreenshotAndroid : MonoBehaviour
         Button shareButton = GetComponent<Button>();
         shareButtonImage.enabled = false;
         shareButton.interactable = false;
+
+        // show the url
+        if (url != null) { url.SetActive(true); }
 
         // wait for graphics to render
         yield return new WaitForEndOfFrame();
