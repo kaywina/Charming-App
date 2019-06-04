@@ -11,7 +11,6 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
     private void OnEnable()
     {
         string prefString = PlayerPrefs.GetString(playerPrefName);
-        Debug.Log(prefString);
         if (prefString == "false")
         {
             PlayerPrefs.SetString(playerPrefName, "false");
