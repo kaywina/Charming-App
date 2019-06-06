@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CongratsPanel : CharmsPanel
 {
-    public LocalizationText unlockText;
     public GameObject shareBonusIndicator;
 
     // this is janky, but make sure these lists match up
@@ -18,21 +17,23 @@ public class CongratsPanel : CharmsPanel
 
     new void OnEnable()
     {
-        shareBonusIndicator.SetActive(true);
-        pillar.SetActive(true);
         base.OnEnable();
+        shareBonusIndicator.SetActive(true);
+        pillar.SetActive(true); // do this after calling base.OnEnable to re-enable
+        charmText.SetActive(true);
     }
 
     new void OnDisable()
     {
-        DisableRigModels();
         pillar.SetActive(false);
+        charmText.SetActive(false); // do this before base.OnEnable to avoid disabling on main UI
+        DisableRigModels();
         base.OnDisable();
+
     }
 
     public void ShowPanel(bool isCharm)
     {
-        unlockText.SetLocalizationKey(unlocked.name.ToUpper());
         SetRig(unlocked.name);
         gameObject.SetActive(true);
     }
