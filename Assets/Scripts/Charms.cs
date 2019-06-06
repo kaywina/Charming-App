@@ -10,8 +10,6 @@ public class Charms : MonoBehaviour {
 	public LocalizationTextMesh charmNameLocText;
 	public LocalizationTextMesh charmDescriptionLocText;
 
-    public CycleCameraBackgroundColor cycleBGColor;
-
 	// For Tap Interface
 	private Ray ray;
 	private RaycastHit hit;
@@ -58,9 +56,6 @@ public class Charms : MonoBehaviour {
         if (string.IsNullOrEmpty(PlayerPrefs.GetString("Charm"))) {
             PlayerPrefs.SetString("Charm", "Love");
         }
-
-        cycleBGColor.CheckPlayerPref();
-        cycleBGColor.SetColor();
 
         SetCharm(PlayerPrefs.GetString("Charm"));
         loaded = true;
