@@ -12,17 +12,21 @@ public class CongratsPanel : CharmsPanel
     public List<GameObject> rigModels;
     public List<GameObject> fireworks;
 
+    public GameObject pillar;
+
     private GameObject unlocked;
 
     new void OnEnable()
     {
         shareBonusIndicator.SetActive(true);
+        pillar.SetActive(true);
         base.OnEnable();
     }
 
     new void OnDisable()
     {
         DisableRigModels();
+        pillar.SetActive(false);
         base.OnDisable();
     }
 
