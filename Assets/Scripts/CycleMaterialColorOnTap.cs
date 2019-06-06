@@ -50,7 +50,6 @@ public class CycleMaterialColorOnTap : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldMousePos2D = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
-
             if (boxCollider2D.bounds.Contains(worldMousePos2D))
             {
                 NextMaterialColor();
