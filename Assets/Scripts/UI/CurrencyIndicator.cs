@@ -20,7 +20,7 @@ public class CurrencyIndicator : MonoBehaviour
 
     private Color storedColor;
 
-    void Start()
+    void Awake()
     {
         if (isForPremiumCurrency)
         {
