@@ -8,6 +8,7 @@ public class SetMainCameraBackgroundColor : MonoBehaviour
     public Camera mainCamera;
 
     private string playerPrefName = "BackgroundColor";
+    private string initPlayerPrefName = "BackgroundColorInitialized";
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +18,14 @@ public class SetMainCameraBackgroundColor : MonoBehaviour
         Color bgColor = Color.black;
 
         // do not set color from playerpref on first run to avoid float parsing error; black is default
-        if (PlayerPrefs.GetString("FirstRun") == "False")
+        if (PlayerPrefs.GetString(initPlayerPrefName).Equals("True"))
         {
-             bgColor = PlayerPrefsX.GetColor(playerPrefName);
+            bgColor = PlayerPrefsX.GetColor(playerPrefName);
         }
         else
         {
             PlayerPrefsX.SetColor(playerPrefName, Color.black);
+            PlayerPrefs.SetString(initPlayerPrefName, "True");
         }
         
         SetColor(bgColor);

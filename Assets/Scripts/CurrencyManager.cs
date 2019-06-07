@@ -35,7 +35,7 @@ public class CurrencyManager : MonoBehaviour {
         welcomeBonusText.text = welcomeBonusSilver.ToString();
 
         // on first time running app
-        if (PlayerPrefs.GetString("FirstRun") != "False")
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False"))
         {
             //Debug.Log("Give currency bonus on first run");
             SetCurrencyOnStart(welcomeBonusSilver, welcomeBonusGold);
@@ -63,7 +63,7 @@ public class CurrencyManager : MonoBehaviour {
         PlayerPrefs.SetInt("Day", currentDayOfYear);
         PlayerPrefs.SetInt("Year", currentYear);
 
-        if (PlayerPrefs.GetString("FirstRun") != "False" || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
         {
             return true;
         }
