@@ -6,7 +6,6 @@ public class ShareScreenshotAndroid : MonoBehaviour
 {
     public Button shareButton;
     public Image shareButtonImage;
-    public Text charmsText;
     private bool isFocus = false;
 
     private string shareSubject, shareMessage, shareLink;
@@ -18,7 +17,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public GameObject url;
     public GameObject thanksText;
 
-    private int bonusAmount = 8;
+    public int bonusAmount = 8;
     private bool bonusGiven;
 
     void Start()
@@ -134,7 +133,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
 
         // give share bonus kisses one time only
-        if (!bonusGiven)
+        if (!bonusGiven && bonusAmount > 0)
         {
             CurrencyManager.Instance.GivePremiumBonus(bonusAmount);
             bonusGiven = true;
