@@ -126,7 +126,7 @@ public class CurrencyManager : MonoBehaviour {
         PlayerPrefs.SetInt("PemiumCurrency", currencyInBankGold);
         SetCurrencyText();
     }
-    #endif
+#endif
 
     public static void SetCurrencyText()
     {

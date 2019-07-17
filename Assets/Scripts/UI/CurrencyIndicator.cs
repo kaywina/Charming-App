@@ -70,7 +70,6 @@ public class CurrencyIndicator : MonoBehaviour
 
     void OnDisable()
     {
-        //Debug.Log("OnDisable in " + gameObject.name);
         if (isForPremiumCurrency)
         {
             premiumCurrencyWasUpdated = false;
@@ -87,14 +86,12 @@ public class CurrencyIndicator : MonoBehaviour
 
     public static void UpdateRegularBonusData(int newValue)
     {
-        //Debug.Log("Update regular bonus data");
         currencyWasUpdated = true;
         updatedByAmountRegular = newValue;
     }
 
     public static void UpdatePremiumBonusData(int newValue)
     {
-        //Debug.Log("Update premium bonus data");
         premiumCurrencyWasUpdated = true;
         updatedByAmountPremium = newValue;
     }

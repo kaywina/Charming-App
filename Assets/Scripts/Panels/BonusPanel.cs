@@ -52,6 +52,7 @@ public class BonusPanel : CharmsPanel
         {
             CurrencyManager.Instance.GiveRegularBonus(storedBonus);
         }
+        storedBonus = 0;
         header.SetActive(true);
         base.OnDisable();
     }
