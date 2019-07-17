@@ -43,16 +43,13 @@ public class BackgroundParticles : MonoBehaviour
 
     public void EnableGameObjectByIndex (int index)
     {
-        Debug.Log(index);
         for (int n = 0; n < particleSystems.Length; n++)
         {
             if (n == index) {
                 particleSystems[n].SetActive(true);
-                Debug.Log("Activate particle system at index " + n);
             }
             else {
                 particleSystems[n].SetActive(false);
-                Debug.Log("Deactivate particle system at index " + n);
             }
         }
         PlayerPrefs.SetInt(playerPrefName, index);
