@@ -99,6 +99,7 @@ public class CurrencyManager : MonoBehaviour {
 
     public void GiveRegularBonus(int bonus)
     {
+        if (bonus <= 0) { return; }
         currencyInBankSilver += bonus;
         PlayerPrefs.SetInt("Currency", currencyInBankSilver);
         SetCurrencyText();
@@ -108,6 +109,7 @@ public class CurrencyManager : MonoBehaviour {
 
     public void GivePremiumBonus(int bonus)
     {
+        if (bonus <= 0) { return; }
         currencyInBankGold += bonus;
         PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
         SetCurrencyText();
