@@ -5,6 +5,7 @@ using UnityEngine;
 public class InfoPanel : CharmsPanel
 {
     bool respectPlayerPref = true; // this is used for the ? button in options
+    public GoToBonusPanelButton goToBonusPanelButton;
 
     new void OnEnable()
     {
@@ -12,8 +13,10 @@ public class InfoPanel : CharmsPanel
         {
             gameObject.SetActive(false);
             respectPlayerPref = true; // set it back to true after disrespecting playerpref once
+            goToBonusPanelButton.TryOpenBonusPanel();
             return;
         }
+
         base.OnEnable();
     }
 
