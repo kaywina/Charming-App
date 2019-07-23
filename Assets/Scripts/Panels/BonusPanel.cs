@@ -44,13 +44,16 @@ public class BonusPanel : CharmsPanel
 
     new void OnDisable()
     {
-        if (prizeIsPremium)
+        if (storedBonus != 0) // on in case where bonus wheel is not skipped
         {
-            CurrencyManager.Instance.GivePremiumBonus(storedBonus);
-        }
-        else
-        {
-            CurrencyManager.Instance.GiveRegularBonus(storedBonus);
+            if (prizeIsPremium)
+            {
+                CurrencyManager.Instance.GivePremiumBonus(storedBonus);
+            }
+            else
+            {
+                CurrencyManager.Instance.GiveRegularBonus(storedBonus);
+            }
         }
         storedBonus = 0;
         header.SetActive(true);
@@ -100,5 +103,12 @@ public class BonusPanel : CharmsPanel
         storedBonus = storedBonus * 2;
         totalBonusText.text = storedBonus.ToString();
         totalBonusText.gameObject.SetActive(true);
+    }
+
+    public void SkipBonus()
+    {
+        PlayerPrefs.DeleteKey("Day");
+        PlayerPrefs.DeleteKey("Year");
+        gameObject.SetActive(false);
     }
 }
