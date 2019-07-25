@@ -98,13 +98,20 @@ public class UnlockPanel : CharmsPanel
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);
 
+        // only two UI options currently supported; either unlocking charm in main UI and go to congrats screen, or unlocking option with 2D button
+        // other options will result in black UI since no panel is opened after closing the unlock panel
         if (isCharm)
         {
             charms.SetCharm(toUnlock.name);
+            congratsPanel.SetUnlockedObject(toUnlock);
+            congratsPanel.ShowPanel(isCharm);
         }
-        
-        congratsPanel.SetUnlockedObject(toUnlock);
-        congratsPanel.ShowPanel(isCharm);
+        else
+        {
+            optionsPanel.SetReturnToMain(true);
+            optionsPanel.ShowPanel();
+        }
+
         gameObject.SetActive(false);
     }
 
