@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UnlockButton : MonoBehaviour {
 
-    public GameObject go;
+    public GameObject objectToEnable;
     public int cost;
     private bool lockOnPlay = false;
     public Text priceText;
@@ -32,24 +32,24 @@ public class UnlockButton : MonoBehaviour {
 
         if (lockOnPlay)
         {
-            PlayerPrefs.SetString(go.name, "locked");
+            PlayerPrefs.SetString(objectToEnable.name, "locked");
             Debug.LogWarning("Warning! lockOnPlay is true");
         }
 
-        if (PlayerPrefs.GetString(go.name) == "unlocked")
+        if (PlayerPrefs.GetString(objectToEnable.name) == "unlocked")
         {
-            go.SetActive(true);
+            objectToEnable.SetActive(true);
             gameObject.SetActive(false);
         }
         else
         {
-            go.SetActive(false);
+            objectToEnable.SetActive(false);
         }
 	}
 
     public void GoToConfirmation(bool isCharm = true)
     {
-        unlockPanel.SetObjectToUnlock(go, gameObject, isCharm, usePremiumCurrency); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
+        unlockPanel.SetObjectToUnlock(objectToEnable, gameObject, isCharm, usePremiumCurrency); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
 
