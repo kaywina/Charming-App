@@ -65,8 +65,17 @@ public class UnlockPanel : CharmsPanel
 
     public void HidePanel()
     {
-        optionsPanel.SetReturnToMain(true);
-        returnToMain = true;
+        if (returnToOptions)
+        {
+            optionsPanel.gameObject.SetActive(true);
+            returnToMain = false;
+        }
+        else
+        {
+            optionsPanel.SetReturnToMain(true); // i think there was an edge case bug related to this; should've commented it at the time I fixed it oops
+            returnToMain = true;
+        }
+        
         base.OnDisable();
         gameObject.SetActive(false);
     }
