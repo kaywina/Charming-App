@@ -20,6 +20,7 @@ public class UnlockPanel : CharmsPanel
     public GameObject goldKeyImage;
     public GameObject silverKeyImage;
     public StorePanel storePanel;
+    private bool returnToOptions;
 
     new void OnEnable()
     {
@@ -76,12 +77,13 @@ public class UnlockPanel : CharmsPanel
         costText.text = cost.ToString();
     }
 
-    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm, bool usePremiumCurrency)
+    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm, bool usePremiumCurrency, bool cameFromOptionsPanel)
     {
         toUnlock = toSet;
         unlockButton = button;
         isCharm = charm;
         premiumCurrency = usePremiumCurrency;
+        returnToOptions = cameFromOptionsPanel;
     }
 
     public void UnlockObject()
@@ -105,6 +107,11 @@ public class UnlockPanel : CharmsPanel
             charms.SetCharm(toUnlock.name);
             congratsPanel.SetUnlockedObject(toUnlock);
             congratsPanel.ShowPanel(isCharm);
+        }
+        
+        else if (returnToOptions)
+        {
+            optionsPanel.ShowPanel();
         }
         else
         {

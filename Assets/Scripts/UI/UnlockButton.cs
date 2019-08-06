@@ -12,7 +12,9 @@ public class UnlockButton : MonoBehaviour {
     public UnlockPanel unlockPanel;
     public CharmsPanel optionsPanel;
     public bool usePremiumCurrency = false;
+    public bool cameFromOptionsPanel = false;
 
+    // leave these three variables unassigned in inspector if button is 2D with no 3D model (i.e. these are only used for 3D UI buttons only)
     public MeshRenderer meshRenderer;
     public Material silverMat;
     public Material goldMat;
@@ -49,7 +51,7 @@ public class UnlockButton : MonoBehaviour {
 
     public void GoToConfirmation(bool isCharm = true)
     {
-        unlockPanel.SetObjectToUnlock(objectToEnable, gameObject, isCharm, usePremiumCurrency); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
+        unlockPanel.SetObjectToUnlock(objectToEnable, gameObject, isCharm, usePremiumCurrency, cameFromOptionsPanel); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
 
