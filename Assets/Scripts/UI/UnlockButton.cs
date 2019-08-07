@@ -19,6 +19,10 @@ public class UnlockButton : MonoBehaviour {
     public Material silverMat;
     public Material goldMat;
 
+    public bool unlockIsBackgroundEffect = false;
+    public SetBackgroundEffectOnClick setBackgroundEffectOnClick;
+    public int effectIndex = 0;
+
     void Start () {
 
         if (usePremiumCurrency)
@@ -51,6 +55,12 @@ public class UnlockButton : MonoBehaviour {
 
     public void GoToConfirmation(bool isCharm = true)
     {
+        if (unlockIsBackgroundEffect)
+        {
+            setBackgroundEffectOnClick.SetEnabled(true);
+            setBackgroundEffectOnClick.SetEffectIndex(effectIndex);
+        }
+
         unlockPanel.SetObjectToUnlock(objectToEnable, gameObject, isCharm, usePremiumCurrency, cameFromOptionsPanel); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
