@@ -68,6 +68,7 @@ public class UnlockPanel : CharmsPanel
         if (returnToOptions)
         {
             optionsPanel.gameObject.SetActive(true);
+            optionsPanel.SetReturnToMain(true);
             returnToMain = false;
         }
         else
@@ -123,11 +124,11 @@ public class UnlockPanel : CharmsPanel
             optionsPanel.ShowPanel();
         }
         else
-        {
-            optionsPanel.SetReturnToMain(true);
+        { 
             optionsPanel.ShowPanel();
         }
 
+        optionsPanel.SetReturnToMain(true);
         gameObject.SetActive(false);
     }
 
