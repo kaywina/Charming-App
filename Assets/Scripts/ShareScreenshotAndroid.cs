@@ -14,8 +14,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
     public GameObject shareBonusIndicator;
     public GameObject[] hideOnShare;
+    public bool showAgainAfterShare = false;
     public GameObject url;
     public GameObject thanksText;
+
 
     public int bonusAmount = 8;
     private bool bonusGiven;
@@ -126,13 +128,15 @@ public class ShareScreenshotAndroid : MonoBehaviour
         // hide url object
         if (url != null) { url.SetActive(false); }
 
-        /*
+        
         // show the hidden objects again
-        for (int i = 0; i < hideOnShare.Length; i++)
+        if (showAgainAfterShare)
         {
-            hideOnShare[i].SetActive(true);
+            for (int i = 0; i < hideOnShare.Length; i++)
+            {
+                hideOnShare[i].SetActive(true);
+            }
         }
-        */
 
         // give share bonus kisses one time only
         if (!bonusGiven && bonusAmount > 0)
