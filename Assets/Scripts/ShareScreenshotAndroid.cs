@@ -103,12 +103,37 @@ public class ShareScreenshotAndroid : MonoBehaviour
             AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
             intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
 
-            //create image URI to add it to the intent
-            AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
-            AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + screenShotPath);
+            // old way - get the Uri from parsing the file path string
+            //AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
+            //AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + screenShotPath); // replaced with File Provider
 
-            //put image and string extra
-            intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject);
+            // new way compatible with Android 8 - use FileProvider
+
+            // add required flag to intent object
+            intentObject.Call<AndroidJavaObject>("addFlags", 0x00000001); // FLAG_GRANT_READ_URI_PERMISSION
+            //intentObject.Call<AndroidJavaObject>("addFlags", 0x00000002); // FLAG_GRANT_WRITE_URI_PERMISSION
+
+            using (AndroidJavaClass fileProviderClass = new AndroidJavaClass("android.support.v4.content.FileProvider")) // get the FileProvider class
+            {
+                // create the File object
+                AndroidJavaClass fileClass = new AndroidJavaClass("java.io.File");
+                AndroidJavaObject fileObject = new AndroidJavaObject("java.io.File", screenShotPath);
+
+                // get the context
+                AndroidJavaClass playerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+                AndroidJavaObject currentActivityObject = playerClass.GetStatic<AndroidJavaObject>("currentActivity"); // Context
+
+                // create the uriObject
+                string packageName = currentActivityObject.Call<string>("getPackageName");
+                string authority = packageName + ".provider";
+                AndroidJavaObject uriObject = fileProviderClass.CallStatic<AndroidJavaObject>("getUriForFile", currentActivityObject, authority, fileObject);
+
+                // add screenshot uri to the Intent
+                intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject);
+            }
+
+
+            // add type and extra text to the Intent
             intentObject.Call<AndroidJavaObject>("setType", "image/png");
             intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), shareSubject);
             intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), shareMessage);
