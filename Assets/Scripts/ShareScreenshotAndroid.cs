@@ -18,15 +18,12 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public GameObject url;
     public GameObject thanksText;
     public GameObject doubleBonusButton;
+    public GameObject watchedAdText;
 
 
-    public int bonusAmount = 8;
-    private bool bonusGiven;
-
-    void Start()
-    {
-        
-    }
+    public int baseBonusAmount = 8;
+    public int givenBonusAmount = 0;
+    public bool bonusGiven;
 
     private void OnEnable()
     {
@@ -34,6 +31,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
         bonusGiven = false;
         if (thanksText != null) { thanksText.SetActive(false); }
         if (url != null) { url.SetActive(false); }
+        if (doubleBonusButton != null) { doubleBonusButton.SetActive(false); }
+        if (watchedAdText != null) { watchedAdText.SetActive(false); }
     }
 
     void OnApplicationFocus(bool focus)
@@ -177,10 +176,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
 
         // give share bonus kisses one time only
-        if (!bonusGiven && bonusAmount > 0)
+        if (!bonusGiven && baseBonusAmount > 0)
         {
-            CurrencyManager.Instance.GivePremiumBonus(bonusAmount);
             bonusGiven = true;
+            givenBonusAmount = baseBonusAmount;
         }
 
         if (thanksText != null) { thanksText.SetActive(true); }

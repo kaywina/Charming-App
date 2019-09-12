@@ -8,7 +8,10 @@ public class UnityRewardedAdsButton : MonoBehaviour
 
     public string placementId = "rewardedVideo";
     private Button adButton;
+    public bool buttonIsOnBonusPanel = true;
     public BonusPanel bonusPanel;
+    public bool buttonIsOnCongratsPanel = false;
+    public ShareScreenshotAndroid shareScreenshotAndroid;
     private bool watched;
     public GameObject watchedRewardedAdText;
 
@@ -47,7 +50,11 @@ public class UnityRewardedAdsButton : MonoBehaviour
         switch (result)
         {
             case ShowResult.Finished:
-                bonusPanel.DoubleBonus();
+                if (buttonIsOnBonusPanel && bonusPanel != null) { bonusPanel.DoubleBonus(); }
+                if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
+                {
+                    shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
+                }
                 watched = true;
                 watchedRewardedAdText.SetActive(true);
                 gameObject.SetActive(false); // deactivate button after completion

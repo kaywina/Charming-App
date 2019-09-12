@@ -15,6 +15,8 @@ public class CongratsPanel : CharmsPanel
 
     private GameObject unlocked;
 
+    public ShareScreenshotAndroid shareScreenshotAndroid;
+
     new void OnEnable()
     {
         base.OnEnable();
@@ -40,6 +42,10 @@ public class CongratsPanel : CharmsPanel
 
     public void HidePanel()
     {
+        if (shareScreenshotAndroid != null && shareScreenshotAndroid.bonusGiven == true)
+        {
+            CurrencyManager.Instance.GivePremiumBonus(shareScreenshotAndroid.givenBonusAmount);
+        }
         gameObject.SetActive(false);
     }
 
