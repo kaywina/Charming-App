@@ -17,6 +17,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public bool showAgainAfterShare = false;
     public GameObject url;
     public GameObject thanksText;
+    public GameObject doubleBonusButton;
 
 
     public int bonusAmount = 8;
@@ -183,6 +184,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
 
         if (thanksText != null) { thanksText.SetActive(true); }
+        if (doubleBonusButton != null) { doubleBonusButton.SetActive(true); }
         isProcessing = false;
     }
 #endif
