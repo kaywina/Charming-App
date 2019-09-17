@@ -93,7 +93,9 @@ public class BonusPanel : CharmsPanel
         {
             activateAfterSpin[i].SetActive(true);
         }
-        
+
+        bonusWheel.gameObject.SetActive(false);
+
         hasSpun = true;
     }
 
