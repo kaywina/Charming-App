@@ -20,6 +20,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public GameObject doubleBonusButton;
     public GameObject watchedAdText;
 
+    public Text rewardAmountText;
+
 
     public int baseBonusAmount = 8;
     public int givenBonusAmount = 0;
@@ -33,6 +35,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
         if (url != null) { url.SetActive(false); }
         if (doubleBonusButton != null) { doubleBonusButton.SetActive(false); }
         if (watchedAdText != null) { watchedAdText.SetActive(false); }
+        if (rewardAmountText != null) { rewardAmountText.text = baseBonusAmount.ToString(); }
+        
     }
 
     void OnApplicationFocus(bool focus)

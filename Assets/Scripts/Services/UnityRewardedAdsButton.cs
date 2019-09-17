@@ -54,6 +54,7 @@ public class UnityRewardedAdsButton : MonoBehaviour
                 if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
                 {
                     shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
+                    shareScreenshotAndroid.rewardAmountText.text = shareScreenshotAndroid.givenBonusAmount.ToString();
                 }
                 watched = true;
                 watchedRewardedAdText.SetActive(true);
