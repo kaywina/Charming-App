@@ -22,6 +22,12 @@ public class BonusPanel : CharmsPanel
 
     new void OnEnable()
     {
+        StartCoroutine(Enable());
+        base.OnEnable();
+    }
+
+    IEnumerator Enable()
+    {
         watchedRewardedAdText.SetActive(false);
         header.SetActive(false);
         strikeoutText.SetActive(false);
@@ -38,8 +44,7 @@ public class BonusPanel : CharmsPanel
             deactivateOnReadySpin[i].SetActive(true);
         }
 
-        base.OnEnable();
-        
+        yield return new WaitForEndOfFrame();
     }
 
     new void OnDisable()
@@ -55,6 +60,7 @@ public class BonusPanel : CharmsPanel
                 CurrencyManager.Instance.GiveRegularBonus(storedBonus);
             }
         }
+
         storedBonus = 0;
         header.SetActive(true);
         base.OnDisable();
