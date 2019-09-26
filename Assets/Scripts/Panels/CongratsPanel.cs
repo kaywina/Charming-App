@@ -28,7 +28,7 @@ public class CongratsPanel : CharmsPanel
     new void OnDisable()
     {
         if (pillar != null) { pillar.SetActive(false); }
-        charmText.SetActive(false); // do this before base.OnEnable to avoid disabling on main UI
+        if (charmText != null) { charmText.SetActive(false); } // do this before base.OnEnable to avoid disabling on main UI
         DisableRigModels();
         base.OnDisable();
 
