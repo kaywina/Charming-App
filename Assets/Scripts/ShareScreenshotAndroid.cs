@@ -19,6 +19,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public GameObject thanksText;
     public GameObject doubleBonusButton;
     public GameObject watchedAdText;
+    public GameObject okButton;
 
     public Text rewardAmountText;
 
@@ -35,8 +36,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         if (url != null) { url.SetActive(false); }
         if (doubleBonusButton != null) { doubleBonusButton.SetActive(false); }
         if (watchedAdText != null) { watchedAdText.SetActive(false); }
-        if (rewardAmountText != null) { rewardAmountText.text = baseBonusAmount.ToString(); }
-        
+        if (rewardAmountText != null) { rewardAmountText.text = baseBonusAmount.ToString(); }     
     }
 
     void OnApplicationFocus(bool focus)
@@ -46,19 +46,15 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
     public void OnShareButtonClick()
     {
-
         screenshotName = string.Format("{0}.png", PlayerPrefs.GetString("Charm"));
         shareSubject = PlayerPrefs.GetString("Charm");
         shareLink = "www.charmingapp.com";
-
         shareMessage = string.Format("{0} - {1}", Application.productName, shareLink);
         ShareScreenshot();
     }
 
-
     private void ShareScreenshot()
     {
-
 #if UNITY_ANDROID
         if (!isProcessing)
         {
@@ -70,20 +66,18 @@ public class ShareScreenshotAndroid : MonoBehaviour
 #endif
     }
 
-
-
-#if UNITY_ANDROID
-    public IEnumerator ShareScreenshotInAnroid()
+    private void SetUpScene()
     {
-
-        isProcessing = true;
-
+        
         // hide some objects while taking screenshot
         if (shareBonusIndicator != null) { shareBonusIndicator.SetActive(false); }
         for (int i = 0; i < hideOnShare.Length; i++)
         {
             hideOnShare[i].SetActive(false);
         }
+
+        // hide ok button if it's linked in inspector
+        if (okButton != null) { okButton.SetActive(false); }
 
         // hide the share button and make it non-interactable
         Button shareButton = GetComponent<Button>();
@@ -92,7 +86,51 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
         // show the url
         if (url != null) { url.SetActive(true); }
+    }
 
+    private void ResetScene()
+    {
+        // show the share button again and make it interactable
+        shareButtonImage.enabled = true;
+        shareButton.interactable = true;
+
+        // hide url object
+        if (url != null) { url.SetActive(false); }
+
+        // show the hidden objects again
+        if (showAgainAfterShare)
+        {
+            for (int i = 0; i < hideOnShare.Length; i++)
+            {
+                hideOnShare[i].SetActive(true);
+            }
+        }
+
+        // always say thank you and show ok button
+        if (thanksText != null) { thanksText.SetActive(true); }
+        if (okButton != null) { okButton.SetActive(true); }
+    }
+
+    private void GiveBonus()
+    {
+        // give share bonus kisses one time only
+        if (!bonusGiven && baseBonusAmount > 0)
+        {
+            bonusGiven = true;
+            givenBonusAmount = baseBonusAmount;
+        }
+
+        if (givenBonusAmount <= baseBonusAmount && doubleBonusButton != null) { doubleBonusButton.SetActive(true); } // givenBonusAmount will be less than or equal to base amount as long as user has not watched a rewarded video; this prevents the button from showing if the user chooses to share more than once
+
+    }
+
+#if UNITY_ANDROID
+    public IEnumerator ShareScreenshotInAnroid()
+    {
+        Debug.Log("Start share screenshot");
+        isProcessing = true;
+
+        SetUpScene();
         // wait for graphics to render
         yield return new WaitForEndOfFrame();
 
@@ -159,35 +197,11 @@ public class ShareScreenshotAndroid : MonoBehaviour
                 Debug.LogError("Exception thrown while trying to share Android screenshot");
             }
 
+            Debug.Log("End share screenshot");
             yield return new WaitUntil(() => isFocus);
         }
-
-        // show the share button again and make it interactable
-        shareButtonImage.enabled = true;
-        shareButton.interactable = true;
-
-        // hide url object
-        if (url != null) { url.SetActive(false); }
-
-        
-        // show the hidden objects again
-        if (showAgainAfterShare)
-        {
-            for (int i = 0; i < hideOnShare.Length; i++)
-            {
-                hideOnShare[i].SetActive(true);
-            }
-        }
-
-        // give share bonus kisses one time only
-        if (!bonusGiven && baseBonusAmount > 0)
-        {
-            bonusGiven = true;
-            givenBonusAmount = baseBonusAmount;
-        }
-
-        if (thanksText != null) { thanksText.SetActive(true); }
-        if (givenBonusAmount <= baseBonusAmount && doubleBonusButton != null) { doubleBonusButton.SetActive(true); } // givenBonusAmount will be less than or equal to base amount as long as user has not watched a rewarded video; this prevents the button from showing if the user chooses to share more than once
+        ResetScene();
+        GiveBonus();
         isProcessing = false;
     }
 #endif
