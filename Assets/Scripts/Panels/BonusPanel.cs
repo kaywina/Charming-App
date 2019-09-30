@@ -62,7 +62,7 @@ public class BonusPanel : CharmsPanel
         }
 
         storedBonus = 0;
-        header.SetActive(true);
+        if (header != null) { header.SetActive(true); }
         base.OnDisable();
     }
 
