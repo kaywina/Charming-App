@@ -127,7 +127,6 @@ public class ShareScreenshotAndroid : MonoBehaviour
 #if UNITY_ANDROID
     public IEnumerator ShareScreenshotInAnroid()
     {
-        Debug.Log("Start share screenshot");
         isProcessing = true;
 
         SetUpScene();
@@ -197,7 +196,6 @@ public class ShareScreenshotAndroid : MonoBehaviour
                 Debug.LogError("Exception thrown while trying to share Android screenshot");
             }
 
-            Debug.Log("End share screenshot");
             yield return new WaitUntil(() => isFocus);
         }
         ResetScene();
