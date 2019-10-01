@@ -11,10 +11,6 @@ public class GoToBonusPanelButton : MonoBehaviour
 
     public void TryOpenBonusPanel()
     {
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-        
-
         bool canOpen = currencyManager.CanOpenBonusPanel();
         if (canOpen)
         {
@@ -29,9 +25,5 @@ public class GoToBonusPanelButton : MonoBehaviour
             charmsPanel.SetReturnToMain(true);
             charmsPanel.DisableCharmsPanel();
         }
-
-        stopwatch.Stop();
-        UnityEngine.Debug.Log("Time for TryOpenBonusPanel in milliseconds = " + stopwatch.ElapsedMilliseconds);
-
     }
 }
