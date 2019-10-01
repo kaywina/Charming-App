@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
 
 public class ShareScreenshotAndroid : MonoBehaviour
 {
@@ -133,7 +134,9 @@ public class ShareScreenshotAndroid : MonoBehaviour
         // wait for graphics to render
         yield return new WaitForEndOfFrame();
 
+        // hmmm not actually using the full path below; and changing it to full path breaks functionality on Android device
         string screenShotPath = Application.persistentDataPath + "/" + screenshotName;
+
         ScreenCapture.CaptureScreenshot(screenshotName, 1);
         yield return new WaitForSeconds(0.5f);
 
@@ -200,6 +203,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
         ResetScene();
         GiveBonus();
+        File.Delete(screenshotName);
         isProcessing = false;
     }
 #endif
