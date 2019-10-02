@@ -203,7 +203,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
         ResetScene();
         GiveBonus();
-        File.Delete(screenshotName);
+        System.IO.File.Delete(screenShotPath);
+
         isProcessing = false;
     }
 #endif
