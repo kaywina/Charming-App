@@ -11,6 +11,7 @@ public class CurrencyManager : MonoBehaviour {
     public GameObject welcomePanel;
     public GameObject infoPanel;
     public GameObject bonusPanel;
+    public StorePanel storePanel;
     public Text currencyTextSilver;
     public Text currencyTextGold;
 
@@ -97,7 +98,7 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
-    public void GiveRegularBonus(int bonus)
+    public void GiveRegularBonus(int bonus, bool isPurchase = false)
     {
         if (bonus <= 0) { return; }
         currencyInBankSilver += bonus;
@@ -105,9 +106,13 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
         if (OnCurrencyAdded != null) { OnCurrencyAdded(bonus); }
         else { Debug.Log("delegate is null");  }
+        if (isPurchase && storePanel != null)
+        {
+            storePanel.ShowThankYou();
+        }
     }
 
-    public void GivePremiumBonus(int bonus)
+    public void GivePremiumBonus(int bonus, bool isPurchase = false)
     {
         if (bonus <= 0) { return; }
         currencyInBankGold += bonus;
@@ -115,6 +120,10 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
         if (OnPremiumCurrencyAdded != null) { OnPremiumCurrencyAdded(bonus); }
         else { Debug.Log("delegate is null"); }
+        if (isPurchase && storePanel != null)
+        {
+            storePanel.ShowThankYou();
+        }
     }
 
 #if UNITY_EDITOR // disable cheats in builds

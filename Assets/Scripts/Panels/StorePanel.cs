@@ -7,9 +7,12 @@ public class StorePanel : CharmsPanel
 
     private bool fromUnlock = false;
     public GameObject unlockPanel;
+    public GameObject thanks;
 
     new void OnEnable()
     {
+        thanks.SetActive(false);
+
         base.OnEnable();
 
         if (fromUnlock)
@@ -34,5 +37,10 @@ public class StorePanel : CharmsPanel
     public void SetFromUnlock (bool toSet)
     {
         fromUnlock = toSet;
+    }
+
+    public void ShowThankYou()
+    {
+        thanks.SetActive(true);
     }
 }

@@ -255,32 +255,32 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
-            CurrencyManager.Instance.GivePremiumBonus(16);
-            CurrencyManager.Instance.GiveRegularBonus(4);
+            CurrencyManager.Instance.GivePremiumBonus(16, true);
+            CurrencyManager.Instance.GiveRegularBonus(4, true);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable32, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
-            CurrencyManager.Instance.GivePremiumBonus(32);
-            CurrencyManager.Instance.GiveRegularBonus(8);
+            CurrencyManager.Instance.GivePremiumBonus(32, true);
+            CurrencyManager.Instance.GiveRegularBonus(8, true);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable64, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
-            CurrencyManager.Instance.GivePremiumBonus(64);
-            CurrencyManager.Instance.GiveRegularBonus(16);
+            CurrencyManager.Instance.GivePremiumBonus(64, true);
+            CurrencyManager.Instance.GiveRegularBonus(16, true);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable128, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
-            CurrencyManager.Instance.GivePremiumBonus(128);
-            CurrencyManager.Instance.GiveRegularBonus(32);
+            CurrencyManager.Instance.GivePremiumBonus(128, true);
+            CurrencyManager.Instance.GiveRegularBonus(32, true);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable256, StringComparison.Ordinal))
