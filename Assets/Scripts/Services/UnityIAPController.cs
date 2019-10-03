@@ -287,8 +287,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
-            CurrencyManager.Instance.GivePremiumBonus(256);
-            CurrencyManager.Instance.GiveRegularBonus(64);
+            CurrencyManager.Instance.GivePremiumBonus(256, true);
+            CurrencyManager.Instance.GiveRegularBonus(64, true);
         }
 
         /*
