@@ -28,6 +28,9 @@ public class CurrencyManager : MonoBehaviour {
     public delegate void PremiumCurrencyAddedAction(int n);
     public static event PremiumCurrencyAddedAction OnPremiumCurrencyAdded;
 
+    private static int stackedBonusRegular = 0; // to handle multiple store purchases before leaving store
+    private static int stackedBonusPremium = 0; // to handle multiple store purchases before leaving store
+
     // Use this for initialization
     void Start ()
     {
@@ -98,17 +101,43 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
+    public static int GetStackedBonusRegular()
+    {
+        return stackedBonusRegular;
+    }
+
+    public static int GetStackedBonusPremium()
+    {
+        return stackedBonusPremium;
+    }
+
+    public static void ResetStackedBonuseRegular()
+    {
+        stackedBonusRegular = 0;
+    }
+
+    public static void ResetStackedBonusePremium()
+    {
+        stackedBonusPremium = 0;
+    }
+
     public void GiveRegularBonus(int bonus, bool isPurchase = false)
     {
         if (bonus <= 0) { return; }
         currencyInBankSilver += bonus;
         PlayerPrefs.SetInt("Currency", currencyInBankSilver);
-        SetCurrencyText();
-        if (OnCurrencyAdded != null) { OnCurrencyAdded(bonus); }
-        else { Debug.Log("delegate is null");  }
-        if (isPurchase && storePanel != null)
+        SetCurrencyText(); 
+
+        if (isPurchase && storePanel != null) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
         {
+            stackedBonusRegular += bonus;
+            //Debug.Log("Stacked Bonus Regular is " + stackedBonusRegular);
             storePanel.ShowThankYou();
+        }
+        else // this case handles all other times a bonus is given; i.e. when stacking is not a problem
+        {
+            if (OnCurrencyAdded != null) { OnCurrencyAdded(bonus); }
+            else { Debug.Log("delegate is null"); }
         }
     }
 
@@ -118,11 +147,17 @@ public class CurrencyManager : MonoBehaviour {
         currencyInBankGold += bonus;
         PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
         SetCurrencyText();
-        if (OnPremiumCurrencyAdded != null) { OnPremiumCurrencyAdded(bonus); }
-        else { Debug.Log("delegate is null"); }
-        if (isPurchase && storePanel != null)
+        
+        if (isPurchase && storePanel != null) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
         {
+            stackedBonusPremium += bonus;
+            //Debug.Log("Stacked Bonus Premium is " + stackedBonusPremium);
             storePanel.ShowThankYou();
+        }
+        else // this case handles all other times a bonus is given; i.e. when stacking is not a problem
+        {
+            if (OnPremiumCurrencyAdded != null) { OnPremiumCurrencyAdded(bonus); }
+            else { Debug.Log("delegate is null"); }
         }
     }
 

@@ -49,23 +49,47 @@ public class CurrencyIndicator : MonoBehaviour
     void OnEnable()
     {
         storedColor = totalAmountText.color;
-        
-        //Debug.Log("OnEnable in " + gameObject.name);
+
+        // this block handles case when returning from IAP store
+        int stackedBonusRegular = CurrencyManager.GetStackedBonusRegular();
+        int stackedBonusPremium = CurrencyManager.GetStackedBonusPremium();
+        if (stackedBonusRegular > 0 || stackedBonusPremium > 0)
+        {
+            if (isForPremiumCurrency)
+            {
+                //Debug.Log("Show premium stacked bonus amount");
+                bonusGivenText.text = "+" + stackedBonusPremium.ToString();
+                CurrencyManager.ResetStackedBonusePremium();
+            }
+            else
+            {
+                //Debug.Log("Show regular stacked bonus amount");
+                bonusGivenText.text = "+" + stackedBonusRegular.ToString();
+                CurrencyManager.ResetStackedBonuseRegular();
+            }
+            ShowBonusText();
+            return;
+        }
+
+        // cases below are for when bonus is given not from store (i.e. after watching a rewarded ad or spinning bonus wheel)
         if (isForPremiumCurrency && premiumCurrencyWasUpdated)
         {
             bonusGivenText.text = "+" + updatedByAmountPremium.ToString();
-            bonusGivenText.gameObject.SetActive(true);
-            totalAmountText.color = bonusGivenText.color;
-            Invoke("HideBonusGivenText", secondsBeforeHide);
+            ShowBonusText();
         }
 
         if (!isForPremiumCurrency && currencyWasUpdated)
         {
             bonusGivenText.text = "+" + updatedByAmountRegular.ToString();
-            bonusGivenText.gameObject.SetActive(true);
-            totalAmountText.color = bonusGivenText.color;
-            Invoke("HideBonusGivenText", secondsBeforeHide);
-        } 
+            ShowBonusText();
+        }
+    }
+
+    private void ShowBonusText()
+    {
+        bonusGivenText.gameObject.SetActive(true);
+        totalAmountText.color = bonusGivenText.color;
+        Invoke("HideBonusGivenText", secondsBeforeHide);
     }
 
     void OnDisable()
