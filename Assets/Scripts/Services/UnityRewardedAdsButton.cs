@@ -14,6 +14,7 @@ public class UnityRewardedAdsButton : MonoBehaviour
     public ShareScreenshotAndroid shareScreenshotAndroid;
     private bool watched;
     public GameObject watchedRewardedAdText;
+    public Text rewardAmountText;
 
     private void OnEnable()
     {
@@ -55,7 +56,9 @@ public class UnityRewardedAdsButton : MonoBehaviour
                 {
                     shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
                     shareScreenshotAndroid.rewardAmountText.text = shareScreenshotAndroid.givenBonusAmount.ToString();
+                    if (rewardAmountText != null) { rewardAmountText.text = "16"; }
                 }
+                
                 watched = true;
                 watchedRewardedAdText.SetActive(true);
                 gameObject.SetActive(false); // deactivate button after completion
