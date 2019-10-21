@@ -47,12 +47,8 @@ public class Charms : MonoBehaviour {
     public GameObject[] unlockButtonSets;
     private static string charmSetPrefName = "CharmSet";
 
-    public GameObject worldUIMask;
-
 	// Use this for initialization
 	void Start () {
-        worldUIMask.SetActive(true); // hide world UI on start
-
         // set the correct charm set depending on pref
         CheckCharmSet();
 
