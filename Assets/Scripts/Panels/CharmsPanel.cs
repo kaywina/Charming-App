@@ -7,6 +7,7 @@ public class CharmsPanel : MonoBehaviour
 {
     public GameObject worldUIMask;
     public GraphicRaycaster worldCanvasRaycaster;
+    public BoxCollider pillarCollider;
     public GameObject charmText;
     public GameObject headerControls;
     public GameObject arrowControls;
@@ -28,6 +29,11 @@ public class CharmsPanel : MonoBehaviour
         if (worldCanvasRaycaster != null)
         {
             worldCanvasRaycaster.enabled = false;
+        }
+
+        if (pillarCollider != null)
+        {
+            pillarCollider.enabled = false;
         }
 
         if (headerControls != null)
@@ -61,6 +67,11 @@ public class CharmsPanel : MonoBehaviour
         if (worldCanvasRaycaster != null)
         {
             worldCanvasRaycaster.enabled = true;
+        }
+
+        if (pillarCollider != null)
+        {
+            pillarCollider.enabled = true;
         }
 
         if (headerControls != null)

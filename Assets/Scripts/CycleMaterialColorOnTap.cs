@@ -11,7 +11,7 @@ public class CycleMaterialColorOnTap : MonoBehaviour
 
     public int defaultIndex = 0;
     private int index = 0;
-    private BoxCollider2D boxCollider2D;
+    private BoxCollider boxCollider;
     private Camera mainCamera;
     private string playerPrefName;
 
@@ -34,13 +34,13 @@ public class CycleMaterialColorOnTap : MonoBehaviour
             index = int.Parse(PlayerPrefs.GetString(playerPrefName));
         }
 
-        boxCollider2D = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider>();
         SetMaterialColor();
     }
 
     private void OnDisable()
     {
-        boxCollider2D = null;
+        boxCollider = null;
     }
 
     // Update is called once per frame
@@ -50,7 +50,7 @@ public class CycleMaterialColorOnTap : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldMousePos2D = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            if (boxCollider2D.bounds.Contains(worldMousePos2D))
+            if (boxCollider.bounds.Contains(worldMousePos2D))
             {
                 NextMaterialColor();
             }
@@ -66,7 +66,7 @@ public class CycleMaterialColorOnTap : MonoBehaviour
             {
                 Vector2 worldTouchPos2D = (Vector2)mainCamera.ScreenToWorldPoint(touch.position);
 
-                if (boxCollider2D.bounds.Contains(worldTouchPos2D))
+                if (boxCollider.bounds.Contains(worldTouchPos2D))
                 {
                     NextMaterialColor();
                 }
