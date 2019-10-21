@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharmsPanel : MonoBehaviour
 {
     public GameObject worldUIMask;
+    public GraphicRaycaster worldCanvasRaycaster;
     public GameObject charmText;
     public GameObject headerControls;
     public GameObject arrowControls;
@@ -21,6 +23,11 @@ public class CharmsPanel : MonoBehaviour
         if (worldUIMask != null)
         {
             worldUIMask.SetActive(true);
+        }
+
+        if (worldCanvasRaycaster != null)
+        {
+            worldCanvasRaycaster.enabled = false;
         }
 
         if (headerControls != null)
@@ -49,6 +56,11 @@ public class CharmsPanel : MonoBehaviour
         if (worldUIMask != null)
         {
             worldUIMask.SetActive(false);
+        }
+
+        if (worldCanvasRaycaster != null)
+        {
+            worldCanvasRaycaster.enabled = true;
         }
 
         if (headerControls != null)
