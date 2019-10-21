@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CharmsPanel : MonoBehaviour
 {
-    public GameObject portraitLayout;
+    public GameObject worldUIMask;
     public GameObject charmText;
-    public GameObject standIcons;
     public GameObject headerControls;
     public GameObject arrowControls;
     public bool returnToMain = true;
@@ -19,14 +18,9 @@ public class CharmsPanel : MonoBehaviour
             charmText.SetActive(false);
         }
 
-        if (portraitLayout != null)
+        if (worldUIMask != null)
         {
-            portraitLayout.SetActive(false);
-        }
-
-        if (standIcons != null)
-        {
-            standIcons.SetActive(false);
+            worldUIMask.SetActive(true);
         }
 
         if (headerControls != null)
@@ -52,14 +46,9 @@ public class CharmsPanel : MonoBehaviour
             charmText.SetActive(true);
         }
 
-        if (portraitLayout != null)
+        if (worldUIMask != null)
         {
-            portraitLayout.SetActive(true);
-        }
-
-        if (standIcons != null)
-        {
-            standIcons.SetActive(true);
+            worldUIMask.SetActive(false);
         }
 
         if (headerControls != null)
