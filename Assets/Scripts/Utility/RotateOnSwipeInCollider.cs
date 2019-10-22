@@ -24,12 +24,20 @@ public class RotateOnSwipeInCollider : MonoBehaviour
         if (Input.GetMouseButton(0) && lastPosition != Vector3.zero)
         {
             Vector3 newPosition = Input.mousePosition;
-            if (newPosition == lastPosition) { return; }
+            if (newPosition == lastPosition)
+            {
+                return;
+            }
       
             Vector2 worldMousePos2D = (Vector2)mainCamera.ScreenToWorldPoint(newPosition);
 
-            if (boxCollider2D.bounds.Contains(worldMousePos2D))
+            // dirty hack to make rotation work with scene setup for UI masking
+            Vector3 hackedPos = worldMousePos2D;
+            hackedPos.z = -7.0f;
+
+            if (boxCollider2D.bounds.Contains(hackedPos))
             {
+
                 Vector3 mousePositionDelta = Input.mousePosition - lastPosition;
                 objectToRotate.transform.Rotate(0f, mousePositionDelta.x, 0f);
             }
