@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class SetBackgroundColorFromImage : MonoBehaviour
 {
-    public SetMainCameraBackgroundColor setMainCameraBackgroundColor;
-    public Material maskMaterial;
+    public SetBackgroundColor setBackgroundColor;
     public Image image;
 
     public void SetColor()
     {
-        setMainCameraBackgroundColor.SetColor(image.color);
-        maskMaterial.color = image.color;
+        setBackgroundColor.SetColor(image.color);
     }
 }
