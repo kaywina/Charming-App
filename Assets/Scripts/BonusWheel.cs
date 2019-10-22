@@ -71,6 +71,6 @@ public class BonusWheel : MonoBehaviour
             prizeText.text = prize[itemNumber].ToString();
         }
 
-        bonusPanel.CompleteSpin(prize[itemNumber]); // premium currency prize       
+        bonusPanel.CompleteSpin(prize[itemNumber]); 
     }
 }
