@@ -9,8 +9,7 @@ public class CharmsPanel : MonoBehaviour
     public GraphicRaycaster worldCanvasRaycaster;
     public BoxCollider pillarCollider;
     public GameObject charmText;
-    public GameObject headerControls;
-    public GameObject arrowControls;
+    public GameObject canvasOverlay;
     public bool returnToMain = true;
     public GameObject[] setActiveOnEnable;
 
@@ -36,14 +35,9 @@ public class CharmsPanel : MonoBehaviour
             pillarCollider.enabled = false;
         }
 
-        if (headerControls != null)
+        if (canvasOverlay != null)
         {
-            headerControls.SetActive(false);
-        }
-
-        if (arrowControls != null)
-        {
-            arrowControls.SetActive(false);
+            canvasOverlay.SetActive(false);
         }
 
         ActivateObjects();
@@ -74,14 +68,9 @@ public class CharmsPanel : MonoBehaviour
             pillarCollider.enabled = true;
         }
 
-        if (headerControls != null)
+        if (canvasOverlay != null)
         {
-            headerControls.SetActive(true);
-        }
-
-        if (arrowControls != null)
-        {
-            arrowControls.SetActive(true);
+            canvasOverlay.SetActive(true);
         }
 
         DeactivateObjects();
