@@ -31,6 +31,8 @@ public class CurrencyManager : MonoBehaviour {
     private static int stackedBonusRegular = 0; // to handle multiple store purchases before leaving store
     private static int stackedBonusPremium = 0; // to handle multiple store purchases before leaving store
 
+    private bool canOpenBonusPanel = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -54,9 +56,11 @@ public class CurrencyManager : MonoBehaviour {
 
         SetCurrencyText();
         PlayerPrefs.SetString("FirstRun", "False");
+
+        canOpenBonusPanel = SetCanOpenBonusPanel();
     }
 
-    public bool CanOpenBonusPanel()
+    public bool SetCanOpenBonusPanel()
     {
         DateTime currentDateTime = System.DateTime.Now;
         int currentDayOfYear = currentDateTime.DayOfYear;
@@ -75,6 +79,11 @@ public class CurrencyManager : MonoBehaviour {
         {
             return false;
         }   
+    }
+
+    public bool GetCanOpenBonusPanel()
+    {
+        return canOpenBonusPanel;
     }
 
     void SetCurrencyOnStart(int amountSilver, int amountGold)

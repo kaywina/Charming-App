@@ -11,7 +11,7 @@ public class GoToBonusPanelButton : MonoBehaviour
 
     public void TryOpenBonusPanel()
     {
-        bool canOpen = currencyManager.CanOpenBonusPanel();
+        bool canOpen = currencyManager.GetCanOpenBonusPanel();
         if (canOpen)
         {
             CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
