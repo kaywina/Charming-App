@@ -16,8 +16,6 @@ public class UnlockPanel : CharmsPanel
     private static GameObject toUnlock;
     private GameObject unlockButton;
     private bool isCharm;
-    private bool premiumCurrency;
-    public GameObject goldKeyImage;
     public GameObject silverKeyImage;
     public StorePanel storePanel;
     private bool returnToOptions;
@@ -26,19 +24,9 @@ public class UnlockPanel : CharmsPanel
     {
         base.OnEnable();
         bool canWithdraw = false;
-        if (premiumCurrency)
-        {
-            canWithdraw = CurrencyManager.CanWithdrawAmountGold(cost);
-            goldKeyImage.SetActive(true);
-            silverKeyImage.SetActive(false);
-        }
-        else
-        {
-            canWithdraw = CurrencyManager.CanWithdrawAmountSilver(cost);
-            goldKeyImage.SetActive(false);
-            silverKeyImage.SetActive(true);
-        }
-        
+        canWithdraw = CurrencyManager.CanWithdrawAmountSilver(cost);
+        silverKeyImage.SetActive(true);
+
         if (canWithdraw)
         {
             buyButton.interactable = true;
@@ -87,25 +75,17 @@ public class UnlockPanel : CharmsPanel
         costText.text = cost.ToString();
     }
 
-    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm, bool usePremiumCurrency, bool cameFromOptionsPanel)
+    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm, bool cameFromOptionsPanel)
     {
         toUnlock = toSet;
         unlockButton = button;
         isCharm = charm;
-        premiumCurrency = usePremiumCurrency;
         returnToOptions = cameFromOptionsPanel;
     }
 
     public void UnlockObject()
     {
-        if (premiumCurrency)
-        {
-            CurrencyManager.WithdrawAmountGold(cost);
-        }
-        else
-        {
-            CurrencyManager.WithdrawAmountSilver(cost);
-        }
+        CurrencyManager.WithdrawAmountSilver(cost);
         PlayerPrefs.SetString(toUnlock.name, "unlocked");
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);

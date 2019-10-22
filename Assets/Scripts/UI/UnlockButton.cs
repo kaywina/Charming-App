@@ -11,13 +11,11 @@ public class UnlockButton : MonoBehaviour {
     public Text priceText;
     public UnlockPanel unlockPanel;
     public CharmsPanel optionsPanel;
-    public bool usePremiumCurrency = false;
     public bool cameFromOptionsPanel = false;
 
     // leave these three variables unassigned in inspector if button is 2D with no 3D model (i.e. these are only used for 3D UI buttons only)
     public MeshRenderer meshRenderer;
     public Material silverMat;
-    public Material goldMat;
 
     public bool unlockIsBackgroundEffect = false;
     public SetBackgroundEffectOnClick setBackgroundEffectOnClick;
@@ -25,14 +23,7 @@ public class UnlockButton : MonoBehaviour {
 
     void Start () {
 
-        if (usePremiumCurrency)
-        {
-            if (meshRenderer != null) { meshRenderer.material = goldMat; }
-        }
-        else
-        {
-            if (meshRenderer != null) { meshRenderer.material = silverMat; }
-        }
+        if (meshRenderer != null) { meshRenderer.material = silverMat; }
 
         priceText.text = cost.ToString();
 
@@ -61,7 +52,7 @@ public class UnlockButton : MonoBehaviour {
             setBackgroundEffectOnClick.SetEffectIndex(effectIndex);
         }
 
-        unlockPanel.SetObjectToUnlock(objectToEnable, gameObject, isCharm, usePremiumCurrency, cameFromOptionsPanel); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
+        unlockPanel.SetObjectToUnlock(objectToEnable, gameObject, isCharm, cameFromOptionsPanel); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
 
