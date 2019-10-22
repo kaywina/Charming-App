@@ -44,7 +44,7 @@ public class CongratsPanel : CharmsPanel
     {
         if (shareScreenshotAndroid != null && shareScreenshotAndroid.bonusGiven == true)
         {
-            CurrencyManager.Instance.GivePremiumBonus(shareScreenshotAndroid.givenBonusAmount);
+            CurrencyManager.Instance.GiveRegularBonus(shareScreenshotAndroid.givenBonusAmount);
         }
         gameObject.SetActive(false);
     }

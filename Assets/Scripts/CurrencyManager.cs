@@ -13,7 +13,6 @@ public class CurrencyManager : MonoBehaviour {
     public GameObject bonusPanel;
     public StorePanel storePanel;
     public Text currencyTextSilver;
-    public Text currencyTextGold;
 
     private static int welcomeBonusSilver = 8;
     private static int welcomeBonusGold = 0;
@@ -24,9 +23,6 @@ public class CurrencyManager : MonoBehaviour {
 
     public delegate void CurrencyAddedAction(int n);
     public static event  CurrencyAddedAction OnCurrencyAdded;
-
-    public delegate void PremiumCurrencyAddedAction(int n);
-    public static event PremiumCurrencyAddedAction OnPremiumCurrencyAdded;
 
     private static int stackedBonusRegular = 0; // to handle multiple store purchases before leaving store
     private static int stackedBonusPremium = 0; // to handle multiple store purchases before leaving store
@@ -135,26 +131,6 @@ public class CurrencyManager : MonoBehaviour {
         }
     }
 
-    public void GivePremiumBonus(int bonus, bool isPurchase = false)
-    {
-        if (bonus <= 0) { return; }
-        currencyInBankGold += bonus;
-        PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
-        SetCurrencyText();
-        
-        if (isPurchase && storePanel != null) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
-        {
-            stackedBonusPremium += bonus;
-            //Debug.Log("Stacked Bonus Premium is " + stackedBonusPremium);
-            storePanel.ShowThankYou();
-        }
-        else // this case handles all other times a bonus is given; i.e. when stacking is not a problem
-        {
-            if (OnPremiumCurrencyAdded != null) { OnPremiumCurrencyAdded(bonus); }
-            else { Debug.Log("delegate is null"); }
-        }
-    }
-
 #if UNITY_EDITOR // disable cheats in builds
     public void ClearCurrency()
     {
@@ -170,7 +146,6 @@ public class CurrencyManager : MonoBehaviour {
     {
 
         Instance.currencyTextSilver.text = currencyInBankSilver.ToString();
-        Instance.currencyTextGold.text = currencyInBankGold.ToString();
     }
 
     public static void SetCurrencyInBankSilver(int amount)

@@ -53,7 +53,7 @@ public class BonusPanel : CharmsPanel
         {
             if (prizeIsPremium)
             {
-                CurrencyManager.Instance.GivePremiumBonus(storedBonus);
+                //CurrencyManager.Instance.GivePremiumBonus(storedBonus);
             }
             else
             {

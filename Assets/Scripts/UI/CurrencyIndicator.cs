@@ -12,38 +12,19 @@ public class CurrencyIndicator : MonoBehaviour
     private static bool currencyWasUpdated = false;
     private static int updatedByAmountRegular = 0;
 
-    private static bool premiumCurrencyWasUpdated = false;
-    private static int updatedByAmountPremium = 0;
-
-    public bool isForPremiumCurrency = false;
     private float secondsBeforeHide = 3f;
 
     private Color storedColor;
 
     void Awake()
     {
-        if (isForPremiumCurrency)
-        {
-            CurrencyManager.OnPremiumCurrencyAdded += CurrencyIndicator.UpdatePremiumBonusData;
-        }
-        else
-        {
-            CurrencyManager.OnCurrencyAdded += CurrencyIndicator.UpdateRegularBonusData;
-        }
-        
+        CurrencyManager.OnCurrencyAdded += CurrencyIndicator.UpdateRegularBonusData;
         bonusGivenText.gameObject.SetActive(false);
     }
 
     private void OnApplicationQuit()
     {
-        if (isForPremiumCurrency)
-        {
-            CurrencyManager.OnPremiumCurrencyAdded -= CurrencyIndicator.UpdatePremiumBonusData;
-        }
-        else
-        {
-            CurrencyManager.OnCurrencyAdded -= CurrencyIndicator.UpdateRegularBonusData;
-        }
+        CurrencyManager.OnCurrencyAdded -= CurrencyIndicator.UpdateRegularBonusData;
     }
 
     void OnEnable()
@@ -55,30 +36,13 @@ public class CurrencyIndicator : MonoBehaviour
         int stackedBonusPremium = CurrencyManager.GetStackedBonusPremium();
         if (stackedBonusRegular > 0 || stackedBonusPremium > 0)
         {
-            if (isForPremiumCurrency)
-            {
-                //Debug.Log("Show premium stacked bonus amount");
-                bonusGivenText.text = "+" + stackedBonusPremium.ToString();
-                CurrencyManager.ResetStackedBonusePremium();
-            }
-            else
-            {
-                //Debug.Log("Show regular stacked bonus amount");
-                bonusGivenText.text = "+" + stackedBonusRegular.ToString();
-                CurrencyManager.ResetStackedBonuseRegular();
-            }
+            bonusGivenText.text = "+" + stackedBonusRegular.ToString();
+            CurrencyManager.ResetStackedBonuseRegular();
             ShowBonusText();
             return;
         }
 
-        // cases below are for when bonus is given not from store (i.e. after watching a rewarded ad or spinning bonus wheel)
-        if (isForPremiumCurrency && premiumCurrencyWasUpdated)
-        {
-            bonusGivenText.text = "+" + updatedByAmountPremium.ToString();
-            ShowBonusText();
-        }
-
-        if (!isForPremiumCurrency && currencyWasUpdated)
+        if (currencyWasUpdated)
         {
             bonusGivenText.text = "+" + updatedByAmountRegular.ToString();
             ShowBonusText();
@@ -94,16 +58,8 @@ public class CurrencyIndicator : MonoBehaviour
 
     void OnDisable()
     {
-        if (isForPremiumCurrency)
-        {
-            premiumCurrencyWasUpdated = false;
-            updatedByAmountPremium = 0;
-        }
-        else
-        {
-            currencyWasUpdated = false;
-            updatedByAmountRegular = 0;
-        }
+        currencyWasUpdated = false;
+        updatedByAmountRegular = 0;
         bonusGivenText.gameObject.SetActive(false);
         totalAmountText.color = storedColor;
     }
@@ -112,12 +68,6 @@ public class CurrencyIndicator : MonoBehaviour
     {
         currencyWasUpdated = true;
         updatedByAmountRegular = newValue;
-    }
-
-    public static void UpdatePremiumBonusData(int newValue)
-    {
-        premiumCurrencyWasUpdated = true;
-        updatedByAmountPremium = newValue;
     }
 
     private void HideBonusGivenText()
