@@ -75,12 +75,11 @@ public class UnlockPanel : CharmsPanel
         costText.text = cost.ToString();
     }
 
-    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm, bool cameFromOptionsPanel)
+    public void SetObjectToUnlock(GameObject toSet, GameObject button, bool charm)
     {
         toUnlock = toSet;
         unlockButton = button;
         isCharm = charm;
-        returnToOptions = cameFromOptionsPanel;
     }
 
     public void UnlockObject()
@@ -90,8 +89,7 @@ public class UnlockPanel : CharmsPanel
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);
 
-        // only two UI options currently supported; either unlocking charm in main UI and go to congrats screen, or unlocking option with 2D button
-        // other options will result in black UI since no panel is opened after closing the unlock panel
+        // only one UI option is currently supported; unlocking charm in main UI (won't work on options screen or other panels)
         if (isCharm)
         {
             charms.SetCharm(toUnlock.name);
@@ -99,15 +97,6 @@ public class UnlockPanel : CharmsPanel
             congratsPanel.ShowPanel(isCharm);
         }
         
-        else if (returnToOptions)
-        {
-            optionsPanel.ShowPanel();
-        }
-        else
-        { 
-            optionsPanel.ShowPanel();
-        }
-
         optionsPanel.SetReturnToMain(true);
         gameObject.SetActive(false);
     }
