@@ -24,7 +24,7 @@ public class UnlockPanel : CharmsPanel
     {
         base.OnEnable();
         bool canWithdraw = false;
-        canWithdraw = CurrencyManager.CanWithdrawAmountSilver(cost);
+        canWithdraw = CurrencyManager.CanWithdrawAmount(cost);
         silverKeyImage.SetActive(true);
 
         if (canWithdraw)
@@ -84,7 +84,7 @@ public class UnlockPanel : CharmsPanel
 
     public void UnlockObject()
     {
-        CurrencyManager.WithdrawAmountSilver(cost);
+        CurrencyManager.WithdrawAmount(cost);
         PlayerPrefs.SetString(toUnlock.name, "unlocked");
         toUnlock.SetActive(true);
         unlockButton.SetActive(false);

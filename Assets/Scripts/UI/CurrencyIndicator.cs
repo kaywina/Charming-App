@@ -10,7 +10,7 @@ public class CurrencyIndicator : MonoBehaviour
     public Text totalAmountText;
 
     private static bool currencyWasUpdated = false;
-    private static int updatedByAmountRegular = 0;
+    private static int updatedByAmount = 0;
 
     private float secondsBeforeHide = 3f;
 
@@ -32,19 +32,18 @@ public class CurrencyIndicator : MonoBehaviour
         storedColor = totalAmountText.color;
 
         // this block handles case when returning from IAP store
-        int stackedBonusRegular = CurrencyManager.GetStackedBonusRegular();
-        int stackedBonusPremium = CurrencyManager.GetStackedBonusPremium();
-        if (stackedBonusRegular > 0 || stackedBonusPremium > 0)
+        int stackedBonus = CurrencyManager.GetStackedBonus();
+        if (stackedBonus > 0)
         {
-            bonusGivenText.text = "+" + stackedBonusRegular.ToString();
-            CurrencyManager.ResetStackedBonuseRegular();
+            bonusGivenText.text = "+" + stackedBonus.ToString();
+            CurrencyManager.ResetStackedBonus();
             ShowBonusText();
             return;
         }
 
         if (currencyWasUpdated)
         {
-            bonusGivenText.text = "+" + updatedByAmountRegular.ToString();
+            bonusGivenText.text = "+" + updatedByAmount.ToString();
             ShowBonusText();
         }
     }
@@ -59,7 +58,7 @@ public class CurrencyIndicator : MonoBehaviour
     void OnDisable()
     {
         currencyWasUpdated = false;
-        updatedByAmountRegular = 0;
+        updatedByAmount = 0;
         bonusGivenText.gameObject.SetActive(false);
         totalAmountText.color = storedColor;
     }
@@ -67,7 +66,7 @@ public class CurrencyIndicator : MonoBehaviour
     public static void UpdateRegularBonusData(int newValue)
     {
         currencyWasUpdated = true;
-        updatedByAmountRegular = newValue;
+        updatedByAmount = newValue;
     }
 
     private void HideBonusGivenText()

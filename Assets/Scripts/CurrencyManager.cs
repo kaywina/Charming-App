@@ -15,17 +15,14 @@ public class CurrencyManager : MonoBehaviour {
     public Text currencyTextSilver;
 
     private static int welcomeBonusSilver = 8;
-    private static int welcomeBonusGold = 0;
     public Text welcomeBonusText;
 
-    private static int currencyInBankSilver = 0;
-    private static int currencyInBankGold = 0;
+    private static int currencyInBank = 0;
 
     public delegate void CurrencyAddedAction(int n);
     public static event  CurrencyAddedAction OnCurrencyAdded;
 
-    private static int stackedBonusRegular = 0; // to handle multiple store purchases before leaving store
-    private static int stackedBonusPremium = 0; // to handle multiple store purchases before leaving store
+    private static int stackedBonus = 0; // to handle multiple store purchases before leaving store
 
     private bool canOpenBonusPanel = false;
 
@@ -40,13 +37,12 @@ public class CurrencyManager : MonoBehaviour {
         if (!PlayerPrefs.GetString("FirstRun").Equals("False"))
         {
             //Debug.Log("Give currency bonus on first run");
-            SetCurrencyOnStart(welcomeBonusSilver, welcomeBonusGold);
+            SetCurrencyOnStart(welcomeBonusSilver);
             welcomePanel.SetActive(true);
         }
         else
         {
-            currencyInBankSilver = PlayerPrefs.GetInt("Currency");
-            currencyInBankGold = PlayerPrefs.GetInt("PremiumCurrency");
+            currencyInBank = PlayerPrefs.GetInt("Currency");
             infoPanel.SetActive(true);
         }
 
@@ -82,45 +78,33 @@ public class CurrencyManager : MonoBehaviour {
         return canOpenBonusPanel;
     }
 
-    void SetCurrencyOnStart(int amountSilver, int amountGold)
+    void SetCurrencyOnStart(int amount)
     {
-        currencyInBankSilver = amountSilver;
-        currencyInBankGold = amountGold;
-        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
-        PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
+        currencyInBank = amount;
+        PlayerPrefs.SetInt("Currency", currencyInBank);
         SetCurrencyText();
     }
 
-    public static int GetStackedBonusRegular()
+    public static int GetStackedBonus()
     {
-        return stackedBonusRegular;
+        return stackedBonus;
     }
 
-    public static int GetStackedBonusPremium()
+    public static void ResetStackedBonus()
     {
-        return stackedBonusPremium;
+        stackedBonus = 0;
     }
 
-    public static void ResetStackedBonuseRegular()
-    {
-        stackedBonusRegular = 0;
-    }
-
-    public static void ResetStackedBonusePremium()
-    {
-        stackedBonusPremium = 0;
-    }
-
-    public void GiveRegularBonus(int bonus, bool isPurchase = false)
+    public void GiveBonus(int bonus, bool isPurchase = false)
     {
         if (bonus <= 0) { return; }
-        currencyInBankSilver += bonus;
-        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
+        currencyInBank += bonus;
+        PlayerPrefs.SetInt("Currency", currencyInBank);
         SetCurrencyText(); 
 
         if (isPurchase && storePanel != null) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
         {
-            stackedBonusRegular += bonus;
+            stackedBonus += bonus;
             //Debug.Log("Stacked Bonus Regular is " + stackedBonusRegular);
             storePanel.ShowThankYou();
         }
@@ -134,10 +118,8 @@ public class CurrencyManager : MonoBehaviour {
 #if UNITY_EDITOR // disable cheats in builds
     public void ClearCurrency()
     {
-        currencyInBankSilver = 0;
-        currencyInBankGold = 0;
-        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
-        PlayerPrefs.SetInt("PemiumCurrency", currencyInBankGold);
+        currencyInBank = 0;
+        PlayerPrefs.SetInt("Currency", currencyInBank);
         SetCurrencyText();
     }
 #endif
@@ -145,45 +127,24 @@ public class CurrencyManager : MonoBehaviour {
     public static void SetCurrencyText()
     {
 
-        Instance.currencyTextSilver.text = currencyInBankSilver.ToString();
+        Instance.currencyTextSilver.text = currencyInBank.ToString();
     }
 
-    public static void SetCurrencyInBankSilver(int amount)
+    public static void SetCurrencyInBank(int amount)
     {
-        currencyInBankSilver = amount;
-        PlayerPrefs.SetInt("Currency", currencyInBankSilver);
+        currencyInBank = amount;
+        PlayerPrefs.SetInt("Currency", currencyInBank);
         SetCurrencyText();
     }
 
-    public static void SetCurrencyInBankGold(int amount)
+    public static void WithdrawAmount(int amount)
     {
-        currencyInBankGold = amount;
-        PlayerPrefs.SetInt("PremiumCurrency", currencyInBankGold);
-        SetCurrencyText();
+        SetCurrencyInBank(currencyInBank - amount);
     }
 
-    public static void WithdrawAmountSilver(int amount)
+    public static bool CanWithdrawAmount(int amount)
     {
-        SetCurrencyInBankSilver(currencyInBankSilver - amount);
-    }
-
-    public static bool CanWithdrawAmountSilver(int amount)
-    {
-        if (amount <= currencyInBankSilver)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public static void WithdrawAmountGold(int amount)
-    {
-        SetCurrencyInBankGold(currencyInBankGold - amount);
-    }
-
-    public static bool CanWithdrawAmountGold(int amount)
-    {
-        if (amount <= currencyInBankGold)
+        if (amount <= currencyInBank)
         {
             return true;
         }

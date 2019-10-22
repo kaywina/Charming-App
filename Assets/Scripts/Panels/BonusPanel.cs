@@ -48,7 +48,7 @@ public class BonusPanel : CharmsPanel
     {
         if (storedBonus != 0) // on in case where bonus wheel is not skipped
         {
-            CurrencyManager.Instance.GiveRegularBonus(storedBonus);
+            CurrencyManager.Instance.GiveBonus(storedBonus);
         }
 
         storedBonus = 0;
