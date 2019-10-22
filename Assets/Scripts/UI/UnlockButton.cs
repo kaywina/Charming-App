@@ -10,7 +10,6 @@ public class UnlockButton : MonoBehaviour {
     private bool lockOnPlay = false;
     public Text priceText;
     public UnlockPanel unlockPanel;
-    public CharmsPanel optionsPanel;
 
     // leave these three variables unassigned in inspector if button is 2D with no 3D model (i.e. these are only used for 3D UI buttons only)
     public MeshRenderer meshRenderer;
@@ -54,11 +53,5 @@ public class UnlockButton : MonoBehaviour {
         unlockPanel.SetObjectToUnlock(objectToEnable, gameObject, isCharm); // pass in the object to unlock, and the current button object (so can disable it if unlock is confirmed)
         unlockPanel.SetUnlockCost(cost);
         unlockPanel.ShowPanel();
-
-        if (optionsPanel != null)
-        {
-            optionsPanel.SetReturnToMain(false);
-            optionsPanel.gameObject.SetActive(false);
-        }
     }
 }
