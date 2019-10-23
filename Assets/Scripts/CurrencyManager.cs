@@ -14,7 +14,7 @@ public class CurrencyManager : MonoBehaviour {
     public StorePanel storePanel;
     public Text currencyTextSilver;
 
-    private static int welcomeBonusSilver = 8;
+    private static int welcomeBonusSilver = 32;
     public Text welcomeBonusText;
 
     private static int currencyInBank = 0;
