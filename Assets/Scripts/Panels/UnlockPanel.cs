@@ -18,9 +18,12 @@ public class UnlockPanel : CharmsPanel
     private bool isCharm;
     public GameObject silverKeyImage;
     public StorePanel storePanel;
+    public LocalizationText hintText;
 
     new void OnEnable()
     {
+        SetHintText(toUnlock.name);
+
         base.OnEnable();
         bool canWithdraw = false;
         canWithdraw = CurrencyManager.CanWithdrawAmount(cost);
@@ -37,6 +40,70 @@ public class UnlockPanel : CharmsPanel
             buyButton.interactable = false;
             storeButton.SetActive(true);
             notEnoughText.SetActive(true);
+        }
+
+        
+    }
+
+    private void SetHintText(string charmName)
+    {
+        switch (charmName)
+        {
+            case "Grace":
+                hintText.localizationKey = "HINT_GRACE";
+                break;
+            case "Patience":
+                hintText.localizationKey = "HINT_PATIENCE";
+                break;
+            case "Wisdom":
+                hintText.localizationKey = "HINT_WISDOM";
+                break;
+            case "Joy":
+                hintText.localizationKey = "HINT_JOY";
+                break;
+            case "Focus":
+                hintText.localizationKey = "HINT_FOCUS";
+                break;
+            case "Will":
+                hintText.localizationKey = "HINT_WILL";
+                break;
+            case "Guile":
+                hintText.localizationKey = "HINT_GUILE";
+                break;
+            case "Force":
+                hintText.localizationKey = "HINT_FORCE";
+                break;
+            case "Honor":
+                hintText.localizationKey = "HINT_HONOR";
+                break;
+            case "Faith":
+                hintText.localizationKey = "HINT_FAITH";
+                break;
+            case "Vision":
+                hintText.localizationKey = "HINT_VISION";
+                break;
+            case "Balance":
+                hintText.localizationKey = "HINT_BALANCE";
+                break;
+            case "Harmony":
+                hintText.localizationKey = "HINT_HARMONY";
+                break;
+            case "Regard":
+                hintText.localizationKey = "HINT_REGARD";
+                break;
+            case "Insight":
+                hintText.localizationKey = "HINT_INSIGHT";
+                break;
+            case "Plenty":
+                hintText.localizationKey = "HINT_PLENTY";
+                break;
+            case "Influence":
+                hintText.localizationKey = "HINT_INFLUENCE";
+                break;
+            default:
+                hintText.localizationKey = null;
+                Debug.LogWarning("Localization key for hint text not found");
+                break;
         }
     }
 
