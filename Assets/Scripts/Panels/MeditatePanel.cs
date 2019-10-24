@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MeditatePanel : CharmsPanel
 {
+    public GameObject charmButtons;
+    
     // world space models for Meditation screen
     public GameObject love;
     public GameObject grace;
@@ -29,12 +31,15 @@ public class MeditatePanel : CharmsPanel
         SetCharmModel(true);
         base.OnEnable();
         charmText.SetActive(true); // charm text stays active on meditate screen
+        charmButtons.SetActive(false);
+        worldUI.SetActive(true);
     }
 
     new void OnDisable()
     {
         SetCharmModel(false);
         base.OnDisable();
+        charmButtons.SetActive(true);
     }
 
     void SetCharmModel(bool enable)

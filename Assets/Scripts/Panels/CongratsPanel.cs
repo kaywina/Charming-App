@@ -12,6 +12,7 @@ public class CongratsPanel : CharmsPanel
     public List<GameObject> fireworks;
 
     public GameObject pillar;
+    public GameObject charmButtons;
 
     private GameObject unlocked;
 
@@ -23,14 +24,17 @@ public class CongratsPanel : CharmsPanel
         shareBonusIndicator.SetActive(true);
         pillar.SetActive(true); // do this after calling base.OnEnable to re-enable
         charmText.SetActive(true);
+        charmButtons.SetActive(false);
+        worldUI.SetActive(true);
     }
 
     new void OnDisable()
     {
-        if (pillar != null) { pillar.SetActive(false); }
-        if (charmText != null) { charmText.SetActive(false); } // do this before base.OnEnable to avoid disabling on main UI
+        pillar.SetActive(false);
+        charmText.SetActive(false); // do this before base.OnEnable to avoid disabling on main UI
         DisableRigModels();
         base.OnDisable();
+        charmButtons.SetActive(true);
 
     }
 
