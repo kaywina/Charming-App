@@ -15,7 +15,8 @@ public class BackgroundParticles : MonoBehaviour
         if (startIndex < 0)
         {
             //Debug.Log("No index stored for background particle system; disabling particle systems");
-            DisableAllParticleSystemsObjects(false); // particles are disabled by default and on first run
+            //DisableAllParticleSystemsObjects(false); // particles are disabled by default and on first run
+            EnableGameObjectByIndex(0); // stars (or whatever is first in index) enabled by default
         }
         else if (startIndex < particleSystems.Length)
         {
