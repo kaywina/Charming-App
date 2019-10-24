@@ -15,8 +15,6 @@ public class SetBackgroundColor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
-
         Color bgColor = Color.black;
 
         // do not set color from playerpref on first run to avoid float parsing error; black is default
@@ -38,7 +36,6 @@ public class SetBackgroundColor : MonoBehaviour
         if (newColor != null)
         {
             mainCamera.backgroundColor = newColor;
-            maskMaterial.color = newColor;
             PlayerPrefsX.SetColor(playerPrefName, newColor);
         }
     }
