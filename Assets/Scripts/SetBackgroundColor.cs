@@ -6,9 +6,6 @@ public class SetBackgroundColor : MonoBehaviour
 {
 
     public Camera mainCamera;
-    public Material maskMaterial;
-
-
     private string playerPrefName = "BackgroundColor";
     private string initPlayerPrefName = "BackgroundColorInitialized";
 
