@@ -38,8 +38,8 @@ public class MeditatePanel : CharmsPanel
     new void OnDisable()
     {
         SetCharmModel(false);
-        base.OnDisable();
-        charmButtons.SetActive(true);
+        if (charmButtons != null) { charmButtons.SetActive(true); }
+        base.OnDisable(); 
     }
 
     void SetCharmModel(bool enable)
