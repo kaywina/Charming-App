@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class CharmsPanel : MonoBehaviour
 {
-    public GameObject worldUIMask;
+
+    public GameObject worldUI;
+    public GameObject standIcons;
     public GraphicRaycaster worldCanvasRaycaster;
     public BoxCollider pillarCollider;
     public GameObject charmText;
@@ -19,12 +21,14 @@ public class CharmsPanel : MonoBehaviour
         {
             charmText.SetActive(false);
         }
-
-        if (worldUIMask != null)
+        if (worldUI != null)
         {
-            worldUIMask.SetActive(true);
+            worldUI.SetActive(false);
         }
-
+        if (standIcons != null)
+        {
+            standIcons.SetActive(false);
+        }
         if (worldCanvasRaycaster != null)
         {
             worldCanvasRaycaster.enabled = false;
@@ -53,9 +57,13 @@ public class CharmsPanel : MonoBehaviour
             charmText.SetActive(true);
         }
 
-        if (worldUIMask != null)
+        if (worldUI != null)
         {
-            worldUIMask.SetActive(false);
+            worldUI.SetActive(true);
+        }
+        if (standIcons != null)
+        {
+            standIcons.SetActive(true);
         }
 
         if (worldCanvasRaycaster != null)
