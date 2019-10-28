@@ -29,6 +29,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public int givenBonusAmount = 0;
     public bool bonusGiven;
 
+    private float sceneResetDelayInSeconds = 2f;
+
     private void OnEnable()
     {
         shareButton.onClick.AddListener(OnShareButtonClick);
@@ -60,11 +62,17 @@ public class ShareScreenshotAndroid : MonoBehaviour
         if (!isProcessing)
         {
             StartCoroutine(ShareScreenshotInAnroid());
+            DelaySceneReset(sceneResetDelayInSeconds);
         }
 
 #else
 		Debug.Log("No sharing set up for this platform.");
 #endif
+    }
+
+    private void DelaySceneReset(float delay)
+    {
+        Invoke("ResetScene", delay);
     }
 
     private void SetUpScene()
