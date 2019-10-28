@@ -124,13 +124,7 @@ public class Charms : MonoBehaviour {
 		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
 			GetTapEnded(Input.GetTouch(0).position);
-		}
-		
-		if (Input.GetKeyDown (KeyCode.Escape))
-        {
-			Application.Quit ();
-		}
-		
+		}	
 	}
 	
 	// Start animations on button tap/click
