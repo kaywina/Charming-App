@@ -65,10 +65,12 @@ public class CurrencyManager : MonoBehaviour {
 
         if (!PlayerPrefs.GetString("FirstRun").Equals("False") || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
         {
+            //Debug.Log("Yes can open bonus panel");
             return true;
         }
         else
         {
+            //Debug.Log("No cannot open bonus panel");
             return false;
         }   
     }
@@ -113,6 +115,7 @@ public class CurrencyManager : MonoBehaviour {
             if (OnCurrencyAdded != null) { OnCurrencyAdded(bonus); }
             else { Debug.Log("delegate is null"); }
         }
+        canOpenBonusPanel = false;
     }
 
 #if UNITY_EDITOR // disable cheats in builds
