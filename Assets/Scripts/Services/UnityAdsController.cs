@@ -25,7 +25,7 @@ public class UnityAdsController : MonoBehaviour
     {
         if (Advertisement.isSupported)
         {
-            Advertisement.Initialize(UnityAdsController.GetGameId(), true);
+            Advertisement.Initialize(UnityAdsController.GetGameId());
         }
     }
 
