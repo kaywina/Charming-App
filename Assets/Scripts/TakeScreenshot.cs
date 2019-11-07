@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class TakeScreenshot : MonoBehaviour
 {
+
     public GameObject takeScreenshotButton;
+#if UNITY_EDITOR
     private int shotCount = 0;
+#endif
 
     // Start is called before the first frame update
     void Start()
