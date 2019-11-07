@@ -15,6 +15,10 @@ public class SwipeCharmControls : MonoBehaviour
     private float maxVertical = 200f;
     private float minHorizontal = 30f;
 
+    // do nothing unless swipe is between 7.5% and 62% of the way down the screen
+    private float yLimitTop = 0.075f;
+    private float yLimitBottom = 0.62f;
+
     private int charmSet;
 
     // Start is called before the first frame update
@@ -79,9 +83,14 @@ public class SwipeCharmControls : MonoBehaviour
     {
         // calculate if mouse movement was a swipe
         //Debug.Log("swipe from " + startPosition + " to " + endPosition);
+        float startRelativePosY = 1 - (startPosition.y / Screen.height);
+
+        // exit if not in swipable area (around charm and colum); i.e. can't swipe over charm buttons or header
+        if (startRelativePosY < yLimitTop || startRelativePosY > yLimitBottom) { return; } 
+
+        // keep going if swipe is valid
         float xDifference = startPos.x - endPos.x;
         float yDifference = startPos.y - endPos.y;
-
 
         if (Mathf.Abs(yDifference) > maxVertical)
         {
