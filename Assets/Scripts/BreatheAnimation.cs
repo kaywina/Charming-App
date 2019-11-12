@@ -17,11 +17,20 @@ public class BreatheAnimation : MonoBehaviour
 
     private void OnEnable()
     {
+        BreatheControl.OnSliderChanged += UpdateFrameTime;
         breatheIn = true;
         transform.localScale = new Vector3(minScaleValue, minScaleValue, minScaleValue);
         frameTime = breatheControl.GetBreatheInOutSeconds() / fps;
         increment = (maxScaleValue - minScaleValue) / fps;
         InvokeRepeating("NextFrame", 0f, frameTime);
+    }
+
+    void UpdateFrameTime()
+    {
+        frameTime = breatheControl.GetBreatheInOutSeconds() / fps;
+        CancelInvoke("NextFrame");
+        InvokeRepeating("NextFrame", 0f, frameTime);
+        //Debug.Log("Update frame time");
     }
 
     private void NextFrame()
