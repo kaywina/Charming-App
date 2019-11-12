@@ -11,12 +11,17 @@ public class BreatheControl : MonoBehaviour
     public delegate void SliderChangedAction();
     public static event SliderChangedAction OnSliderChanged;
 
-    private void OnEnable()
+    private string playerPrefName = "BreatheSeconds";
+
+    void OnEnable()
     {
 
-        int storedSecondsValue = PlayerPrefs.GetInt("BreatheSeconds");
-        if (storedSecondsValue >= secondsSlider.minValue || storedSecondsValue <= secondsSlider.maxValue) // if in valid range
+        float storedSecondsValue = PlayerPrefs.GetFloat(playerPrefName);
+        Debug.Log("storedSecondsValue = " + storedSecondsValue);
+        if (storedSecondsValue >= secondsSlider.minValue && storedSecondsValue <= secondsSlider.maxValue) // if in valid range
         {
+            Debug.Log("set breathe in/out seconds from stored value");
+            secondsSlider.value = storedSecondsValue;
             breatheInOutSeconds = storedSecondsValue;
         }
     }
@@ -29,11 +34,12 @@ public class BreatheControl : MonoBehaviour
     public void SetBreatheInOutSeconds(float seconds)
     {
         breatheInOutSeconds = seconds;
+        PlayerPrefs.SetFloat(playerPrefName, breatheInOutSeconds);
     }
 
     public void SetSecondsFromSlider()
     {
-        breatheInOutSeconds = secondsSlider.value;
+        SetBreatheInOutSeconds(secondsSlider.value);
         OnSliderChanged(); // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
     }
 }
