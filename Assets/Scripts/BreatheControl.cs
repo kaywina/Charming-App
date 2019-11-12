@@ -7,6 +7,9 @@ public class BreatheControl : MonoBehaviour
 {
     private float breatheInOutSeconds = 3f;
     public Slider secondsSlider;
+    public LocalizationTextMesh breatheInOutLocMesh;
+
+    private bool breatheIn = true; // flag for breathing in or out
 
     public delegate void SliderChangedAction();
     public static event SliderChangedAction OnSliderChanged;
@@ -15,7 +18,6 @@ public class BreatheControl : MonoBehaviour
 
     void OnEnable()
     {
-
         float storedSecondsValue = PlayerPrefs.GetFloat(playerPrefName);
         Debug.Log("storedSecondsValue = " + storedSecondsValue);
         if (storedSecondsValue >= secondsSlider.minValue && storedSecondsValue <= secondsSlider.maxValue) // if in valid range
@@ -41,5 +43,24 @@ public class BreatheControl : MonoBehaviour
     {
         SetBreatheInOutSeconds(secondsSlider.value);
         OnSliderChanged(); // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
+    }
+
+    public void SetBreatheInOutFlag(bool newFlag)
+    {
+        breatheIn = newFlag;
+        if (breatheIn == true)
+        {
+            breatheInOutLocMesh.localizationKey = "BREATHE_IN";
+        }
+        else
+        {
+            breatheInOutLocMesh.localizationKey = "BREATHE_OUT";
+        }
+        breatheInOutLocMesh.ChangeText();
+    }
+
+    public bool GetBreatheInOutFlag()
+    {
+        return breatheIn;
     }
 }
