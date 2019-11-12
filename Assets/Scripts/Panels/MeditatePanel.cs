@@ -30,7 +30,6 @@ public class MeditatePanel : CharmsPanel
     {
         SetCharmModel(true);
         base.OnEnable();
-        charmText.SetActive(true); // charm text stays active on meditate screen
         charmButtons.SetActive(false);
         worldUI.SetActive(true);
     }
