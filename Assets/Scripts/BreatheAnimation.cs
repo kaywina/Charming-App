@@ -9,7 +9,7 @@ public class BreatheAnimation : MonoBehaviour
 
     private bool breatheIn = true;
     private float frameTime = 0f;
-    private int fps = 30;
+    private int fps = 60;
 
     private float minScaleValue = 0.2f;
     private float maxScaleValue = 0.5f;
