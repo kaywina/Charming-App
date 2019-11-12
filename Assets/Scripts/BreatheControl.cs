@@ -45,7 +45,7 @@ public class BreatheControl : MonoBehaviour
     {
         SetBreatheInOutSeconds(secondsSlider.value);
         secondsValueText.text = breatheInOutSeconds.ToString();
-        OnSliderChanged(); // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
+        if (OnSliderChanged != null) { OnSliderChanged(); } // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
     }
 
     public void SetBreatheInOutFlag(bool newFlag)
