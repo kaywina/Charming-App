@@ -7,12 +7,14 @@ public class BreatheAnimation : MonoBehaviour
 
     public BreatheControl breatheControl;
 
-    private float frameTime = 0f;
     private int fps = 60;
+
+    private float frameTime;
+    private float increment;
 
     private float minScaleValue = 0.2f;
     private float maxScaleValue = 0.5f;
-    private float increment = 0.0f;
+    
 
     private void OnEnable()
     {
@@ -20,7 +22,13 @@ public class BreatheAnimation : MonoBehaviour
         transform.localScale = new Vector3(minScaleValue, minScaleValue, minScaleValue);
         frameTime = breatheControl.GetBreatheInOutSeconds() / fps;
         increment = (maxScaleValue - minScaleValue) / fps;
+
         InvokeRepeating("NextFrame", 0f, frameTime);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke("NextFrame");
     }
 
     void UpdateFrameTime()
@@ -33,7 +41,6 @@ public class BreatheAnimation : MonoBehaviour
 
     private void NextFrame()
     {
-        
         // do the animation
         if (breatheControl.GetBreatheInOutFlag()) // get bigger if breathing in
         {
