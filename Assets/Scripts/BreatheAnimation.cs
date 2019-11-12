@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BreatheAnimation : MonoBehaviour
 {
-    private float lengthInSeconds = 2f;
+
+    public BreatheControl breatheControl;
+
     private bool breatheIn = true;
     private float frameTime = 0f;
     private int fps = 30;
@@ -17,7 +19,7 @@ public class BreatheAnimation : MonoBehaviour
     {
         breatheIn = true;
         transform.localScale = new Vector3(minScaleValue, minScaleValue, minScaleValue);
-        frameTime = lengthInSeconds / fps;
+        frameTime = breatheControl.GetBreatheInOutSeconds() / fps;
         increment = (maxScaleValue - minScaleValue) / fps;
         InvokeRepeating("NextFrame", 0f, frameTime);
     }
