@@ -7,7 +7,7 @@ public class BreatheAnimation : MonoBehaviour
 
     public BreatheControl breatheControl;
 
-    private int fps = 60;
+    private int fpsLimit = 90;
 
     private float frameTime;
     private float increment;
@@ -20,8 +20,8 @@ public class BreatheAnimation : MonoBehaviour
     {
         BreatheControl.OnSliderChanged += UpdateFrameTime;
         transform.localScale = new Vector3(minScaleValue, minScaleValue, minScaleValue);
-        frameTime = breatheControl.GetBreatheInOutSeconds() / fps;
-        increment = (maxScaleValue - minScaleValue) / fps;
+        frameTime = breatheControl.GetBreatheInOutSeconds() / fpsLimit;
+        increment = (maxScaleValue - minScaleValue) / fpsLimit;
 
         InvokeRepeating("NextFrame", 0f, frameTime);
     }
@@ -33,7 +33,7 @@ public class BreatheAnimation : MonoBehaviour
 
     void UpdateFrameTime()
     {
-        frameTime = breatheControl.GetBreatheInOutSeconds() / fps;
+        frameTime = breatheControl.GetBreatheInOutSeconds() / fpsLimit;
         CancelInvoke("NextFrame");
         InvokeRepeating("NextFrame", 0f, frameTime);
         //Debug.Log("Update frame time");
