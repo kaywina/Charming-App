@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class BreatheControl : MonoBehaviour
 {
     private float breatheInOutSeconds = 3f;
+    private int numberOfBreaths = 0;
+
+    public Text breathsText;
     public Slider secondsSlider;
     public LocalizationTextMesh breatheInOutLocMesh;
     public Text secondsValueText;
@@ -19,6 +22,7 @@ public class BreatheControl : MonoBehaviour
 
     void OnEnable()
     {
+        ResetBreaths(); // not tracking number of breaths between sessions
         float storedSecondsValue = PlayerPrefs.GetFloat(playerPrefName);
         //Debug.Log("storedSecondsValue = " + storedSecondsValue);
         if (storedSecondsValue >= secondsSlider.minValue && storedSecondsValue <= secondsSlider.maxValue) // if in valid range
@@ -48,12 +52,20 @@ public class BreatheControl : MonoBehaviour
         if (OnSliderChanged != null) { OnSliderChanged(); } // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
     }
 
-    public void SetBreatheInOutFlag(bool newFlag)
+    public void ResetBreaths()
     {
-        breatheIn = newFlag;
+        numberOfBreaths = 0;
+        breathsText.text = "0";
+    }
+
+    public void Breathe(bool breatheIsIn) // true if breathing in; false if breathing out
+    {
+        breatheIn = breatheIsIn;
         if (breatheIn == true)
         {
             breatheInOutLocMesh.localizationKey = "BREATHE_IN";
+            numberOfBreaths++;
+            breathsText.text = numberOfBreaths.ToString();
         }
         else
         {

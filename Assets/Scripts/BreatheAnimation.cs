@@ -54,11 +54,11 @@ public class BreatheAnimation : MonoBehaviour
         // check if finished breathing in or out
         if (transform.localScale.x >= maxScaleValue)
         {
-            breatheControl.SetBreatheInOutFlag(false);
+            breatheControl.Breathe(false);
         }
         else if (transform.localScale.x <= minScaleValue)
         {
-            breatheControl.SetBreatheInOutFlag(true);
+            breatheControl.Breathe(true);
         }
     }
 
