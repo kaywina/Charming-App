@@ -32,13 +32,15 @@ public class MeditatePanel : CharmsPanel
         base.OnEnable();
         charmButtons.SetActive(false);
         worldUI.SetActive(true);
+        Screen.sleepTimeout = SleepTimeout.NeverSleep; // prevent device from automatically going to sleep
     }
 
     new void OnDisable()
     {
         SetCharmModel(false);
         if (charmButtons != null) { charmButtons.SetActive(true); }
-        base.OnDisable(); 
+        base.OnDisable();
+        Screen.sleepTimeout = SleepTimeout.SystemSetting;
     }
 
     void SetCharmModel(bool enable)
