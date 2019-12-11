@@ -9,7 +9,7 @@ using UnityEditor.iOS.Xcode;
 public class NSPostProcessBuild 
 {
 	private const bool ENABLED = true;
-	private const string PHOTO_LIBRARY_USAGE_DESCRIPTION = "Save media to Photos";
+	private const string PHOTO_LIBRARY_USAGE_DESCRIPTION = "Share screenshots via native dialog";
 
 	[InitializeOnLoadMethod]
 	public static void ValidatePlugin()
