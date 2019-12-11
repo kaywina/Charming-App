@@ -61,7 +61,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
 #if UNITY_ANDROID
         if (!isProcessing)
         {
-            StartCoroutine(ShareScreenshotInAnroid());
+            StartCoroutine(TakeSSAndShare());
             DelaySceneReset(sceneResetDelayInSeconds);
         }
 
@@ -133,87 +133,31 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
     }
 
-#if UNITY_ANDROID
-    public IEnumerator ShareScreenshotInAnroid()
+    private IEnumerator TakeSSAndShare()
     {
         isProcessing = true;
-
-        SetUpScene();
-        // wait for graphics to render
         yield return new WaitForEndOfFrame();
 
-        // hmmm not actually using the full path below; and changing it to full path breaks functionality on Android device
-        string screenShotPath = Application.persistentDataPath + "/" + screenshotName;
+        SetUpScene();
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
 
-        ScreenCapture.CaptureScreenshot(screenshotName, 1);
-        yield return new WaitForSeconds(0.5f);
+        string filePath = Path.Combine(Application.temporaryCachePath, screenshotName);
+        File.WriteAllBytes(filePath, ss.EncodeToPNG());
 
-        if (!Application.isEditor)
-        {
-            try
-            {
-                //Create intent for action send
-                using (AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent"))
-                {
+        // To avoid memory leaks
+        Destroy(ss);
 
-                    AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
-                    intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
-
-                    // old way - get the Uri from parsing the file path string
-                    //AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
-                    //AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + screenShotPath); // replaced with File Provider
-
-                    // new way compatible with Android 8 - use FileProvider
-
-                    // add required flag to intent object
-                    intentObject.Call<AndroidJavaObject>("addFlags", 0x00000001); // FLAG_GRANT_READ_URI_PERMISSION
-                                                                                  //intentObject.Call<AndroidJavaObject>("addFlags", 0x00000002); // FLAG_GRANT_WRITE_URI_PERMISSION
-
-                    using (AndroidJavaClass fileProviderClass = new AndroidJavaClass("android.support.v4.content.FileProvider")) // get the FileProvider class
-                    {
-                        // create the File object
-                        AndroidJavaClass fileClass = new AndroidJavaClass("java.io.File");
-                        AndroidJavaObject fileObject = new AndroidJavaObject("java.io.File", screenShotPath);
-
-                        // get the context
-                        AndroidJavaClass playerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-                        AndroidJavaObject currentActivityObject = playerClass.GetStatic<AndroidJavaObject>("currentActivity"); // Context
-
-                        // create the uriObject
-                        string packageName = currentActivityObject.Call<string>("getPackageName");
-                        string authority = packageName + ".provider";
-                        AndroidJavaObject uriObject = fileProviderClass.CallStatic<AndroidJavaObject>("getUriForFile", currentActivityObject, authority, fileObject);
-
-                        // add screenshot uri to the Intent
-                        intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject);
-                    }
-
-
-                    // add type and extra text to the Intent
-                    intentObject.Call<AndroidJavaObject>("setType", "image/png");
-                    intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), shareSubject);
-                    intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), shareMessage);
-
-                    using (AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-                    {
-                        AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
-                        AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, "Share your success!");
-                        currentActivity.Call("startActivity", chooser);
-                    }
-                }
-            }
-            catch
-            {
-                Debug.LogError("Exception thrown while trying to share Android screenshot");
-            }
-
-            yield return new WaitUntil(() => isFocus);
-        }
         ResetScene();
         GiveBonus();
-        System.IO.File.Delete(screenShotPath);
+
+        new NativeShare().AddFile(filePath).SetSubject(shareSubject).SetText(shareMessage).Share();
+
+        // Share on WhatsApp only, if installed (Android only)
+        //if( NativeShare.TargetExists( "com.whatsapp" ) )
+        //	new NativeShare().AddFile( filePath ).SetText( "Hello world!" ).SetTarget( "com.whatsapp" ).Share();
 
         isProcessing = false;
     }
-#endif
 }
