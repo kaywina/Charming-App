@@ -58,7 +58,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
     private void ShareScreenshot()
     {
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS
         if (!isProcessing)
         {
             StartCoroutine(TakeSSAndShare());
@@ -66,7 +66,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
 
 #else
-		Debug.Log("No sharing set up for this platform.");
+        Debug.Log("No sharing set up for this platform.");
 #endif
     }
 
