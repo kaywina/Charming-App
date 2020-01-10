@@ -5,22 +5,11 @@ using UnityEngine;
 public class TakeScreenshot : MonoBehaviour
 {
 
-    public GameObject takeScreenshotButton;
 #if UNITY_EDITOR
-    private int shotCount = 0;
+    private static int shotCount = 0;
 #endif
 
-    // Start is called before the first frame update
-    void Start()
-    {
-#if UNITY_EDITOR
-        shotCount = 0;
-#else
-        takeScreenshotButton.SetActive(false);
-#endif
-    }
-
-    public void TakeShot()
+    public static void TakeShot()
     {
 #if UNITY_EDITOR
         Debug.Log("Take screenshot");
