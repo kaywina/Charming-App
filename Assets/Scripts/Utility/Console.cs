@@ -114,7 +114,7 @@ namespace Consolation
 
             if (Input.GetKeyDown(toggleKey))
             {
-                isVisible = !isVisible;
+                ToggleIsVisible();
             }
 
             if (shakeToOpen && Input.acceleration.sqrMagnitude > shakeAcceleration)
@@ -268,6 +268,11 @@ namespace Consolation
                 logs.Add(log);
                 TrimExcessLogs();
             }
+        }
+
+        public void ToggleIsVisible()
+        {
+            isVisible = !isVisible;
         }
 
         bool IsLogVisible(Log log)
