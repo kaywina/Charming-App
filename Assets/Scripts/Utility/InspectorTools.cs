@@ -17,6 +17,11 @@ public class InspectorTools : MonoBehaviour
 
     }
 
+    public static void DeleteAllData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public static void TakeScreenshotInEditor()
     {
         TakeScreenshot.TakeShot();
