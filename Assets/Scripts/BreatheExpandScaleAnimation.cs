@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreatheAnimation : MonoBehaviour
+public class BreathExpandScaleAnimation : MonoBehaviour
 {
 
     public BreatheControl breatheControl;
@@ -12,9 +12,8 @@ public class BreatheAnimation : MonoBehaviour
     private float frameTime;
     private float increment;
 
-    private float minScaleValue = 0.2f;
-    private float maxScaleValue = 0.5f;
-    
+    public float minScaleValue = 1f;
+    public float maxScaleValue = 3f;
 
     private void OnEnable()
     {
@@ -61,6 +60,4 @@ public class BreatheAnimation : MonoBehaviour
             breatheControl.Breathe(true);
         }
     }
-
-
 }

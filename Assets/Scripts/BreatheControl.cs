@@ -63,15 +63,16 @@ public class BreatheControl : MonoBehaviour
         breatheIn = breatheIsIn;
         if (breatheIn == true)
         {
-            breatheInOutLocMesh.localizationKey = "BREATHE_IN";
+            if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
             numberOfBreaths++;
             breathsText.text = numberOfBreaths.ToString();
         }
         else
         {
-            breatheInOutLocMesh.localizationKey = "BREATHE_OUT";
+            if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_OUT"; }
         }
-        breatheInOutLocMesh.ChangeText();
+
+        if (Localization.CheckLocalization()) { breatheInOutLocMesh.ChangeText(); }
     }
 
     public bool GetBreatheInOutFlag()
