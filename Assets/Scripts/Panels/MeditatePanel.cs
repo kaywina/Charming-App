@@ -26,6 +26,8 @@ public class MeditatePanel : CharmsPanel
     public GameObject plenty;
     public GameObject influence;
 
+    public SetParticleColorFromCharm particleColor;
+
     new void OnEnable()
     {
         SetCharmModel(true);
@@ -58,6 +60,8 @@ public class MeditatePanel : CharmsPanel
 
     void EnableCharm (string charmName, bool enable)
     {
+        particleColor.SetColor(charmName);
+
         switch (charmName)
         {
             case "Love":
