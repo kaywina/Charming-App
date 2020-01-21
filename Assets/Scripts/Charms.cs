@@ -61,11 +61,6 @@ public class Charms : MonoBehaviour {
         loaded = true;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		GetInput ();
-	}
-	
     public static string GetCharmSetPlayerPrefName()
     {
         return charmSetPrefName;
@@ -103,50 +98,6 @@ public class Charms : MonoBehaviour {
             }
         }
     }
-
-	void GetInput() {
-        #if UNITY_EDITOR // Mouse Input
-        if (Input.GetMouseButtonDown (0))
-        {
-			GetTapStarted(Input.mousePosition);
-		}
-		if (Input.GetMouseButtonUp (0))
-        {
-			GetTapEnded (Input.mousePosition);
-		}
-        #endif
-
-        // Touch Input
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-			GetTapStarted(Input.GetTouch(0).position);
-		}
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-			GetTapEnded(Input.GetTouch(0).position);
-		}	
-	}
-	
-	// Start animations on button tap/click
-	void GetTapStarted(Vector2 position) {
-		ray = Camera.main.ScreenPointToRay(position);
-        if (Physics.Raycast(ray, out hit))
-        {
-            for (int i = 0; i < charmNames.Length; i++)
-            {
-               if (hit.transform.name == charmNames[i])
-                {
-                    SetCharm(charmNames[i]);
-                    break;
-                }
-            }
-		}
-	}
-
-	// Start animations on button tap/click
-	void GetTapEnded(Vector2 position) {
-
-	}
 
 	public void SetCharm(string charmName) {
 
