@@ -52,7 +52,7 @@ public class SetParticleColorFromCharm : MonoBehaviour
                 main.startColor = new ParticleSystem.MinMaxGradient(Color.cyan, Color.magenta);
                 break;
             case "Harmony":
-                main.startColor = new ParticleSystem.MinMaxGradient(Color.blue, Color.blue);
+                main.startColor = new ParticleSystem.MinMaxGradient(Color.blue, Color.cyan);
                 break;
             case "Regard":
                 main.startColor = new ParticleSystem.MinMaxGradient(Color.green, Color.blue);
