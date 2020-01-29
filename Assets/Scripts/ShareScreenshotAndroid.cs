@@ -77,12 +77,12 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
     private void SetUpScene()
     {
-        
         // hide some objects while taking screenshot
         if (shareBonusIndicator != null) { shareBonusIndicator.SetActive(false); }
         for (int i = 0; i < hideOnShare.Length; i++)
         {
             hideOnShare[i].SetActive(false);
+            //Debug.Log("hide " + hideOnShare[i].name);
         }
 
         // hide ok button if it's linked in inspector
@@ -136,9 +136,10 @@ public class ShareScreenshotAndroid : MonoBehaviour
     private IEnumerator TakeSSAndShare()
     {
         isProcessing = true;
-        yield return new WaitForEndOfFrame();
 
         SetUpScene();
+
+        yield return new WaitForEndOfFrame();
         Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         ss.Apply();
@@ -146,9 +147,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         string filePath = Path.Combine(Application.temporaryCachePath, screenshotName);
         File.WriteAllBytes(filePath, ss.EncodeToPNG());
 
-        // To avoid memory leaks
         Destroy(ss);
-
         ResetScene();
         GiveBonus();
 
@@ -157,7 +156,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         // Share on WhatsApp only, if installed (Android only)
         //if( NativeShare.TargetExists( "com.whatsapp" ) )
         //	new NativeShare().AddFile( filePath ).SetText( "Hello world!" ).SetTarget( "com.whatsapp" ).Share();
-
+ 
         isProcessing = false;
     }
 }
