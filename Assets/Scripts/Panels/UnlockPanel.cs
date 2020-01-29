@@ -7,7 +7,7 @@ public class UnlockPanel : CharmsPanel
 {
     public Charms charms;
     public GameObject notEnoughText;
-    public GameObject storeButton;
+    public GameObject storeButton; // showing the store button functionality has been disabled in v1.0.4 while sorting out monetization options
     public Button buyButton;
     public Text costText;
     public CongratsPanel congratsPanel;
@@ -32,13 +32,13 @@ public class UnlockPanel : CharmsPanel
         if (canWithdraw)
         {
             buyButton.interactable = true;
-            storeButton.SetActive(false);
+            if (storeButton != null) { storeButton.SetActive(false); }
             notEnoughText.SetActive(false);
         }
         else
         {
             buyButton.interactable = false;
-            storeButton.SetActive(true);
+            if (storeButton != null) { storeButton.SetActive(true); }
             notEnoughText.SetActive(true);
         }
 
