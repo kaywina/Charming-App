@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using UnityEngine.UI;
 
 public class SendEmailFromInputField : MonoBehaviour
 {
@@ -12,13 +13,15 @@ public class SendEmailFromInputField : MonoBehaviour
     public string sender = "";
     public string password = "";
 
-    public void SendTestMessage()
+    public InputField inputField;
+
+    public void SendMessage()
     {
         MailMessage mail = new MailMessage();
-        mail.From = new MailAddress(emailAddress);
+        mail.From = new MailAddress(sender);
         mail.To.Add(emailAddress);
         mail.Subject = "Feedback from in-app form";
-        mail.Body = "This is for testing SMTP mail from GMAIL";
+        mail.Body = inputField.text;
 
         SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
         smtpServer.Port = 587;
@@ -28,6 +31,5 @@ public class SendEmailFromInputField : MonoBehaviour
             delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
             { return true; };
         smtpServer.Send(mail);
-        Debug.Log("success");
     }
 }
