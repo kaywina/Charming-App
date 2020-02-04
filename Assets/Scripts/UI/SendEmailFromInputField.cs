@@ -14,6 +14,7 @@ public class SendEmailFromInputField : MonoBehaviour
     public string password = "";
 
     public InputField inputField;
+    public FeedbackForm feedbackForm;
 
     public void SendMessage()
     {
@@ -31,5 +32,6 @@ public class SendEmailFromInputField : MonoBehaviour
             delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
             { return true; };
         smtpServer.Send(mail);
+        feedbackForm.ShowThanks();
     }
 }
