@@ -26,6 +26,8 @@ public class CurrencyManager : MonoBehaviour {
 
     private bool canOpenBonusPanel = false;
 
+    public static bool firstRunOfDay = true;
+
     // Use this for initialization
     void Start ()
     {
@@ -52,6 +54,11 @@ public class CurrencyManager : MonoBehaviour {
         canOpenBonusPanel = SetCanOpenBonusPanel();
     }
 
+    public static void SetWasFirstRunOfDay(bool toSet)
+    {
+        firstRunOfDay = toSet;
+    }
+
     public bool SetCanOpenBonusPanel()
     {
         DateTime currentDateTime = System.DateTime.Now;
@@ -63,14 +70,25 @@ public class CurrencyManager : MonoBehaviour {
         PlayerPrefs.SetInt("Day", currentDayOfYear);
         PlayerPrefs.SetInt("Year", currentYear);
 
+        if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
+        {
+            firstRunOfDay = true;
+        }
+        else
+        {
+            firstRunOfDay = false;
+        }
+
         if (!PlayerPrefs.GetString("FirstRun").Equals("False") || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
         {
             //Debug.Log("Yes can open bonus panel");
+            firstRunOfDay = true;
             return true;
         }
         else
         {
             //Debug.Log("No cannot open bonus panel");
+            firstRunOfDay = false;
             return false;
         }   
     }
