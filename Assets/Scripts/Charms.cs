@@ -47,6 +47,8 @@ public class Charms : MonoBehaviour {
     public GameObject[] unlockButtonSets;
     private static string charmSetPrefName = "CharmSet";
 
+    public Material pillarMaterial;
+
 	// Use this for initialization
 	void Start () {
         // set the correct charm set depending on pref
@@ -59,6 +61,8 @@ public class Charms : MonoBehaviour {
 
         SetCharm(PlayerPrefs.GetString("Charm"));
         loaded = true;
+
+        pillarMaterial.color = Color.white; // added when removed the ability to cycle pillar colors in favor of meditate button covering pillar; in order to enforce default color on all pillars despite a previous playerpref existing
     }
 	
     public static string GetCharmSetPlayerPrefName()
