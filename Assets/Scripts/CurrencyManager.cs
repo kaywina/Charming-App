@@ -26,7 +26,7 @@ public class CurrencyManager : MonoBehaviour {
 
     private bool canOpenBonusPanel = false;
 
-    public static bool firstRunOfDay = true;
+    public static bool newDayThisSession = false;
 
     // Use this for initialization
     void Start ()
@@ -54,12 +54,21 @@ public class CurrencyManager : MonoBehaviour {
         canOpenBonusPanel = SetCanOpenBonusPanel();
     }
 
-    public static void SetWasFirstRunOfDay(bool toSet)
+    public bool SetCanOpenBonusPanel()
     {
-        firstRunOfDay = toSet;
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay(false)) 
+        {
+            //Debug.Log("Yes can open bonus panel");
+            return true;
+        }
+        else
+        {
+            //Debug.Log("No cannot open bonus panel");
+            return false;
+        }   
     }
 
-    public bool SetCanOpenBonusPanel()
+    public static bool IsNewDay(bool setStoredDay)
     {
         DateTime currentDateTime = System.DateTime.Now;
         int currentDayOfYear = currentDateTime.DayOfYear;
@@ -67,30 +76,20 @@ public class CurrencyManager : MonoBehaviour {
 
         int storedDayOfYear = PlayerPrefs.GetInt("Day");
         int storedYear = PlayerPrefs.GetInt("Year");
-        PlayerPrefs.SetInt("Day", currentDayOfYear);
-        PlayerPrefs.SetInt("Year", currentYear);
 
+        if (setStoredDay)
+        {
+            PlayerPrefs.SetInt("Day", currentDayOfYear);
+            PlayerPrefs.SetInt("Year", currentYear);
+        }
+ 
         if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
         {
-            firstRunOfDay = true;
-        }
-        else
-        {
-            firstRunOfDay = false;
-        }
-
-        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
-        {
-            //Debug.Log("Yes can open bonus panel");
-            firstRunOfDay = true;
+            newDayThisSession = true;
             return true;
         }
-        else
-        {
-            //Debug.Log("No cannot open bonus panel");
-            firstRunOfDay = false;
-            return false;
-        }   
+
+        return false;
     }
 
     public bool GetCanOpenBonusPanel()

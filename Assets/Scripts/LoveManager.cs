@@ -13,13 +13,12 @@ public class LoveManager : MonoBehaviour
     private const string PLAYER_PREF_NAME_MAX_UNLOCKED = "LoveNumberMaxUnlocked"; // don't change in production
 
     private int maxLocStrings = 69;
-
-    public static bool unlockedForToday = false;
+    private bool unlockedToday = false;
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        if (unlockedForToday == false && CheckIfCanUnlock())
+        if (CurrencyManager.newDayThisSession && !unlockedToday)
         {
             string locKey = "LOVE_" + PlayerPrefs.GetInt(PLAYER_PREF_NAME).ToString();
             loveText.SetLocalizationKey(locKey);
@@ -38,27 +37,7 @@ public class LoveManager : MonoBehaviour
                     PlayerPrefs.SetInt(PLAYER_PREF_NAME_MAX_UNLOCKED, newIndex);
                 }
             }
-            unlockedForToday = true;
-        }
-    }
-
-    private bool CheckIfCanUnlock()
-    {
-        DateTime currentDateTime = System.DateTime.Now;
-        int currentDayOfYear = currentDateTime.DayOfYear;
-        int currentYear = currentDateTime.Year;
-
-        int storedDayOfYear = PlayerPrefs.GetInt("Day");
-        int storedYear = PlayerPrefs.GetInt("Year");
-
-        if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
-        {
-            unlockedForToday = false;
-            return true;
-        }
-        else
-        {
-            return false;
+            unlockedToday = true;
         }
     }
 }
