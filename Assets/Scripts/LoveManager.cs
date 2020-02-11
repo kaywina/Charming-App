@@ -12,7 +12,7 @@ public class LoveManager : MonoBehaviour
     private const string PLAYER_PREF_NAME = "LoveNumber"; // don't change in production
     private const string PLAYER_PREF_NAME_MAX_UNLOCKED = "LoveNumberMaxUnlocked"; // don't change in production
 
-    private int maxLocStrings = 69;
+    private int maxLocStrings = 69; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_1 to LOVE_69
     private static bool unlockedThisSession = false;
 
     // Start is called before the first frame update

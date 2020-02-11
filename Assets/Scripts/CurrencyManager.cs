@@ -86,11 +86,11 @@ public class CurrencyManager : MonoBehaviour {
         if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
         {
             newDayThisSession = true;
-            Debug.Log("It's a new day!");
+            //Debug.Log("It's a new day!");
             return true;
         }
 
-        Debug.Log("It is not a new day!");
+        //Debug.Log("It is not a new day!");
         return false;
     }
 
