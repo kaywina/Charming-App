@@ -56,7 +56,7 @@ public class CurrencyManager : MonoBehaviour {
 
     public bool SetCanOpenBonusPanel()
     {
-        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay(false)) 
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay(true)) 
         {
             //Debug.Log("Yes can open bonus panel");
             return true;
@@ -86,9 +86,11 @@ public class CurrencyManager : MonoBehaviour {
         if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
         {
             newDayThisSession = true;
+            Debug.Log("It's a new day!");
             return true;
         }
 
+        Debug.Log("It is not a new day!");
         return false;
     }
 

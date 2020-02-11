@@ -13,18 +13,16 @@ public class LoveManager : MonoBehaviour
     private const string PLAYER_PREF_NAME_MAX_UNLOCKED = "LoveNumberMaxUnlocked"; // don't change in production
 
     private int maxLocStrings = 69;
-    private bool unlockedToday = false;
+    private static bool unlockedThisSession = false;
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        if (CurrencyManager.newDayThisSession && !unlockedToday)
+        if (!unlockedThisSession)
         {
-            string locKey = "LOVE_" + PlayerPrefs.GetInt(PLAYER_PREF_NAME).ToString();
-            loveText.SetLocalizationKey(locKey);
             if (PlayerPrefs.GetInt(PLAYER_PREF_NAME) > maxLocStrings)
             {
-                PlayerPrefs.SetInt(PLAYER_PREF_NAME, 0);
+                PlayerPrefs.SetInt(PLAYER_PREF_NAME, 1);
             }
             else
             {
@@ -37,7 +35,10 @@ public class LoveManager : MonoBehaviour
                     PlayerPrefs.SetInt(PLAYER_PREF_NAME_MAX_UNLOCKED, newIndex);
                 }
             }
-            unlockedToday = true;
+            unlockedThisSession = true;
         }
+
+        string locKey = "LOVE_" + PlayerPrefs.GetInt(PLAYER_PREF_NAME).ToString();
+        loveText.SetLocalizationKey(locKey);
     }
 }
