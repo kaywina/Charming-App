@@ -26,6 +26,8 @@ public class CurrencyManager : MonoBehaviour {
 
     private bool canOpenBonusPanel = false;
 
+    public static bool newDayThisSession = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -47,23 +49,17 @@ public class CurrencyManager : MonoBehaviour {
         }
 
         SetCurrencyText();
-        PlayerPrefs.SetString("FirstRun", "False");
-
         canOpenBonusPanel = SetCanOpenBonusPanel();
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetString("FirstRun", "False");
     }
 
     public bool SetCanOpenBonusPanel()
     {
-        DateTime currentDateTime = System.DateTime.Now;
-        int currentDayOfYear = currentDateTime.DayOfYear;
-        int currentYear = currentDateTime.Year;
-
-        int storedDayOfYear = PlayerPrefs.GetInt("Day");
-        int storedYear = PlayerPrefs.GetInt("Year");
-        PlayerPrefs.SetInt("Day", currentDayOfYear);
-        PlayerPrefs.SetInt("Year", currentYear);
-
-        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)) 
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay(true, "Day", "Year")) // don't change string values in post-production
         {
             //Debug.Log("Yes can open bonus panel");
             return true;
@@ -73,6 +69,32 @@ public class CurrencyManager : MonoBehaviour {
             //Debug.Log("No cannot open bonus panel");
             return false;
         }   
+    }
+
+    public static bool IsNewDay(bool setStoredValues, string dayPrefName, string yearPrefName)
+    {
+        DateTime currentDateTime = System.DateTime.Now;
+        int currentDayOfYear = currentDateTime.DayOfYear;
+        int currentYear = currentDateTime.Year;
+
+        int storedDayOfYear = PlayerPrefs.GetInt(dayPrefName);
+        int storedYear = PlayerPrefs.GetInt(yearPrefName);
+
+        if (setStoredValues)
+        {
+            PlayerPrefs.SetInt(dayPrefName, currentDayOfYear);
+            PlayerPrefs.SetInt(yearPrefName, currentYear);
+        }
+ 
+        if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
+        {
+            newDayThisSession = true;
+            //Debug.Log("It's a new day!");
+            return true;
+        }
+
+        //Debug.Log("It is not a new day!");
+        return false;
     }
 
     public bool GetCanOpenBonusPanel()
