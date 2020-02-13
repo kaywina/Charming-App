@@ -28,6 +28,12 @@ public class CurrencyManager : MonoBehaviour {
 
     public static bool newDayThisSession = false;
 
+    private const string DAILY_SPIN_PREF_DAY_NAME = "Day";
+    private const string DAILY_SPIN_PREF_YEAR_NAME = "Year";
+
+    private static int currentDayOfYear;
+    private static int currentYear;
+
     // Use this for initialization
     void Start ()
     {
@@ -59,7 +65,7 @@ public class CurrencyManager : MonoBehaviour {
 
     public bool SetCanOpenBonusPanel()
     {
-        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay(true, "Day", "Year")) // don't change string values in post-production
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay()) // don't change string values in post-production
         {
             //Debug.Log("Yes can open bonus panel");
             return true;
@@ -71,21 +77,15 @@ public class CurrencyManager : MonoBehaviour {
         }   
     }
 
-    public static bool IsNewDay(bool setStoredValues, string dayPrefName, string yearPrefName)
+    public static bool IsNewDay()
     {
         DateTime currentDateTime = System.DateTime.Now;
-        int currentDayOfYear = currentDateTime.DayOfYear;
-        int currentYear = currentDateTime.Year;
+        currentDayOfYear = currentDateTime.DayOfYear;
+        currentYear = currentDateTime.Year;
 
-        int storedDayOfYear = PlayerPrefs.GetInt(dayPrefName);
-        int storedYear = PlayerPrefs.GetInt(yearPrefName);
+        int storedDayOfYear = PlayerPrefs.GetInt(DAILY_SPIN_PREF_DAY_NAME);
+        int storedYear = PlayerPrefs.GetInt(DAILY_SPIN_PREF_YEAR_NAME);
 
-        if (setStoredValues)
-        {
-            PlayerPrefs.SetInt(dayPrefName, currentDayOfYear);
-            PlayerPrefs.SetInt(yearPrefName, currentYear);
-        }
- 
         if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
         {
             newDayThisSession = true;
@@ -95,6 +95,12 @@ public class CurrencyManager : MonoBehaviour {
 
         //Debug.Log("It is not a new day!");
         return false;
+    }
+
+    public void SetPrefsForDailySpin()
+    {
+        PlayerPrefs.SetInt(DAILY_SPIN_PREF_DAY_NAME, currentDayOfYear);
+        PlayerPrefs.SetInt(DAILY_SPIN_PREF_YEAR_NAME, currentYear);
     }
 
     public bool GetCanOpenBonusPanel()
@@ -138,6 +144,7 @@ public class CurrencyManager : MonoBehaviour {
             else { Debug.Log("delegate is null"); }
         }
         canOpenBonusPanel = false;
+        SetPrefsForDailySpin();
     }
 
 #if UNITY_EDITOR // disable cheats in builds

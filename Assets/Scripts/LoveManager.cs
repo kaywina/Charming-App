@@ -27,7 +27,7 @@ public class LoveManager : MonoBehaviour
         }
 
         // only update once per day
-        if (!CurrencyManager.IsNewDay(true, "Day_Love", "Day_Year")) // make sure all calls to IsNewDay pass in different string player pref names
+        if (!CurrencyManager.IsNewDay()) // make sure all calls to IsNewDay pass in different string player pref names
         {
             //Debug.Log("Already unlocked love value for today");
             loveText.SetLocalizationKey(locKey);
