@@ -54,7 +54,7 @@ public class CurrencyManager : MonoBehaviour {
 
     public bool SetCanOpenBonusPanel()
     {
-        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || TimeManager.IsNewDay(TimeManager.TimeType.DailySpin)) // don't change string values in post-production
+        if (TimeManager.IsNewDay(TimeManager.TimeType.DailySpin))
         {
             //Debug.Log("Yes can open bonus panel");
             return true;

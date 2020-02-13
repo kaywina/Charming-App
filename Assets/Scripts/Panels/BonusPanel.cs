@@ -96,21 +96,7 @@ public class BonusPanel : CharmsPanel
 
     public void SkipBonus()
     {
-        DeleteBonusWheelPlayerPrefs();
+        //DeleteBonusWheelPlayerPrefs();
         gameObject.SetActive(false);
-    }
-
-    private void OnApplicationQuit()
-    {
-        if (!hasSpun)
-        {
-            DeleteBonusWheelPlayerPrefs();
-        }
-    }
-
-    private void DeleteBonusWheelPlayerPrefs()
-    {
-        PlayerPrefs.DeleteKey("Day");
-        PlayerPrefs.DeleteKey("Year");
     }
 }
