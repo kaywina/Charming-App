@@ -22,7 +22,7 @@ public class LoveManager : MonoBehaviour
 
         // only update once per session
         if (unlockedThisSession) {
-            //Debug.Log("Already unlocked love value for this session");
+            Debug.Log("Already unlocked love value for this session");
             loveText.SetLocalizationKey(locKey);
             return;
         }
@@ -30,7 +30,7 @@ public class LoveManager : MonoBehaviour
         // only update once per day
         if (!TimeManager.IsNewDay(TimeManager.TimeType.DailyLove)) // make sure all calls to IsNewDay pass in different string player pref names
         {
-            //Debug.Log("Already unlocked love value for today");
+            Debug.Log("Already unlocked love value for today");
             loveText.SetLocalizationKey(locKey);
             return;
         }
@@ -49,14 +49,14 @@ public class LoveManager : MonoBehaviour
             // we want to start off the first day with a zero index and increment it every day after
             if (PlayerPrefs.GetString(PLAYER_PREF_HAS_CHECKED) == "True")
             {
-                //Debug.Log("Increment daily love index");
+                Debug.Log("Increment daily love index");
                 newIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) + 1;
                 PlayerPrefs.SetInt(PLAYER_PREF_NAME_MAX_UNLOCKED, newIndex);
             }
 
             if (newIndex > PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED))
             {
-                //Debug.Log("Exceeded number of max love loc strings, resetting index to 0");    
+                Debug.Log("Exceeded number of max love loc strings, resetting index to 0");    
                 newIndex = 0;      
             }
         }

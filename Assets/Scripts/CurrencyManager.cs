@@ -56,12 +56,12 @@ public class CurrencyManager : MonoBehaviour {
     {
         if (TimeManager.IsNewDay(TimeManager.TimeType.DailySpin))
         {
-            //Debug.Log("Yes can open bonus panel");
+            Debug.Log("Yes can open bonus panel");
             return true;
         }
         else
         {
-            //Debug.Log("No cannot open bonus panel");
+            Debug.Log("No cannot open bonus panel");
             return false;
         }   
     }
