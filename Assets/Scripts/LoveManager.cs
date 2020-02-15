@@ -11,6 +11,7 @@ public class LoveManager : MonoBehaviour
 
     private const string PLAYER_PREF_NAME = "LoveNumber"; // don't change in production
     private const string PLAYER_PREF_NAME_MAX_UNLOCKED = "LoveNumberMaxUnlocked"; // don't change in production
+    private const string PLAYER_PREF_HAS_CHECKED = "HasCheckedDailyLove";
 
     private int maxLocStrings = 69; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_0 to LOVE_68
     private static bool unlockedThisSession = false;
@@ -46,9 +47,9 @@ public class LoveManager : MonoBehaviour
         else
         { 
             // we want to start off the first day with a zero index and increment it every day after
-            if (PlayerPrefs.GetString("FirstRun").Equals("False"))
+            if (PlayerPrefs.GetString(PLAYER_PREF_HAS_CHECKED) == "True")
             {
-                //Debug.Log("First run is false, increment index");
+                //Debug.Log("Increment daily love index");
                 newIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) + 1;
                 PlayerPrefs.SetInt(PLAYER_PREF_NAME_MAX_UNLOCKED, newIndex);
             }
@@ -60,9 +61,11 @@ public class LoveManager : MonoBehaviour
             }
         }
         PlayerPrefs.SetInt(PLAYER_PREF_NAME, newIndex);
+        //Debug.Log("index is " + newIndex);
         locKey = "LOVE_" + newIndex.ToString();
         loveText.SetLocalizationKey(locKey);
         TimeManager.SetPrefsForDailyLove();
         unlockedThisSession = true;
+        PlayerPrefs.SetString(PLAYER_PREF_HAS_CHECKED, "True");
     }
 }
