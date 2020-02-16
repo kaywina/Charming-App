@@ -49,14 +49,17 @@ public class CurrencyManager : MonoBehaviour {
         }
 
         SetCurrencyText();
-        PlayerPrefs.SetString("FirstRun", "False");
-
         canOpenBonusPanel = SetCanOpenBonusPanel();
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetString("FirstRun", "False");
     }
 
     public bool SetCanOpenBonusPanel()
     {
-        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay(true)) 
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False") || IsNewDay(true, "Day", "Year")) // don't change string values in post-production
         {
             //Debug.Log("Yes can open bonus panel");
             return true;
@@ -68,19 +71,19 @@ public class CurrencyManager : MonoBehaviour {
         }   
     }
 
-    public static bool IsNewDay(bool setStoredDay)
+    public static bool IsNewDay(bool setStoredValues, string dayPrefName, string yearPrefName)
     {
         DateTime currentDateTime = System.DateTime.Now;
         int currentDayOfYear = currentDateTime.DayOfYear;
         int currentYear = currentDateTime.Year;
 
-        int storedDayOfYear = PlayerPrefs.GetInt("Day");
-        int storedYear = PlayerPrefs.GetInt("Year");
+        int storedDayOfYear = PlayerPrefs.GetInt(dayPrefName);
+        int storedYear = PlayerPrefs.GetInt(yearPrefName);
 
-        if (setStoredDay)
+        if (setStoredValues)
         {
-            PlayerPrefs.SetInt("Day", currentDayOfYear);
-            PlayerPrefs.SetInt("Year", currentYear);
+            PlayerPrefs.SetInt(dayPrefName, currentDayOfYear);
+            PlayerPrefs.SetInt(yearPrefName, currentYear);
         }
  
         if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
