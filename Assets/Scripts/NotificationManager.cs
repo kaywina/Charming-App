@@ -54,6 +54,7 @@ public class NotificationManager : MonoBehaviour
 #if UNITY_IOS
     private void SendIosNotification()
     {
+        Debug.Log("Send iOS notification in 10 seconds");
         int hours = 0;
         int minutes = 0;
         int seconds = 10;
