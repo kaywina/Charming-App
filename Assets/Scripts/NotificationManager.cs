@@ -16,11 +16,13 @@ public class NotificationManager : MonoBehaviour
     private void Start()
     {
 #if UNITY_ANDROID
+        AndroidNotificationCenter.CancelAllScheduledNotifications();
         CreateAndroidChannel();
-        SendAndroidNotification();
+        ScheduleRepeatDailyNotificationAndroid();
 #elif UNITY_IOS
         // we are registering for notifications on app start (see mobile notifications project settings)
-        SendIosNotification();
+        iOSNotificationCenter.RemoveAllScheduledNotifications();
+        ScheduleRepeatDailyNotificationsIos();
 #endif
 
     }
@@ -34,35 +36,37 @@ public class NotificationManager : MonoBehaviour
             Id = CHANNEL_ID,
             Name = "Charming App Notifications Channel",
             Importance = Importance.High,
-            Description = "Mindfullness notification from Charming App",
+            Description = "Mindfulness notification from Charming App",
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel);
     }
 
-    private void SendAndroidNotification()
+    private void ScheduleRepeatDailyNotificationAndroid()
     {
-        Debug.Log("Send Android notification in 10 seconds");
+        Debug.Log("Schedule repeat daily Android notification for 11:00am");
         var notification = new AndroidNotification();
         notification.Title = "Title of notification!";
-        notification.Text = "Test of the notification.";
-        notification.FireTime = System.DateTime.Now.AddSeconds(10);
+        notification.Text = "Text of the notification.";
+
+        DateTime today = DateTime.Today;
+        DateTime fireTime = new DateTime(today.Year, today.Month, today.Day, 11, 0, 0); // schedule for noon
+
+        notification.FireTime = fireTime;
+        notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
 
         AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
     }
 #endif
 
 #if UNITY_IOS
-    private void SendIosNotification()
+    private void ScheduleRepeatDailyNotificationsIos()
     {
-        Debug.Log("Send iOS notification in 10 seconds");
-        int hours = 0;
-        int minutes = 0;
-        int seconds = 10;
+        Debug.Log("Schedule repeat daily iOS notification for 11:00am");
 
-        var timeTrigger = new iOSNotificationTimeIntervalTrigger()
+        var calendarTrigger = new iOSNotificationCalendarTrigger()
         {
-            TimeInterval = new TimeSpan(hours, minutes, seconds),
-            Repeats = false
+            Hour = 11,
+            Repeats = true
         };
 
         var notification = new iOSNotification()
@@ -70,15 +74,15 @@ public class NotificationManager : MonoBehaviour
             // You can optionally specify a custom identifier which can later be 
             // used to cancel the notification, if you don't set one, a unique 
             // string will be generated automatically.
-            Identifier = "_notification_01",
+            Identifier = "notification_01",
             Title = "Title",
-            Body = "Scheduled at: " + DateTime.Now.ToShortDateString() + " triggered in 10 seconds",
+            Body = "Notification body - scheduled to repeat at hour 11:00am",
             Subtitle = "This is a subtitle, something, something important...",
             ShowInForeground = true,
             ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
             CategoryIdentifier = "category_a",
             ThreadIdentifier = "thread1",
-            Trigger = timeTrigger,
+            Trigger = calendarTrigger,
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
