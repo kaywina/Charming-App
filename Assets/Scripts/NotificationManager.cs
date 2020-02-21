@@ -11,7 +11,9 @@ using Unity.Notifications.iOS;
 
 public class NotificationManager : MonoBehaviour
 {
+#if UNITY_ANDROID
     private const string CHANNEL_ID = "CharmingAppNotifications";
+#endif
 
     private void Start()
     {
@@ -45,11 +47,11 @@ public class NotificationManager : MonoBehaviour
     {
         Debug.Log("Schedule repeat daily Android notification for 11:00am");
         var notification = new AndroidNotification();
-        notification.Title = "Title of notification!";
-        notification.Text = "Text of the notification.";
+        notification.Title = "Title of notification that should repeat daily!";
+        notification.Text = "Text of the notification that should show up every day at 11am.";
 
         DateTime today = DateTime.Today;
-        DateTime fireTime = new DateTime(today.Year, today.Month, today.Day, 11, 0, 0); // schedule for noon
+        DateTime fireTime = new DateTime(today.Year, today.Month, today.Day, 11, 0, 0); // schedule for 11am
 
         notification.FireTime = fireTime;
         notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
@@ -77,7 +79,7 @@ public class NotificationManager : MonoBehaviour
             Identifier = "notification_01",
             Title = "Title",
             Body = "Notification body - scheduled to repeat at hour 11:00am",
-            Subtitle = "This is a subtitle, something, something important...",
+            Subtitle = "This is a subtitle, show at 11am please thx...",
             ShowInForeground = true,
             ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
             CategoryIdentifier = "category_a",
