@@ -37,14 +37,8 @@ public class NotificationManager : MonoBehaviour
         }
 
         // only show notifications if that setting has been enabled in options
-#if UNITY_ANDROID
-        CreateAndroidChannel();
-        ScheduleRepeatDailyNotificationAndroid();
-#elif UNITY_IOS
-        // we are registering for notifications on app start (see mobile notifications project settings)
-        ScheduleRepeatDailyNotificationsIos();
-#endif
 
+        EnableNotifcations();
     }
 
 #if UNITY_ANDROID
@@ -116,5 +110,33 @@ public class NotificationManager : MonoBehaviour
 #elif UNITY_IOS
         iOSNotificationCenter.RemoveAllScheduledNotifications();
 #endif
+    }
+
+    public void EnableNotifcations()
+    {
+#if UNITY_ANDROID
+        CreateAndroidChannel();
+        ScheduleRepeatDailyNotificationAndroid();
+#elif UNITY_IOS
+        // we are registering for notifications on app start (see mobile notifications project settings)
+        ScheduleRepeatDailyNotificationsIos();
+#else
+        Debug.Log("Notifications not implemented for this platform");
+#endif
+    }
+
+    public void ToggleNotifications()
+    {
+        if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false")
+        {
+            DisableNotifications();
+            Debug.Log("Notifications have been disabled");
+        }
+        else
+        {
+            EnableNotifcations();
+            Debug.Log("Notifications have been enabled");
+        }
+                
     }
 }
