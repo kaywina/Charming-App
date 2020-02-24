@@ -15,15 +15,33 @@ public class NotificationManager : MonoBehaviour
     private const string CHANNEL_ID = "CharmingAppNotifications";
 #endif
 
+    public SetPlayerPrefFromToggle togglePrefab;
+
     private void Start()
     {
+
+        DisableNotifications(); // always start from scratch
+
+        if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false" )
+        {
+            Debug.Log("Notifications are disabled");
+            return;
+        }
+        else
+        {
+            if (String.IsNullOrEmpty(PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName())))
+            {
+                Debug.Log("Notifications option not yet set; defaulting to enabled");
+                PlayerPrefs.SetString(togglePrefab.GetPlayerPrefName(), "true");
+            }
+        }
+
+        // only show notifications if that setting has been enabled in options
 #if UNITY_ANDROID
-        AndroidNotificationCenter.CancelAllScheduledNotifications();
         CreateAndroidChannel();
         ScheduleRepeatDailyNotificationAndroid();
 #elif UNITY_IOS
         // we are registering for notifications on app start (see mobile notifications project settings)
-        iOSNotificationCenter.RemoveAllScheduledNotifications();
         ScheduleRepeatDailyNotificationsIos();
 #endif
 
@@ -90,4 +108,13 @@ public class NotificationManager : MonoBehaviour
         iOSNotificationCenter.ScheduleNotification(notification);
     }
 #endif
+
+    public void DisableNotifications()
+    {
+#if UNITY_ANDROID
+        AndroidNotificationCenter.CancelAllNotifications();
+#elif UNITY_IOS
+        iOSNotificationCenter.RemoveAllScheduledNotifications();
+#endif
+    }
 }

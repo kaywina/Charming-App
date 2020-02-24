@@ -8,6 +8,11 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
     public string playerPrefName;
     public Toggle toggle;
 
+    public string GetPlayerPrefName()
+    {
+        return playerPrefName;
+    }
+
     private void OnEnable()
     {
         string prefString = PlayerPrefs.GetString(playerPrefName);
