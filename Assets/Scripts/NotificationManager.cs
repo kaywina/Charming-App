@@ -63,7 +63,9 @@ public class NotificationManager : MonoBehaviour
         notification.Text = "Text of the notification that should show up every day at 11am.";
 
         DateTime today = DateTime.Today;
-        DateTime fireTime = new DateTime(today.Year, today.Month, today.Day, 11, 0, 0); // schedule for 11am
+        DateTime tomorrow = today.AddDays(1);
+        int hourToSend = 11;
+        DateTime fireTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, hourToSend, 0, 0); // schedule for 11am
 
         notification.FireTime = fireTime;
         notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
