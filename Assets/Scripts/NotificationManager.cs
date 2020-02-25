@@ -59,18 +59,23 @@ public class NotificationManager : MonoBehaviour
     {
         Debug.Log("Schedule repeat daily Android notification for 11:00am");
         var notification = new AndroidNotification();
+
+        Debug.Log("Assign title and text");
         notification.Title = "Title of notification that should repeat daily!";
         notification.Text = "Text of the notification that should show up every day at 11am.";
 
+
+        Debug.Log("Set fire time and repeat interval");
         DateTime today = DateTime.Today;
         DateTime tomorrow = today.AddDays(1);
         int hourToSend = 11;
         DateTime fireTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, hourToSend, 0, 0); // schedule for 11am
-
         notification.FireTime = fireTime;
         notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
 
+        Debug.Log("Send Android notification");
         AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
+        Debug.Log("Android notification has been sent");
     }
 #endif
 
@@ -107,6 +112,7 @@ public class NotificationManager : MonoBehaviour
 
     public void DisableNotifications()
     {
+        Debug.Log("Cancel notifications");
 #if UNITY_ANDROID
         AndroidNotificationCenter.CancelAllNotifications();
 #elif UNITY_IOS
