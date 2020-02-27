@@ -45,25 +45,37 @@ public class UnityRewardedAdsButton : MonoBehaviour
             Advertisement.Show(placementId, options);
         }
         */
+        if (IronSource.Agent.isRewardedVideoAvailable())
+        {
+            IronSource.Agent.showRewardedVideo();
+            GiveReward();
+        }
+    }
+
+    void GiveReward()
+    {
+        Debug.Log("Give reward for watching ad");
+        if (buttonIsOnBonusPanel && bonusPanel != null) { bonusPanel.DoubleBonus(); }
+        if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
+        {
+            shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
+            shareScreenshotAndroid.rewardAmountText.text = shareScreenshotAndroid.givenBonusAmount.ToString();
+            if (rewardAmountText != null) { rewardAmountText.text = "16"; }
+        }
+
+        watched = true;
+        watchedRewardedAdText.SetActive(true);
+        gameObject.SetActive(false); // deactivate button after completion
     }
 
     /*
     void HandleShowResult(ShowResult result)
     {
+        // Old way for Unity Ads
         switch (result)
         {
             case ShowResult.Finished:
-                if (buttonIsOnBonusPanel && bonusPanel != null) { bonusPanel.DoubleBonus(); }
-                if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
-                {
-                    shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
-                    shareScreenshotAndroid.rewardAmountText.text = shareScreenshotAndroid.givenBonusAmount.ToString();
-                    if (rewardAmountText != null) { rewardAmountText.text = "16"; }
-                }
-                
-                watched = true;
-                watchedRewardedAdText.SetActive(true);
-                gameObject.SetActive(false); // deactivate button after completion
+                GiveReward();
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:

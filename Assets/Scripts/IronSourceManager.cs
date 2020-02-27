@@ -5,9 +5,9 @@ using UnityEngine;
 public class IronSourceManager : MonoBehaviour
 {
 #if UNITY_IOS
-    private const string YOUR_APP_KEY = "b5bf7fe5";
+    private string YOUR_APP_KEY = "b5bf7fe5";
 #elif UNITY_ANDROID
-    private const string YOUR_APP_KEY = "b5bfb96d";
+    private string YOUR_APP_KEY = "b5bfb96d";
 #else
     private const string YOUR_APP_KEY = "";
 #endif
