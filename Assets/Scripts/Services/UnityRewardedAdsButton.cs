@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+//using UnityEngine.Advertisements;
 
 [RequireComponent(typeof(Button))]
 public class UnityRewardedAdsButton : MonoBehaviour
@@ -32,20 +32,22 @@ public class UnityRewardedAdsButton : MonoBehaviour
     {
         if (adButton)
         {
-            adButton.interactable = (!watched && Advertisement.IsReady(placementId));
+            //adButton.interactable = (!watched && Advertisement.IsReady(placementId));
         }
     }
 
     void ShowRewardedAd()
     {
-
+        /*
         if (Advertisement.IsReady(placementId))
         {
             var options = new ShowOptions { resultCallback = HandleShowResult };
             Advertisement.Show(placementId, options);
         }
+        */
     }
 
+    /*
     void HandleShowResult(ShowResult result)
     {
         switch (result)
@@ -72,4 +74,5 @@ public class UnityRewardedAdsButton : MonoBehaviour
                 break;
         }
     }
+    */
 }

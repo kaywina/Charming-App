@@ -122,7 +122,7 @@ public class CurrencyManager : MonoBehaviour {
     public static void SetCurrencyText()
     {
 
-        Instance.currencyTextSilver.text = currencyInBank.ToString();
+        if (Instance.currencyTextSilver != null) { Instance.currencyTextSilver.text = currencyInBank.ToString(); }
     }
 
     public static void SetCurrencyInBank(int amount)

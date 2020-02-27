@@ -21,6 +21,7 @@ public class UnityAdsController : MonoBehaviour
 #endif
     }
 
+    /*
     private void Start()
     {
         if (Advertisement.isSupported)
@@ -28,5 +29,6 @@ public class UnityAdsController : MonoBehaviour
             Advertisement.Initialize(UnityAdsController.GetGameId());
         }
     }
+    */
 
 }

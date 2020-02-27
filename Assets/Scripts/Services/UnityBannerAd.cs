@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Advertisements;
+//using UnityEngine.Advertisements;
 
 public class UnityBannerAd : MonoBehaviour
 {
@@ -9,9 +9,10 @@ public class UnityBannerAd : MonoBehaviour
 
     void OnEnable()
     {
-        StartCoroutine(ShowBannerWhenReady());
+        //StartCoroutine(ShowBannerWhenReady());
     }
 
+    /*
     IEnumerator ShowBannerWhenReady()
     {
         while (!Advertisement.IsReady(bannerPlacement))
@@ -20,4 +21,5 @@ public class UnityBannerAd : MonoBehaviour
         }
         Advertisement.Show(bannerPlacement);
     }
+    */
 }
