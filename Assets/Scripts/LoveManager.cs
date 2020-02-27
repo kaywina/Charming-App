@@ -13,7 +13,7 @@ public class LoveManager : MonoBehaviour
     private const string PLAYER_PREF_NAME_MAX_UNLOCKED = "LoveNumberMaxUnlocked"; // don't change in production
     private const string PLAYER_PREF_HAS_CHECKED = "HasCheckedDailyLove";
 
-    private int maxLocStrings = 69; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_0 to LOVE_68
+    private int maxLocIndex = 68; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_0 to LOVE_68
     private static bool unlockedThisSession = false;
 
     void OnEnable()
@@ -38,7 +38,7 @@ public class LoveManager : MonoBehaviour
         int newIndex = 0;
 
         // enforce max limit on number of null strings to avoid null refs; maxLocStrings should be same as number of key-value pairs in localization dictionary
-        if (PlayerPrefs.GetInt(PLAYER_PREF_NAME) >= maxLocStrings)
+        if (PlayerPrefs.GetInt(PLAYER_PREF_NAME) >= maxLocIndex)
         {
             PlayerPrefs.SetInt(PLAYER_PREF_NAME, newIndex);
         }
@@ -61,7 +61,6 @@ public class LoveManager : MonoBehaviour
             }
         }
         PlayerPrefs.SetInt(PLAYER_PREF_NAME, newIndex);
-        //Debug.Log("index is " + newIndex);
         locKey = "LOVE_" + newIndex.ToString();
         loveText.SetLocalizationKey(locKey);
         TimeManager.SetPrefsForDailyLove();
