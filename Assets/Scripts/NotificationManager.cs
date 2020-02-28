@@ -60,12 +60,12 @@ public class NotificationManager : MonoBehaviour
         Debug.Log("Schedule repeat daily Android notification for 11:00am");
         var notification = new AndroidNotification();
 
-        Debug.Log("Assign title and text");
-        notification.Title = "Title of notification that should repeat daily!";
-        notification.Text = "Text of the notification that should show up every day at 11am.";
+        Debug.Log("Assign localized title and text to notification object");
+        notification.Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE");
+        notification.Text = Localization.GetTranslationByKey("NOTIFICATION_TEXTs");
 
 
-        Debug.Log("Set fire time and repeat interval");
+        Debug.Log("Set fire time and repeat interval of localization object");
         DateTime today = DateTime.Today;
         DateTime tomorrow = today.AddDays(1);
         int hourToSend = 11;
