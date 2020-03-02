@@ -24,7 +24,8 @@ public class NotificationManager : MonoBehaviour
 
         if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false" )
         {
-            Debug.Log("Notifications are disabled");
+            Debug.Log("Notifications are disabled; cancel all notifications on start");
+            DisableNotifications();
             return;
         }
         else
@@ -57,15 +58,12 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatDailyNotificationAndroid()
     {
-        Debug.Log("Schedule repeat daily Android notification for 11:00am");
+        Debug.Log("Schedule repeat daily Android mindfulness notification for 11:00am");
         var notification = new AndroidNotification();
 
-        Debug.Log("Assign localized title and text to notification object");
         notification.Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE");
-        notification.Text = Localization.GetTranslationByKey("NOTIFICATION_TEXTs");
+        notification.Text = Localization.GetTranslationByKey("NOTIFICATION_TEXT");
 
-
-        Debug.Log("Set fire time and repeat interval of localization object");
         DateTime today = DateTime.Today;
         DateTime tomorrow = today.AddDays(1);
         int hourToSend = 11;
@@ -73,16 +71,15 @@ public class NotificationManager : MonoBehaviour
         notification.FireTime = fireTime;
         notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
 
-        Debug.Log("Send Android notification");
         AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
-        Debug.Log("Android notification has been sent");
+        Debug.Log("Android notification sent");
     }
 #endif
 
 #if UNITY_IOS
     private void ScheduleRepeatDailyNotificationsIos()
     {
-        Debug.Log("Schedule repeat daily iOS notification for 11:00am");
+        Debug.Log("Schedule repeat daily iOS mindfulness notification for 11:00am");
 
         var calendarTrigger = new iOSNotificationCalendarTrigger()
         {
@@ -107,6 +104,7 @@ public class NotificationManager : MonoBehaviour
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
+        Debug.Log("iOS notification sent");
     }
 #endif
 
