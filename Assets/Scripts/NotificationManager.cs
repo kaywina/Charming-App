@@ -123,9 +123,9 @@ public class NotificationManager : MonoBehaviour
             // used to cancel the notification, if you don't set one, a unique 
             // string will be generated automatically.
             Identifier = "notification_01",
-            Title = "Title",
-            Body = "Notification body - scheduled to repeat at hour 11:00am",
-            Subtitle = "This is a subtitle, show at 11am please thx...",
+            Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE"),
+            Body = Localization.GetTranslationByKey("NOTIFICATION_TEXT"),
+            Subtitle = Localization.GetTranslationByKey("NOTIFICATION_SUBTITLE"),
             ShowInForeground = true,
             ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
             CategoryIdentifier = "category_a",
@@ -155,7 +155,7 @@ public class NotificationManager : MonoBehaviour
         ScheduleRepeatDailyNotificationAndroid();
 #elif UNITY_IOS
         // we are registering for notifications on app start (see mobile notifications project settings)
-        ScheduleRepeatDailyNotificationsIos(onStart);
+        ScheduleRepeatDailyNotificationsIos();
 #else
         Debug.Log("Notifications not implemented for this platform");
 #endif
