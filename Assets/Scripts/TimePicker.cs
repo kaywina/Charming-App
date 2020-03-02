@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class TimePicker : MonoBehaviour
 {
 
+    public NotificationManager notificationManager;
+
     public Text hourText;
     public Text minuteText;
 
@@ -16,23 +18,21 @@ public class TimePicker : MonoBehaviour
     private int minuteIncrement = 5; // each time the arrow is clicked minute increases/decreases by this amount
     private const int MAX_MINUTE = 59; // display can be up to 59 minutes
 
-    private const string PLAYERPREF_NAME_HOUR = "NotificationHour"; // don't change in production
-    private const string PLAYERPREF_NAME_MINUTE = "NotificationMinute"; // don't change in production
 
     private void OnEnable()
     {
-        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_HOUR))
+        if (PlayerPrefs.HasKey(NotificationManager.PLAYERPREF_NAME_HOUR))
         {
-            hour = PlayerPrefs.GetInt(PLAYERPREF_NAME_HOUR);
+            hour = PlayerPrefs.GetInt(NotificationManager.PLAYERPREF_NAME_HOUR);
         }
         else
         {
             Debug.Log("Notification hour is not set; using default value");
         }
 
-        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_MINUTE))
+        if (PlayerPrefs.HasKey(NotificationManager.PLAYERPREF_NAME_MINUTE))
         {
-            minute = PlayerPrefs.GetInt(PLAYERPREF_NAME_MINUTE);
+            minute = PlayerPrefs.GetInt(NotificationManager.PLAYERPREF_NAME_MINUTE);
         }
         else
         {
@@ -40,6 +40,15 @@ public class TimePicker : MonoBehaviour
         }
 
         SetUIText();
+    }
+
+    private void OnDisable()
+    {
+        // We are only setting the data and rescheduling when the options panel is closed
+        // to avoid case where UI shows incorrect time.
+        // This means though that if the user closes the app before exiting the options, the new notification time will not be saved.
+        SetPlayerPrefs();
+        notificationManager.RescheduleNotifications();
     }
 
     public void HourUp()
@@ -52,7 +61,6 @@ public class TimePicker : MonoBehaviour
             hour = 0;
         }
 
-        PlayerPrefs.SetInt(PLAYERPREF_NAME_HOUR, hour);
         SetHourText();
         //Debug.Log("Hour up");
     }
@@ -67,7 +75,6 @@ public class TimePicker : MonoBehaviour
             hour = MAX_HOUR;
         }
 
-        PlayerPrefs.SetInt(PLAYERPREF_NAME_HOUR, hour);
         SetHourText();
         //Debug.Log("Hour down");
     }
@@ -82,7 +89,6 @@ public class TimePicker : MonoBehaviour
             minute = 0;
         }
 
-        PlayerPrefs.SetInt(PLAYERPREF_NAME_MINUTE, minute);
         SetMinuteText();
         //Debug.Log("Minute up");
     }
@@ -97,7 +103,6 @@ public class TimePicker : MonoBehaviour
             minute = MAX_MINUTE + 1 - minuteIncrement; // tweak to deal with cycling properly below zero
         }
 
-        PlayerPrefs.SetInt(PLAYERPREF_NAME_MINUTE, minute);
         SetMinuteText();
         //Debug.Log("Minute down");
     }
@@ -116,5 +121,12 @@ public class TimePicker : MonoBehaviour
     {
         SetHourText();
         SetMinuteText();
+    }
+
+    public void SetPlayerPrefs()
+    {
+        Debug.Log("Set player prefs for notification hour and minute");
+        PlayerPrefs.SetInt(NotificationManager.PLAYERPREF_NAME_HOUR, hour);
+        PlayerPrefs.SetInt(NotificationManager.PLAYERPREF_NAME_MINUTE, minute);
     }
 }
