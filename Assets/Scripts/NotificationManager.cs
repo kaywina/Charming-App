@@ -109,13 +109,29 @@ public class NotificationManager : MonoBehaviour
 #if UNITY_IOS
     private void ScheduleRepeatDailyNotificationsIos()
     {
-        Debug.Log("Schedule repeat daily iOS mindfulness notification for 11:00am");
+        Debug.Log("Schedule repeat daily iOS mindfulness notification");
+
+        // set notification time from data; or use default
+        int hourToSend = 11; // default time is 11:00am
+        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_HOUR))
+        {
+            hourToSend = PlayerPrefs.GetInt(PLAYERPREF_NAME_HOUR); // otherwise overright default hour with stored time from options
+        }
+
+        int minuteToSend = 0; // default time is 11:00am
+        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_MINUTE))
+        {
+            minuteToSend = PlayerPrefs.GetInt(PLAYERPREF_NAME_MINUTE); // otherwise overright default minute with stored time from options
+        }
 
         var calendarTrigger = new iOSNotificationCalendarTrigger()
         {
-            Hour = 11,
+            Hour = hourToSend,
+            Minute = minuteToSend,
             Repeats = true
         };
+
+        Debug.Log("iOS notification scheduled for hour " + calendarTrigger.Hour.ToString() + " and minute " + calendarTrigger.Minute.ToString());
 
         var notification = new iOSNotification()
         {
