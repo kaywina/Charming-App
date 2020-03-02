@@ -17,15 +17,19 @@ public class NotificationManager : MonoBehaviour
 
     public SetPlayerPrefFromToggle togglePrefab;
 
+
+    public static string PLAYERPREF_NAME_HOUR = "NotificationHour"; // don't change in production
+    public static string PLAYERPREF_NAME_MINUTE = "NotificationMinute"; // don't change in production
+
     private void Start()
     {
 
-        DisableNotifications(); // always start from scratch
+        CancelNotifications(); // always start from scratch
 
         if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false" )
         {
             Debug.Log("Notifications are disabled; cancel all notifications on start");
-            DisableNotifications();
+            CancelNotifications();
             return;
         }
         else
@@ -38,8 +42,7 @@ public class NotificationManager : MonoBehaviour
         }
 
         // only show notifications if that setting has been enabled in options
-
-        EnableNotifcations();
+        ScheduleNotifications();
     }
 
 #if UNITY_ANDROID
@@ -58,34 +61,77 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatDailyNotificationAndroid()
     {
-        Debug.Log("Schedule repeat daily Android mindfulness notification for 11:00am");
+        Debug.Log("Schedule repeat daily Android mindfulness notification");
         var notification = new AndroidNotification();
 
         notification.Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE");
         notification.Text = Localization.GetTranslationByKey("NOTIFICATION_TEXT");
 
-        DateTime today = DateTime.Today;
-        DateTime tomorrow = today.AddDays(1);
-        int hourToSend = 11;
-        DateTime fireTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, hourToSend, 0, 0); // schedule for 11am
+        DateTime now = DateTime.Now;
+        DateTime tomorrow = now.AddDays(1);
+
+        int hourToSend = 11; // default time is 11:00am
+        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_HOUR))
+        {
+            hourToSend = PlayerPrefs.GetInt(PLAYERPREF_NAME_HOUR); // otherwise overright default hour with stored time from options
+        }
+
+        int minuteToSend = 0; // default time is 11:00am
+        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_MINUTE))
+        {
+            minuteToSend = PlayerPrefs.GetInt(PLAYERPREF_NAME_MINUTE); // otherwise overright default minute with stored time from options
+        }
+
+        DateTime fireTime;
+        // if notification could still be sent today, schedule for today
+        if (hourToSend > now.Hour || (hourToSend == now.Hour && minuteToSend > now.Minute))
+        {
+            fireTime = new DateTime(now.Year, now.Month, now.Day, hourToSend, minuteToSend, 0);
+            Debug.Log("Android notification scheduled for " + fireTime.ToShortTimeString() + " today");
+        }
+
+        // if time has passed, schedule for tomorrow
+        else
+        {
+            fireTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, hourToSend, minuteToSend, 0);
+            Debug.Log("Android notification scheduled for " + fireTime.ToShortTimeString() + " tomorrow");
+        }
+        
         notification.FireTime = fireTime;
         notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
 
         AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
-        Debug.Log("Android notification sent");
+        Debug.Log("Android notification scheduling completed");
+        
     }
 #endif
 
 #if UNITY_IOS
     private void ScheduleRepeatDailyNotificationsIos()
     {
-        Debug.Log("Schedule repeat daily iOS mindfulness notification for 11:00am");
+        Debug.Log("Schedule repeat daily iOS mindfulness notification");
+
+        // set notification time from data; or use default
+        int hourToSend = 11; // default time is 11:00am
+        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_HOUR))
+        {
+            hourToSend = PlayerPrefs.GetInt(PLAYERPREF_NAME_HOUR); // otherwise overright default hour with stored time from options
+        }
+
+        int minuteToSend = 0; // default time is 11:00am
+        if (PlayerPrefs.HasKey(PLAYERPREF_NAME_MINUTE))
+        {
+            minuteToSend = PlayerPrefs.GetInt(PLAYERPREF_NAME_MINUTE); // otherwise overright default minute with stored time from options
+        }
 
         var calendarTrigger = new iOSNotificationCalendarTrigger()
         {
-            Hour = 11,
+            Hour = hourToSend,
+            Minute = minuteToSend,
             Repeats = true
         };
+
+        Debug.Log("iOS notification scheduled for hour " + calendarTrigger.Hour.ToString() + " and minute " + calendarTrigger.Minute.ToString());
 
         var notification = new iOSNotification()
         {
@@ -93,9 +139,9 @@ public class NotificationManager : MonoBehaviour
             // used to cancel the notification, if you don't set one, a unique 
             // string will be generated automatically.
             Identifier = "notification_01",
-            Title = "Title",
-            Body = "Notification body - scheduled to repeat at hour 11:00am",
-            Subtitle = "This is a subtitle, show at 11am please thx...",
+            Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE"),
+            Body = Localization.GetTranslationByKey("NOTIFICATION_TEXT"),
+            Subtitle = Localization.GetTranslationByKey("NOTIFICATION_SUBTITLE"),
             ShowInForeground = true,
             ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
             CategoryIdentifier = "category_a",
@@ -108,7 +154,7 @@ public class NotificationManager : MonoBehaviour
     }
 #endif
 
-    public void DisableNotifications()
+    public void CancelNotifications()
     {
         Debug.Log("Cancel notifications");
 #if UNITY_ANDROID
@@ -118,7 +164,7 @@ public class NotificationManager : MonoBehaviour
 #endif
     }
 
-    public void EnableNotifcations()
+    public void ScheduleNotifications()
     {
 #if UNITY_ANDROID
         CreateAndroidChannel();
@@ -135,14 +181,27 @@ public class NotificationManager : MonoBehaviour
     {
         if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false")
         {
-            DisableNotifications();
+            CancelNotifications();
             Debug.Log("Notifications have been disabled");
         }
         else
         {
-            EnableNotifcations();
+            ScheduleNotifications();
             Debug.Log("Notifications have been enabled");
+        }        
+    }
+
+    public void RescheduleNotifications()
+    {
+        CancelNotifications();
+        if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "true")
+        {
+            ScheduleNotifications();
+            Debug.Log("Reschedule notifications");
         }
-                
+        else
+        {
+            Debug.Log("Notifications have been disabled; do not reschedule");
+        }
     }
 }
