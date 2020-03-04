@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource chimeSound;
+    public AudioSource[] chimeSounds;
     
     public void PlayChimeSound()
     {
-        chimeSound.Play();
+        int randomIndex = Random.Range(0, chimeSounds.Length);
+        //Debug.Log("Play sound " + chimeSounds[randomIndex].gameObject.name);
+        chimeSounds[randomIndex].Play();
     }
 
 }
