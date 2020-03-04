@@ -20,6 +20,8 @@ public class BreatheControl : MonoBehaviour
 
     private string playerPrefName = "BreatheSeconds";
 
+    public SoundManager soundManager;
+
     void OnEnable()
     {
         ResetBreaths(); // not tracking number of breaths between sessions
@@ -73,6 +75,8 @@ public class BreatheControl : MonoBehaviour
         }
 
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.ChangeText(); }
+
+        soundManager.PlayChimeSound();
     }
 
     public bool GetBreatheInOutFlag()
