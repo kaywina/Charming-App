@@ -5,8 +5,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public AudioSource[] chimeSounds;
+    public SetPlayerPrefFromToggle meditateAudioToggle;
 
-    private void Start()
+    private void OnEnable()
     {
         SetMuteFromPlayerPref();
     }
@@ -20,7 +21,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetMuteFromPlayerPref()
     {
-        if (PlayerPrefs.GetString("EnableSounds") == "false")
+        if (PlayerPrefs.GetString(meditateAudioToggle.GetPlayerPrefName()) == "false")
         {
             Debug.Log("Mute all sounds");
             SetMuteOnSounds(true);
