@@ -9,6 +9,8 @@ public class BonusPanel : CharmsPanel
     public BonusWheel bonusWheel;
     public GameObject[] deactivateOnReadySpin;
     public GameObject[] activateAfterSpin;
+    public GameObject rewardedAdButton;
+    public SetPlayerPrefFromToggle goldTogglePrefab;
     public Text prizeText;
     public GameObject strikeoutText;
     public GameObject watchedRewardedAdText;
@@ -81,8 +83,17 @@ public class BonusPanel : CharmsPanel
             activateAfterSpin[i].SetActive(true);
         }
 
-        bonusWheel.gameObject.SetActive(false);
+        // custom case for gold subscribers, they should not see the rewarded ad button (and should receive double bonus automatically)
+        if (PlayerPrefs.GetString(goldTogglePrefab.GetPlayerPrefName()) == "true")
+        {
+            rewardedAdButton.SetActive(false);
+        }
+        else
+        {
+            rewardedAdButton.SetActive(true);
+        }
 
+        bonusWheel.gameObject.SetActive(false);
         hasSpun = true;
     }
 
