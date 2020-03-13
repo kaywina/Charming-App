@@ -16,19 +16,19 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
 
     private void CheckForKey()
     {
-        Debug.Log("Check if player pref exists");
+        Debug.Log("Check if PlayerPref " + playerPrefName + " exists");
         // set the default value if this is the first time this player pref is accessed
         if (!PlayerPrefs.HasKey(playerPrefName))
         {
             if (onByDefault)
             {
                 PlayerPrefs.SetString(playerPrefName, "true");
-                Debug.Log("Default to true");
+                Debug.Log("Default " + playerPrefName + " to true OnEnable");
             }
             else
             {
                 PlayerPrefs.SetString(playerPrefName, "false");
-                Debug.Log("Default to false");
+                Debug.Log("Default " + playerPrefName + " to false OnEnable");
             }
         }
     }
@@ -42,13 +42,13 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
         {
             PlayerPrefs.SetString(playerPrefName, "false");
             toggle.isOn = false;
-            Debug.Log("Set toggle off");
+            Debug.Log("Set PlayerPref " + playerPrefName + " toggle off OnEnable");
         }
         else
         {
             PlayerPrefs.SetString(playerPrefName, "true");
             toggle.isOn = true;
-            Debug.Log("Set toggle on");
+            Debug.Log("Set PlayerPref  " + playerPrefName + " toggle on OnEnable");
         }
     }
 
@@ -59,13 +59,13 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
         {
             PlayerPrefs.SetString(playerPrefName, "true");
             toggle.isOn = true;
-            Debug.Log("Toggle on");
+            Debug.Log("Toggle on the PlayerPref " + playerPrefName);
         }
         else
         {
             PlayerPrefs.SetString(playerPrefName, "false");
             toggle.isOn = false;
-            Debug.Log("Toggle off");
+            Debug.Log("Toggle off the PlayerPref " + playerPrefName);
         }
     }
 }
