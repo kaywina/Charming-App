@@ -21,9 +21,13 @@ public class IAPButton : MonoBehaviour
             return;
         }
 
-        /* // these have been disabled following change from consumables store to gold subscription
+        // these have been disabled following change from consumables store to gold subscription
         switch (purchaseID)
         {
+            case "Gold":
+                iapController.BuyGoldSubscription();
+                break;
+            /*
             case "16":
                 iapController.BuyConsumable16();
                 break;
@@ -39,11 +43,11 @@ public class IAPButton : MonoBehaviour
             case "256":
                 iapController.BuyConsumable256();
                 break;
+            */
             default:
                 Debug.LogWarning("ProductID not implemented in IAPButton class");
                 break;
         }
-        */
 
         return;
     }

@@ -32,7 +32,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
     //public static string kProductIDNonConsumable = "nonconsumable";
 
-    public static string kProductIDSubscription = "gold";
+    public static string kProductIDSubscription = "Gold";
 
     // Apple App Store-specific product identifier for the subscription product.
     private static string kProductNameAppleSubscription = "com.CharmingApe.CharmingApp.Gold";
