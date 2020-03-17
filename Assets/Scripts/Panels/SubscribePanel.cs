@@ -7,13 +7,22 @@ public class SubscribePanel : CharmsPanel
 {
 
     public bool fromOptions = false;
+    public bool fromLove = false;
+
     public OptionsPanel optionsPanel;
+    public CharmsPanel lovePanel;
 
     private bool optionsRTM;
+    private bool loveRTM;
 
     public void SetFromOptionsFlag (bool flag)
     {
         fromOptions = flag;
+    }
+
+    public void SetFromLoveFlag (bool flag)
+    {
+        fromLove = flag;
     }
 
     new void OnEnable()
@@ -24,6 +33,12 @@ public class SubscribePanel : CharmsPanel
             optionsRTM = optionsPanel.returnToMain;
             optionsPanel.SetReturnToMain(false);
             optionsPanel.gameObject.SetActive(false);
+        }
+        else if (fromLove) {
+            returnToMain = false;
+            loveRTM = lovePanel.returnToMain;
+            lovePanel.SetReturnToMain(false);
+            lovePanel.gameObject.SetActive(false);
         }
         else
         {
@@ -37,6 +52,11 @@ public class SubscribePanel : CharmsPanel
         if (fromOptions) {
             optionsPanel.SetReturnToMain(optionsRTM);
             optionsPanel.gameObject.SetActive(true);
+        }
+        else if (fromLove)
+        {
+            lovePanel.SetReturnToMain(loveRTM);
+            lovePanel.gameObject.SetActive(true);
         }
     }
 }
