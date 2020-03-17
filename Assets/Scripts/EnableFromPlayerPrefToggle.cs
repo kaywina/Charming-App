@@ -29,12 +29,12 @@ public class EnableFromPlayerPrefToggle : MonoBehaviour
     {
         Debug.Log("Enable or disable objects for playerpref " + togglePrefab.GetPlayerPrefName());
         UpdateReferencedObjects();
-        EventManager.StartListening(togglePrefab.GetPlayerPrefName(), UpdateReferencedObjects);
+        EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, UpdateReferencedObjects);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(togglePrefab.GetPlayerPrefName(), UpdateReferencedObjects);
+        EventManager.StopListening(UnityIAPController.subscribeSuccessPlayerPref, UpdateReferencedObjects);
     }
 
     private void EnableDisableObjects(bool isTrue)

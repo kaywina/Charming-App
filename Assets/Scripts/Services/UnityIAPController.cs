@@ -9,6 +9,9 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string goldSubscriptionPlayerPref = "Gold";
     public SetPlayerPrefFromToggle goldTogglePrefab;
 
+    public static string failedToSubscribePlayerPref = "GoldFail";
+    public static string subscribeSuccessPlayerPref = "GoldSuccess";
+
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
@@ -92,7 +95,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         UnityPurchasing.Initialize(this, builder);
     }
 
-    private bool IsInitialized()
+    private static bool IsInitialized()
     {
         // Only say we are initialized if both the Purchasing references are set.
         return m_StoreController != null && m_StoreExtensionProvider != null;
@@ -151,16 +154,17 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         * Additional button methods for subscription products
         * */
 
-    public void BuyGoldSubscription()
+    public static void BuyGoldSubscription()
     {
         // Buy the subscription product using its the general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
         // Notice how we use the general product identifier in spite of this ID being mapped to
         // custom store-specific identifiers above.
         BuyProductID(kProductIDSubscription);
+        //BuyProductID("this_should_fail");
     }
 
-    void BuyProductID(string productId)
+    static void BuyProductID(string productId)
     {
         // If Purchasing has been initialized ...
         if (IsInitialized())
@@ -182,6 +186,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             {
                 // ... report the product look-up failure situation  
                 Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
+                EventManager.TriggerEvent(failedToSubscribePlayerPref);
             }
         }
         // Otherwise ...
@@ -190,6 +195,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
             // retrying initiailization.
             Debug.Log("BuyProductID FAIL. Not initialized.");
+            EventManager.TriggerEvent(failedToSubscribePlayerPref);
         }
     }
 
@@ -262,7 +268,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true"); // if the gold subscription has been restored set the player pref
-            EventManager.TriggerEvent(goldSubscriptionPlayerPref);
+            EventManager.TriggerEvent(subscribeSuccessPlayerPref);
         }
         // Cases where a consumable product has been purchased by this user.
         /*
@@ -329,5 +335,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         // A product purchase attempt did not succeed. Check failureReason for more detail. Consider sharing 
         // this reason with the user to guide their troubleshooting actions.
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
+        EventManager.TriggerEvent(failedToSubscribePlayerPref);
     }
 }

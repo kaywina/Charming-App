@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class IAPButton : MonoBehaviour
 {
-    private UnityIAPController iapController;
     public string purchaseID;
+    public GameObject failIndicator;
 
-    void OnEnable()
+    private void OnEnable()
     {
-        GameObject controllerObject = GameObject.FindGameObjectWithTag("IAPController");
-        iapController = controllerObject.GetComponent<UnityIAPController>();
+        EventManager.StartListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
+        EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, HideFailIndicator);
+        HideFailIndicator();
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StopListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
+        EventManager.StopListening(UnityIAPController.subscribeSuccessPlayerPref, HideFailIndicator);
     }
 
     public void MakePurchase()
     {
-        if (iapController == null)
-        {
-            Debug.LogWarning("IAP Controller is null; aborting purchase");
-            return;
-        }
-
         // these have been disabled following change from consumables store to gold subscription
         switch (purchaseID)
         {
             case "Gold":
-                iapController.BuyGoldSubscription();
+                UnityIAPController.BuyGoldSubscription();
                 break;
             /*
             case "16":
@@ -50,6 +51,16 @@ public class IAPButton : MonoBehaviour
         }
 
         return;
+    }
+
+    public void ShowFailIndicator()
+    {
+        if (failIndicator != null) { failIndicator.SetActive(true); }
+    }
+
+    public void HideFailIndicator()
+    {
+        if (failIndicator != null) { failIndicator.SetActive(false); }
     }
 
 }
