@@ -21,6 +21,7 @@ public class IAPButton : MonoBehaviour
             return;
         }
 
+        /* // these have been disabled following change from consumables store to gold subscription
         switch (purchaseID)
         {
             case "16":
@@ -42,6 +43,7 @@ public class IAPButton : MonoBehaviour
                 Debug.LogWarning("ProductID not implemented in IAPButton class");
                 break;
         }
+        */
 
         return;
     }

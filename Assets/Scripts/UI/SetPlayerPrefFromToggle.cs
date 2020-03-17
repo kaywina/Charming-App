@@ -14,6 +14,11 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
         return playerPrefName;
     }
 
+    public void SetPlayerPrefName(string name)
+    {
+        playerPrefName = name;
+    }
+
     private void CheckForKey()
     {
         Debug.Log("Check if PlayerPref " + playerPrefName + " exists");
