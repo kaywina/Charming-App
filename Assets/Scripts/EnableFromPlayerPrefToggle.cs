@@ -8,12 +8,8 @@ public class EnableFromPlayerPrefToggle : MonoBehaviour
     public GameObject[] enableIfFalse;
     public GameObject[] enableIfTrue;
 
-
-    // Start is called before the first frame update
-    void OnEnable()
+    public void UpdateReferencedObjects()
     {
-        Debug.Log("Enable or disable objects for playerpref " + togglePrefab.GetPlayerPrefName());
-
         string playerPref = PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName());
         Debug.Log("playerPref is " + playerPref);
 
@@ -27,6 +23,18 @@ public class EnableFromPlayerPrefToggle : MonoBehaviour
             EnableDisableObjects(true);
             Debug.Log("Key exists and playerpref is true" + togglePrefab.GetPlayerPrefName());
         }
+    }
+    // Start is called before the first frame update
+    void OnEnable()
+    {
+        Debug.Log("Enable or disable objects for playerpref " + togglePrefab.GetPlayerPrefName());
+        UpdateReferencedObjects();
+        EventManager.StartListening(togglePrefab.GetPlayerPrefName(), UpdateReferencedObjects);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StopListening(togglePrefab.GetPlayerPrefName(), UpdateReferencedObjects);
     }
 
     private void EnableDisableObjects(bool isTrue)

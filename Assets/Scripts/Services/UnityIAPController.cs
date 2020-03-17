@@ -262,6 +262,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true"); // if the gold subscription has been restored set the player pref
+            EventManager.TriggerEvent(goldSubscriptionPlayerPref);
         }
         // Cases where a consumable product has been purchased by this user.
         /*
