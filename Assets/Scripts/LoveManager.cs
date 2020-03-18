@@ -16,6 +16,8 @@ public class LoveManager : MonoBehaviour
     private int maxLocIndex = 68; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_0 to LOVE_68
     private static bool unlockedThisSession = false;
 
+    private int tempIndex = 0;
+
     void OnEnable()
     {
         string locKey = "LOVE_" + PlayerPrefs.GetInt(PLAYER_PREF_NAME).ToString();
@@ -66,5 +68,36 @@ public class LoveManager : MonoBehaviour
         TimeManager.SetPrefsForDailyLove();
         unlockedThisSession = true;
         PlayerPrefs.SetString(PLAYER_PREF_HAS_CHECKED, "True");
+        tempIndex = newIndex;
+    }
+
+    public void PreviousLove()
+    {
+        Debug.Log("Go to previous love");
+
+        tempIndex--;
+
+        if (tempIndex < 0)
+        {
+            tempIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME);
+        }
+
+        string tempLocKey = "LOVE_" + tempIndex.ToString();
+        loveText.SetLocalizationKey(tempLocKey);
+    }
+
+    public void NextLove()
+    {
+        Debug.Log("Go to next love");
+
+        tempIndex++;
+
+        if (tempIndex > PlayerPrefs.GetInt(PLAYER_PREF_NAME))
+        {
+            tempIndex = 0;
+        }
+
+        string tempLocKey = "LOVE_" + tempIndex.ToString();
+        loveText.SetLocalizationKey(tempLocKey);
     }
 }
