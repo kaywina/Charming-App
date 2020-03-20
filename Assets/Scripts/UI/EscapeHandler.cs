@@ -9,8 +9,6 @@ using UnityEngine.UI;
 
 public class EscapeHandler : MonoBehaviour
 {
-
-    public Button optionsButton;
     public Button optionsBackButton;
     public Button meditateBackButton;
     public Button bonusSkipButton;
@@ -20,6 +18,8 @@ public class EscapeHandler : MonoBehaviour
     public Button welcomeOKButton;
     public Button unlockNoButton;
     public Button congratsOKButton;
+    public Button loveBackButton;
+    public Button secretsBackButton;
 
     private Button[] allButtons;
 
@@ -27,7 +27,6 @@ public class EscapeHandler : MonoBehaviour
     void Start()
     {
         allButtons = new Button[] {
-            optionsButton,
             optionsBackButton,
             meditateBackButton,
             bonusSkipButton,
@@ -36,7 +35,9 @@ public class EscapeHandler : MonoBehaviour
             infoOKButton,
             welcomeOKButton,
             unlockNoButton,
-            congratsOKButton
+            congratsOKButton,
+            loveBackButton,
+            secretsBackButton
         };
     }
 
