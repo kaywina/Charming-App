@@ -13,7 +13,7 @@ public class BonusPanel : CharmsPanel
     public SetPlayerPrefFromToggle goldTogglePrefab;
     public Text prizeText;
     public GameObject strikeoutText;
-    public GameObject watchedRewardedAdText;
+    public GameObject doubleKeysText;
     public Text totalBonusText;
 
     private bool hasSpun;
@@ -27,7 +27,7 @@ public class BonusPanel : CharmsPanel
 
     IEnumerator Enable()
     {
-        watchedRewardedAdText.SetActive(false);
+        doubleKeysText.SetActive(false);
         header.SetActive(false);
         strikeoutText.SetActive(false);
         totalBonusText.gameObject.SetActive(false);
@@ -83,10 +83,15 @@ public class BonusPanel : CharmsPanel
         {
             isGold = true;
         }
-        // gold subscribers receive double bonus automatically;
-        if (isGold) { bonus = bonus * 2; }
 
-        storedBonus = bonus; 
+        storedBonus = bonus;
+
+        // gold subscribers receive double bonus automatically;
+        if (isGold)
+        {
+            DoubleBonus();
+            doubleKeysText.SetActive(true);
+        }
         prizeText.text = bonus.ToString();
         for (int i = 0; i < activateAfterSpin.Length; i++)
         {
