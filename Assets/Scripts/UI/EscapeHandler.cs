@@ -20,6 +20,7 @@ public class EscapeHandler : MonoBehaviour
     public Button congratsOKButton;
     public Button loveBackButton;
     public Button secretsBackButton;
+    public Button hideSecretButton;
     public Button quitButton;
     public Button quitPanelNoButton;
     public Button subscribePanelBackButton;
@@ -41,6 +42,7 @@ public class EscapeHandler : MonoBehaviour
             congratsOKButton,
             loveBackButton,
             secretsBackButton,
+            hideSecretButton,
             quitButton,
             quitPanelNoButton,
             subscribePanelBackButton
