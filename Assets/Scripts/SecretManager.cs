@@ -16,6 +16,7 @@ public class SecretManager : MonoBehaviour
     private void Start()
     {
         hideSecretButton.SetActive(false);
+        canvasSecret.SetActive(false);
     }
 
     public void WhenShowSecret(int i)
