@@ -11,23 +11,23 @@ public class EnableFromPlayerPrefToggle : MonoBehaviour
     public void UpdateReferencedObjects()
     {
         string playerPref = PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName());
-        Debug.Log("playerPref is " + playerPref);
+        //Debug.Log("playerPref is " + playerPref);
 
         if (!PlayerPrefs.HasKey(togglePrefab.GetPlayerPrefName()) || playerPref == "false")
         {
             EnableDisableObjects(false);
-            Debug.Log("No key or playerpref is false for " + togglePrefab.GetPlayerPrefName());
+            //Debug.Log("No key or playerpref is false for " + togglePrefab.GetPlayerPrefName());
         }
         else
         {
             EnableDisableObjects(true);
-            Debug.Log("Key exists and playerpref is true" + togglePrefab.GetPlayerPrefName());
+            //Debug.Log("Key exists and playerpref is true" + togglePrefab.GetPlayerPrefName());
         }
     }
     // Start is called before the first frame update
     void OnEnable()
     {
-        Debug.Log("Enable or disable objects for playerpref " + togglePrefab.GetPlayerPrefName());
+        //Debug.Log("Enable or disable objects for playerpref " + togglePrefab.GetPlayerPrefName());
         UpdateReferencedObjects();
         EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, UpdateReferencedObjects);
     }

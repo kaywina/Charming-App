@@ -20,14 +20,14 @@ public class TimeManager
     {
         PlayerPrefs.SetInt(DAILY_LOVE_PREF_DAY_NAME, currentDayOfYear);
         PlayerPrefs.SetInt(DAILY_LOVE_PREF_YEAR_NAME, currentYear);
-        Debug.Log("Set day and year for daily love");
+        //Debug.Log("Set day and year for daily love");
     }
 
     public static void SetPrefsForDailySpin()
     {
         PlayerPrefs.SetInt(DAILY_SPIN_PREF_DAY_NAME, currentDayOfYear);
         PlayerPrefs.SetInt(DAILY_SPIN_PREF_YEAR_NAME, currentYear);
-        Debug.Log("Set day and year for daily spin");
+        //Debug.Log("Set day and year for daily spin");
     }
 
     public static bool IsNewDay(TimeType timeType)
@@ -43,12 +43,12 @@ public class TimeManager
             case TimeType.DailySpin:
                 storedDayOfYear = PlayerPrefs.GetInt(DAILY_SPIN_PREF_DAY_NAME);
                 storedYear = PlayerPrefs.GetInt(DAILY_SPIN_PREF_YEAR_NAME);
-                Debug.Log("Get stored day and year for daily spin");
+                //Debug.Log("Get stored day and year for daily spin");
                 break;
             case TimeType.DailyLove:
                 storedDayOfYear = PlayerPrefs.GetInt(DAILY_LOVE_PREF_DAY_NAME);
                 storedYear = PlayerPrefs.GetInt(DAILY_LOVE_PREF_YEAR_NAME);
-                Debug.Log("Get stored day and year for daily love");
+                //Debug.Log("Get stored day and year for daily love");
                 break;
             default:
                 Debug.Log("Reached default case in IsNewDay, this should not happen");
@@ -57,11 +57,11 @@ public class TimeManager
  
         if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
         {
-            Debug.Log("It's a new day!");
+            //Debug.Log("It's a new day!");
             return true;
         }
 
-        Debug.Log("It is not a new day!");
+        //Debug.Log("It is not a new day!");
         return false;
     }
 }

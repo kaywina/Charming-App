@@ -17,18 +17,16 @@ public class NotificationManager : MonoBehaviour
 
     public SetPlayerPrefFromToggle togglePrefab;
 
-
     public static string PLAYERPREF_NAME_HOUR = "NotificationHour"; // don't change in production
     public static string PLAYERPREF_NAME_MINUTE = "NotificationMinute"; // don't change in production
 
     private void Start()
     {
-
         CancelNotifications(); // always start from scratch
 
         if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false" )
         {
-            Debug.Log("Notifications are disabled; cancel all notifications on start");
+            //Debug.Log("Notifications are disabled; cancel all notifications on start");
             CancelNotifications();
             return;
         }
@@ -36,7 +34,7 @@ public class NotificationManager : MonoBehaviour
         {
             if (String.IsNullOrEmpty(PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName())))
             {
-                Debug.Log("Notifications option not yet set; defaulting to enabled");
+                //Debug.Log("Notifications option not yet set; defaulting to enabled");
                 PlayerPrefs.SetString(togglePrefab.GetPlayerPrefName(), "true");
             }
         }
@@ -48,7 +46,7 @@ public class NotificationManager : MonoBehaviour
 #if UNITY_ANDROID
     private void CreateAndroidChannel()
     {
-        Debug.Log("Create Android Channel");
+        //Debug.Log("Create Android Channel");
         var channel = new AndroidNotificationChannel()
         {
             Id = CHANNEL_ID,
@@ -61,7 +59,7 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatDailyNotificationAndroid()
     {
-        Debug.Log("Schedule repeat daily Android mindfulness notification");
+        //Debug.Log("Schedule repeat daily Android mindfulness notification");
         var notification = new AndroidNotification();
 
         notification.Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE");
@@ -87,21 +85,21 @@ public class NotificationManager : MonoBehaviour
         if (hourToSend > now.Hour || (hourToSend == now.Hour && minuteToSend > now.Minute))
         {
             fireTime = new DateTime(now.Year, now.Month, now.Day, hourToSend, minuteToSend, 0);
-            Debug.Log("Android notification scheduled for " + fireTime.ToShortTimeString() + " today");
+            //Debug.Log("Android notification scheduled for " + fireTime.ToShortTimeString() + " today");
         }
 
         // if time has passed, schedule for tomorrow
         else
         {
             fireTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, hourToSend, minuteToSend, 0);
-            Debug.Log("Android notification scheduled for " + fireTime.ToShortTimeString() + " tomorrow");
+            //Debug.Log("Android notification scheduled for " + fireTime.ToShortTimeString() + " tomorrow");
         }
         
         notification.FireTime = fireTime;
         notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
 
         AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
-        Debug.Log("Android notification scheduling completed");
+        //Debug.Log("Android notification scheduling completed");
         
     }
 #endif
@@ -109,7 +107,7 @@ public class NotificationManager : MonoBehaviour
 #if UNITY_IOS
     private void ScheduleRepeatDailyNotificationsIos()
     {
-        Debug.Log("Schedule repeat daily iOS mindfulness notification");
+        //Debug.Log("Schedule repeat daily iOS mindfulness notification");
 
         // set notification time from data; or use default
         int hourToSend = 11; // default time is 11:00am
@@ -131,7 +129,7 @@ public class NotificationManager : MonoBehaviour
             Repeats = true
         };
 
-        Debug.Log("iOS notification scheduled for hour " + calendarTrigger.Hour.ToString() + " and minute " + calendarTrigger.Minute.ToString());
+        //Debug.Log("iOS notification scheduled for hour " + calendarTrigger.Hour.ToString() + " and minute " + calendarTrigger.Minute.ToString());
 
         var notification = new iOSNotification()
         {
@@ -150,13 +148,13 @@ public class NotificationManager : MonoBehaviour
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
-        Debug.Log("iOS notification sent");
+        //Debug.Log("iOS notification sent");
     }
 #endif
 
     public void CancelNotifications()
     {
-        Debug.Log("Cancel notifications");
+        //Debug.Log("Cancel notifications");
 #if UNITY_ANDROID
         AndroidNotificationCenter.CancelAllNotifications();
 #elif UNITY_IOS
@@ -182,12 +180,12 @@ public class NotificationManager : MonoBehaviour
         if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false")
         {
             CancelNotifications();
-            Debug.Log("Notifications have been disabled");
+            //Debug.Log("Notifications have been disabled");
         }
         else
         {
             ScheduleNotifications();
-            Debug.Log("Notifications have been enabled");
+            //Debug.Log("Notifications have been enabled");
         }        
     }
 
@@ -197,11 +195,11 @@ public class NotificationManager : MonoBehaviour
         if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "true")
         {
             ScheduleNotifications();
-            Debug.Log("Reschedule notifications");
+            //Debug.Log("Reschedule notifications");
         }
         else
         {
-            Debug.Log("Notifications have been disabled; do not reschedule");
+            //Debug.Log("Notifications have been disabled; do not reschedule");
         }
     }
 }

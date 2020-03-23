@@ -23,12 +23,12 @@ public class SoundManager : MonoBehaviour
     {
         if (PlayerPrefs.GetString(meditateAudioToggle.GetPlayerPrefName()) == "true")
         {
-            Debug.Log("Unmute all sounds");
+            //Debug.Log("Unmute all sounds");
             SetMuteOnSounds(false);
         }
         else
         {
-            Debug.Log("Mute all sounds");
+            //Debug.Log("Mute all sounds");
             SetMuteOnSounds(true);
         }
     } 
