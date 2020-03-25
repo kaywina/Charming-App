@@ -25,22 +25,28 @@ public class SwipeCharmControls : SwipeFunction
     public override void SwipeLeft()
     {
         // go to previous charm set if possible otherwise do nothing
+        //Debug.Log("Swipe Left");
         if (charmSet == 0)
         {
+            //Debug.Log("Go to charm set 1");
             DeactivateObjects(charmSet);
             charmSet = 1;
             ActivateObjects(charmSet);
+            PlayerPrefs.SetInt(Charms.GetCharmSetPlayerPrefName(), charmSet);
         }
     }
 
     public override void SwipeRight()
     {
         // go to next charm set if possible otherwise do nothing
+        //Debug.Log("Swipe Right");
         if (charmSet == 1)
         {
+            //Debug.Log("Go to charm set 0");
             DeactivateObjects(charmSet);
             charmSet = 0;
             ActivateObjects(charmSet);
+            PlayerPrefs.SetInt(Charms.GetCharmSetPlayerPrefName(), charmSet);
         }
     }
 
