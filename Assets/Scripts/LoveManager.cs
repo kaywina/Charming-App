@@ -11,16 +11,35 @@ public class LoveManager : MonoBehaviour
 
     private const string PLAYER_PREF_NAME = "LoveNumber"; // don't change in production
     private const string PLAYER_PREF_NAME_MAX_UNLOCKED = "LoveNumberMaxUnlocked"; // don't change in production
-    private const string PLAYER_PREF_HAS_CHECKED = "HasCheckedDailyLove";
 
     private int maxLocIndex = 68; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_0 to LOVE_68
     private static bool unlockedThisSession = false;
 
+    private int originalIndex = 0;
     private int tempIndex = 0;
 
+    private void Awake()
+    {
+        // hack to make indexing work properly
+        if (TimeManager.IsNewDay(TimeManager.TimeType.DailyLove)) {
+            originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME);
+        }
+        else
+        {
+            originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) - 1;
+        }
+
+        Debug.Log("Assign original index in LoveManager");
+    }
     void OnEnable()
     {
-        string locKey = "LOVE_" + PlayerPrefs.GetInt(PLAYER_PREF_NAME).ToString();
+        int loveIndex = originalIndex; // original index ensures that only one value is unlocked per day
+        tempIndex = loveIndex; // temp index is used for arrow button/swipe functionality to read previous unlocked messages
+
+        string locKey = "LOVE_" + loveIndex.ToString();
+
+        Debug.Log("Starting loveIndex for this session is " + loveIndex);
+        Debug.Log("Max unlocked so far is " + PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED));
 
         // only update once per session
         if (unlockedThisSession) {
@@ -37,38 +56,28 @@ public class LoveManager : MonoBehaviour
             return;
         }
 
-        int newIndex = 0;
-
         // enforce max limit on number of null strings to avoid null refs; maxLocStrings should be same as number of key-value pairs in localization dictionary
-        if (PlayerPrefs.GetInt(PLAYER_PREF_NAME) >= maxLocIndex)
+        if (loveIndex > maxLocIndex)
         {
-            PlayerPrefs.SetInt(PLAYER_PREF_NAME, newIndex);
+            loveIndex = 0;
+            PlayerPrefs.SetInt(PLAYER_PREF_NAME, loveIndex);
+            Debug.Log("Exceeded number of max love loc strings, resetting index to 0");
         }
-
-        // if there is still a valid increment to be made
         else
-        { 
-            // we want to start off the first day with a zero index and increment it every day after
-            if (PlayerPrefs.GetString(PLAYER_PREF_HAS_CHECKED) == "True")
-            {
-                Debug.Log("Increment daily love index");
-                newIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) + 1;
-                PlayerPrefs.SetInt(PLAYER_PREF_NAME_MAX_UNLOCKED, newIndex);
-            }
-
-            if (newIndex > PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED))
-            {
-                Debug.Log("Exceeded number of max love loc strings, resetting index to 0");    
-                newIndex = 0;      
-            }
+        {
+            PlayerPrefs.SetInt(PLAYER_PREF_NAME_MAX_UNLOCKED, loveIndex);
         }
-        PlayerPrefs.SetInt(PLAYER_PREF_NAME, newIndex);
-        locKey = "LOVE_" + newIndex.ToString();
+
+        // display the correct love statement
+        locKey = "LOVE_" + loveIndex.ToString();
         loveText.SetLocalizationKey(locKey);
+
+        // increment love index for next session
+        loveIndex++;
+        PlayerPrefs.SetInt(PLAYER_PREF_NAME, loveIndex);
+        Debug.Log("Incrementing daily love index to " + loveIndex + " for next session");
         TimeManager.SetPrefsForDailyLove();
         unlockedThisSession = true;
-        PlayerPrefs.SetString(PLAYER_PREF_HAS_CHECKED, "True");
-        tempIndex = newIndex;
     }
 
     public void PreviousLove()
@@ -76,10 +85,12 @@ public class LoveManager : MonoBehaviour
         Debug.Log("Go to previous love");
 
         tempIndex--;
+        Debug.Log("temp index is now " + tempIndex);
 
         if (tempIndex < 0)
         {
-            tempIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME);
+            tempIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED);
+            Debug.Log("temp index less than zero, reset to max unlocked index");
         }
 
         string tempLocKey = "LOVE_" + tempIndex.ToString();
@@ -91,9 +102,11 @@ public class LoveManager : MonoBehaviour
         Debug.Log("Go to next love");
 
         tempIndex++;
+        Debug.Log("temp index is now " + tempIndex);
 
-        if (tempIndex > PlayerPrefs.GetInt(PLAYER_PREF_NAME))
+        if (tempIndex > PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED))
         {
+            Debug.Log("temp index greater than max unlocked, reset to zero");
             tempIndex = 0;
         }
 
