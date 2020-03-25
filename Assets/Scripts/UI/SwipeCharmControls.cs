@@ -22,7 +22,7 @@ public class SwipeCharmControls : SwipeFunction
         charmSet = Charms.GetCharmSet();
     }
 
-    protected override void SwipeLeft()
+    public override void SwipeLeft()
     {
         // go to previous charm set if possible otherwise do nothing
         if (charmSet == 0)
@@ -33,7 +33,7 @@ public class SwipeCharmControls : SwipeFunction
         }
     }
 
-    protected override void SwipeRight()
+    public override void SwipeRight()
     {
         // go to next charm set if possible otherwise do nothing
         if (charmSet == 1)

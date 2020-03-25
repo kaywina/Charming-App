@@ -107,12 +107,12 @@ public class SwipeFunction : MonoBehaviour
         }
     }
 
-    protected virtual void SwipeLeft()
+    public virtual void SwipeLeft()
     {
 
     }
 
-    protected virtual void SwipeRight()
+    public virtual void SwipeRight()
     {
 
     }

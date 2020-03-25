@@ -6,12 +6,12 @@ public class SwipeLove : SwipeFunction
 {
     public LoveManager loveManager;
 
-    protected override void SwipeLeft()
+    public override void SwipeLeft()
     {
         loveManager.NextLove();
     }
 
-    protected override void SwipeRight()
+    public override void SwipeRight()
     {
         loveManager.PreviousLove();
     }
