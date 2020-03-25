@@ -20,16 +20,13 @@ public class LoveManager : MonoBehaviour
 
     private void Awake()
     {
-        // hack to make indexing work properly
         if (TimeManager.IsNewDay(TimeManager.TimeType.DailyLove)) {
-            originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME);
+            originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME); // new day case
         }
         else
         {
-            originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) - 1;
+            originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) - 1; // not a new day; player pref was already incremented so less one to make indexing work
         }
-
-        Debug.Log("Assign original index in LoveManager");
     }
     void OnEnable()
     {
@@ -38,12 +35,12 @@ public class LoveManager : MonoBehaviour
 
         string locKey = "LOVE_" + loveIndex.ToString();
 
-        Debug.Log("Starting loveIndex for this session is " + loveIndex);
-        Debug.Log("Max unlocked at start of this session is " + PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED));
+        //Debug.Log("Starting loveIndex for this session is " + loveIndex);
+        //Debug.Log("Max unlocked at start of this session is " + PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED));
 
         // only update once per session
         if (unlockedThisSession) {
-            Debug.Log("Already unlocked love value for this session");
+            //Debug.Log("Already unlocked love value for this session");
             loveText.SetLocalizationKey(locKey);
             return;
         }
@@ -51,7 +48,7 @@ public class LoveManager : MonoBehaviour
         // only update once per day
         if (!TimeManager.IsNewDay(TimeManager.TimeType.DailyLove)) // make sure all calls to IsNewDay pass in different string player pref names
         {
-            Debug.Log("Already unlocked love value for today");
+            //Debug.Log("Already unlocked love value for today");
             loveText.SetLocalizationKey(locKey);
             return;
         }
@@ -78,8 +75,8 @@ public class LoveManager : MonoBehaviour
         PlayerPrefs.SetInt(PLAYER_PREF_NAME, loveIndex);
         TimeManager.SetPrefsForDailyLove();
         unlockedThisSession = true;
-        Debug.Log("Ending loveIndex for this session is " + loveIndex);
-        Debug.Log("Max unlocked at end of this session is " + PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED));
+        //Debug.Log("Ending loveIndex for this session is " + loveIndex);
+        //Debug.Log("Max unlocked at end of this session is " + PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED));
     }
 
     public void PreviousLove()
@@ -87,12 +84,12 @@ public class LoveManager : MonoBehaviour
         Debug.Log("Go to previous love");
 
         tempIndex--;
-        Debug.Log("temp index is now " + tempIndex);
+        //Debug.Log("temp index is now " + tempIndex);
 
         if (tempIndex < 0)
         {
             tempIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED) - 1; // this is less one, because max has been incremented in OnEnable
-            Debug.Log("temp index less than zero, reset to max unlocked index");
+            //Debug.Log("temp index less than zero, reset to max unlocked index");
         }
 
         string tempLocKey = "LOVE_" + tempIndex.ToString();
@@ -101,14 +98,14 @@ public class LoveManager : MonoBehaviour
 
     public void NextLove()
     {
-        Debug.Log("Go to next love");
+        //Debug.Log("Go to next love");
 
         tempIndex++;
-        Debug.Log("temp index is now " + tempIndex);
+        //Debug.Log("temp index is now " + tempIndex);
 
         if (tempIndex >= PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED))
         {
-            Debug.Log("temp index greater than max unlocked, reset to zero");
+            //Debug.Log("temp index greater than max unlocked, reset to zero");
             tempIndex = 0;
         }
 
