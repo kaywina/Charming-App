@@ -28,16 +28,16 @@ public class SwipeThroughObjectArray : SwipeFunction
     public override void SwipeLeft()
     {
         objects[index].SetActive(false);
-        index++;
-        if (index >= objects.Length) { index = 0; }
+        index--;
+        if (index < 0) { index = objects.Length - 1; }
         objects[index].SetActive(true);
     }
 
     public override void SwipeRight()
     {
         objects[index].SetActive(false);
-        index--;
-        if (index < 0) { index = objects.Length - 1; }
+        index++;
+        if (index >= objects.Length) { index = 0; }
         objects[index].SetActive(true);
     }
 }
