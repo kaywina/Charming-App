@@ -125,7 +125,7 @@ public class TimePicker : MonoBehaviour
 
     public void SetPlayerPrefs()
     {
-        Debug.Log("Set player prefs for notification hour and minute");
+        //Debug.Log("Set player prefs for notification hour and minute");
         PlayerPrefs.SetInt(NotificationManager.PLAYERPREF_NAME_HOUR, hour);
         PlayerPrefs.SetInt(NotificationManager.PLAYERPREF_NAME_MINUTE, minute);
     }
