@@ -81,7 +81,7 @@ public class LoveManager : MonoBehaviour
 
     public void PreviousLove()
     {
-        Debug.Log("Go to previous love");
+        //Debug.Log("Go to previous love");
 
         tempIndex--;
         //Debug.Log("temp index is now " + tempIndex);

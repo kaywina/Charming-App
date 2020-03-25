@@ -9,8 +9,14 @@ public class SecretManager : MonoBehaviour
     public Secret[] secrets;
     public GameObject worldSpaceSecrets;
     public GameObject canvasSecret;
+    public GameObject hideSecretButton;
 
     private int lastIndex = 0;
+
+    private void Start()
+    {
+        hideSecretButton.SetActive(false);
+    }
 
     public void WhenShowSecret(int i)
     {
@@ -20,6 +26,7 @@ public class SecretManager : MonoBehaviour
         secrets[i].Show();
         canvasSecret.SetActive(true);
         lastIndex = i;
+        hideSecretButton.SetActive(true);
     }
 
     public void WhenHideSecret()
@@ -29,5 +36,6 @@ public class SecretManager : MonoBehaviour
         canvasNoninteractable.SetActive(true);
         worldSpaceSecrets.SetActive(false);
         secrets[lastIndex].Hide();
+        hideSecretButton.SetActive(false);
     }
 }

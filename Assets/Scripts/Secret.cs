@@ -7,13 +7,22 @@ public class Secret : MonoBehaviour
 
     public GameObject[] objects;
 
+    // secrets are all disabled on start by default
+    private void Start()
+    {
+        for (int i = 0; i < objects.Length; i++)
+        {
+            objects[i].SetActive(false);
+        }
+    }
+
     public void Show()
     {
         for (int i = 0; i < objects.Length; i++)
         {
             objects[i].SetActive(true);
         }
-        Debug.Log("Show the secret");
+        //Debug.Log("Show the secret");
     }
 
     public void Hide()
@@ -22,6 +31,6 @@ public class Secret : MonoBehaviour
         {
             objects[i].SetActive(false);
         }
-        Debug.Log("Hide the secret");
+        //Debug.Log("Hide the secret");
     }
 }
