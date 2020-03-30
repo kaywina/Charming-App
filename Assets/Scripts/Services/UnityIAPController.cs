@@ -15,6 +15,19 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
+#if SUBSCRIPTION_MANAGER
+    Dictionary<string, string> introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
+#endif
+
+    private ITransactionHistoryExtensions m_TransactionHistoryExtensions;
+#if UNITY_ANDROID
+    private IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
+#elif UNITY_IOS
+    private IAppleExtensions m_AppleExtensions;
+#endif
+
+    private bool m_PurchaseInProgress;
+
     // Product identifiers for all products capable of being purchased: 
     // "convenience" general identifiers for use with Purchasing, and their store-specific identifier 
     // counterparts for use with and outside of Unity Purchasing. Define store-specific identifiers 
@@ -251,8 +264,126 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         m_StoreController = controller;
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
+
+        m_TransactionHistoryExtensions = extensions.GetExtension<ITransactionHistoryExtensions>();
+
+#if UNITY_ANDROID
+        m_GooglePlayStoreExtensions = extensions.GetExtension<IGooglePlayStoreExtensions>();
+#elif UNITY_IOS
+        m_AppleExtensions = extensions.GetExtension<IAppleExtensions>();
+#endif
+
+#if UNITY_ANDROID
+        Dictionary<string, string> introductory_info_dict = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
+#elif UNITY_IOS
+        Dictionary<string, string> introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
+#endif
+
+
+        Debug.Log("Available items:");
+        foreach (var item in controller.products.all)
+        {
+            if (item.availableToPurchase)
+            {
+                Debug.Log(string.Join(" - ",
+                    new[]
+                    {
+                        item.metadata.localizedTitle,
+                        item.metadata.localizedDescription,
+                        item.metadata.isoCurrencyCode,
+                        item.metadata.localizedPrice.ToString(),
+                        item.metadata.localizedPriceString,
+                        item.transactionID,
+                        item.receipt
+                    }));
+
+                // this is the usage of SubscriptionManager class
+                if (item.receipt != null)
+                {
+                    if (item.definition.type == ProductType.Subscription)
+                    {
+                        if (checkIfProductIsAvailableForSubscriptionManager(item.receipt))
+                        {
+                            string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
+                            SubscriptionManager p = new SubscriptionManager(item, intro_json);
+                            SubscriptionInfo info = p.getSubscriptionInfo();
+                            Debug.Log("product id is: " + info.getProductId());
+                            Debug.Log("purchase date is: " + info.getPurchaseDate());
+                            Debug.Log("subscription next billing date is: " + info.getExpireDate());
+                            Debug.Log("is subscribed? " + info.isSubscribed().ToString());
+                            Debug.Log("is expired? " + info.isExpired().ToString());
+                            Debug.Log("is cancelled? " + info.isCancelled());
+                            Debug.Log("product is in free trial peroid? " + info.isFreeTrial());
+                            Debug.Log("product is auto renewing? " + info.isAutoRenewing());
+                            Debug.Log("subscription remaining valid time until next billing date is: " + info.getRemainingTime());
+                            Debug.Log("is this product in introductory price period? " + info.isIntroductoryPricePeriod());
+                            Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
+                            Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
+                            Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
+                        }
+                        else
+                        {
+                            Debug.Log("This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("the product is not a subscription product");
+                    }
+                }
+                else
+                {
+                    Debug.Log("the product should have a valid receipt");
+                }
+            }
+        }
     }
 
+    private bool checkIfProductIsAvailableForSubscriptionManager(string receipt) {
+        var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);
+        if (!receipt_wrapper.ContainsKey("Store") || !receipt_wrapper.ContainsKey("Payload")) {
+            Debug.Log("The product receipt does not contain enough information");
+            return false;
+        }
+        var store = (string)receipt_wrapper ["Store"];
+        var payload = (string)receipt_wrapper ["Payload"];
+
+        if (payload != null ) {
+            switch (store) {
+            case GooglePlay.Name:
+                {
+                    var payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
+                    if (!payload_wrapper.ContainsKey("json")) {
+                        Debug.Log("The product receipt does not contain enough information, the 'json' field is missing");
+                        return false;
+                    }
+                    var original_json_payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
+                    if (original_json_payload_wrapper == null || !original_json_payload_wrapper.ContainsKey("developerPayload")) {
+                        Debug.Log("The product receipt does not contain enough information, the 'developerPayload' field is missing");
+                        return false;
+                    }
+                    var developerPayloadJSON = (string)original_json_payload_wrapper["developerPayload"];
+                    var developerPayload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(developerPayloadJSON);
+                    if (developerPayload_wrapper == null || !developerPayload_wrapper.ContainsKey("is_free_trial") || !developerPayload_wrapper.ContainsKey("has_introductory_price_trial")) {
+                        Debug.Log("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");
+                        return false;
+                    }
+                    return true;
+                }
+            case AppleAppStore.Name:
+            case AmazonApps.Name:
+            case MacAppStore.Name:
+                {
+                    return true;
+                }
+            default:
+                {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
@@ -329,12 +460,22 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         return PurchaseProcessingResult.Complete;
     }
 
-
-    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
+    /// <summary>
+    /// This will be called if an attempted purchase fails.
+    /// </summary>
+    public void OnPurchaseFailed(Product item, PurchaseFailureReason r)
     {
-        // A product purchase attempt did not succeed. Check failureReason for more detail. Consider sharing 
-        // this reason with the user to guide their troubleshooting actions.
-        Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
-        EventManager.TriggerEvent(failedToSubscribePlayerPref);
+        Debug.Log("Purchase failed: " + item.definition.id);
+        Debug.Log(r);
+
+        // Detailed debugging information
+        Debug.Log("Store specific error code: " + m_TransactionHistoryExtensions.GetLastStoreSpecificPurchaseErrorCode());
+        if (m_TransactionHistoryExtensions.GetLastPurchaseFailureDescription() != null)
+        {
+            Debug.Log("Purchase failure description message: " +
+                      m_TransactionHistoryExtensions.GetLastPurchaseFailureDescription().message);
+        }
+
+        m_PurchaseInProgress = false;
     }
 }
