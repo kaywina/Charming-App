@@ -79,7 +79,7 @@ public class BonusPanel : CharmsPanel
 
         // get and store playerpref for gold subscribers
         bool isGold = false;
-        if (PlayerPrefs.GetString(goldTogglePrefab.GetPlayerPrefName()) == "true")
+        if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
         {
             isGold = true;
         }

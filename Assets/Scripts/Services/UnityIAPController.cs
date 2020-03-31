@@ -26,7 +26,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     private IAppleExtensions m_AppleExtensions;
 #endif
 
-    private bool m_PurchaseInProgress;
+    private static bool m_PurchaseInProgress;
 
     // Product identifiers for all products capable of being purchased: 
     // "convenience" general identifiers for use with Purchasing, and their store-specific identifier 
@@ -179,6 +179,12 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
     static void BuyProductID(string productId)
     {
+        if (m_PurchaseInProgress == true)
+        {
+            Debug.Log("Purchase is already in progress. Do not proceed with buying a new product");
+            return;
+        }
+        
         // If Purchasing has been initialized ...
         if (IsInitialized())
         {
@@ -320,6 +326,9 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                             Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                             Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
+
+                            ValidateSubscription(info);
+
                         }
                         else
                         {
@@ -336,6 +345,54 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                     Debug.Log("the product should have a valid receipt");
                 }
             }
+        }
+    }
+
+    private void ValidateSubscription(SubscriptionInfo i)
+    {
+        string productIdFromInfo;
+        productIdFromInfo = i.getProductId();
+
+        if (string.IsNullOrEmpty(productIdFromInfo))
+        {
+            Debug.Log("Product ID is null or void; exiting validation");
+            return;
+        }
+
+        bool isValid = false;
+#if UNITY_ANDROID
+        if (i.getProductId() == kProductNameGooglePlaySubscription) { isValid = true; }
+#elif UNITY_IOS
+        if (i.getProductId() == kProductNameAppleSubscription) { isValid = true; }
+#else
+        Debug.Log("IAP is not supported for this platform, no validation to perform");
+#endif
+
+        if (isValid == false)
+        {
+            Debug.Log("Product ID exist but is not valid, exiting validation");
+            return;
+        }
+
+        // set the player pref flag for gold toggle based on info data
+        // this should enforce enabling gold functionality if user has subscribed
+        // and should enforce disabling gold functionality if user has ended their subscription
+        switch (i.isSubscribed())
+        {
+            case Result.True:
+                Debug.Log("This user is subscribed to Charming App Gold");
+                PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true");
+                break;
+            case Result.False:
+                Debug.Log("This user is not subscribed to Charming App Gold");
+                PlayerPrefs.SetString(goldSubscriptionPlayerPref, "false");
+                break;
+            case Result.Unsupported:
+                Debug.Log("Hit unsupported case in Charming App Gold validation check");
+                break;
+            default:
+                Debug.Log("Hit default case in subscription check; this message should not appear");
+                break;
         }
     }
 
