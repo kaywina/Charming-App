@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource[] chimeSounds;
     public SetPlayerPrefFromToggle meditateAudioToggle;
 
+    private string audioPlayerPref = "EnableSounds"; // don't change this in production
+
     private void OnEnable()
     {
         SetMuteFromPlayerPref();
@@ -21,7 +23,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetMuteFromPlayerPref()
     {
-        if (PlayerPrefs.GetString(meditateAudioToggle.GetPlayerPrefName()) == "true")
+        if (PlayerPrefs.GetString(audioPlayerPref) == "true")
         {
             //Debug.Log("Unmute all sounds");
             SetMuteOnSounds(false);

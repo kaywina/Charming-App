@@ -15,16 +15,16 @@ public class NotificationManager : MonoBehaviour
     private const string CHANNEL_ID = "CharmingAppNotifications";
 #endif
 
-    public SetPlayerPrefFromToggle togglePrefab;
-
     public static string PLAYERPREF_NAME_HOUR = "NotificationHour"; // don't change in production
     public static string PLAYERPREF_NAME_MINUTE = "NotificationMinute"; // don't change in production
+
+    private string notificationsPlayerPref = "EnableNotifications"; // don't change in production
 
     private void Start()
     {
         CancelNotifications(); // always start from scratch
 
-        if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false" )
+        if (PlayerPrefs.GetString(notificationsPlayerPref) == "false" )
         {
             //Debug.Log("Notifications are disabled; cancel all notifications on start");
             CancelNotifications();
@@ -32,10 +32,10 @@ public class NotificationManager : MonoBehaviour
         }
         else
         {
-            if (String.IsNullOrEmpty(PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName())))
+            if (String.IsNullOrEmpty(PlayerPrefs.GetString(notificationsPlayerPref)))
             {
                 //Debug.Log("Notifications option not yet set; defaulting to enabled");
-                PlayerPrefs.SetString(togglePrefab.GetPlayerPrefName(), "true");
+                PlayerPrefs.SetString(notificationsPlayerPref, "true");
             }
         }
 
@@ -177,7 +177,7 @@ public class NotificationManager : MonoBehaviour
 
     public void ToggleNotifications()
     {
-        if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "false")
+        if (PlayerPrefs.GetString(notificationsPlayerPref) == "false")
         {
             CancelNotifications();
             //Debug.Log("Notifications have been disabled");
@@ -192,7 +192,7 @@ public class NotificationManager : MonoBehaviour
     public void RescheduleNotifications()
     {
         CancelNotifications();
-        if (PlayerPrefs.GetString(togglePrefab.GetPlayerPrefName()) == "true")
+        if (PlayerPrefs.GetString(notificationsPlayerPref) == "true")
         {
             ScheduleNotifications();
             //Debug.Log("Reschedule notifications");
