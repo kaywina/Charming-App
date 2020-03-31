@@ -6,8 +6,6 @@ using System.Reflection;
 [CustomEditor(typeof(InspectorTools))]
 public class InspectorToolsGUI : Editor
 {
-    private MethodInfo _eventMethodInfo = null;
-
     public override void OnInspectorGUI()
     {
         //EditorGUILayout.LabelField("Click on this window to update values:");
