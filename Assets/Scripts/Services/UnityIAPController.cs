@@ -26,6 +26,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     private IAppleExtensions m_AppleExtensions;
 #endif
 
+    private SubscriptionInfo info;
     private static bool m_PurchaseInProgress;
 
     // Product identifiers for all products capable of being purchased: 
@@ -304,7 +305,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
 
         Debug.Log("Available items:");
-        foreach (var item in controller.products.all)
+        foreach (Product item in controller.products.all)
         {
             if (item.availableToPurchase)
             {
@@ -329,7 +330,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                         {
                             string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
                             SubscriptionManager p = new SubscriptionManager(item, intro_json);
-                            SubscriptionInfo info = p.getSubscriptionInfo();
+                            info = p.getSubscriptionInfo();
                             Debug.Log("product id is: " + info.getProductId());
                             Debug.Log("purchase date is: " + info.getPurchaseDate());
                             Debug.Log("subscription next billing date is: " + info.getExpireDate());
@@ -360,9 +361,25 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 else
                 {
                     Debug.Log("the product should have a valid receipt");
+                    CheckForCancelledSubscription(item);
+
                 }
             }
         }
+    }
+
+    private void CheckForCancelledSubscription(Product product)
+    {
+        // disable gold if there is not valid receipt for the subscription
+        // this should capture case where the subscription has been cancelled
+        bool disableGold = false;
+        string id = product.definition.storeSpecificId;
+#if UNITY_ANDROID
+        if (id == kProductNameGooglePlaySubscription) { disableGold = true; }
+#elif UNITY_IOS
+        if (id == kProductNameAppleSubscription) { disableGold = true; }
+#endif
+        if (disableGold) { PlayerPrefs.SetString(goldSubscriptionPlayerPref, "false"); }
     }
 
     private void ValidateSubscription(SubscriptionInfo i)
@@ -391,9 +408,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             return;
         }
 
-        // set the player pref flag for gold toggle based on info data
-        // this should enforce enabling gold functionality if user has subscribed
-        // and should enforce disabling gold functionality if user has ended their subscription
+        // set the player pref flag for gold toggle based on if the user is subscribed or not
         switch (i.isSubscribed())
         {
             case Result.True:
