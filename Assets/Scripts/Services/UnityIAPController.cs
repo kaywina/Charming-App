@@ -231,6 +231,17 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             return;
         }
 
+#if UNITY_ANDROID
+        Debug.Log("Restore transactions on Google Play");
+        m_GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored);
+#elif UNITY_IOS
+        Debug.Log("Restore transactions on the App Store");
+        m_AppleExtensions.RestoreTransactions(OnTransactionsRestored);
+#else
+        Debug.Log("Restoring transactions is not supported on this platform.");
+        return;
+#endif
+
         // If we are running on an Apple device ... 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
             Application.platform == RuntimePlatform.OSXPlayer)
@@ -256,11 +267,17 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         }
     }
 
+    /// <summary>
+    /// This will be called after a call to IAppleExtensions.RestoreTransactions().
+    /// </summary>
+    private void OnTransactionsRestored(bool success)
+    {
+        Debug.Log("Transactions restored." + success);
+    }
 
     //  
     // --- IStoreListener
     //
-
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         // Purchasing has succeeded initializing. Collect our Purchasing references.
@@ -442,13 +459,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         return false;
     }
 
-    public void OnInitializeFailed(InitializationFailureReason error)
-    {
-        // Purchasing set-up has not succeeded. Check error for reason. Consider sharing this reason with the user.
-        Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
-    }
-
-
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
         // Or ... a subscription product has been purchased by this user.
@@ -534,5 +544,42 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         }
 
         m_PurchaseInProgress = false;
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error)
+    {
+        Debug.Log("Billing failed to initialize!");
+        switch (error)
+        {
+            case InitializationFailureReason.AppNotKnown:
+                Debug.LogError("IAP initialization error AppNotKnown. Is the App correctly uploaded on the relevant publisher console?");
+                break;
+            case InitializationFailureReason.PurchasingUnavailable:
+                // Ask the user if billing is disabled in device settings.
+                Debug.Log("IAP initialization error PurchasingUnvailable. Is billing disabled in the user's device settings?");
+                break;
+            case InitializationFailureReason.NoProductsAvailable:
+                // Developer configuration error; check product metadata.
+                Debug.Log("IAP initialization error NoProductsAvailable. Have the IAP products been setup on the relevant publisher console?");
+                break;
+            default:
+                Debug.Log("Hit default case in IAP OnInitializeFailed. This message should not be shown.");
+                break;
+        }
+    }
+
+    /// <summary>
+    /// iOS Specific.
+    /// This is called as part of Apple's 'Ask to buy' functionality,
+    /// when a purchase is requested by a minor and referred to a parent
+    /// for approval.
+    ///
+    /// When the purchase is approved or rejected, the normal purchase events
+    /// will fire.
+    /// </summary>
+    /// <param name="item">Item.</param>
+    private void OnDeferred(Product item)
+    {
+        Debug.Log("Purchase deferred: " + item.definition.id);
     }
 }
