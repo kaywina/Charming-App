@@ -29,6 +29,7 @@ public class CurrencyManager : MonoBehaviour {
         Instance = this;
 
         welcomeBonusText.text = welcomeBonusSilver.ToString();
+        canOpenBonusPanel = SetCanOpenBonusPanel();
 
         // on first time running app
         if (!PlayerPrefs.GetString("FirstRun").Equals("False"))
@@ -44,7 +45,6 @@ public class CurrencyManager : MonoBehaviour {
         }
 
         SetCurrencyText();
-        canOpenBonusPanel = SetCanOpenBonusPanel();
     }
 
     private void OnApplicationQuit()
