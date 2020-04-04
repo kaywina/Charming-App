@@ -42,4 +42,15 @@ public class SoundManager : MonoBehaviour
             chimeSounds[i].mute = mute;
         }
     }
+
+    public void PlayChimeSoundByIndex (int i)
+    {
+        if (i < 0 || i >= chimeSounds.Length)
+        {
+            Debug.LogError("Invalid index for chime sounds array");
+            return;
+        }
+
+        chimeSounds[i].Play();
+    }
 }
