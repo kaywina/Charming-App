@@ -129,8 +129,19 @@ public class ShareScreenshotAndroid : MonoBehaviour
             givenBonusAmount = baseBonusAmount;
         }
 
-        if (givenBonusAmount <= baseBonusAmount && doubleBonusButton != null) { doubleBonusButton.SetActive(true); } // givenBonusAmount will be less than or equal to base amount as long as user has not watched a rewarded video; this prevents the button from showing if the user chooses to share more than once
-
+        // givenBonusAmount will be less than or equal to base amount as long as user has not watched a rewarded video; this prevents the button from showing if the user chooses to share more than once
+        if (givenBonusAmount <= baseBonusAmount && doubleBonusButton != null)
+        {
+            if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) != "true")
+            {
+                doubleBonusButton.SetActive(true);
+            }
+            else
+            {
+                givenBonusAmount = givenBonusAmount * 2;
+                rewardAmountText.text = givenBonusAmount.ToString();
+            } 
+        } 
     }
 
     private IEnumerator TakeSSAndShare()
