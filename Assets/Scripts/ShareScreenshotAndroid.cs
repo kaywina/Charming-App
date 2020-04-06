@@ -19,7 +19,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public GameObject url;
     public GameObject thanksText;
     public GameObject doubleBonusButton;
-    public GameObject watchedAdText;
+    public GameObject doubleBonusText;
     public GameObject okButton;
 
     public Text rewardAmountText;
@@ -38,7 +38,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         if (thanksText != null) { thanksText.SetActive(false); }
         if (url != null) { url.SetActive(false); }
         if (doubleBonusButton != null) { doubleBonusButton.SetActive(false); }
-        if (watchedAdText != null) { watchedAdText.SetActive(false); }
+        if (doubleBonusText != null) { doubleBonusText.SetActive(false); }
         if (rewardAmountText != null) { rewardAmountText.text = baseBonusAmount.ToString(); }     
     }
 
@@ -140,6 +140,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
             {
                 givenBonusAmount = givenBonusAmount * 2;
                 rewardAmountText.text = givenBonusAmount.ToString();
+                doubleBonusText.SetActive(true);
             } 
         } 
     }
