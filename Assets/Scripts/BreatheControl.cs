@@ -76,7 +76,7 @@ public class BreatheControl : MonoBehaviour
 
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.ChangeText(); }
 
-        soundManager.PlayChimeSound();
+        soundManager.PlayChimeNoteInScale();
     }
 
     public bool GetBreatheInOutFlag()

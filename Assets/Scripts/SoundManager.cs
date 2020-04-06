@@ -7,6 +7,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource[] chimeSounds;
     public SetPlayerPrefFromToggle meditateAudioToggle;
 
+    private static int chimeIndex = 0;
+    private bool goingUpScale = true;
+
     private string audioPlayerPref = "EnableSounds"; // don't change this in production
 
     private void OnEnable()
@@ -14,11 +17,31 @@ public class SoundManager : MonoBehaviour
         SetMuteFromPlayerPref();
     }
 
-    public void PlayChimeSound()
+    public void PlayRandomChimeSound()
     {
         int randomIndex = Random.Range(0, chimeSounds.Length);
         //Debug.Log("Play sound " + chimeSounds[randomIndex].gameObject.name);
         chimeSounds[randomIndex].Play();
+    }
+
+    public void PlayChimeNoteInScale()
+    {
+        chimeSounds[chimeIndex].Play();
+
+        if (goingUpScale) { chimeIndex++; }
+        else { chimeIndex--; }
+
+        if (chimeIndex >= chimeSounds.Length)
+        {
+            goingUpScale = false;
+            chimeIndex = chimeIndex - 2;
+        }
+
+        else if (chimeIndex < 0)
+        {
+            goingUpScale = true;
+            chimeIndex = chimeIndex + 2;
+        }
     }
 
     public void SetMuteFromPlayerPref()
