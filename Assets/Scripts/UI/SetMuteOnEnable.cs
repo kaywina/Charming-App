@@ -9,6 +9,6 @@ public class SetMuteOnEnable : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        soundManager.SetMuteFromPlayerPref();
+        soundManager.SetMuteSoundFromPlayerPref();
     }
 }

@@ -6,16 +6,18 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource[] chimeSounds;
     public AudioSource wheelPointerSound;
-    public SetPlayerPrefFromToggle meditateAudioToggle;
+    public AudioSource music;
 
     private static int chimeIndex = 0;
     private bool goingUpScale = true;
 
-    private string audioPlayerPref = "EnableSounds"; // don't change this in production
+    private string soundsPlayerPref = "EnableSounds"; // don't change this in production
+    private string musicPlayerPref = "EnableMusic"; // don't change this in production
 
     private void OnEnable()
     {
-        SetMuteFromPlayerPref();
+        SetMuteSoundFromPlayerPref();
+        SetPlayMusicFromPlayerPref();
     }
 
     public void PlayRandomChimeSound()
@@ -45,9 +47,9 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void SetMuteFromPlayerPref()
+    public void SetMuteSoundFromPlayerPref()
     {
-        if (PlayerPrefs.GetString(audioPlayerPref) == "true")
+        if (PlayerPrefs.GetString(soundsPlayerPref) == "true")
         {
             //Debug.Log("Unmute all sounds");
             SetMuteOnSounds(false);
@@ -57,7 +59,21 @@ public class SoundManager : MonoBehaviour
             //Debug.Log("Mute all sounds");
             SetMuteOnSounds(true);
         }
-    } 
+    }
+
+    public void SetPlayMusicFromPlayerPref()
+    {
+        if (PlayerPrefs.GetString(musicPlayerPref) == "true")
+        {
+            //Debug.Log("Play music");
+            SetPlayOnMusic(false);
+        }
+        else
+        {
+            //Debug.Log("Stop music");
+            SetPlayOnMusic(true);
+        }
+    }
 
     private void SetMuteOnSounds(bool mute)
     {
@@ -69,6 +85,18 @@ public class SoundManager : MonoBehaviour
         // Add mute function for other sounds below
         wheelPointerSound.mute = mute;
 
+    }
+
+    private void SetPlayOnMusic(bool doNotPlay)
+    {
+        if (doNotPlay == true)
+        {
+            music.Stop();
+        }
+        else
+        {
+            music.Play();
+        }
     }
 
     public void PlayChimeSoundByIndex (int i)
@@ -86,8 +114,4 @@ public class SoundManager : MonoBehaviour
     {
         wheelPointerSound.Play();
     }
-
-
-
-
 }
