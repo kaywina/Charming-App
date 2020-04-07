@@ -31,8 +31,6 @@ public class BackgroundParticles : MonoBehaviour
         
     }
 
-
-
     public void DisableAllParticleSystemsObjects(bool resetPlayerPref)
     {
         for (int i = 0; i < particleSystems.Length; i++)
@@ -55,4 +53,14 @@ public class BackgroundParticles : MonoBehaviour
         }
         PlayerPrefs.SetInt(playerPrefName, index);
     }
+
+    public void SetEmissionRateMultiplier(float multiplier)
+    {
+        for (int i = 0; i < particleSystems.Length; i++)
+        {
+            var e = particleSystems[i].GetComponent<ParticleSystem>().emission;
+            e.rateOverTimeMultiplier = multiplier;
+            //particleSystems[i].GetComponent<ParticleSystem>().emission.rateOverTimeMultiplier = multipler;
+        }
+    } 
 }
