@@ -15,4 +15,14 @@ public class SwipeLove : SwipeFunction
     {
         loveManager.PreviousLove();
     }
+
+    public void SwipeToughLoveLeft()
+    {
+        loveManager.NextToughLove();
+    }
+
+    public void SwipeToughLoveRight()
+    {
+        loveManager.PreviousToughLove();
+    }
 }
