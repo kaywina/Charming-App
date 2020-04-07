@@ -7,10 +7,13 @@ public class BackgroundParticles : MonoBehaviour
 
     public GameObject[] particleSystems;
     public string playerPrefName = "BackgroundParticleSystemIndex";
+    public EmissionRateSlider emitSlider;
 
     // Start is called before the first frame update
     void Start()
     {
+        emitSlider.Initialize(); // this sets the number of particles correctly from stored playerpref data
+
         int startIndex = PlayerPrefs.GetInt(playerPrefName, -1);
         if (startIndex < 0)
         {
