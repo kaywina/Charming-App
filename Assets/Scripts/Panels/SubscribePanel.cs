@@ -58,5 +58,8 @@ public class SubscribePanel : CharmsPanel
             lovePanel.SetReturnToMain(loveRTM);
             lovePanel.gameObject.SetActive(true);
         }
+
+        fromOptions = false;
+        fromLove = false;
     }
 }
