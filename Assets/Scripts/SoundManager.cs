@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public AudioSource[] chimeSounds;
+    public AudioSource wheelPointerSound;
     public SetPlayerPrefFromToggle meditateAudioToggle;
 
     private static int chimeIndex = 0;
@@ -64,6 +65,10 @@ public class SoundManager : MonoBehaviour
         {
             chimeSounds[i].mute = mute;
         }
+
+        // Add mute function for other sounds below
+        wheelPointerSound.mute = mute;
+
     }
 
     public void PlayChimeSoundByIndex (int i)
@@ -76,4 +81,13 @@ public class SoundManager : MonoBehaviour
 
         chimeSounds[i].Play();
     }
+
+    public void PlayWheelPointerSound()
+    {
+        wheelPointerSound.Play();
+    }
+
+
+
+
 }
