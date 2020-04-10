@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwipeLove : SwipeFunction
+public class SwipeToughLove : SwipeFunction
 {
     public LoveManager loveManager;
 
     new void Start()
     {
         base.Start();
-        yLimitTop = 0.0f;
-        yLimitBottom = 0.5f;
+        yLimitTop = 0.5f;
+        yLimitBottom = 1.0f;
     }
+
     public override void SwipeLeft()
     {
-        //Debug.Log("Swile easy love left");
-        loveManager.NextLove();
+        //Debug.Log("Swile tough love left");
+        loveManager.NextToughLove();
     }
 
     public override void SwipeRight()
     {
-        //Debug.Log("Swile easy love right");
-        loveManager.PreviousLove();
+        //Debug.Log("Swile tough love right");
+        loveManager.PreviousToughLove();
     }
+
 }
