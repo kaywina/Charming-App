@@ -15,12 +15,22 @@ public class UnityRewardedAdsButton : MonoBehaviour
     private bool watched;
     public GameObject watchedRewardedAdText;
     public Text rewardAmountText;
+    public GameObject strikeout;
 
     private void OnEnable()
     {
         adButton = GetComponent<Button>();
         adButton.onClick.AddListener(ShowRewardedAd);
         watched = false; // can only use button once during bonus wheel session
+
+        if (rewardAmountText != null)
+        {
+            rewardAmountText.gameObject.SetActive(false);
+        }
+        if (strikeout != null)
+        {
+            strikeout.SetActive(false);
+        }
     }
 
     private void OnDisable()
@@ -55,8 +65,8 @@ public class UnityRewardedAdsButton : MonoBehaviour
                 if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
                 {
                     shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
-                    shareScreenshotAndroid.rewardAmountText.text = shareScreenshotAndroid.givenBonusAmount.ToString();
-                    if (rewardAmountText != null) { rewardAmountText.text = "16"; }
+                    if (rewardAmountText != null) { rewardAmountText.gameObject.SetActive(true); }
+                    if (strikeout != null) { strikeout.SetActive(true); }
                 }
                 
                 watched = true;
