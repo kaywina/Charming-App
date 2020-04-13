@@ -35,7 +35,7 @@ public class EmissionRateSlider : MonoBehaviour
         // this is what should happen
         float emissionRateMultiplier = defaultRate * slider.value;
         bgParticles.SetEmissionRateMultiplier(emissionRateMultiplier);
-        Debug.Log("Emission of background particles changed to " + emissionRateMultiplier);
+        //Debug.Log("Emission of background particles changed to " + emissionRateMultiplier);
         PlayerPrefs.SetFloat(playerPrefName, slider.value);
     }
 }

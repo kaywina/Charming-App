@@ -19,7 +19,7 @@ public class SwipeCharmControls : SwipeFunction
     public override void SwipeLeft()
     {
         // go to previous charm set if possible otherwise do nothing
-        Debug.Log("Swipe Left; charmSet = " + charmSet);
+        //Debug.Log("Swipe Left; charmSet = " + charmSet);
         if (charmSet == 0)
         {
             //Debug.Log("Go to charm set 1");
@@ -33,7 +33,7 @@ public class SwipeCharmControls : SwipeFunction
     public override void SwipeRight()
     {
         // go to next charm set if possible otherwise do nothing
-        Debug.Log("Swipe Right; charmSet = " + charmSet);
+        //Debug.Log("Swipe Right; charmSet = " + charmSet);
 
         if (charmSet == 1)
         {

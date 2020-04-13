@@ -111,8 +111,8 @@ public class LoveManager : MonoBehaviour
 
         string locKey = "TOUGH_LOVE_" + secondLoveIndex.ToString();
 
-        Debug.Log("Starting secondLoveIndex for this session is " + secondLoveIndex);
-        Debug.Log("Max unlocked tough love at start of this session is " + PlayerPrefs.GetInt(SECOND_PLAYER_PREF_NAME_MAX_UNLOCKED));
+        //Debug.Log("Starting secondLoveIndex for this session is " + secondLoveIndex);
+        //Debug.Log("Max unlocked tough love at start of this session is " + PlayerPrefs.GetInt(SECOND_PLAYER_PREF_NAME_MAX_UNLOCKED));
 
         // only update once per session
         if (secondUnlockedThisSession)

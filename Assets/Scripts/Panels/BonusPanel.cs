@@ -75,7 +75,7 @@ public class BonusPanel : CharmsPanel
 
     public void CompleteSpin(int bonus)
     {
-        Debug.Log("Complete bonus wheel spin");
+        //Debug.Log("Complete bonus wheel spin");
 
         // get and store playerpref for gold subscribers
         bool isGold = false;
