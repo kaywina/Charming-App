@@ -26,6 +26,9 @@ public class SendEmailFromInputField : MonoBehaviour
 
         SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
         smtpServer.Port = 587;
+        smtpServer.Timeout = 1000;
+        smtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+        smtpServer.UseDefaultCredentials = false;
         smtpServer.Credentials = new System.Net.NetworkCredential(sender, password) as ICredentialsByHost;
         smtpServer.EnableSsl = true;
         ServicePointManager.ServerCertificateValidationCallback =
@@ -33,5 +36,9 @@ public class SendEmailFromInputField : MonoBehaviour
             { return true; };
         smtpServer.Send(mail);
         feedbackForm.ShowThanks();
+
+        //Attachment attachement = new Attachment(path);
+        //mail.Attachments.Add(attachement);
+
     }
 }
