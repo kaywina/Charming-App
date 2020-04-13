@@ -114,15 +114,17 @@ public class BonusPanel : CharmsPanel
 
     public void DoubleBonus()
     {
-        strikeoutText.SetActive(true);
         storedBonus = storedBonus * 2;
-        totalBonusText.text = storedBonus.ToString();
-        totalBonusText.gameObject.SetActive(true);
     }
 
     public void SkipBonus()
     {
         //DeleteBonusWheelPlayerPrefs();
         gameObject.SetActive(false);
+    }
+
+    public int GetStoredBonus()
+    {
+        return storedBonus;
     }
 }

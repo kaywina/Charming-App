@@ -139,7 +139,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
             else
             {
                 givenBonusAmount = givenBonusAmount * 2;
-                rewardAmountText.text = givenBonusAmount.ToString();
+                //rewardAmountText.text = givenBonusAmount.ToString();
                 doubleBonusText.SetActive(true);
             } 
         } 

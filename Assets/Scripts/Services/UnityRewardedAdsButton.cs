@@ -14,7 +14,7 @@ public class UnityRewardedAdsButton : MonoBehaviour
     public ShareScreenshotAndroid shareScreenshotAndroid;
     private bool watched;
     public GameObject watchedRewardedAdText;
-    public Text rewardAmountText;
+    public Text doubleRewardAmountText;
     public GameObject strikeout;
 
     private void OnEnable()
@@ -23,9 +23,9 @@ public class UnityRewardedAdsButton : MonoBehaviour
         adButton.onClick.AddListener(ShowRewardedAd);
         watched = false; // can only use button once during bonus wheel session
 
-        if (rewardAmountText != null)
+        if (doubleRewardAmountText != null)
         {
-            rewardAmountText.gameObject.SetActive(false);
+            doubleRewardAmountText.gameObject.SetActive(false);
         }
         if (strikeout != null)
         {
@@ -61,16 +61,27 @@ public class UnityRewardedAdsButton : MonoBehaviour
         switch (result)
         {
             case ShowResult.Finished:
-                if (buttonIsOnBonusPanel && bonusPanel != null) { bonusPanel.DoubleBonus(); }
+                if (buttonIsOnBonusPanel && bonusPanel != null) {
+                    bonusPanel.DoubleBonus();
+                    doubleRewardAmountText.text = bonusPanel.GetStoredBonus().ToString();
+                }
                 if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
                 {
                     shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
-                    if (rewardAmountText != null) { rewardAmountText.gameObject.SetActive(true); }
-                    if (strikeout != null) { strikeout.SetActive(true); }
+                    doubleRewardAmountText.text = shareScreenshotAndroid.givenBonusAmount.ToString();
+                }
+
+                if (doubleRewardAmountText != null) {
+                    doubleRewardAmountText.gameObject.SetActive(true);
+                }
+                if (strikeout != null) { strikeout.SetActive(true); }
+
+                watched = true;
+                if (watchedRewardedAdText != null)
+                {
+                    watchedRewardedAdText.SetActive(true);
                 }
                 
-                watched = true;
-                watchedRewardedAdText.SetActive(true);
                 gameObject.SetActive(false); // deactivate button after completion
                 //Debug.Log("The ad was successfully shown.");
                 break;
