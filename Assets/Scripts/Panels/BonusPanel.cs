@@ -12,7 +12,7 @@ public class BonusPanel : CharmsPanel
     public GameObject rewardedAdButton;
     public SetPlayerPrefFromToggle goldTogglePrefab;
     public Text prizeText;
-    public GameObject strikeoutText;
+    public GameObject strikeout;
     public GameObject doubleKeysText;
     public Text totalBonusText;
 
@@ -30,7 +30,7 @@ public class BonusPanel : CharmsPanel
     {
         doubleKeysText.SetActive(false);
         header.SetActive(false);
-        strikeoutText.SetActive(false);
+        strikeout.SetActive(false);
         totalBonusText.gameObject.SetActive(false);
         hasSpun = false;
 
