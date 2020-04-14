@@ -22,8 +22,6 @@ public class BreatheControl : MonoBehaviour
 
     public SoundManager soundManager;
 
-    public ParticleSystem particles;
-
     void OnEnable()
     {
         ResetBreaths(); // not tracking number of breaths between sessions
@@ -42,6 +40,7 @@ public class BreatheControl : MonoBehaviour
     {
         ResetBreaths();
         soundManager.StopAllChimeNotes();
+        breatheIn = true;
     }
 
     public float GetBreatheInOutSeconds()
@@ -64,12 +63,14 @@ public class BreatheControl : MonoBehaviour
 
     public void ResetBreaths()
     {
+        //Debug.Log("Reset breaths");
         numberOfBreaths = 0;
         breathsText.text = "0";
     }
 
     public void Breathe(bool breatheIsIn) // true if breathing in; false if breathing out
     {
+        //Debug.Log("Breathe");
         breatheIn = breatheIsIn;
         if (breatheIn == true)
         {

@@ -18,9 +18,13 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
 
     private void OnEnable()
     {
+        frameTime = 0;
+        increment = 0;
+
         BreatheControl.OnSliderChanged += UpdateFrameTime;
         frameTime = breatheControl.GetBreatheInOutSeconds() / fpsLimit;
         increment = (maxScaleValue - minScaleValue) / fpsLimit;
+
         InvokeRepeating("NextFrame", 0f, frameTime);
 
         ParticleSystemShapeType circleShape = ParticleSystemShapeType.Circle;
@@ -49,7 +53,6 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
     private void NextFrame()
     {
         // do the animation
-
         ParticleSystemShapeType circleShape = ParticleSystemShapeType.Circle;
         var shape = particles.shape;
         shape.shapeType = circleShape;
