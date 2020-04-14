@@ -22,6 +22,8 @@ public class BreatheControl : MonoBehaviour
 
     public SoundManager soundManager;
 
+    public ParticleSystem particles;
+
     void OnEnable()
     {
         ResetBreaths(); // not tracking number of breaths between sessions
@@ -34,6 +36,12 @@ public class BreatheControl : MonoBehaviour
             breatheInOutSeconds = storedSecondsValue;
         }
         secondsValueText.text = breatheInOutSeconds.ToString();
+    }
+
+    private void OnDisable()
+    {
+        ResetBreaths();
+        soundManager.StopAllChimeNotes();
     }
 
     public float GetBreatheInOutSeconds()

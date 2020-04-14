@@ -48,6 +48,14 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void StopAllChimeNotes()
+    {
+        for (int i = 0; i < chimeSounds.Length; i++)
+        {
+            chimeSounds[i].Stop();
+        }
+    }
+
     public void SetMuteSoundFromPlayerPref()
     {
         if (PlayerPrefs.GetString(soundsPlayerPref) == "true")

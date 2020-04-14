@@ -32,6 +32,10 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
     private void OnDisable()
     {
         CancelInvoke("NextFrame");
+        ParticleSystemShapeType circleShape = ParticleSystemShapeType.Circle;
+        var shape = particles.shape;
+        shape.shapeType = circleShape;
+        shape.radius = minScaleValue;
     }
 
     void UpdateFrameTime()
