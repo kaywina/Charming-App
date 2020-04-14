@@ -39,7 +39,7 @@ public class BreatheControl : MonoBehaviour
     private void OnDisable()
     {
         ResetBreaths();
-        soundManager.StopAllChimeNotes();
+        soundManager.StopAllBreathNotes();
         breatheIn = true;
     }
 
@@ -85,7 +85,7 @@ public class BreatheControl : MonoBehaviour
 
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.ChangeText(); }
 
-        soundManager.PlayChimeNoteInScale();
+        soundManager.PlayBreathNoteInScale();
     }
 
     public bool GetBreatheInOutFlag()

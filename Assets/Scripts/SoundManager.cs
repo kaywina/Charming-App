@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource[] chimeSounds;
+    public AudioSource[] breathSounds;
     public AudioSource wheelPointerSound;
     public AudioSource music;
     public AudioSource woosh;
@@ -21,21 +21,21 @@ public class SoundManager : MonoBehaviour
         SetPlayMusicFromPlayerPref();
     }
 
-    public void PlayRandomChimeSound()
+    public void PlayRandomBreathSound()
     {
-        int randomIndex = Random.Range(0, chimeSounds.Length);
+        int randomIndex = Random.Range(0, breathSounds.Length);
         //Debug.Log("Play sound " + chimeSounds[randomIndex].gameObject.name);
-        chimeSounds[randomIndex].Play();
+        breathSounds[randomIndex].Play();
     }
 
-    public void PlayChimeNoteInScale()
+    public void PlayBreathNoteInScale()
     {
-        chimeSounds[chimeIndex].Play();
+        breathSounds[chimeIndex].Play();
 
         if (goingUpScale) { chimeIndex++; }
         else { chimeIndex--; }
 
-        if (chimeIndex >= chimeSounds.Length)
+        if (chimeIndex >= breathSounds.Length)
         {
             goingUpScale = false;
             chimeIndex = chimeIndex - 2;
@@ -48,11 +48,11 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void StopAllChimeNotes()
+    public void StopAllBreathNotes()
     {
-        for (int i = 0; i < chimeSounds.Length; i++)
+        for (int i = 0; i < breathSounds.Length; i++)
         {
-            chimeSounds[i].Stop();
+            breathSounds[i].Stop();
         }
     }
 
@@ -86,9 +86,9 @@ public class SoundManager : MonoBehaviour
 
     private void SetMuteOnSounds(bool mute)
     {
-        for (int i = 0; i < chimeSounds.Length; i++)
+        for (int i = 0; i < breathSounds.Length; i++)
         {
-            chimeSounds[i].mute = mute;
+            breathSounds[i].mute = mute;
         }
 
         // Add mute function for other sounds below
@@ -109,15 +109,15 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlayChimeSoundByIndex (int i)
+    public void PlayBreathSoundByIndex (int i)
     {
-        if (i < 0 || i >= chimeSounds.Length)
+        if (i < 0 || i >= breathSounds.Length)
         {
-            Debug.LogError("Invalid index for chime sounds array");
+            Debug.LogError("Invalid index for breath sounds array");
             return;
         }
 
-        chimeSounds[i].Play();
+        breathSounds[i].Play();
     }
 
     public void PlayWheelPointerSound()
