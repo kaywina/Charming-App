@@ -66,6 +66,7 @@ public class BreatheControl : MonoBehaviour
         //Debug.Log("Reset breaths");
         numberOfBreaths = 0;
         breathsText.text = "0";
+        if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
     }
 
     public void Breathe(bool breatheIsIn) // true if breathing in; false if breathing out
