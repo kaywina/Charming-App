@@ -29,21 +29,21 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
 
         InvokeRepeating("NextFrame", 0f, frameTime);
 
-        SetShape();
+        shape = particles.shape;
+        shape.shapeType = circleShape;
+        SetMinRadius();
         particles.Play();
     }
 
     private void OnDisable()
     {
         CancelInvoke("NextFrame");
-        SetShape();
+        SetMinRadius();
         particles.Stop();
     }
 
-    void SetShape()
+    void SetMinRadius()
     {
-        shape = particles.shape;
-        shape.shapeType = circleShape;
         shape.radius = minScaleValue;
     }
     
@@ -58,8 +58,6 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
     private void NextFrame()
     {
         // do the animation
-        shape = particles.shape;
-        shape.shapeType = circleShape;
 
         if (breatheControl.GetBreatheInOutFlag()) // get bigger if breathing in
         { 
