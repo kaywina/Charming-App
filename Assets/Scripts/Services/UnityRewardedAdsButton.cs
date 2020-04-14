@@ -65,15 +65,14 @@ public class UnityRewardedAdsButton : MonoBehaviour
                     bonusPanel.DoubleBonus();
                     doubleRewardAmountText.text = bonusPanel.GetStoredBonus().ToString();
                 }
-                if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
+
+                else if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
                 {
                     shareScreenshotAndroid.givenBonusAmount = shareScreenshotAndroid.baseBonusAmount * 2;
                     doubleRewardAmountText.text = shareScreenshotAndroid.givenBonusAmount.ToString();
                 }
 
-                if (doubleRewardAmountText != null) {
-                    doubleRewardAmountText.gameObject.SetActive(true);
-                }
+                if (doubleRewardAmountText != null) { doubleRewardAmountText.gameObject.SetActive(true); }
                 if (strikeout != null) { strikeout.SetActive(true); }
 
                 watched = true;
