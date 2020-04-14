@@ -26,8 +26,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
 
     public int baseBonusAmount = 8;
-    public int givenBonusAmount = 0;
-    public bool bonusGiven;
+    private int givenBonusAmount = 0;
+    private bool bonusGiven;
 
     private float sceneResetDelayInSeconds = 2f;
 
@@ -170,5 +170,20 @@ public class ShareScreenshotAndroid : MonoBehaviour
         //	new NativeShare().AddFile( filePath ).SetText( "Hello world!" ).SetTarget( "com.whatsapp" ).Share();
  
         isProcessing = false;
+    }
+
+    public bool GetBonusGive ()
+    {
+        return bonusGiven;
+    }
+
+    public int GetGivenBonusAmount()
+    {
+        return givenBonusAmount;
+    }
+
+    public void SetGivenBonusAmount(int amount)
+    {
+        givenBonusAmount = amount;
     }
 }
