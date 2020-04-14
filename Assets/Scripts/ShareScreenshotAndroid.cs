@@ -17,7 +17,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public GameObject[] hideOnShare;
     public bool showAgainAfterShare = false;
     public GameObject url;
-    public GameObject thanksText;
+    public GameObject thanksObject;
     public GameObject doubleBonusButton;
     public GameObject doubleBonusText;
     public GameObject okButton;
@@ -35,7 +35,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     {
         shareButton.onClick.AddListener(OnShareButtonClick);
         bonusGiven = false;
-        if (thanksText != null) { thanksText.SetActive(false); }
+        if (thanksObject != null) { thanksObject.SetActive(false); }
         if (url != null) { url.SetActive(false); }
         if (doubleBonusButton != null) { doubleBonusButton.SetActive(false); }
         if (doubleBonusText != null) { doubleBonusText.SetActive(false); }
@@ -116,7 +116,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         }
 
         // always say thank you and show ok button
-        if (thanksText != null) { thanksText.SetActive(true); }
+        if (thanksObject != null) { thanksObject.SetActive(true); }
         if (okButton != null) { okButton.SetActive(true); }
     }
 

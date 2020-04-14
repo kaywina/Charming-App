@@ -21,6 +21,7 @@ public class BonusPanel : CharmsPanel
 
     new void OnEnable()
     {
+        bonusWheel.gameObject.SetActive(true);
         StartCoroutine(Enable());
         base.OnEnable();
     }
