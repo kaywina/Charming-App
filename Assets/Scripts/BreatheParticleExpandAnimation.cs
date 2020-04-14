@@ -15,6 +15,8 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
 
     public float minScaleValue = 1f;
     public float maxScaleValue = 3f;
+    ParticleSystemShapeType circleShape = ParticleSystemShapeType.Circle;
+    ParticleSystem.ShapeModule shape;
 
     private void OnEnable()
     {
@@ -27,21 +29,24 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
 
         InvokeRepeating("NextFrame", 0f, frameTime);
 
-        ParticleSystemShapeType circleShape = ParticleSystemShapeType.Circle;
-        var shape = particles.shape;
-        shape.shapeType = circleShape;
-        shape.radius = minScaleValue;
+        SetShape();
+        particles.Play();
     }
 
     private void OnDisable()
     {
         CancelInvoke("NextFrame");
-        ParticleSystemShapeType circleShape = ParticleSystemShapeType.Circle;
-        var shape = particles.shape;
+        SetShape();
+        particles.Stop();
+    }
+
+    void SetShape()
+    {
+        shape = particles.shape;
         shape.shapeType = circleShape;
         shape.radius = minScaleValue;
     }
-
+    
     void UpdateFrameTime()
     {
         frameTime = breatheControl.GetBreatheInOutSeconds() / fpsLimit;
@@ -53,8 +58,7 @@ public class BreatheParticleExpandAnimation : MonoBehaviour
     private void NextFrame()
     {
         // do the animation
-        ParticleSystemShapeType circleShape = ParticleSystemShapeType.Circle;
-        var shape = particles.shape;
+        shape = particles.shape;
         shape.shapeType = circleShape;
 
         if (breatheControl.GetBreatheInOutFlag()) // get bigger if breathing in
