@@ -31,13 +31,8 @@ public class RotateOnSwipeInCollider : MonoBehaviour
       
             Vector2 worldMousePos2D = (Vector2)mainCamera.ScreenToWorldPoint(newPosition);
 
-            // dirty hack to make rotation work with scene setup for UI masking
-            Vector3 hackedPos = worldMousePos2D;
-            hackedPos.z = -7.0f;
-
-            if (boxCollider2D.bounds.Contains(hackedPos))
+            if (boxCollider2D.bounds.Contains(worldMousePos2D))
             {
-
                 Vector3 mousePositionDelta = Input.mousePosition - lastPosition;
                 objectToRotate.transform.Rotate(0f, mousePositionDelta.x, 0f);
             }
@@ -54,12 +49,8 @@ public class RotateOnSwipeInCollider : MonoBehaviour
             Touch touch0 = Input.GetTouch(0);
             Vector2 worldTouchPos2D = (Vector2)mainCamera.ScreenToWorldPoint(touch0.position);
 
-            // dirty hack to make rotation work with scene setup for UI masking
-            Vector3 hackedPos = worldTouchPos2D;
-            hackedPos.z = -7.0f;
-
             // APPLY ROTATION
-            if (touch0.phase == TouchPhase.Moved && boxCollider2D.bounds.Contains(hackedPos))
+            if (touch0.phase == TouchPhase.Moved && boxCollider2D.bounds.Contains(worldTouchPos2D))
             {
                 objectToRotate.transform.Rotate(0f, touch0.deltaPosition.x, 0f);
             }
