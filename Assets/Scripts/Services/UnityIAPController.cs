@@ -15,10 +15,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
-#if SUBSCRIPTION_MANAGER
-    Dictionary<string, string> introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
-#endif
-
     private ITransactionHistoryExtensions m_TransactionHistoryExtensions;
 #if UNITY_ANDROID
     private IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
@@ -28,6 +24,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
     private SubscriptionInfo info;
     private static bool m_PurchaseInProgress;
+
+    private static string localizedPricePlayerPrefName = "GoldPrice";
 
     // Product identifiers for all products capable of being purchased: 
     // "convenience" general identifiers for use with Purchasing, and their store-specific identifier 
@@ -309,6 +307,25 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             if (item.availableToPurchase)
             {
+
+#if UNITY_EDITOR
+                string goldProductID = kProductIDSubscription;
+#elif UNITY_ANDROID
+                string goldProductID = kProductNameGooglePlaySubscription;
+#elif UNITY_IOS
+                string goldProductID = kProductNameAppleSubscription;
+#else
+                Debug.Log("No product ID for this platform");
+                // no product id assigned should cause build error on unsupported platforms intentionally
+#endif
+
+                if (item.definition.storeSpecificId == goldProductID)
+                {
+                    string localizedPrice = item.metadata.localizedPriceString;
+                    Debug.Log("localizedPrice for " + goldProductID + " is " + localizedPrice);
+                    PlayerPrefs.SetString(localizedPricePlayerPrefName, item.metadata.localizedPriceString);
+                }
+                
                 Debug.Log(string.Join(" - ",
                     new[]
                     {
@@ -426,6 +443,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 Debug.Log("Hit default case in subscription check; this message should not appear");
                 break;
         }
+    }
+
+    public static string GetLocalizedPricePlayerPrefName()
+    {
+        return localizedPricePlayerPrefName;
     }
 
     private bool checkIfProductIsAvailableForSubscriptionManager(string receipt) {
