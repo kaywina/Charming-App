@@ -6,9 +6,15 @@ using UnityEngine.UI;
 public class SetPriceTextFromPlayerPref : MonoBehaviour
 {
     public Text t;
+    private string defaultPriceString = "$8.49 CAD";
 
     void OnEnable()
     {
-        t.text = PlayerPrefs.GetString(UnityIAPController.GetLocalizedPricePlayerPrefName());
+        string localizedPrice = PlayerPrefs.GetString(UnityIAPController.GetLocalizedPricePlayerPrefName());
+        if (string.IsNullOrEmpty(localizedPrice))
+        {
+            localizedPrice = defaultPriceString;
+        }
+        t.text = localizedPrice;
     }
 }
