@@ -12,7 +12,7 @@ public class OpenURLByPlatform : MonoBehaviour
 #if UNITY_ANDROID
         return androidURL;
 #elif UNITY_IOS
-        return iOSURL
+        return iosURL;
 #else
         Debug.Log("Open URL functionality not defined for this platform;
         return "http://www.charmingapp.com/faq";
