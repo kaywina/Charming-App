@@ -5,26 +5,9 @@ using UnityEngine;
 public class MeditatePanel : CharmsPanel
 {
     public GameObject charmButtons;
-    
+
     // world space models for Meditation screen
-    public GameObject love;
-    public GameObject grace;
-    public GameObject patience;
-    public GameObject wisdom;
-    public GameObject joy;
-    public GameObject focus;
-    public GameObject will;
-    public GameObject guile;
-    public GameObject force;
-    public GameObject honor;
-    public GameObject faith;
-    public GameObject vision;
-    public GameObject balance;
-    public GameObject harmony;
-    public GameObject regard;
-    public GameObject insight;
-    public GameObject plenty;
-    public GameObject influence;
+    public GameObject[] charms;
 
     public SetParticleColorFromCharm particleColor;
 
@@ -58,69 +41,27 @@ public class MeditatePanel : CharmsPanel
         EnableCharm(charmName, enable);
     }
 
+    private void DisableAllCharms()
+    {
+        for (int i = 0; i < charms.Length; i++)
+        {
+
+        }
+    }
+
     void EnableCharm (string charmName, bool enable)
     {
-        particleColor.SetColor(charmName);
-
-        switch (charmName)
+        for (int i = 0; i < charms.Length; i++)
         {
-            case "Love":
-                if (love != null) { love.SetActive(enable); }
-                break;
-            case "Grace":
-                if (grace != null) { grace.SetActive(enable); }
-                break;
-            case "Patience":
-                if (patience != null) { patience.SetActive(enable); }
-                break;
-            case "Wisdom":
-                if (wisdom != null) { wisdom.SetActive(enable); }
-                break;
-            case "Joy":
-                if (joy != null) { joy.SetActive(enable); }
-                break;
-            case "Focus":
-                if (focus != null) { focus.SetActive(enable); }
-                break;
-            case "Will":
-                if (will != null) { will.SetActive(enable); }
-                break;
-            case "Guile":
-                if (guile != null) { guile.SetActive(enable); }
-                break;
-            case "Force":
-                if (force != null) { force.SetActive(enable); }
-                break;
-            case "Honor":
-                if (honor != null) { honor.SetActive(enable); }
-                break;
-            case "Faith":
-                if (faith != null) { faith.SetActive(enable); }
-                break;
-            case "Vision":
-                if (vision != null) { vision.SetActive(enable); }
-                break;
-            case "Balance":
-                if (balance != null) { balance.SetActive(enable); }
-                break;
-            case "Harmony":
-                if (harmony != null) { harmony.SetActive(enable); }
-                break;
-            case "Regard":
-                if (regard != null) { regard.SetActive(enable); }
-                break;
-            case "Insight":
-                if (insight != null) { insight.SetActive(enable); }
-                break;
-            case "Plenty":
-                if (plenty != null) { plenty.SetActive(enable); }
-                break;
-            case "Influence":
-                if (influence != null) { influence.SetActive(enable); }
-                break;
-            default:
-                Debug.Log("This is not the case you are looking for");
-                break;
+            if (charms[i].name == charmName)
+            {
+                charms[i].SetActive(true);
+                particleColor.SetColor(charmName);
+            }
+            else
+            {
+                charms[i].SetActive(false);
+            }
         }
     }
 }
