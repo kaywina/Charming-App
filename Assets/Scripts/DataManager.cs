@@ -20,8 +20,7 @@ public class DataManager : MonoBehaviour
         File.Delete(Application.persistentDataPath + "/" + saveFileName);
     }
 
-    // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         persistentData = ReadPersistentSaveData();
         //Debug.Log("persistentData = " + persistentData);
@@ -81,6 +80,7 @@ public class DataManager : MonoBehaviour
 
         try
         {
+            Debug.Log("Attempting to read text from save file");
             allText = File.ReadAllText(Application.persistentDataPath + "/" + saveFileName);
         }
         catch
@@ -88,7 +88,8 @@ public class DataManager : MonoBehaviour
             Debug.Log("Save file has not yet been created");
             allText = null;
         }
-        
+
+        Debug.Log("Contents of save file are: " + allText);
         return allText;
     }
 }
