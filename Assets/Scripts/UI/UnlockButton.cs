@@ -35,6 +35,7 @@ public class UnlockButton : MonoBehaviour {
         {
             objectToEnable.SetActive(true);
             gameObject.SetActive(false);
+            //Debug.Log(objectToEnable.name + " has been unlocked");
         }
         else
         {
