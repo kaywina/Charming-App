@@ -7,8 +7,18 @@ public class DataManager : MonoBehaviour
 {
     public UnlockButton[] unlockObjects;
 
-    private string saveFileName = "charmingData.txt"; // do not change this in production!
+    private static string saveFileName = "charmProgessData.txt"; // do not change this in production!
     private string persistentData;
+
+    public static string GetSaveFileName()
+    {
+        return saveFileName;
+    }
+
+    public static void DeleteDataFile()
+    {
+        File.Delete(Application.persistentDataPath + "/" + saveFileName);
+    }
 
     // Start is called before the first frame update
     void Awake()

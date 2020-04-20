@@ -22,6 +22,11 @@ public class InspectorTools : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
+    public static void DeletePersistentData()
+    {
+        DataManager.DeleteDataFile();
+    }
+
     public static void TakeScreenshotInEditor()
     {
         TakeScreenshot.TakeShot();

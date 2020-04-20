@@ -11,9 +11,14 @@ public class InspectorToolsGUI : Editor
         //EditorGUILayout.LabelField("Click on this window to update values:");
         //EditorGUILayout.LabelField("Lives Left", InspectorTools.GetLivesLeft().ToString());
 
-        if (GUILayout.Button("Delete All Data"))
+        if (GUILayout.Button("Delete PlayerPrefs"))
         {
             InspectorTools.DeleteAllData();
+        }
+
+        if (GUILayout.Button("Delete Persistent Data"))
+        {
+            InspectorTools.DeletePersistentData();
         }
 
         if (GUILayout.Button("Take Screenshot"))
