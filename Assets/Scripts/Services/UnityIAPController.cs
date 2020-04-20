@@ -350,6 +350,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
                             SubscriptionManager p = new SubscriptionManager(item, intro_json);
                             info = p.getSubscriptionInfo();
+                            /*
                             Debug.Log("product id is: " + info.getProductId());
                             Debug.Log("purchase date is: " + info.getPurchaseDate());
                             Debug.Log("subscription next billing date is: " + info.getExpireDate());
@@ -363,6 +364,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                             Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                             Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
+                            */
                             ValidateSubscription(info);
 
                         }
