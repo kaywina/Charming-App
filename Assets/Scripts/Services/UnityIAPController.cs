@@ -302,7 +302,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 #endif
 
 
-        Debug.Log("Available items:");
+        //Debug.Log("Available items:");
         foreach (Product item in controller.products.all)
         {
             if (item.availableToPurchase)
@@ -322,10 +322,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (item.definition.storeSpecificId == goldProductID)
                 {
                     string localizedPrice = item.metadata.localizedPriceString;
-                    Debug.Log("localizedPrice for " + goldProductID + " is " + localizedPrice);
+                    //Debug.Log("localizedPrice for " + goldProductID + " is " + localizedPrice);
                     PlayerPrefs.SetString(localizedPricePlayerPrefName, item.metadata.localizedPriceString);
                 }
                 
+                /*
                 Debug.Log(string.Join(" - ",
                     new[]
                     {
@@ -337,7 +338,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                         item.transactionID,
                         item.receipt
                     }));
-
+                
+                */
                 // this is the usage of SubscriptionManager class
                 if (item.receipt != null)
                 {
@@ -361,7 +363,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                             Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                             Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-
                             ValidateSubscription(info);
 
                         }

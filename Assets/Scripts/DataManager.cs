@@ -49,7 +49,6 @@ public class DataManager : MonoBehaviour
             string ppValue = playerPrefData[1];
 
             PlayerPrefs.SetString(ppName, ppValue);
-            Debug.Log("Value " + ppValue + " for playerPref" + ppName + "recovered from data.");
         }
     }
 
@@ -79,8 +78,6 @@ public class DataManager : MonoBehaviour
     private string ReadPersistentSaveData()
     {
         string allText;
-
-        Debug.Log(Application.persistentDataPath);
 
         try
         {
