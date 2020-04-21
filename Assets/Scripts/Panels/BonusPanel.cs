@@ -13,7 +13,7 @@ public class BonusPanel : CharmsPanel
     public SetPlayerPrefFromToggle goldTogglePrefab;
     public Text prizeText;
     public GameObject strikeout;
-    public GameObject doubleKeysText;
+    public GameObject doubleBonusText;
     public Text totalBonusText;
 
     private bool hasSpun;
@@ -28,10 +28,11 @@ public class BonusPanel : CharmsPanel
 
     IEnumerator Enable()
     {
-        doubleKeysText.SetActive(false);
-        header.SetActive(false);
         strikeout.SetActive(false);
+        doubleBonusText.SetActive(false);
         totalBonusText.gameObject.SetActive(false);
+
+        header.SetActive(false);
         hasSpun = false;
 
         for (int i = 0; i < activateAfterSpin.Length; i++)
@@ -77,6 +78,8 @@ public class BonusPanel : CharmsPanel
     public void CompleteSpin(int bonus)
     {
         //Debug.Log("Complete bonus wheel spin");
+        storedBonus = bonus;
+        prizeText.text = bonus.ToString();
 
         // get and store playerpref for gold subscribers
         bool isGold = false;
@@ -85,28 +88,25 @@ public class BonusPanel : CharmsPanel
             isGold = true;
         }
 
-        storedBonus = bonus;
-
         // gold subscribers receive double bonus automatically;
         if (isGold)
         {
+            //Debug.Log("Gold subscribers automatically get double bonus");
+            rewardedAdButton.SetActive(false); //this needs to be done before the code below or the double bonus objects don't show up
             DoubleBonus();
-            doubleKeysText.SetActive(true);
+            doubleBonusText.SetActive(true);
+            strikeout.SetActive(true);
+            totalBonusText.gameObject.SetActive(true);
         }
-        prizeText.text = bonus.ToString();
-        for (int i = 0; i < activateAfterSpin.Length; i++)
-        {
-            activateAfterSpin[i].SetActive(true);
-        }
-
-        // custom case for gold subscribers, they should not see the rewarded ad button (and should receive double bonus automatically)
-        if (isGold)
-        {
-            rewardedAdButton.SetActive(false);
-        }
+        // if not gold show the rewarded ad button
         else
         {
             rewardedAdButton.SetActive(true);
+        }
+
+        for (int i = 0; i < activateAfterSpin.Length; i++)
+        {
+            activateAfterSpin[i].SetActive(true);
         }
 
         bonusWheel.gameObject.SetActive(false);
@@ -116,6 +116,7 @@ public class BonusPanel : CharmsPanel
     public void DoubleBonus()
     {
         storedBonus = storedBonus * 2;
+        totalBonusText.text = storedBonus.ToString();
     }
 
     public void SkipBonus()

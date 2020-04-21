@@ -63,10 +63,9 @@ public class UnityRewardedAdsButton : MonoBehaviour
             case ShowResult.Finished:
                 if (buttonIsOnBonusPanel && bonusPanel != null) {
                     bonusPanel.DoubleBonus();
-                    doubleRewardAmountText.text = bonusPanel.GetStoredBonus().ToString();
                 }
 
-                else if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
+                if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
                 {
                     shareScreenshotAndroid.SetGivenBonusAmount(shareScreenshotAndroid.baseBonusAmount * 2);
                     doubleRewardAmountText.text = shareScreenshotAndroid.GetGivenBonusAmount().ToString();
@@ -76,12 +75,10 @@ public class UnityRewardedAdsButton : MonoBehaviour
                 if (strikeout != null) { strikeout.SetActive(true); }
 
                 watched = true;
-                if (watchedRewardedAdText != null)
-                {
-                    watchedRewardedAdText.SetActive(true);
-                }
+                if (watchedRewardedAdText != null) { watchedRewardedAdText.SetActive(true); }
                 
                 gameObject.SetActive(false); // deactivate button after completion
+
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:

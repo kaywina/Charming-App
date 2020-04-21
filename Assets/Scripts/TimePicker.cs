@@ -27,7 +27,7 @@ public class TimePicker : MonoBehaviour
         }
         else
         {
-            Debug.Log("Notification hour is not set; using default value");
+            //Debug.Log("Notification hour is not set; using default value");
         }
 
         if (PlayerPrefs.HasKey(NotificationManager.PLAYERPREF_NAME_MINUTE))
@@ -36,7 +36,7 @@ public class TimePicker : MonoBehaviour
         }
         else
         {
-            Debug.Log("Notification minute is not set; using default value");
+            //Debug.Log("Notification minute is not set; using default value");
         }
 
         SetUIText();
