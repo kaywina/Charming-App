@@ -22,6 +22,8 @@ public class BreatheControl : MonoBehaviour
 
     public SoundManager soundManager;
 
+    public ParticleSystem yayParticles;
+
     void OnEnable()
     {
         ResetBreaths(); // not tracking number of breaths between sessions
@@ -87,6 +89,11 @@ public class BreatheControl : MonoBehaviour
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.ChangeText(); }
 
         soundManager.PlayBreathNoteInScale();
+
+        if (numberOfBreaths != 0 && numberOfBreaths % 10 == 0) // after 10, 20, 30, breaths etc
+        {
+            yayParticles.Play();
+        }
     }
 
     public bool GetBreatheInOutFlag()

@@ -53,6 +53,12 @@ public class MeditatePanel : CharmsPanel
     {
         for (int i = 0; i < charms.Length; i++)
         {
+            if (charms[i] == null)
+            {
+                //Debug.Log("Charm is null; handle exception and do nothing on app shutdown");
+                return;
+            }
+
             if (charms[i].name == charmName)
             {
                 charms[i].SetActive(true);
