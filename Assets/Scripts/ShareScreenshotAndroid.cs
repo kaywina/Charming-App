@@ -90,7 +90,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
         // hide the share button and make it non-interactable
         Button shareButton = GetComponent<Button>();
-        shareButtonImage.enabled = false;
+        if (shareButtonImage != null) { shareButtonImage.enabled = false; }
         shareButton.interactable = false;
 
         // show the url
@@ -100,7 +100,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
     private void ResetScene()
     {
         // show the share button again and make it interactable
-        shareButtonImage.enabled = true;
+        if (shareButtonImage != null) { shareButtonImage.enabled = true; }
         shareButton.interactable = true;
 
         // hide url object
