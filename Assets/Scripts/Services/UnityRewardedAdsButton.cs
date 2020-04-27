@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
 [RequireComponent(typeof(Button))]
-public class UnityRewardedAdsButton : MonoBehaviour
+public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 {
 
     public string placementId = "rewardedVideo";
@@ -21,6 +21,8 @@ public class UnityRewardedAdsButton : MonoBehaviour
     {
         adButton = GetComponent<Button>();
         adButton.onClick.AddListener(ShowRewardedAd);
+        Advertisement.AddListener(this); // for handling callbacks
+
         watched = false; // can only use button once during bonus wheel session
 
         if (doubleRewardAmountText != null)
@@ -51,17 +53,19 @@ public class UnityRewardedAdsButton : MonoBehaviour
 
         if (Advertisement.IsReady(placementId))
         {
-            var options = new ShowOptions { resultCallback = HandleShowResult };
-            Advertisement.Show(placementId, options);
+            //var options = new ShowOptions { resultCallback = HandleShowResult }; // this is old deprecated method
+            Advertisement.Show(placementId);
         }
     }
 
-    void HandleShowResult(ShowResult result)
+    // Implement IUnityAdsListener interface methods:
+    public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        switch (result)
+        switch (showResult)
         {
             case ShowResult.Finished:
-                if (buttonIsOnBonusPanel && bonusPanel != null) {
+                if (buttonIsOnBonusPanel && bonusPanel != null)
+                {
                     bonusPanel.DoubleBonus();
                 }
 
@@ -76,7 +80,7 @@ public class UnityRewardedAdsButton : MonoBehaviour
 
                 watched = true;
                 if (watchedRewardedAdText != null) { watchedRewardedAdText.SetActive(true); }
-                
+
                 gameObject.SetActive(false); // deactivate button after completion
 
                 //Debug.Log("The ad was successfully shown.");
@@ -88,5 +92,26 @@ public class UnityRewardedAdsButton : MonoBehaviour
                 //Debug.LogError("The ad failed to be shown.");
                 break;
         }
+    }
+
+    public void OnUnityAdsReady(string id)
+    {
+        // If the ready Placement is rewarded, show the ad:
+        /*
+        if (id == placementId)
+        {
+            Advertisement.Show(placementId);
+        }
+        */
+    }
+
+    public void OnUnityAdsDidError(string message)
+    {
+        // Log the error.
+    }
+
+    public void OnUnityAdsDidStart(string placementId)
+    {
+        // Optional actions to take when the end-users triggers an ad.
     }
 }
