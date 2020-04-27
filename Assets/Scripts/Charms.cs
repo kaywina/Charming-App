@@ -49,6 +49,8 @@ public class Charms : MonoBehaviour {
 
     public Material pillarMaterial;
 
+    public CharmsPanel meditatePanel;
+
 	// Use this for initialization
 	void Start () {
         // set the correct charm set depending on pref
@@ -105,9 +107,10 @@ public class Charms : MonoBehaviour {
 
 	public void SetCharm(string charmName) {
 
-        // don't try to set charm if it hasn't changed
+        // if charm hasn't changed, open meditate panel instead of trying to set charm
         if (loaded && charmName == PlayerPrefs.GetString("Charm"))
         {
+            meditatePanel.gameObject.SetActive(true);
             return;
         }
 
