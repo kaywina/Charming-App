@@ -1,22 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
     public AudioSource[] breathSounds;
     public AudioSource wheelPointerSound;
-    public AudioSource music;
+    public AudioSource[] musicClips;
 
+    private static int musicIndex = 0;
     private static int chimeIndex = 0;
     private bool goingUpScale = true;
 
     private string soundsPlayerPref = "EnableSounds"; // don't change this in production
     private string musicPlayerPref = "EnableMusic"; // don't change this in production
 
+    private string musicIndexPlayerPref = "MusicIndex";
+
+    public Toggle musicToggle;
+
     private void OnEnable()
     {
         SetMuteSoundFromPlayerPref();
+        SetMusicIndexFromPlayerPref();
         SetPlayMusicFromPlayerPref();
     }
 
@@ -99,11 +106,11 @@ public class SoundManager : MonoBehaviour
     {
         if (doNotPlay == true)
         {
-            music.Stop();
+            StopMusic();
         }
         else
         {
-            music.Play();
+            PlayMusic();
         }
     }
 
@@ -121,5 +128,67 @@ public class SoundManager : MonoBehaviour
     public void PlayWheelPointerSound()
     {
         wheelPointerSound.Play();
+    }
+
+    private void SetMusicIndexFromPlayerPref()
+    {
+        if (PlayerPrefs.HasKey(musicIndexPlayerPref))
+        {
+            musicIndex = PlayerPrefs.GetInt(musicIndexPlayerPref);
+        }
+    }
+
+    private void PlayMusic()
+    {
+        CheckMusicIndex();
+        musicClips[musicIndex].Play();
+    }
+
+    private void StopMusic()
+    {
+        CheckMusicIndex();
+        musicClips[musicIndex].Stop();
+    }
+
+    private void CheckMusicIndex()
+    {
+        if (musicIndex < 0)
+        {
+            Debug.LogWarning("Music index is less than zero, resetting to zero default");
+            musicIndex = 0;
+        }
+
+        else if (musicIndex >= musicClips.Length)
+        {
+            Debug.LogWarning("Music index is invalid, resetting to zero default");
+            musicIndex = 0;
+        }
+
+        PlayerPrefs.SetInt(musicIndexPlayerPref, musicIndex);
+    }
+
+    public void SetMusicByIndex(int index)
+    {
+        StopMusic();
+
+        // use a specific index to disable music from button
+        if (index == -1)
+        {
+            DisableMusic();
+            return;
+        }
+
+        musicIndex = index;
+        CheckMusicIndex();
+        PlayMusic();
+        musicToggle.isOn = true;
+    }
+
+    private void DisableMusic()
+    {
+        PlayerPrefs.SetString(musicPlayerPref, "false");
+        PlayerPrefs.SetInt(musicIndexPlayerPref, 0);
+        SetPlayMusicFromPlayerPref();
+        musicToggle.isOn = false;
     }
 }
