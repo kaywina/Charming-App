@@ -7,7 +7,6 @@ public class SoundManager : MonoBehaviour
     public AudioSource[] breathSounds;
     public AudioSource wheelPointerSound;
     public AudioSource music;
-    public AudioSource woosh;
 
     private static int chimeIndex = 0;
     private bool goingUpScale = true;
@@ -93,7 +92,6 @@ public class SoundManager : MonoBehaviour
 
         // Add mute function for other sounds below
         wheelPointerSound.mute = mute;
-        woosh.mute = mute;
 
     }
 
@@ -123,10 +121,5 @@ public class SoundManager : MonoBehaviour
     public void PlayWheelPointerSound()
     {
         wheelPointerSound.Play();
-    }
-
-    public void PlayWooshSound()
-    {
-        woosh.Play();
     }
 }
