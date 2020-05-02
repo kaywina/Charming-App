@@ -8,16 +8,30 @@ public class OptionsSubPanel : MonoBehaviour
 
     private bool oldRTM;
 
+    private bool wentToSubscribe = false;
+
     void OnEnable()
     {
-        oldRTM = optionsPanel.returnToMain;
-        optionsPanel.SetReturnToMain(false);
-        optionsPanel.gameObject.SetActive(false);
+        if (!wentToSubscribe)
+        {
+            oldRTM = optionsPanel.returnToMain;
+            optionsPanel.SetReturnToMain(false);
+            optionsPanel.gameObject.SetActive(false);
+        }
+        wentToSubscribe = false;
     }
 
     void OnDisable()
     {
-        optionsPanel.SetReturnToMain(oldRTM);
-        optionsPanel.gameObject.SetActive(true);
+        if (!wentToSubscribe)
+        {
+            optionsPanel.SetReturnToMain(oldRTM);
+            optionsPanel.gameObject.SetActive(true);
+        }
+    }
+
+    public void SetWentToSubscribe(bool toSet)
+    {
+        wentToSubscribe = toSet;
     }
 }

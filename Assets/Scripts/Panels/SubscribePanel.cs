@@ -6,16 +6,30 @@ using UnityEngine.UI;
 public class SubscribePanel : CharmsPanel
 {
 
-    public bool fromOptions = false;
-    public bool fromLove = false;
+    private bool fromOptions = false;
+    private bool fromVisualOptions = false;
+    private bool fromAudioOptions = false;
+    private bool fromLove = false;
 
+    public OptionsSubPanel visualOptionsPanel;
+    public OptionsSubPanel audioOptionsPanel;
     public OptionsPanel optionsPanel;
     public CharmsPanel lovePanel;
 
     private bool optionsRTM;
     private bool loveRTM;
 
-    public void SetFromOptionsFlag (bool flag)
+    public void SetFromVisualOptionsFlag(bool flag)
+    {
+        fromVisualOptions = flag;
+    }
+
+    public void SetFromAudioOptionsFlag (bool flag)
+    {
+        fromAudioOptions = flag;
+    }
+
+    public void SetFromOptionsFlag(bool flag)
     {
         fromOptions = flag;
     }
@@ -28,14 +42,24 @@ public class SubscribePanel : CharmsPanel
     new void OnEnable()
     {
         base.OnEnable();
+
+        returnToMain = false;
         if (fromOptions) {
-            returnToMain = false;
             optionsRTM = optionsPanel.returnToMain;
             optionsPanel.SetReturnToMain(false);
             optionsPanel.gameObject.SetActive(false);
         }
+        else if (fromVisualOptions)
+        {
+            visualOptionsPanel.SetWentToSubscribe(true);
+            visualOptionsPanel.gameObject.SetActive(false);
+        }
+        else if (fromAudioOptions)
+        {
+            audioOptionsPanel.SetWentToSubscribe(true);
+            audioOptionsPanel.gameObject.SetActive(false);
+        }
         else if (fromLove) {
-            returnToMain = false;
             loveRTM = lovePanel.returnToMain;
             lovePanel.SetReturnToMain(false);
             lovePanel.gameObject.SetActive(false);
@@ -53,6 +77,14 @@ public class SubscribePanel : CharmsPanel
             optionsPanel.SetReturnToMain(optionsRTM);
             optionsPanel.gameObject.SetActive(true);
         }
+        else if (fromVisualOptions)
+        {
+            visualOptionsPanel.gameObject.SetActive(true);
+        }
+        else if (fromAudioOptions)
+        {
+            audioOptionsPanel.gameObject.SetActive(true);
+        }
         else if (fromLove)
         {
             lovePanel.SetReturnToMain(loveRTM);
@@ -61,5 +93,7 @@ public class SubscribePanel : CharmsPanel
 
         fromOptions = false;
         fromLove = false;
+        fromVisualOptions = false;
+        fromAudioOptions = false;
     }
 }
