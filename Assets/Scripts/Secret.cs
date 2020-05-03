@@ -5,31 +5,43 @@ using UnityEngine;
 public class Secret : MonoBehaviour
 {
 
-    public GameObject[] objects;
+    public GameObject[] objectsToActivate;
+    public GameObject[] objectsToDeactivate;
 
     // secrets are all disabled on start by default
     private void Start()
     {
-        for (int i = 0; i < objects.Length; i++)
+        for (int i = 0; i < objectsToActivate.Length; i++)
         {
-            objects[i].SetActive(false);
+            objectsToActivate[i].SetActive(false);
         }
     }
 
     public void Show()
     {
-        for (int i = 0; i < objects.Length; i++)
+        for (int i = 0; i < objectsToActivate.Length; i++)
         {
-            objects[i].SetActive(true);
+            objectsToActivate[i].SetActive(true);
         }
+
+        for (int i = 0; i < objectsToDeactivate.Length; i++)
+        {
+            objectsToDeactivate[i].SetActive(false);
+        }
+
         //Debug.Log("Show the secret");
     }
 
     public void Hide()
     {
-        for (int i = 0; i < objects.Length; i++)
+        for (int i = 0; i < objectsToActivate.Length; i++)
         {
-            objects[i].SetActive(false);
+            objectsToActivate[i].SetActive(false);
+        }
+
+        for (int i = 0; i < objectsToDeactivate.Length; i++)
+        {
+            objectsToDeactivate[i].SetActive(true);
         }
         //Debug.Log("Hide the secret");
     }
