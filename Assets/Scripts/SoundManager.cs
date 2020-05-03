@@ -182,6 +182,7 @@ public class SoundManager : MonoBehaviour
         CheckMusicIndex();
         PlayMusic();
         musicToggle.isOn = true;
+        PlayerPrefs.SetString(musicPlayerPref, "true");
     }
 
     private void DisableMusic()
