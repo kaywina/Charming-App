@@ -22,6 +22,7 @@ public class RankManager : MonoBehaviour
             PlayerPrefs.SetInt(rankPlayerPref, 0);
             DisableAllRankTextObjects();
             EnableRankTextObjectByIndex(0);
+            Debug.Log("No rank set; starting at index 0 unranked");
             return;
         }
 
@@ -46,7 +47,7 @@ public class RankManager : MonoBehaviour
         int index = PlayerPrefs.GetInt(rankPlayerPref);
         if (index >= rankTextObjects.Length)
         {
-            Debug.LogError("Error: rank index exceeds lenght of rank text objects array");
+            Debug.LogError("Error: rank index exceeds length of rank text objects array");
             return;
         }
 
