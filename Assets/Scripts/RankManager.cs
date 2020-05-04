@@ -13,6 +13,12 @@ public class RankManager : MonoBehaviour
     void Start()
     {
         SetRank();
+
+        // TODO:
+        /*
+         * RankManager needs to track the number of check-ins, store it in a player pref, and increase the rank accordingly
+         * 
+         * */
     }
 
     private void SetRank()
