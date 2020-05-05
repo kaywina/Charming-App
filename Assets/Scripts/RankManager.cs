@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RankManager : MonoBehaviour
 {
     public GameObject[] rankTextObjects;
-
+    public Text daysToNextRankText;
     private string daysPlayerPref = "RankDays";
 
     // Start is called before the first frame update
@@ -27,6 +27,7 @@ public class RankManager : MonoBehaviour
          * RankManager needs to track the number of check-ins, store it in a player pref, and increase the rank accordingly
          * 
          * */
+
         if (TimeManager.IsNewDay(TimeManager.TimeType.DailySpin))
         {
             newDays++;
@@ -42,29 +43,58 @@ public class RankManager : MonoBehaviour
         Debug.Log("Set a rank based on number of unique daily spin days");
 
         int rankIndex = 0;
-        
+        int daysToNextRank = 0;
+
         // match number of rank cases to length of rankTextObjects array
-        if (days >= 2)
-        {
-            rankIndex = 1; // amateur
-        }
-        if (days >= 4)
-        {
-            rankIndex = 2; // apprentice
-        }
-        if (days >= 8)
-        {
-            rankIndex = 3; // adept
-        }
-        if (days >= 16)
-        {
-            rankIndex = 4; // acolyte
-        }
-        if (days >= 32)
+
+        int firstRankDays = 2;
+        int secondRankDays = 4 + firstRankDays;
+        int thirdRankDays = 8 + secondRankDays;
+        int fourthRankDays = 16 + thirdRankDays;
+        int fifthRankDays = 32 + fourthRankDays;
+
+        if (days >= fifthRankDays)
         {
             rankIndex = 5; // archon
+            // this is the maximum rank
+        }
+        else if (days >= fourthRankDays)
+        {
+            rankIndex = 4; // acolyte
+            daysToNextRank = fifthRankDays - days;
+        }
+        else if (days >= thirdRankDays)
+        {
+            rankIndex = 3; // adept
+            daysToNextRank = fourthRankDays - days;
+        }
+        else if (days >= secondRankDays)
+        {
+            rankIndex = 2; // apprentice
+            daysToNextRank = thirdRankDays - days;
+        }
+        else if (days >= firstRankDays)
+        {
+            rankIndex = 1; // amateur
+            daysToNextRank = secondRankDays - days;
+        }
+        else
+        {
+            rankIndex = 0; // unranked
+            daysToNextRank = firstRankDays - days;
         }
 
+
+        // special loc case for having reached maximum rank
+        if (rankIndex == 5)
+        {
+            daysToNextRankText.text = Localization.GetTranslationByKey("REACHED_MAX_LENGTH");
+        }
+        else
+        {
+            daysToNextRankText.text = daysToNextRank.ToString();
+        }
+        
         EnableRankTextObjectByIndex(rankIndex);
         Debug.Log("user has achieved rank " + rankIndex);
     }
