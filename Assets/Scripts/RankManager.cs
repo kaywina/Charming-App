@@ -7,13 +7,14 @@ public class RankManager : MonoBehaviour
 {
     public GameObject[] rankTextObjects;
     public Text daysToNextRankText;
-    private string daysPlayerPref = "RankDays"; // don't change this in production!
+    private string daysPlayerPref = "RankDayCount"; // don't change this in production!
     private string maxRankLocKey = "REACHED_MAX_RANK"; // don't change this in production!
+
+    private int newDays = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        int newDays = 0;
         if (PlayerPrefs.HasKey(daysPlayerPref))
         {
             newDays = PlayerPrefs.GetInt(daysPlayerPref);
@@ -21,23 +22,25 @@ public class RankManager : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt(daysPlayerPref, 0);
+            IncrementDayCount();
         }
 
-        // TODO:
-        /*
-         * RankManager needs to track the number of check-ins, store it in a player pref, and increase the rank accordingly
-         * 
-         * */
-
-        if (TimeManager.IsNewDay(TimeManager.TimeType.DailySpin))
+        if (TimeManager.IsNewDay(TimeManager.TimeType.Rank))
         {
-            newDays++;
-            PlayerPrefs.SetInt(daysPlayerPref, newDays);
-            Debug.Log("Total days checked in = " + newDays);
+            IncrementDayCount();
         }
 
         SetRank(newDays);
     }
+
+    private void IncrementDayCount()
+    {
+        newDays++;
+        PlayerPrefs.SetInt(daysPlayerPref, newDays);
+        Debug.Log("Total days checked in = " + newDays);
+        TimeManager.SetPrefsForRank();
+    }
+
     private void SetRank(int days)
     {
         DisableAllRankTextObjects();
@@ -48,7 +51,7 @@ public class RankManager : MonoBehaviour
 
         // match number of rank cases to length of rankTextObjects array
 
-        int firstRankDays = 3; // 3 instead 2 makes count start at 2 days until next rank (accounts for index starting at zero)
+        int firstRankDays = 3; // hack to make zero indexing work to display 2 days until first rank
         int secondRankDays = 4 + firstRankDays;
         int thirdRankDays = 8 + secondRankDays;
         int fourthRankDays = 16 + thirdRankDays;

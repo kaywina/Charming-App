@@ -11,10 +11,13 @@ public class TimeManager
     private const string DAILY_LOVE_PREF_DAY_NAME = "Day_Love";
     private const string DAILY_LOVE_PREF_YEAR_NAME = "Year_Love";
 
+    private const string RANK_PREF_DAY_NAME = "Day_Rank";
+    private const string RANK_PREF_YEAR_NAME = "Year_Rank";
+
     private static int currentDayOfYear;
     private static int currentYear;
 
-    public enum TimeType {  DailySpin, DailyLove };
+    public enum TimeType {  DailySpin, DailyLove, Rank };
 
     public static void SetPrefsForDailyLove()
     {
@@ -28,6 +31,13 @@ public class TimeManager
         PlayerPrefs.SetInt(DAILY_SPIN_PREF_DAY_NAME, currentDayOfYear);
         PlayerPrefs.SetInt(DAILY_SPIN_PREF_YEAR_NAME, currentYear);
         //Debug.Log("Set day and year for daily spin");
+    }
+
+    public static void SetPrefsForRank()
+    {
+        PlayerPrefs.SetInt(RANK_PREF_DAY_NAME, currentDayOfYear);
+        PlayerPrefs.SetInt(RANK_PREF_YEAR_NAME, currentYear);
+        //Debug.Log("Set day and year for rank");
     }
 
     public static bool IsNewDay(TimeType timeType)
@@ -49,6 +59,11 @@ public class TimeManager
                 storedDayOfYear = PlayerPrefs.GetInt(DAILY_LOVE_PREF_DAY_NAME);
                 storedYear = PlayerPrefs.GetInt(DAILY_LOVE_PREF_YEAR_NAME);
                 //Debug.Log("Get stored day and year for daily love");
+                break;
+            case TimeType.Rank:
+                storedDayOfYear = PlayerPrefs.GetInt(RANK_PREF_DAY_NAME);
+                storedYear = PlayerPrefs.GetInt(RANK_PREF_YEAR_NAME);
+                //Debug.Log("Get stored day and year for rank");
                 break;
             default:
                 Debug.Log("Reached default case in IsNewDay, this should not happen");
