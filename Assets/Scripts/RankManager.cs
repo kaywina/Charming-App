@@ -7,7 +7,8 @@ public class RankManager : MonoBehaviour
 {
     public GameObject[] rankTextObjects;
     public Text daysToNextRankText;
-    private string daysPlayerPref = "RankDays";
+    private string daysPlayerPref = "RankDays"; // don't change this in production!
+    private string maxRankLocKey = "REACHED_MAX_RANK"; // don't change this in production!
 
     // Start is called before the first frame update
     void Start()
@@ -47,11 +48,12 @@ public class RankManager : MonoBehaviour
 
         // match number of rank cases to length of rankTextObjects array
 
-        int firstRankDays = 2;
+        int firstRankDays = 3; // 3 instead 2 makes count start at 2 days until next rank (accounts for index starting at zero)
         int secondRankDays = 4 + firstRankDays;
         int thirdRankDays = 8 + secondRankDays;
         int fourthRankDays = 16 + thirdRankDays;
         int fifthRankDays = 32 + fourthRankDays;
+
 
         if (days >= fifthRankDays)
         {
@@ -88,7 +90,7 @@ public class RankManager : MonoBehaviour
         // special loc case for having reached maximum rank
         if (rankIndex == 5)
         {
-            daysToNextRankText.text = Localization.GetTranslationByKey("REACHED_MAX_LENGTH");
+            daysToNextRankText.text = Localization.GetTranslationByKey(maxRankLocKey);
         }
         else
         {
