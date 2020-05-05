@@ -7,32 +7,66 @@ public class RankManager : MonoBehaviour
 {
     public GameObject[] rankTextObjects;
 
-    private string rankPlayerPref = "Rank";  // don't change this in production
-    
+    private string daysPlayerPref = "RankDays";
+
     // Start is called before the first frame update
     void Start()
     {
-        SetRank();
+        int newDays = 0;
+        if (PlayerPrefs.HasKey(daysPlayerPref))
+        {
+            newDays = PlayerPrefs.GetInt(daysPlayerPref);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(daysPlayerPref, 0);
+        }
 
         // TODO:
         /*
          * RankManager needs to track the number of check-ins, store it in a player pref, and increase the rank accordingly
          * 
          * */
-    }
-
-    private void SetRank()
-    {
-        if (!PlayerPrefs.HasKey(rankPlayerPref))
+        if (TimeManager.IsNewDay(TimeManager.TimeType.DailySpin))
         {
-            PlayerPrefs.SetInt(rankPlayerPref, 0);
-            DisableAllRankTextObjects();
-            EnableRankTextObjectByIndex(0);
-            Debug.Log("No rank set; starting at index 0 unranked");
-            return;
+            newDays++;
+            PlayerPrefs.SetInt(daysPlayerPref, newDays);
+            Debug.Log("Total days checked in = " + newDays);
         }
 
-        SetRankFromPlayerPref(); // set the rank from data if we get this far
+        SetRank(newDays);
+    }
+    private void SetRank(int days)
+    {
+        DisableAllRankTextObjects();
+        Debug.Log("Set a rank based on number of unique daily spin days");
+
+        int rankIndex = 0;
+        
+        // match number of rank cases to length of rankTextObjects array
+        if (days >= 2)
+        {
+            rankIndex = 1; // amateur
+        }
+        if (days >= 4)
+        {
+            rankIndex = 2; // apprentice
+        }
+        if (days >= 8)
+        {
+            rankIndex = 3; // adept
+        }
+        if (days >= 16)
+        {
+            rankIndex = 4; // acolyte
+        }
+        if (days >= 32)
+        {
+            rankIndex = 5; // archon
+        }
+
+        EnableRankTextObjectByIndex(rankIndex);
+        Debug.Log("user has achieved rank " + rankIndex);
     }
 
     private void DisableAllRankTextObjects()
@@ -46,19 +80,5 @@ public class RankManager : MonoBehaviour
     private void EnableRankTextObjectByIndex(int index)
     {
         rankTextObjects[index].SetActive(true);
-    }
-
-    private void SetRankFromPlayerPref()
-    {
-        int index = PlayerPrefs.GetInt(rankPlayerPref);
-        if (index >= rankTextObjects.Length)
-        {
-            Debug.LogError("Error: rank index exceeds length of rank text objects array");
-            return;
-        }
-
-        DisableAllRankTextObjects();
-        EnableRankTextObjectByIndex(index);
-        Debug.Log("Rank successfully set from data");
     }
 }
