@@ -89,7 +89,7 @@ public class DataManager : MonoBehaviour
             allText = null;
         }
 
-        Debug.Log("Contents of save file are: " + allText);
+        //Debug.Log("Contents of save file are: " + allText);
         return allText;
     }
 }
