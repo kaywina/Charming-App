@@ -18,15 +18,15 @@ public class SetPositionFromSlider : MonoBehaviour
         { 
             case PositionAxis.X:
                 t.localPosition = new Vector3(slider.value, origPos.y, origPos.z);
-                Debug.Log("Set X position from slider to " + slider.value);
+                //Debug.Log("Set X position from slider to " + slider.value);
                 break;
             case PositionAxis.Y:
                 t.localPosition = new Vector3(origPos.x, slider.value, origPos.z);
-                Debug.Log("Set Y position from slider");
+                //Debug.Log("Set Y position from slider");
                 break;
             case PositionAxis.Z:
                 t.localPosition = new Vector3(origPos.x, origPos.y, slider.value);
-                Debug.Log("Set Z position from slider");
+                //Debug.Log("Set Z position from slider");
                 break;
             default:
                 Debug.Log("Hit default case in SetPositionFromSlider; should not occur");
