@@ -319,6 +319,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 // no product id assigned should cause build error on unsupported platforms intentionally
 #endif
 
+                // The case for Charming App Gold Subscription
                 if (item.definition.storeSpecificId == goldProductID)
                 {
                     string localizedPrice = item.metadata.localizedPriceString;
@@ -402,6 +403,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         if (disableGold) { PlayerPrefs.SetString(goldSubscriptionPlayerPref, "false"); }
     }
 
+    // Validate the Charming App Gold Subscription
     private void ValidateSubscription(SubscriptionInfo i)
     {
         string productIdFromInfo;
@@ -441,9 +443,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 break;
             case Result.Unsupported:
                 Debug.Log("Hit unsupported case in Charming App Gold validation check");
+                PlayerPrefs.SetString(goldSubscriptionPlayerPref, "false");
                 break;
             default:
                 Debug.Log("Hit default case in subscription check; this message should not appear");
+                PlayerPrefs.SetString(goldSubscriptionPlayerPref, "false");
                 break;
         }
     }
