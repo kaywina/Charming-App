@@ -16,7 +16,7 @@ public class GoToBonusPanelButton : MonoBehaviour
         // we show the bonus wheel every new day
         bool canOpen = currencyManager.GetCanOpenBonusPanel();
 
-        // this falg allows the user to choose whether or not have bonus wheel appear on start with a toggle
+        // this flag allows the user to choose whether or not have bonus wheel appear on start with a toggle
         bool shouldOpen = true;
         if (PlayerPrefs.HasKey(bonusWheelToggle.GetPlayerPrefName())) {
             if (PlayerPrefs.GetString(bonusWheelToggle.GetPlayerPrefName()) == "false")
