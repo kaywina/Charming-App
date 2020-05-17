@@ -47,7 +47,17 @@ public class DataManager : MonoBehaviour
             string ppName = playerPrefData[0];
             string ppValue = playerPrefData[1];
 
-            PlayerPrefs.SetString(ppName, ppValue);
+            // special case for int player prefs
+            if (ppName == RankManager.daysPlayerPref)
+            {
+                PlayerPrefs.SetInt(ppName, int.Parse(ppValue));
+            }
+
+            // otherwise everything else is a string
+            else
+            {
+                PlayerPrefs.SetString(ppName, ppValue);
+            } 
         }
     }
 
@@ -69,7 +79,9 @@ public class DataManager : MonoBehaviour
             }
             saveData = saveData + unlockObjects[i].objectToEnable.name + " " + PlayerPrefs.GetString(unlockObjects[i].objectToEnable.name);
         }
-        
+
+        saveData += "*" + RankManager.daysPlayerPref + " " + PlayerPrefs.GetInt(RankManager.daysPlayerPref).ToString();
+
         File.WriteAllText(Application.persistentDataPath + "/" + saveFileName, saveData);
     }
 
@@ -89,7 +101,7 @@ public class DataManager : MonoBehaviour
             allText = null;
         }
 
-        //Debug.Log("Contents of save file are: " + allText);
+        Debug.Log("Contents of save file are: " + allText);
         return allText;
     }
 }

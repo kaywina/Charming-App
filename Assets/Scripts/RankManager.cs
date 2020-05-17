@@ -7,8 +7,8 @@ public class RankManager : MonoBehaviour
 {
     public GameObject[] rankTextObjects;
     public Text daysToNextRankText;
-    private string daysPlayerPref = "RankDayCount"; // don't change this in production!
-    private string maxRankLocKey = "REACHED_MAX_RANK"; // don't change this in production!
+    public static string daysPlayerPref = "RankDayCount"; // don't change this in production!
+    public static string maxRankLocKey = "REACHED_MAX_RANK"; // don't change this in production!
 
     private int newDays = 0;
 
