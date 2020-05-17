@@ -10,6 +10,9 @@ public class DataManager : MonoBehaviour
     private static string saveFileName = "charmProgessData.txt"; // do not change this in production!
     private string persistentData;
 
+    private char nameValueSeparator = ' '; // not recommended to change this in production
+    private char pairSeparator = '*'; // not recommended to change this in production
+
     public static string GetSaveFileName()
     {
         return saveFileName;
@@ -39,16 +42,16 @@ public class DataManager : MonoBehaviour
 
     private void ParseSaveData()
     {
-        string[] perObjectData = persistentData.Split('*');
+        string[] perObjectData = persistentData.Split(pairSeparator);
 
         for (int n = 0; n < perObjectData.Length; n++)
         {
-            string[] playerPrefData = perObjectData[n].Split(' ');
+            string[] playerPrefData = perObjectData[n].Split(nameValueSeparator);
             string ppName = playerPrefData[0];
             string ppValue = playerPrefData[1];
 
             // special case for int player prefs
-            if (ppName == RankManager.daysPlayerPref)
+            if (ppName == RankManager.daysPlayerPref || ppName == CurrencyManager.currencyPlayerPref)
             {
                 PlayerPrefs.SetInt(ppName, int.Parse(ppValue));
             }
@@ -80,7 +83,8 @@ public class DataManager : MonoBehaviour
             saveData = saveData + unlockObjects[i].objectToEnable.name + " " + PlayerPrefs.GetString(unlockObjects[i].objectToEnable.name);
         }
 
-        saveData += "*" + RankManager.daysPlayerPref + " " + PlayerPrefs.GetInt(RankManager.daysPlayerPref).ToString();
+        saveData += pairSeparator + RankManager.daysPlayerPref + nameValueSeparator + PlayerPrefs.GetInt(RankManager.daysPlayerPref).ToString();
+        saveData += pairSeparator + CurrencyManager.currencyPlayerPref + nameValueSeparator + PlayerPrefs.GetInt(CurrencyManager.currencyPlayerPref).ToString();
 
         File.WriteAllText(Application.persistentDataPath + "/" + saveFileName, saveData);
     }

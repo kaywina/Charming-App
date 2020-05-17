@@ -23,6 +23,8 @@ public class CurrencyManager : MonoBehaviour {
 
     private bool canOpenBonusPanel = false;
 
+    public static string currencyPlayerPref = "Currency";
+
     // Use this for initialization
     void Start ()
     {
@@ -40,7 +42,7 @@ public class CurrencyManager : MonoBehaviour {
         }
         else
         {
-            currencyInBank = PlayerPrefs.GetInt("Currency");
+            currencyInBank = PlayerPrefs.GetInt(currencyPlayerPref);
             infoPanel.SetActive(true);
         }
 
@@ -73,8 +75,9 @@ public class CurrencyManager : MonoBehaviour {
 
     void SetCurrencyOnStart(int amount)
     {
-        currencyInBank = amount;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        currencyInBank = PlayerPrefs.GetInt(currencyPlayerPref); // we do this to respect persistent data file (see DataManager class)
+        currencyInBank += amount;
+        PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
         SetCurrencyText();
     }
 
@@ -92,7 +95,7 @@ public class CurrencyManager : MonoBehaviour {
     {
         if (bonus <= 0) { return; }
         currencyInBank += bonus;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
         SetCurrencyText(); 
 
         if (isPurchase && storePanel != null) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
@@ -114,7 +117,7 @@ public class CurrencyManager : MonoBehaviour {
     public void ClearCurrency()
     {
         currencyInBank = 0;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
         SetCurrencyText();
     }
 #endif
@@ -128,7 +131,7 @@ public class CurrencyManager : MonoBehaviour {
     public static void SetCurrencyInBank(int amount)
     {
         currencyInBank = amount;
-        PlayerPrefs.SetInt("Currency", currencyInBank);
+        PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
         SetCurrencyText();
     }
 
