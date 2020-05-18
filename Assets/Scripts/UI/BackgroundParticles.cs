@@ -66,4 +66,15 @@ public class BackgroundParticles : MonoBehaviour
             //particleSystems[i].GetComponent<ParticleSystem>().emission.rateOverTimeMultiplier = multipler;
         }
     } 
+
+    public int GetIndex()
+    {
+        return PlayerPrefs.GetInt(playerPrefName);
+    }
+
+    public void SetIndex(int newIndex, bool update)
+    {
+        PlayerPrefs.SetInt(playerPrefName, newIndex);
+        if (update) { EnableGameObjectByIndex(newIndex); }
+    }
 }
