@@ -48,10 +48,10 @@ public class BackgroundParticles : MonoBehaviour
         for (int n = 0; n < particleSystems.Length; n++)
         {
             if (n == index) {
-                particleSystems[n].SetActive(true);
+                if (particleSystems[n] != null) { particleSystems[n].SetActive(true); }
             }
             else {
-                particleSystems[n].SetActive(false);
+                if (particleSystems[n] != null) { particleSystems[n].SetActive(false); }
             }
         }
         PlayerPrefs.SetInt(playerPrefName, index);
