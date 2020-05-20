@@ -16,9 +16,26 @@ public class SoundManager : MonoBehaviour
     private string soundsPlayerPref = "EnableSounds"; // don't change this in production
     private string musicPlayerPref = "EnableMusic"; // don't change this in production
 
+    public bool enabledByDefault = true;
+
     private string musicIndexPlayerPref = "MusicIndex";
 
     public Toggle musicToggle;
+
+    private void Awake()
+    {
+        if (enabledByDefault)
+        {
+            if (!PlayerPrefs.HasKey(soundsPlayerPref))
+            {
+                PlayerPrefs.SetString(soundsPlayerPref, "true");
+            }
+            if (!PlayerPrefs.HasKey(musicPlayerPref))
+            {
+                PlayerPrefs.SetString(musicPlayerPref, "true");
+            }
+        }
+    }
 
     private void OnEnable()
     {
