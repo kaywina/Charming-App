@@ -5,7 +5,7 @@ using UnityEngine;
 public class SwipeThroughObjectArray : SwipeFunction
 {
     public GameObject[] objects;
-    static int index = 0;
+    int index = 0;
 
     new void Start()
     {
