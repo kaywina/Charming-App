@@ -17,10 +17,12 @@ public class ExpandForSeconds : MonoBehaviour
     private bool isExpanding = false;
 
     private Vector3 originalLocalScale;
+    private Vector3 tempScale;
     
     void OnEnable()
     {
         originalLocalScale = toExpand.transform.localScale;
+        tempScale = new Vector3();
     }
 
     private void OnDisable()
@@ -32,8 +34,6 @@ public class ExpandForSeconds : MonoBehaviour
     {
         if (isExpanding)
         {
-            Vector3 tempScale = new Vector3();
-
             if (x) { tempScale.x = toExpand.transform.localScale.x + sizeIncrement; }
             if (y) { tempScale.y = toExpand.transform.localScale.y + sizeIncrement; }
             if (z) { tempScale.z = toExpand.transform.localScale.z + sizeIncrement; }
