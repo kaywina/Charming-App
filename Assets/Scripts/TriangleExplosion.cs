@@ -8,12 +8,6 @@ public class TriangleExplosion : MonoBehaviour
     private WaitForSeconds waitForDestroy;
     private WaitForSeconds waitForReenable;
 
-    public void Start()
-    {
-        waitForDestroy = new WaitForSeconds(1.0f);
-        waitForReenable = new WaitForSeconds(2.5f);
-    }
-
     private Renderer R;
     private MeshRenderer MR;
     private SkinnedMeshRenderer SMR;
@@ -24,6 +18,9 @@ public class TriangleExplosion : MonoBehaviour
 
     public void OnEnable()
     {
+        waitForDestroy = new WaitForSeconds(1.0f);
+        waitForReenable = new WaitForSeconds(2.5f);
+
         R = GetComponent<Renderer>();
         MR = GetComponent<MeshRenderer>();
         SMR = GetComponent<SkinnedMeshRenderer>();
