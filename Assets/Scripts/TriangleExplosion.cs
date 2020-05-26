@@ -14,6 +14,24 @@ public class TriangleExplosion : MonoBehaviour
         waitForReenable = new WaitForSeconds(2.5f);
     }
 
+    private Renderer R;
+    private MeshRenderer MR;
+    private SkinnedMeshRenderer SMR;
+    private MeshFilter MF;
+    private Collider C;
+    private Mesh M;
+
+
+    public void OnEnable()
+    {
+        R = GetComponent<Renderer>();
+        MR = GetComponent<MeshRenderer>();
+        SMR = GetComponent<SkinnedMeshRenderer>();
+        MF = GetComponent<MeshFilter>();
+        C = GetComponent<Collider>();
+        M = new Mesh();
+    }
+
     public void Explode()
     {
         StartCoroutine(SplitMesh(false));
@@ -21,36 +39,29 @@ public class TriangleExplosion : MonoBehaviour
 
     private IEnumerator SplitMesh(bool destroy)
     {
-
-        if (GetComponent<MeshFilter>() == null || GetComponent<SkinnedMeshRenderer>() == null)
+        if (MF == null)
         {
+            //Debug.Log("MeshFilter is null");
             yield return null;
         }
 
-        if (GetComponent<Collider>())
+        if (SMR == null)
         {
-            GetComponent<Collider>().enabled = false;
+            //Debug.Log("SkinnedMeshRenderer is null");
+            yield return null;
         }
 
-        Mesh M = new Mesh();
-        if (GetComponent<MeshFilter>())
+        if (C != null)
         {
-            M = GetComponent<MeshFilter>().mesh;
+            C.enabled = false;
         }
-        else if (GetComponent<SkinnedMeshRenderer>())
-        {
-            M = GetComponent<SkinnedMeshRenderer>().sharedMesh;
-        }
+
+        if (MF != null) { M = MF.mesh; }
+        else if (SMR != null) { M = SMR.sharedMesh; }
 
         Material[] materials = new Material[0];
-        if (GetComponent<MeshRenderer>())
-        {
-            materials = GetComponent<MeshRenderer>().materials;
-        }
-        else if (GetComponent<SkinnedMeshRenderer>())
-        {
-            materials = GetComponent<SkinnedMeshRenderer>().materials;
-        }
+        if (MR != null) { materials = MR.materials; }
+        else if (SMR != null) { materials = SMR.materials; }
 
         Vector3[] verts = M.vertices;
         Vector3[] normals = M.normals;
@@ -94,7 +105,7 @@ public class TriangleExplosion : MonoBehaviour
             }
         }
 
-        GetComponent<Renderer>().enabled = false;
+        R.enabled = false;
 
         yield return waitForDestroy;
         if (destroy == true)
@@ -104,11 +115,8 @@ public class TriangleExplosion : MonoBehaviour
         else
         {
             yield return waitForReenable;
-            GetComponent<Renderer>().enabled = true;
-            if (GetComponent<Collider>())
-            {
-                GetComponent<Collider>().enabled = false;
-            }
+            R.enabled = true;
+            if (C != null) { C.enabled = false; }
         }
     }
 }
