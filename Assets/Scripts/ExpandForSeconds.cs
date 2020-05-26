@@ -30,10 +30,8 @@ public class ExpandForSeconds : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("Fixed update");
         if (isExpanding)
         {
-            Debug.Log("Expand the object!");
             Vector3 tempScale = new Vector3();
 
             if (x) { tempScale.x = toExpand.transform.localScale.x + sizeIncrement; }

@@ -5,6 +5,15 @@ using UnityEngine;
 public class TriangleExplosion : MonoBehaviour
 {
 
+    private WaitForSeconds waitForDestroy;
+    private WaitForSeconds waitForReenable;
+
+    public void Start()
+    {
+        waitForDestroy = new WaitForSeconds(1.0f);
+        waitForReenable = new WaitForSeconds(2.5f);
+    }
+
     public void Explode()
     {
         StartCoroutine(SplitMesh(false));
@@ -87,14 +96,14 @@ public class TriangleExplosion : MonoBehaviour
 
         GetComponent<Renderer>().enabled = false;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return waitForDestroy;
         if (destroy == true)
         {
             Destroy(gameObject);
         }
         else
         {
-            yield return new WaitForSeconds(2.5f);
+            yield return waitForReenable;
             GetComponent<Renderer>().enabled = true;
             if (GetComponent<Collider>())
             {
