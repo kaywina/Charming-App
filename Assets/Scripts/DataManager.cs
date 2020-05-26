@@ -105,7 +105,7 @@ public class DataManager : MonoBehaviour
             allText = null;
         }
 
-        Debug.Log("Contents of save file are: " + allText);
+        //Debug.Log("Contents of save file are: " + allText); // don't leave this uncommented in production!
         return allText;
     }
 }
