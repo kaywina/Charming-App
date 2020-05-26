@@ -84,6 +84,7 @@ public class TriangleExplosion : MonoBehaviour
                     newNormals[n] = normals[index];
                 }
 
+                // if I try to cache this mesh it brutalizes performance
                 Mesh mesh = new Mesh();
                 mesh.vertices = newVerts;
                 mesh.normals = newNormals;
