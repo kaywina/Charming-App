@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BackgroundParticles : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class BackgroundParticles : MonoBehaviour
     public GameObject[] particleSystems;
     public string playerPrefName = "BackgroundParticleSystemIndex";
     public EmissionRateSlider emitSlider;
+
+    public GameObject tornadoPosXSlider;
+    public GameObject tornadoPosYSlider;
+    public GameObject tornadoRotXSlider;
+    public GameObject tornadoRotZSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -47,10 +53,31 @@ public class BackgroundParticles : MonoBehaviour
     {
         for (int n = 0; n < particleSystems.Length; n++)
         {
-            if (n == index) {
-                if (particleSystems[n] != null) { particleSystems[n].SetActive(true); }
+            if (n == index)
+            {
+                if (particleSystems[n] != null)
+                {
+                    // special case for tornado particles that can be rotated in secrets
+                    if (particleSystems[n].name == "Tornado")
+                    {
+                        Debug.Log("Set the position and rotation of tornado particles");
+                        tornadoPosXSlider.GetComponent<SetPlayerPrefFromSlider>().SetSliderValue();
+                        tornadoPosXSlider.GetComponent<SetPositionFromSlider>().SetLocalPosition();
+
+                        tornadoPosYSlider.GetComponent<SetPlayerPrefFromSlider>().SetSliderValue();
+                        tornadoPosYSlider.GetComponent<SetPositionFromSlider>().SetLocalPosition();
+
+                        tornadoRotXSlider.GetComponent<SetPlayerPrefFromSlider>().SetSliderValue();
+                        tornadoRotXSlider.GetComponent<SetRotationFromSlider>().SetLocalRotation();
+
+                        tornadoRotZSlider.GetComponent<SetPlayerPrefFromSlider>().SetSliderValue();
+                        tornadoRotZSlider.GetComponent<SetRotationFromSlider>().SetLocalRotation();
+                    }
+                    particleSystems[n].SetActive(true);
+                }
             }
-            else {
+            else
+            {
                 if (particleSystems[n] != null) { particleSystems[n].SetActive(false); }
             }
         }
