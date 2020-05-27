@@ -35,6 +35,7 @@ public class SetRotationFromSlider : MonoBehaviour
                 Debug.Log("Hit default case in SetRotationFromSlider; should not occur");
                 break;
         }
-        t.localRotation = Quaternion.Euler(newRot); ;
+
+        t.localRotation = Quaternion.Euler(newRot);
     }
 }
