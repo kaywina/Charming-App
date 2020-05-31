@@ -30,12 +30,12 @@ public class DataManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(persistentData))
         {
-            Debug.Log("No persistent data was found; initialize normally");
+            //Debug.Log("No persistent data was found; initialize normally");
             return;
         }
         else
         {
-            Debug.Log("Persistent data was found; set player prefs from stored values");
+            //Debug.Log("Persistent data was found; set player prefs from stored values");
             ParseSaveData();
         }
     }
@@ -96,12 +96,12 @@ public class DataManager : MonoBehaviour
 
         try
         {
-            Debug.Log("Attempting to read text from save file");
+            //Debug.Log("Attempting to read text from save file");
             allText = File.ReadAllText(Application.persistentDataPath + "/" + saveFileName);
         }
         catch
         {
-            Debug.Log("Save file has not yet been created");
+            //Debug.Log("Save file has not yet been created");
             allText = null;
         }
 

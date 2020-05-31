@@ -37,14 +37,14 @@ public class RankManager : MonoBehaviour
     {
         newDays++;
         PlayerPrefs.SetInt(daysPlayerPref, newDays);
-        Debug.Log("Total days checked in = " + newDays);
+        //Debug.Log("Total days checked in = " + newDays);
         TimeManager.SetPrefsForRank();
     }
 
     private void SetRank(int days)
     {
         DisableAllRankTextObjects();
-        Debug.Log("Set a rank based on number of unique daily spin days");
+        //Debug.Log("Set a rank based on number of unique daily spin days");
 
         int rankIndex = 0;
         int daysToNextRank = 0;
@@ -101,7 +101,7 @@ public class RankManager : MonoBehaviour
         }
         
         EnableRankTextObjectByIndex(rankIndex);
-        Debug.Log("user has achieved rank " + rankIndex);
+        //Debug.Log("user has achieved rank " + rankIndex);
     }
 
     private void DisableAllRankTextObjects()

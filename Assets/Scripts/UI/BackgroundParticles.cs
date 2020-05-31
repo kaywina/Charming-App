@@ -9,6 +9,8 @@ public class BackgroundParticles : MonoBehaviour
     public string playerPrefName = "BackgroundParticleSystemIndex";
     public EmissionRateSlider emitSlider;
 
+    public GameObject tornadoParent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,5 +78,11 @@ public class BackgroundParticles : MonoBehaviour
     {
         PlayerPrefs.SetInt(playerPrefName, newIndex);
         if (update) { EnableGameObjectByIndex(newIndex); }
+    }
+
+    public void ResetTornado()
+    {
+        tornadoParent.transform.localPosition = new Vector3(0, 0, 0);
+        tornadoParent.transform.localRotation = new Quaternion(0, 0, 0, 0);
     }
 }
