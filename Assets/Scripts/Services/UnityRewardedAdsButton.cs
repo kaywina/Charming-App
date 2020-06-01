@@ -55,6 +55,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
         {
             //var options = new ShowOptions { resultCallback = HandleShowResult }; // this is old deprecated method
             Advertisement.Show(placementId);
+            UnityAnalyticsController.SendStartWatchingRewardedAdEvent();
         }
     }
 
@@ -82,11 +83,12 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
                 if (watchedRewardedAdText != null) { watchedRewardedAdText.SetActive(true); }
 
                 gameObject.SetActive(false); // deactivate button after completion
-
+                UnityAnalyticsController.SendCompleteWatchingRewardedAdEvent();
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:
                 //Debug.Log("The ad was skipped before reaching the end.");
+                UnityAnalyticsController.SendSkipWatchingRewardedAdEvent();
                 break;
             case ShowResult.Failed:
                 //Debug.LogError("The ad failed to be shown.");
