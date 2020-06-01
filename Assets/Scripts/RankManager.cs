@@ -61,27 +61,32 @@ public class RankManager : MonoBehaviour
         if (days >= fifthRankDays)
         {
             rankIndex = 5; // archon
+            UnityAnalyticsController.SendAchievedFifthRankEvent();
             // this is the maximum rank
         }
         else if (days >= fourthRankDays)
         {
             rankIndex = 4; // acolyte
             daysToNextRank = fifthRankDays - days;
+            UnityAnalyticsController.SendAchievedFourthRankEvent();
         }
         else if (days >= thirdRankDays)
         {
             rankIndex = 3; // adept
             daysToNextRank = fourthRankDays - days;
+            UnityAnalyticsController.SendAchievedThirdRankEvent();
         }
         else if (days >= secondRankDays)
         {
             rankIndex = 2; // apprentice
             daysToNextRank = thirdRankDays - days;
+            UnityAnalyticsController.SendAchievedSecondRankEvent();
         }
         else if (days >= firstRankDays)
         {
             rankIndex = 1; // amateur
             daysToNextRank = secondRankDays - days;
+            UnityAnalyticsController.SendAchievedFirstRankEvent();
         }
         else
         {
