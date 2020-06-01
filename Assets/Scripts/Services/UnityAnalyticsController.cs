@@ -19,7 +19,7 @@ public class UnityAnalyticsController : MonoBehaviour
     }
 
     /*
-     * IAP / Subscription analytics calls
+     * In-App Purchase / Subscription analytics calls (see SendSubscribeVisitEventOnEnable.cs on Panel_Subscribe scene object)
     * */
     public static void SendVisitSubscribeScreenEvent()
     {
@@ -28,7 +28,7 @@ public class UnityAnalyticsController : MonoBehaviour
     }
 
     /*
-    * Achievement ranks analytics calls 
+    * Achievement ranks analytics calls (see RankManager.cs)
     * */
     public static void SendAchievedFirstRankEvent()
     {
@@ -52,7 +52,7 @@ public class UnityAnalyticsController : MonoBehaviour
     }
 
     /*
-     * Reward ad analytics calls
+     * Reward ad analytics calls (see UnityRewardedAdsButton.cs)
      * */
     public static void SendStartWatchingRewardedAdEvent()
     {
@@ -66,4 +66,14 @@ public class UnityAnalyticsController : MonoBehaviour
     {
         AnalyticsEvent.AdSkip(true, AdvertisingNetwork.UnityAds, "Skip_Watching_Rewarded_Ad");
     }
+
+    /*
+     * User interaction analytics calls
+     * */
+    public static void SendFirstInteractionEvent()
+    {
+        //Debug.Log("Send first interaction analytics event");
+        AnalyticsEvent.FirstInteraction("First_Interaction"); // see SendFirstInteractionEvent.cs on Button_OK under Panel_Welcome
+    }
+
 }
