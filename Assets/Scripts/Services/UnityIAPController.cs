@@ -256,6 +256,10 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 // The first phase of restoration. If no more responses are received on ProcessPurchase then 
                 // no purchases are available to be restored.
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
+                if (result)
+                {
+                    PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true"); // hmm this might cause restore purchases to always enable gold regardless of result
+                }
             });
         }
         // Otherwise ...
@@ -271,8 +275,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     /// </summary>
     private void OnTransactionsRestored(bool success)
     {
-        Debug.Log("Transactions restored." + success);
-        PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true");
+        Debug.Log("Transactions restored. Success flag = " + success);       
     }
 
     //  
