@@ -64,7 +64,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             InitializePurchasing();
         }
 
-        goldTogglePrefab.SetPlayerPrefName(goldSubscriptionPlayerPref);
+        goldTogglePrefab.SetPlayerPrefName(goldSubscriptionPlayerPref); //to-do: clean up this UI dependency
     }
 
     public void InitializePurchasing()
@@ -272,6 +272,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     private void OnTransactionsRestored(bool success)
     {
         Debug.Log("Transactions restored." + success);
+        PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true");
     }
 
     //  
@@ -489,6 +490,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                     return true;
                 }
             case AppleAppStore.Name:
+                    Debug.Log("Nothing here implemented for Apple App Store");
+                    return false; // if this doesn't work try just returning true like the implementation for the Mac store
             case AmazonApps.Name:
             case MacAppStore.Name:
                 {
