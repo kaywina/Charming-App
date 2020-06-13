@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SetPriceTextFromPlayerPref : MonoBehaviour
 {
     public Text t;
-    private string defaultPriceString = "$1.39 CAD";
+    private string defaultPriceString = "$2.79 CAD";
 
     void OnEnable()
     {
