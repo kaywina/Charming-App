@@ -30,9 +30,10 @@ public class LoveManager : MonoBehaviour
     private int secondOriginalIndex = 0;
     private int secondTempIndex = 0;
 
-    private void Awake()
+    public void Initialize()
     {
-        if (TimeManager.IsNewDay(TimeManager.TimeType.DailyLove)) {
+        if (TimeManager.IsNewDay(TimeManager.TimeType.DailyLove))
+        {
             originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME); // new day case
             secondOriginalIndex = PlayerPrefs.GetInt(SECOND_PLAYER_PREF_NAME);
         }
@@ -41,11 +42,15 @@ public class LoveManager : MonoBehaviour
             originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) - 1; // not a new day; player pref was already incremented so less one to make indexing work
             secondOriginalIndex = PlayerPrefs.GetInt(SECOND_PLAYER_PREF_NAME) - 1;
         }
-    }
-    void OnEnable()
-    {
+
         InitializeLove();
         InitializeToughLove();
+        SetPrefs();
+    }
+
+    public void SetPrefs()
+    {
+        //Debug.Log("Set prefs for daily love");
         TimeManager.SetPrefsForDailyLove();
     }
 
@@ -77,6 +82,7 @@ public class LoveManager : MonoBehaviour
             return;
         }
 
+        //Debug.Log("Unlock next love sayings");
         // display the correct love statement
         locKey = "LOVE_" + loveIndex.ToString();
         loveText.SetLocalizationKey(locKey);
@@ -98,6 +104,7 @@ public class LoveManager : MonoBehaviour
         // set the player pref to be used next session
         PlayerPrefs.SetInt(PLAYER_PREF_NAME, loveIndex);
         unlockedThisSession = true;
+        
         //Debug.Log("Ending loveIndex for this session is " + loveIndex);
         //Debug.Log("Max easy love unlocked at end of this session is " + PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED));
     }
@@ -151,6 +158,8 @@ public class LoveManager : MonoBehaviour
         // set the player pref to be used next session
         PlayerPrefs.SetInt(SECOND_PLAYER_PREF_NAME, secondLoveIndex);
         secondUnlockedThisSession = true;
+
+        TimeManager.SetPrefsForDailyLove();
         //Debug.Log("Ending secondLoveIndex for this session is " + secondLoveIndex);
         //Debug.Log("Max tough love unlocked at end of this session is " + PlayerPrefs.GetInt(SECOND_PLAYER_PREF_NAME_MAX_UNLOCKED));
     }
