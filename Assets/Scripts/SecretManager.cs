@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SecretManager : MonoBehaviour
 {
-    public GameObject canvasInteractable;
-    public GameObject canvasNoninteractable;
+    public GameObject canvasMenu;
     public Secret[] secrets;
     public GameObject worldSpaceSecrets;
     public GameObject canvasSecret;
@@ -21,8 +20,7 @@ public class SecretManager : MonoBehaviour
 
     public void WhenShowSecret(int i)
     {
-        canvasInteractable.SetActive(false);
-        canvasNoninteractable.SetActive(false);
+        canvasMenu.SetActive(false);
         worldSpaceSecrets.SetActive(true);
         secrets[i].Show();
         canvasSecret.SetActive(true);
@@ -33,8 +31,7 @@ public class SecretManager : MonoBehaviour
     public void WhenHideSecret()
     {
         canvasSecret.SetActive(false);
-        canvasInteractable.SetActive(true);
-        canvasNoninteractable.SetActive(true);
+        canvasMenu.SetActive(true);
         worldSpaceSecrets.SetActive(false);
         secrets[lastIndex].Hide();
         hideSecretButton.SetActive(false);
