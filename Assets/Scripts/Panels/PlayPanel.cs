@@ -7,6 +7,7 @@ public class PlayPanel : CharmsPanel
     public GameObject headerControls;
     public GameObject arrowControls;
     public GameObject scoreIndicator;
+    public GameObject gameSelectMenu;
 
     new void OnEnable()
     {
@@ -14,6 +15,7 @@ public class PlayPanel : CharmsPanel
         headerControls.SetActive(false);
         arrowControls.SetActive(false);
         canvasOverlay.SetActive(true); // inherited
+        gameSelectMenu.SetActive(true);
 
         scoreIndicator.SetActive(false); // always enforce this off at first
 }
