@@ -37,10 +37,17 @@ public class GameAttention : MonoBehaviour
         int[] indexesToShuffle = new int[levelButtons[level].Length];
         for (int i = 0; i < levelButtons[level].Length; i++)
         {
-            indexesToShuffle[i] = i;
+            indexesToShuffle[i] = i + 1; // we want random indexes to start at 1 so we don't get the first sprite in the array, used when hiding the pattern
         }
 
         Shuffle(indexesToShuffle); // shuffle those numbers
+
+        // check for error
+        if (indexesToShuffle.Length != levelButtons[level].Length)
+        {
+            Debug.LogError("Mismatched array lengths in Game Attention; aborting level setup");
+            return;
+        }
 
         /*
         string output = "";
@@ -51,9 +58,14 @@ public class GameAttention : MonoBehaviour
         Debug.Log("contents of indexesToShuffle after shuffling =" + output);
         */
 
+        // this should apply the randomized pattern to the buttons
+        for (int f = 0; f < indexesToShuffle.Length; f++)
+        {
+            Debug.Log("Set sprite for " + levelButtons[level][f].name + " to " + playManager.GetSpriteByIndex(indexesToShuffle[f]).name);
+            levelButtons[level][f].GetComponent<Image>().sprite = playManager.GetSpriteByIndex(indexesToShuffle[f]);
+        }
 
-
-        HideAll();
+        //HideAll();
     }
 
     //for shuffle number from array
