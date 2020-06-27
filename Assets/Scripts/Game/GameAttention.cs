@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameAttention : MonoBehaviour
 {
     private int level = 0;
+    private int score = 0;
+    public Text scoreText;
 
     public Text countdownText;
     int countdown = 3;
@@ -17,9 +19,16 @@ public class GameAttention : MonoBehaviour
     private static int[] indexes;
     private static GameAttentionIndexedObject[] indexedButtons;
 
-    private bool playingGame = false;
+    private static bool playingGame = false;
 
     private static int selectedCount = 0;
+
+    private static GameAttention instance;
+
+    private void Awake()
+    {
+        instance = gameObject.GetComponent<GameAttention>();
+    }
 
     private void OnEnable()
     {
@@ -162,8 +171,19 @@ public class GameAttention : MonoBehaviour
         selectedCount++;
     }
 
+    public void IncrementScore()
+    {
+        score++;
+        scoreText.text = score.ToString();
+    }
+
     public static void CheckIndex(int indexToCheck)
     {
+        if (!playingGame)
+        {
+            return;
+        }
+
         selectedCount++;
 
         Debug.Log("selectedCount = " + selectedCount.ToString());
@@ -176,11 +196,13 @@ public class GameAttention : MonoBehaviour
         else
         {
             Debug.Log("Correct");
+            instance.IncrementScore();
         }
 
         if (selectedCount >= indexes.Length)
         {
             Debug.Log("Go to next level");
+            instance.NextLevel();
         }
     }
 
