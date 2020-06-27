@@ -14,7 +14,12 @@ public class GameAttention : MonoBehaviour
 
     public GameObject[] levelButtons;
     private Image[] images;
-    
+    private static int[] indexes;
+    private static GameAttentionIndexedObject[] indexedButtons;
+
+    private bool playingGame = false;
+
+    private static int selectedCount = 0;
 
     private void OnEnable()
     {
@@ -29,6 +34,7 @@ public class GameAttention : MonoBehaviour
 
         // get an array of all button Images for this level
         images = levelButtons[level].GetComponentsInChildren<Image>();
+        indexedButtons = levelButtons[level].GetComponentsInChildren<GameAttentionIndexedObject>();
 
         if (images.Length <= 0)
         {
@@ -37,37 +43,38 @@ public class GameAttention : MonoBehaviour
         }
 
         // fill up an array up with numbers from 0 to one less than it's length
-        int[] indexesToShuffle = new int[images.Length];
+        indexes = new int[images.Length];
 
         // build the array of indexes that will be used to shuffle buttons
-        for (int i = 0; i < indexesToShuffle.Length; i++)
+        for (int i = 0; i < indexes.Length; i++)
         {
-            indexesToShuffle[i] = i + 1; // we want random indexes to start at 1 so we don't get the first sprite in the array, used when hiding the pattern
+            indexes[i] = i + 1; // we want random indexes to start at 1 so we don't get the first sprite in the array, used when hiding the pattern
         }
 
-        Shuffle(indexesToShuffle); // shuffle those numbers
+        Shuffle(indexes); // shuffle those numbers
 
         // check for error
-        if (indexesToShuffle.Length != images.Length)
+        if (indexes.Length != images.Length)
         {
             Debug.LogError("Mismatched array lengths in Game Attention; aborting level setup");
             return;
         }
 
-        /*
+        
         string output = "";
-        foreach (int i in indexesToShuffle)
+        foreach (int i in indexes)
         {
             output += " " + i.ToString();
         }
         Debug.Log("contents of indexesToShuffle after shuffling =" + output);
-        */
+        
 
         // this should apply the randomized pattern to the buttons
-        for (int f = 0; f < indexesToShuffle.Length; f++)
+        for (int f = 0; f < indexes.Length; f++)
         {
             //Debug.Log("Set sprite for " + levelButtons[level][f].name + " to " + playManager.GetSpriteByIndex(indexesToShuffle[f]).name);
-            images[f].sprite = playManager.GetSpriteByIndex(indexesToShuffle[f]);
+            images[f].sprite = playManager.GetSpriteByIndex(indexes[f]);
+            indexedButtons[f].SetIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
 
         levelButtons[level].SetActive(true);
@@ -101,7 +108,7 @@ public class GameAttention : MonoBehaviour
 
     private void NextLevel()
     {
-
+        selectedCount = 0;
         levelButtons[level].SetActive(false);
 
         level++;
@@ -134,6 +141,7 @@ public class GameAttention : MonoBehaviour
         {
             HideAll();         
             ResetCountdown();
+            playingGame = true;
         }
         else
         {
@@ -147,6 +155,33 @@ public class GameAttention : MonoBehaviour
         Debug.Log("Reset countdown");
         countdown = 3;
         countdownText.text = "";
+    }
+
+    private static void IncrementSelectedCount()
+    {
+        selectedCount++;
+    }
+
+    public static void CheckIndex(int indexToCheck)
+    {
+        selectedCount++;
+
+        Debug.Log("selectedCount = " + selectedCount.ToString());
+        Debug.Log("indexToCheck is " + indexToCheck.ToString());
+
+        if (selectedCount != indexToCheck)
+        {
+            Debug.Log("Incorrect");
+        }
+        else
+        {
+            Debug.Log("Correct");
+        }
+
+        if (selectedCount >= indexes.Length)
+        {
+            Debug.Log("Go to next level");
+        }
     }
 
 }
