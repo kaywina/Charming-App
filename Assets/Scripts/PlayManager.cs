@@ -8,6 +8,8 @@ public class PlayManager : MonoBehaviour
     public GameObject menuCanvas;
     public GameObject scoreIndicator;
 
+    public Sprite[] romanNumeralSprites;
+
     private int gameCost = 2;
 
     public void PlayGameByIndex(int index)
@@ -23,4 +25,10 @@ public class PlayManager : MonoBehaviour
         games[index].SetActive(false);
         menuCanvas.SetActive(true);
     }
+
+    public Sprite GetSpriteByIndex(int index)
+    {
+        return romanNumeralSprites[index];
+    }
+
 }
