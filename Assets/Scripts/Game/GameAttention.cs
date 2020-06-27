@@ -12,6 +12,7 @@ public class GameAttention : MonoBehaviour
     public Text countdownText;
     int countdown = 3;
 
+    public PlayGame playGame;
     public PlayManager playManager;
 
     public GameObject[] levelButtons;
@@ -32,13 +33,13 @@ public class GameAttention : MonoBehaviour
 
     private void OnEnable()
     {
-        ResetCountdown();
+        ResetGame();
         SetupLevel();
     }
 
     private void SetupLevel()
     {
-        Debug.Log("Setup the level for the attention game");
+        //Debug.Log("Setup the level for the attention game");
 
 
         // get an array of all button Images for this level
@@ -75,7 +76,7 @@ public class GameAttention : MonoBehaviour
         {
             output += " " + i.ToString();
         }
-        Debug.Log("contents of indexesToShuffle after shuffling =" + output);
+        //Debug.Log("contents of indexesToShuffle after shuffling =" + output);
         
 
         // this should apply the randomized pattern to the buttons
@@ -115,8 +116,16 @@ public class GameAttention : MonoBehaviour
         }
     }
 
+    private void EndGame()
+    {
+        playingGame = false;
+        levelButtons[level].SetActive(false);
+        playGame.EndGame();
+    }
+
     private void NextLevel()
     {
+        playingGame = false;
         selectedCount = 0;
         levelButtons[level].SetActive(false);
 
@@ -124,21 +133,17 @@ public class GameAttention : MonoBehaviour
 
         if (level > levelButtons.Length)
         {
-            EndGame();
+            Debug.Log("Completed all levels");
+            instance.EndGame();
             return;
         }
 
         SetupLevel();
     }
 
-    private void EndGame()
-    {
-        Debug.LogError("That's the end of the game; thanks for playing");
-    }
-
     public void CountdownToPlay()
     {
-        Debug.Log("Start 3 2 1 countdown to play");
+        //Debug.Log("Start 3 2 1 countdown to play");
         countdownText.text = countdown.ToString();
         InvokeRepeating("CountdownByOne", 1f, 1f);
     }
@@ -161,7 +166,7 @@ public class GameAttention : MonoBehaviour
     private void ResetCountdown()
     {
         CancelInvoke("CountdownByOne");
-        Debug.Log("Reset countdown");
+        //Debug.Log("Reset countdown");
         countdown = 3;
         countdownText.text = "";
     }
@@ -186,12 +191,13 @@ public class GameAttention : MonoBehaviour
 
         selectedCount++;
 
-        Debug.Log("selectedCount = " + selectedCount.ToString());
-        Debug.Log("indexToCheck is " + indexToCheck.ToString());
+        //Debug.Log("selectedCount = " + selectedCount.ToString());
+        //Debug.Log("indexToCheck is " + indexToCheck.ToString());
 
         if (selectedCount != indexToCheck)
         {
             Debug.Log("Incorrect");
+            instance.EndGame();
         }
         else
         {
@@ -204,6 +210,16 @@ public class GameAttention : MonoBehaviour
             Debug.Log("Go to next level");
             instance.NextLevel();
         }
+    }
+
+    public void ResetGame()
+    {
+        playingGame = false;
+        selectedCount = 0;
+        level = 0;
+        score = 0;
+        scoreText.text = "";
+        ResetCountdown();
     }
 
 }
