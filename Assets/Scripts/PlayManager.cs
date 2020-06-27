@@ -12,6 +12,14 @@ public class PlayManager : MonoBehaviour
 
     private int gameCost = 2;
 
+    public void OnEnable()
+    {
+        for (int i = 0; i < games.Length; i++)
+        {
+            games[i].SetActive(false);
+        }
+    }
+
     public void PlayGameByIndex(int index)
     {
         menuCanvas.SetActive(false);
