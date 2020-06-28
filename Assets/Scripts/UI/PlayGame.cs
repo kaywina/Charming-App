@@ -12,7 +12,10 @@ public class PlayGame : MonoBehaviour
     public GameObject gameControls;
     public GameObject highScoreDisplay;
     public GameObject newHighScore;
+    public GameObject niceTry;
     public GameObject playButton;
+
+    bool newHighScoreFlag = false;
 
     private string highScoreDataTag = "_highscore"; // this is used to define the player pref name; so don't change it in production
 
@@ -29,6 +32,8 @@ public class PlayGame : MonoBehaviour
         scoreIndicator.SetActive(false);
         highScoreDisplay.SetActive(false);
         newHighScore.SetActive(false);
+        niceTry.SetActive(false);
+        newHighScoreFlag = false;
     }
 
     public void Play()
@@ -54,7 +59,11 @@ public class PlayGame : MonoBehaviour
     // returns true if there is a new high score
     public bool CheckScore(int score)
     {
-        if (score > PlayerPrefs.GetInt(gameName + highScoreDataTag)) { return true; }
+        if (score > PlayerPrefs.GetInt(gameName + highScoreDataTag))
+        {
+            newHighScoreFlag = true;
+            return true;
+        }
         else { return false; }
     }
 
@@ -74,6 +83,19 @@ public class PlayGame : MonoBehaviour
         gameControls.SetActive(false);
         highScoreDisplay.SetActive(true);
         playButton.SetActive(true);
+
+        // show different UI depending on if user got a personal high score or not
+        if (newHighScoreFlag)
+        {
+            newHighScore.SetActive(true);
+            niceTry.SetActive(false);
+        }
+        else
+        {
+            newHighScore.SetActive(false);
+            niceTry.SetActive(true);
+        }
+
         ShowHighScoreDisplay();
     }
 }
