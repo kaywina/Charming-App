@@ -107,7 +107,7 @@ public class GameAttention : MonoBehaviour
         int p = array.Length;
         for (int n = p - 1; n > 0; n--)
         {
-            int r = _random.Next(1, n);
+            int r = _random.Next(0, n);
             int t = array[r];
             array[r] = array[n];
             array[n] = t;
