@@ -227,6 +227,10 @@ public class GameAttention : MonoBehaviour
 
     public void ResetGame()
     {
+        for (int n = 0; n < levelButtons.Length; n++)
+        {
+            levelButtons[n].SetActive(false);
+        }
         playingGame = false;
         selectedCount = 0;
         level = 0;
