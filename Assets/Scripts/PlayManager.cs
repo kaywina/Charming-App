@@ -6,7 +6,6 @@ public class PlayManager : MonoBehaviour
 {
     public GameObject[] games;
     public GameObject menuCanvas;
-    public GameObject scoreIndicator;
 
     public Sprite[] romanNumeralSprites;
     public Sprite hideSprite;
@@ -26,7 +25,6 @@ public class PlayManager : MonoBehaviour
         menuCanvas.SetActive(false);
         games[index].SetActive(true);
         CurrencyManager.WithdrawAmount(gameCost);
-        scoreIndicator.SetActive(true);
     }
 
     public void QuitGameByIndex(int index)

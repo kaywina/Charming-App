@@ -5,15 +5,20 @@ using UnityEngine.UI;
 
 public class PlayGame : MonoBehaviour
 {
+    public string gameName;
     public Text scoreText;
+    public GameObject scoreIndicator;
     public GameObject instructions;
     public GameObject gameControls;
     public GameObject highScoreDisplay;
     public GameObject playButton;
 
+    private string highScoreDataTag = "_highscore"; // this is used to define the player pref name; so don't change it in production
+
     void OnEnable()
     {
         Reset();
+        scoreIndicator.SetActive(false);
     }
 
     public void Reset()
@@ -30,6 +35,24 @@ public class PlayGame : MonoBehaviour
         instructions.SetActive(false);
         gameControls.SetActive(true);
         playButton.SetActive(false);
+        scoreIndicator.SetActive(true);
+    }
+
+    public void SaveHighScore(int score)
+    {
+        PlayerPrefs.SetInt(gameName + highScoreDataTag, score);
+    }
+
+    public int LoadHighScore()
+    {
+        return PlayerPrefs.GetInt(gameName + highScoreDataTag);
+    }
+
+    // returns true if there is a new high score
+    public bool CheckScore(int score)
+    {
+        if (score > PlayerPrefs.GetInt(gameName + highScoreDataTag)) { return true; }
+        else { return false; }
     }
 
     public void EndGame()

@@ -126,6 +126,10 @@ public class GameAttention : MonoBehaviour
 
     private void EndGame()
     {
+        if (playGame.CheckScore(score))
+        {
+            playGame.SaveHighScore(score);
+        }
         playingGame = false;
         levelButtons[level].SetActive(false);
         playGame.EndGame();
