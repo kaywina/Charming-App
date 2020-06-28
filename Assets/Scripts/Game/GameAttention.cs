@@ -162,7 +162,7 @@ public class GameAttention : MonoBehaviour
         countdown--;
         if (countdown <= 0)
         {
-            //HideAll();         
+            HideAll();         
             ResetCountdown();
             playingGame = true;
         }
