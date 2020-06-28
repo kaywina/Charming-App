@@ -11,6 +11,7 @@ public class GameAttention : MonoBehaviour
 
     public Text countdownText;
     private int countdown = 3;
+    public GameObject go;
 
     public PlayGame playGame;
     public PlayManager playManager;
@@ -172,12 +173,19 @@ public class GameAttention : MonoBehaviour
         {
             HideAll();         
             ResetCountdown();
+            go.SetActive(true);
             playingGame = true;
+            Invoke("HideGo", 1.5f);
         }
         else
         {
             countdownText.text = countdown.ToString();
         }
+    }
+
+    private void HideGo()
+    {
+        go.SetActive(false);
     }
 
     private void ResetCountdown()
@@ -186,6 +194,8 @@ public class GameAttention : MonoBehaviour
         //Debug.Log("Reset countdown");
         countdown = 3;
         countdownText.text = "";
+        go.SetActive(false);
+
     }
 
     public void IncrementScore()
@@ -249,6 +259,12 @@ public class GameAttention : MonoBehaviour
 
     public void ResetGame()
     {
+
+        if (indexedButtons != null)
+        {
+            indexedButtons[selectedIndex].gameObject.SetActive(true); // set the last clicked button back to active incase it was deactivated as an incorrect choice
+        }
+
         for (int n = 0; n < levelButtons.Length; n++)
         {
             levelButtons[n].SetActive(false);
