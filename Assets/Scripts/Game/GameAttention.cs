@@ -28,6 +28,8 @@ public class GameAttention : MonoBehaviour
 
     private static int selectedIndex = 0;
 
+    public GameObject incorrectIndicator;
+
     private void Awake()
     {
         instance = gameObject.GetComponent<GameAttention>();
@@ -128,6 +130,7 @@ public class GameAttention : MonoBehaviour
     {
         playingGame = false;
         levelButtons[level].SetActive(false);
+        indexedButtons[selectedIndex].gameObject.SetActive(true); // set the last clicked button back to active incase it was deactivated as an incorrect choice
         if (playGame.CheckScore(score))
         {
             playGame.SaveHighScore(score);
@@ -167,7 +170,7 @@ public class GameAttention : MonoBehaviour
         countdown--;
         if (countdown <= 0)
         {
-            //HideAll();         
+            HideAll();         
             ResetCountdown();
             playingGame = true;
         }
@@ -198,6 +201,13 @@ public class GameAttention : MonoBehaviour
         indexedButtons[selectedIndex].GetComponent<Image>().sprite = playManager.GetSpriteByIndex(index);
     }
 
+    public void ShowIncorrectIndicator()
+    {
+        indexedButtons[selectedIndex].gameObject.SetActive(false);
+        incorrectIndicator.transform.position = indexedButtons[selectedIndex].transform.position;
+        incorrectIndicator.SetActive(true);
+    }
+
     public static void CheckIndex(int shuffledIndex, int orderedIndex)
     {
 
@@ -213,7 +223,9 @@ public class GameAttention : MonoBehaviour
         if (selectedCount != shuffledIndex)
         {
             Debug.Log("Incorrect");
-            instance.EndGame();
+            instance.ShowIncorrectIndicator();
+            playingGame = false; // stop ability to press more game buttons
+            instance.DelayedEndGame(1f);
         }
         else
         {
@@ -230,12 +242,18 @@ public class GameAttention : MonoBehaviour
         }
     }
 
+    public void DelayedEndGame(float secondsToDelay)
+    {
+        Invoke("EndGame", secondsToDelay);
+    }
+
     public void ResetGame()
     {
         for (int n = 0; n < levelButtons.Length; n++)
         {
             levelButtons[n].SetActive(false);
         }
+        incorrectIndicator.SetActive(false);
         playingGame = false;
         selectedCount = 0;
         level = 0;
