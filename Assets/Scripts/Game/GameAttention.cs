@@ -78,14 +78,14 @@ public class GameAttention : MonoBehaviour
             return;
         }
 
-        
+        /*
         string output = "";
         foreach (int i in indexes)
         {
             output += " " + i.ToString();
         }
         Debug.Log("contents of indexesToShuffle after shuffling =" + output);
-        
+        */
 
         // this should apply the randomized pattern to the buttons
         for (int f = 0; f < indexes.Length; f++)
@@ -139,9 +139,10 @@ public class GameAttention : MonoBehaviour
 
         level++;
 
-        if (level > levelButtons.Length)
+        if (level >= levelButtons.Length)
         {
             Debug.Log("Completed all levels");
+            level--; //set this back so that corret level buttons get disabled in EndGame
             instance.EndGame();
             return;
         }
@@ -161,7 +162,7 @@ public class GameAttention : MonoBehaviour
         countdown--;
         if (countdown <= 0)
         {
-            HideAll();         
+            //HideAll();         
             ResetCountdown();
             playingGame = true;
         }
@@ -187,8 +188,8 @@ public class GameAttention : MonoBehaviour
 
     public void SetImage(int index)
     {
-        Debug.Log("index is " + index);
-        Debug.Log("indexes[index] is " + indexes[index]);
+        //Debug.Log("index is " + index);
+        //Debug.Log("indexes[index] is " + indexes[index]);
         indexedButtons[selectedIndex].GetComponent<Image>().sprite = playManager.GetSpriteByIndex(index);
     }
 
