@@ -7,6 +7,7 @@ public class PlayGame : MonoBehaviour
 {
     public string gameName;
     public Text scoreText;
+    public Text highScoreText;
     public GameObject scoreIndicator;
     public GameObject instructions;
     public GameObject gameControls;
@@ -38,12 +39,14 @@ public class PlayGame : MonoBehaviour
 
     public void Play()
     {
-        highScoreDisplay.SetActive(false);
-        newHighScore.SetActive(false);
         instructions.SetActive(false);
         gameControls.SetActive(true);
         playButton.SetActive(false);
         scoreIndicator.SetActive(true);
+        highScoreDisplay.SetActive(false);
+        newHighScore.SetActive(false);
+        niceTry.SetActive(false);
+        newHighScoreFlag = false;
     }
 
     public void SaveHighScore(int score)
@@ -69,6 +72,7 @@ public class PlayGame : MonoBehaviour
 
     public void ShowHighScoreDisplay()
     {
+        highScoreText.text = PlayerPrefs.GetInt(gameName + highScoreDataTag).ToString();
         highScoreDisplay.SetActive(true);
     }
 
