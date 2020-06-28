@@ -10,21 +10,23 @@ public class GameAttention : MonoBehaviour
     public Text scoreText;
 
     public Text countdownText;
-    int countdown = 3;
+    private int countdown = 3;
 
     public PlayGame playGame;
     public PlayManager playManager;
 
     public GameObject[] levelButtons;
-    private Image[] images;
-    private static int[] indexes;
-    private static GameAttentionIndexedObject[] indexedButtons;
+    public Image[] images;
+    public static int[] indexes;
+    public static GameAttentionIndexedObject[] indexedButtons;
 
     private static bool playingGame = false;
 
     private static int selectedCount = 0;
 
     private static GameAttention instance;
+
+    private static int selectedIndex = 0;
 
     private void Awake()
     {
@@ -46,6 +48,12 @@ public class GameAttention : MonoBehaviour
         images = levelButtons[level].GetComponentsInChildren<Image>();
         indexedButtons = levelButtons[level].GetComponentsInChildren<GameAttentionIndexedObject>();
 
+        // set ordered indexes (we use these to track which button a user selects
+        for (int n = 0; n < indexedButtons.Length; n++)
+        {
+            indexedButtons[n].SetOrderedIndex(n);
+        }
+
         if (images.Length <= 0)
         {
             Debug.LogError("No button images found; are you missing the inspector hookup? Aborting level setup");
@@ -58,7 +66,7 @@ public class GameAttention : MonoBehaviour
         // build the array of indexes that will be used to shuffle buttons
         for (int i = 0; i < indexes.Length; i++)
         {
-            indexes[i] = i + 1; // we want random indexes to start at 1 so we don't get the first sprite in the array, used when hiding the pattern
+            indexes[i] = i;
         }
 
         Shuffle(indexes); // shuffle those numbers
@@ -76,7 +84,7 @@ public class GameAttention : MonoBehaviour
         {
             output += " " + i.ToString();
         }
-        //Debug.Log("contents of indexesToShuffle after shuffling =" + output);
+        Debug.Log("contents of indexesToShuffle after shuffling =" + output);
         
 
         // this should apply the randomized pattern to the buttons
@@ -84,7 +92,7 @@ public class GameAttention : MonoBehaviour
         {
             //Debug.Log("Set sprite for " + levelButtons[level][f].name + " to " + playManager.GetSpriteByIndex(indexesToShuffle[f]).name);
             images[f].sprite = playManager.GetSpriteByIndex(indexes[f]);
-            indexedButtons[f].SetIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
+            indexedButtons[f].SetShuffledIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
 
         levelButtons[level].SetActive(true);
@@ -112,7 +120,7 @@ public class GameAttention : MonoBehaviour
         for (int i = 0; i < images.Length; i++)
         {
             //Debug.Log("Set default sprite for object named - " + levelButtons[level][i].name);
-            images[i].sprite = playManager.GetSpriteByIndex(0); // set all sprites to blank
+            images[i].sprite = playManager.GetHideSprite(); // set all sprites to blank
         }
     }
 
@@ -171,30 +179,32 @@ public class GameAttention : MonoBehaviour
         countdownText.text = "";
     }
 
-    private static void IncrementSelectedCount()
-    {
-        selectedCount++;
-    }
-
     public void IncrementScore()
     {
         score++;
         scoreText.text = score.ToString();
     }
 
-    public static void CheckIndex(int indexToCheck)
+    public void SetImage(int index)
     {
+        Debug.Log("index is " + index);
+        Debug.Log("indexes[index] is " + indexes[index]);
+        indexedButtons[selectedIndex].GetComponent<Image>().sprite = playManager.GetSpriteByIndex(index);
+    }
+
+    public static void CheckIndex(int shuffledIndex, int orderedIndex)
+    {
+
+        selectedIndex = orderedIndex;
         if (!playingGame)
         {
             return;
         }
 
-        selectedCount++;
-
         //Debug.Log("selectedCount = " + selectedCount.ToString());
         //Debug.Log("indexToCheck is " + indexToCheck.ToString());
 
-        if (selectedCount != indexToCheck)
+        if (selectedCount != shuffledIndex)
         {
             Debug.Log("Incorrect");
             instance.EndGame();
@@ -202,7 +212,9 @@ public class GameAttention : MonoBehaviour
         else
         {
             Debug.Log("Correct");
-            instance.IncrementScore();
+            selectedCount++;
+            instance.SetImage(shuffledIndex);
+            instance.IncrementScore();  
         }
 
         if (selectedCount >= indexes.Length)

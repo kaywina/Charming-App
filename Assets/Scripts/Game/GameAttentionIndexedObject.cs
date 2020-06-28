@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class GameAttentionIndexedObject : MonoBehaviour
 {
-    private int index = 0;
+    private int shuffledIndex = 0;
+    private int orderedIndex = 0;
     
-    public void SetIndex (int i)
+    public void SetOrderedIndex (int i)
     {
-        index = i;
+        orderedIndex = i;
     }
 
-    public int GetIndex ()
+    public int GetOrderedIndex()
     {
-        return index;
+        return orderedIndex;
+    }
+
+    public void SetShuffledIndex (int i)
+    {
+        shuffledIndex = i;
+    }
+
+    public int GetShuffledIndex ()
+    {
+        return shuffledIndex;
     }
 
     public void CheckIndex()
     {
-        GameAttention.CheckIndex(index);
+        GameAttention.CheckIndex(shuffledIndex, orderedIndex);
     }
 }

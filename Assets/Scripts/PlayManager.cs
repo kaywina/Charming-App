@@ -9,6 +9,7 @@ public class PlayManager : MonoBehaviour
     public GameObject scoreIndicator;
 
     public Sprite[] romanNumeralSprites;
+    public Sprite hideSprite;
 
     private int gameCost = 2;
 
@@ -37,6 +38,11 @@ public class PlayManager : MonoBehaviour
     public Sprite GetSpriteByIndex(int index)
     {
         return romanNumeralSprites[index];
+    }
+
+    public Sprite GetHideSprite()
+    {
+        return hideSprite;
     }
 
 }
