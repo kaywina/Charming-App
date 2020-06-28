@@ -52,7 +52,6 @@ public class PlayManager : MonoBehaviour
 
     public void StopFireworks()
     {
-        fireworks.Stop();
+        if (fireworks != null) { fireworks.Stop(); }
     }
-
 }
