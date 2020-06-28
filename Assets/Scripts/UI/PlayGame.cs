@@ -10,6 +10,7 @@ public class PlayGame : MonoBehaviour
     public Text scoreText;
     public Text highScoreText;
     public Text previousHighScoreText;
+    public GameObject perfectIndicator;
     public GameObject scoreIndicator;
     public GameObject instructions;
     public GameObject gameControls;
@@ -43,6 +44,7 @@ public class PlayGame : MonoBehaviour
         highScoreDisplay.SetActive(false);
         newHighScore.SetActive(false);
         niceTry.SetActive(false);
+        perfectIndicator.SetActive(false);
         newHighScoreFlag = false;
     }
 
@@ -96,6 +98,11 @@ public class PlayGame : MonoBehaviour
     public void ShowNewHighScore()
     {
         newHighScore.SetActive(true);
+    }
+
+    public void ShowPerfectIndicator()
+    {
+        perfectIndicator.SetActive(true);
     }
 
     public void EndGame()

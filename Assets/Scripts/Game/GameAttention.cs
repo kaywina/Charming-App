@@ -147,6 +147,7 @@ public class GameAttention : MonoBehaviour
         {
             Debug.Log("Completed all levels");
             level--; //set this back so that corret level buttons get disabled in EndGame
+            playGame.ShowPerfectIndicator();
             instance.EndGame();
             return;
         }
@@ -166,7 +167,7 @@ public class GameAttention : MonoBehaviour
         countdown--;
         if (countdown <= 0)
         {
-            HideAll();         
+            //HideAll();         
             ResetCountdown();
             playingGame = true;
         }
