@@ -11,6 +11,7 @@ public class PlayGame : MonoBehaviour
     public GameObject instructions;
     public GameObject gameControls;
     public GameObject highScoreDisplay;
+    public GameObject newHighScore;
     public GameObject playButton;
 
     private string highScoreDataTag = "_highscore"; // this is used to define the player pref name; so don't change it in production
@@ -18,7 +19,6 @@ public class PlayGame : MonoBehaviour
     void OnEnable()
     {
         Reset();
-        scoreIndicator.SetActive(false);
     }
 
     public void Reset()
@@ -26,12 +26,15 @@ public class PlayGame : MonoBehaviour
         gameControls.SetActive(false);
         instructions.SetActive(true);
         playButton.SetActive(true);
+        scoreIndicator.SetActive(false);
         highScoreDisplay.SetActive(false);
+        newHighScore.SetActive(false);
     }
 
     public void Play()
     {
         highScoreDisplay.SetActive(false);
+        newHighScore.SetActive(false);
         instructions.SetActive(false);
         gameControls.SetActive(true);
         playButton.SetActive(false);
@@ -55,11 +58,22 @@ public class PlayGame : MonoBehaviour
         else { return false; }
     }
 
+    public void ShowHighScoreDisplay()
+    {
+        highScoreDisplay.SetActive(true);
+    }
+
+    public void ShowNewHighScore()
+    {
+        newHighScore.SetActive(true);
+    }
+
     public void EndGame()
     {
         Debug.Log("That's the end of the game");
         gameControls.SetActive(false);
         highScoreDisplay.SetActive(true);
         playButton.SetActive(true);
+        ShowHighScoreDisplay();
     }
 }
