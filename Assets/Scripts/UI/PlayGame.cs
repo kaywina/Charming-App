@@ -9,6 +9,7 @@ public class PlayGame : MonoBehaviour
     public PlayManager playManager;
     public Text scoreText;
     public Text highScoreText;
+    public Text previousHighScoreText;
     public GameObject scoreIndicator;
     public GameObject instructions;
     public GameObject gameControls;
@@ -20,6 +21,7 @@ public class PlayGame : MonoBehaviour
     bool newHighScoreFlag = false;
 
     private string highScoreDataTag = "_highscore"; // this is used to define the player pref name; so don't change it in production
+    private string previousHighScoreDataTag = "_previous_highscore"; // this is used to define the player pref name; so don't change it in production
 
     void OnEnable()
     {
@@ -63,10 +65,21 @@ public class PlayGame : MonoBehaviour
         return PlayerPrefs.GetInt(gameName + highScoreDataTag);
     }
 
+    public void SavePreviousHighScore(int score)
+    {
+        PlayerPrefs.SetInt(gameName + previousHighScoreDataTag, score);
+    }
+
+    public int LoadPreviousHighScore()
+    {
+        return PlayerPrefs.GetInt(gameName + previousHighScoreDataTag);
+    }
+
     // returns true if there is a new high score
     public bool CheckScore(int score)
     {
-        if (score > PlayerPrefs.GetInt(gameName + highScoreDataTag))
+        if (!PlayerPrefs.HasKey(gameName + highScoreDataTag) 
+                || score > PlayerPrefs.GetInt(gameName + highScoreDataTag))
         {
             newHighScoreFlag = true;
             return true;
@@ -88,9 +101,8 @@ public class PlayGame : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("That's the end of the game");
+        
         gameControls.SetActive(false);
-        highScoreDisplay.SetActive(true);
-        playButton.SetActive(true);
 
         // show different UI depending on if user got a personal high score or not
         if (newHighScoreFlag)
@@ -105,6 +117,9 @@ public class PlayGame : MonoBehaviour
             niceTry.SetActive(true);
         }
 
+        previousHighScoreText.text = LoadPreviousHighScore().ToString();
+        SavePreviousHighScore(PlayerPrefs.GetInt(gameName + highScoreDataTag)); // need to do this after updating text
         ShowHighScoreDisplay();
+        playButton.SetActive(true);
     }
 }
