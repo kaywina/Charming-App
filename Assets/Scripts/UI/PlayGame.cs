@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayGame : MonoBehaviour
 {
     public string gameName;
+    public PlayManager playManager;
     public Text scoreText;
     public Text highScoreText;
     public GameObject scoreIndicator;
@@ -25,8 +26,14 @@ public class PlayGame : MonoBehaviour
         Reset();
     }
 
+    private void OnDisable()
+    {
+        playManager.StopFireworks();
+    }
+
     public void Reset()
     {
+        playManager.StopFireworks();
         gameControls.SetActive(false);
         instructions.SetActive(true);
         playButton.SetActive(true);
@@ -39,14 +46,11 @@ public class PlayGame : MonoBehaviour
 
     public void Play()
     {
+        Reset();
         instructions.SetActive(false);
         gameControls.SetActive(true);
         playButton.SetActive(false);
         scoreIndicator.SetActive(true);
-        highScoreDisplay.SetActive(false);
-        newHighScore.SetActive(false);
-        niceTry.SetActive(false);
-        newHighScoreFlag = false;
     }
 
     public void SaveHighScore(int score)
@@ -91,6 +95,7 @@ public class PlayGame : MonoBehaviour
         // show different UI depending on if user got a personal high score or not
         if (newHighScoreFlag)
         {
+            playManager.StartFireworks();
             newHighScore.SetActive(true);
             niceTry.SetActive(false);
         }

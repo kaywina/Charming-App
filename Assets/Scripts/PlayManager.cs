@@ -10,6 +10,8 @@ public class PlayManager : MonoBehaviour
     public Sprite[] romanNumeralSprites;
     public Sprite hideSprite;
 
+    public ParticleSystem fireworks;
+
     private int gameCost = 2;
 
     public void OnEnable()
@@ -41,6 +43,16 @@ public class PlayManager : MonoBehaviour
     public Sprite GetHideSprite()
     {
         return hideSprite;
+    }
+
+    public void StartFireworks()
+    {
+        fireworks.Play();
+    }
+
+    public void StopFireworks()
+    {
+        fireworks.Stop();
     }
 
 }
