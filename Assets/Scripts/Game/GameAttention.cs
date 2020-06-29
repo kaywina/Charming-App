@@ -136,7 +136,7 @@ public class GameAttention : MonoBehaviour
         {
             playGame.SaveHighScore(score);
         }
-        playGame.EndGame();
+        playGame.EndGame(score);
     }
 
     private void NextLevel()

@@ -8,7 +8,7 @@ public class PlayGame : MonoBehaviour
     public string gameName;
     public PlayManager playManager;
     public Text scoreText;
-    public Text highScoreText;
+    public Text yourScoreText;
     public Text previousHighScoreText;
     public GameObject perfectIndicator;
     public GameObject scoreIndicator;
@@ -89,9 +89,9 @@ public class PlayGame : MonoBehaviour
         else { return false; }
     }
 
-    public void ShowHighScoreDisplay()
+    public void ShowYourScoreDisplay(int score)
     {
-        highScoreText.text = PlayerPrefs.GetInt(gameName + highScoreDataTag).ToString();
+        yourScoreText.text = score.ToString();
         highScoreDisplay.SetActive(true);
     }
 
@@ -105,7 +105,7 @@ public class PlayGame : MonoBehaviour
         perfectIndicator.SetActive(true);
     }
 
-    public void EndGame()
+    public void EndGame(int score)
     {
         Debug.Log("That's the end of the game");
         
@@ -126,7 +126,7 @@ public class PlayGame : MonoBehaviour
 
         previousHighScoreText.text = LoadPreviousHighScore().ToString();
         SavePreviousHighScore(PlayerPrefs.GetInt(gameName + highScoreDataTag)); // need to do this after updating text
-        ShowHighScoreDisplay();
+        ShowYourScoreDisplay(score);
         playButton.SetActive(true);
     }
 }
