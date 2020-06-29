@@ -7,7 +7,6 @@ public class GameAttention : MonoBehaviour
 {
     private int level = 0;
     private int score = 0;
-    public Text scoreText;
 
     public Text countdownText;
     private int countdown = 3;
@@ -201,7 +200,6 @@ public class GameAttention : MonoBehaviour
     public void IncrementScore()
     {
         score++;
-        scoreText.text = score.ToString();
     }
 
     public void SetImage(int index)
@@ -274,7 +272,6 @@ public class GameAttention : MonoBehaviour
         selectedCount = 0;
         level = 0;
         score = 0;
-        scoreText.text = "";
         ResetCountdown();
     }
 

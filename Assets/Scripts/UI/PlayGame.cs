@@ -11,7 +11,6 @@ public class PlayGame : MonoBehaviour
     public Text yourScoreText;
     public Text previousHighScoreText;
     public GameObject perfectIndicator;
-    public GameObject scoreIndicator;
     public GameObject instructions;
     public GameObject gameControls;
     public GameObject highScoreDisplay;
@@ -40,7 +39,6 @@ public class PlayGame : MonoBehaviour
         gameControls.SetActive(false);
         instructions.SetActive(true);
         playButton.SetActive(true);
-        scoreIndicator.SetActive(false);
         highScoreDisplay.SetActive(false);
         newHighScore.SetActive(false);
         niceTry.SetActive(false);
@@ -54,7 +52,6 @@ public class PlayGame : MonoBehaviour
         instructions.SetActive(false);
         gameControls.SetActive(true);
         playButton.SetActive(false);
-        scoreIndicator.SetActive(true);
     }
 
     public void SaveHighScore(int score)
