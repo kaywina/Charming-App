@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayManager : MonoBehaviour
 {
-    public GameObject[] games;
     public GameObject menuCanvas;
+
+    public PlayGame playGameAttention;
+    public GameAttention gameAttention;
 
     public Sprite[] romanNumeralSprites;
     public Sprite hideSprite;
@@ -16,23 +18,25 @@ public class PlayManager : MonoBehaviour
 
     public void OnEnable()
     {
-        for (int i = 0; i < games.Length; i++)
-        {
-            games[i].SetActive(false);
-        }
+        playGameAttention.gameObject.SetActive(false);
     }
 
-    public void PlayGameByIndex(int index)
+    public void CloseGameSelectMenu()
     {
         menuCanvas.SetActive(false);
-        games[index].SetActive(true);
-        CurrencyManager.WithdrawAmount(gameCost);
     }
 
-    public void QuitGameByIndex(int index)
+    public void OpenGameAttention()
     {
-        games[index].SetActive(false);
-        menuCanvas.SetActive(true);
+        CloseGameSelectMenu();
+        playGameAttention.gameObject.SetActive(true);
+    }
+
+    public void PlayGameAttention()
+    {
+        gameAttention.ResetGame();
+        playGameAttention.Play();
+        CurrencyManager.WithdrawAmount(gameCost);
     }
 
     public Sprite GetSpriteByIndex(int index)
