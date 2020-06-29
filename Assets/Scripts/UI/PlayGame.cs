@@ -104,8 +104,7 @@ public class PlayGame : MonoBehaviour
 
     public void EndGame(int score)
     {
-        Debug.Log("That's the end of the game");
-        
+        //Debug.Log("That's the end of the game");
         gameControls.SetActive(false);
 
         // show different UI depending on if user got a personal high score or not

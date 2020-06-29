@@ -118,7 +118,7 @@ public class GameAttention : MonoBehaviour
 
     private void HideAll()
     {
-        Debug.Log("Hide all");
+        //Debug.Log("Hide all");
         for (int i = 0; i < images.Length; i++)
         {
             //Debug.Log("Set default sprite for object named - " + levelButtons[level][i].name);
@@ -230,14 +230,14 @@ public class GameAttention : MonoBehaviour
 
         if (selectedCount != shuffledIndex)
         {
-            Debug.Log("Incorrect");
+            //Debug.Log("Incorrect");
             instance.ShowIncorrectIndicator();
             playingGame = false; // stop ability to press more game buttons
             instance.DelayedEndGame(1f);
         }
         else
         {
-            Debug.Log("Correct");
+            //Debug.Log("Correct");
             selectedCount++;
             instance.SetImage(shuffledIndex);
             instance.IncrementScore();  
@@ -245,7 +245,7 @@ public class GameAttention : MonoBehaviour
 
         if (selectedCount >= indexes.Length)
         {
-            Debug.Log("Go to next level");
+            //Debug.Log("Go to next level");
             instance.NextLevel();
         }
     }
