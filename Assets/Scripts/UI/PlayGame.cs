@@ -80,7 +80,7 @@ public class PlayGame : MonoBehaviour
     // returns true if there is a new high score
     public bool CheckScore(int score)
     {
-        if (!PlayerPrefs.HasKey(gameName + highScoreDataTag) 
+        if (!PlayerPrefs.HasKey(gameName + highScoreDataTag) && score != 0 
                 || score > PlayerPrefs.GetInt(gameName + highScoreDataTag))
         {
             newHighScoreFlag = true;
