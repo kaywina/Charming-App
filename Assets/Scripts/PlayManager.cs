@@ -13,12 +13,18 @@ public class PlayManager : MonoBehaviour
 
     public ParticleSystem fireworks;
 
-    private int gameCostNoGold = 2;
-    private int gameCostGold = 1;
+    private static int gameCostNoGold = 2;
+    private static int gameCostGold = 1;
 
     public void OnEnable()
     {
         playGameAttention.gameObject.SetActive(false);
+    }
+
+    public static int GetGameCost()
+    {
+        if (IsGold()) { return gameCostGold; }
+        else { return gameCostNoGold;  }
     }
 
     public void CloseGameSelectMenu()
@@ -40,9 +46,21 @@ public class PlayManager : MonoBehaviour
         } 
     }
 
-    private bool CheckGameCost()
+    private static bool IsGold()
     {
         if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private bool CheckGameCost()
+    {
+        if (IsGold())
         {
             if (CurrencyManager.WithdrawAmount(gameCostGold))
             {
