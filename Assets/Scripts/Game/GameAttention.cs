@@ -220,13 +220,13 @@ public class GameAttention : MonoBehaviour
 
     public static void CheckIndex(int shuffledIndex, int orderedIndex)
     {
-
-        selectedIndex = orderedIndex;
         if (!playingGame)
         {
             return;
         }
 
+        selectedIndex = orderedIndex; // this needs to happen after the playingGame check, to avoid cases where user cicks a button between an incorrect guess and end of game, which results in buttons not showing up on subsequent plays
+        
         //Debug.Log("selectedCount = " + selectedCount.ToString());
         //Debug.Log("indexToCheck is " + indexToCheck.ToString());
 
