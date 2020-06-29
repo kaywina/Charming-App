@@ -9,7 +9,7 @@ public class CurrencyManager : MonoBehaviour {
     public GameObject infoPanel;
     public GameObject bonusPanel;
     public StorePanel storePanel;
-    public Text currencyTextSilver;
+    public Text currencyText;
 
     private static int welcomeBonusSilver = 32;
     public Text welcomeBonusText;
@@ -125,7 +125,7 @@ public class CurrencyManager : MonoBehaviour {
     public static void SetCurrencyText()
     {
 
-        Instance.currencyTextSilver.text = currencyInBank.ToString();
+        Instance.currencyText.text = currencyInBank.ToString();
     }
 
     public static void SetCurrencyInBank(int amount)
@@ -135,9 +135,30 @@ public class CurrencyManager : MonoBehaviour {
         SetCurrencyText();
     }
 
-    public static void WithdrawAmount(int amount)
+    public static bool WithdrawAmount(int amount)
     {
-        SetCurrencyInBank(currencyInBank - amount);
+        if (currencyInBank >= amount)
+        {
+            SetCurrencyInBank(currencyInBank - amount);
+            return true;
+        }
+        else
+        {
+            Instance.FlashYellow();
+            return false;
+        }
+    }
+
+    private void FlashYellow()
+    {
+        CancelInvoke("ResetToWhite");
+        currencyText.color = Color.yellow;
+        Invoke("ResetToWhite", 1f);
+    }
+
+    private void ResetToWhite()
+    {
+        currencyText.color = Color.white;
     }
 
     public static bool CanWithdrawAmount(int amount)

@@ -7,14 +7,14 @@ public class PlayManager : MonoBehaviour
     public GameObject menuCanvas;
 
     public PlayGame playGameAttention;
-    public GameAttention gameAttention;
 
     public Sprite[] romanNumeralSprites;
     public Sprite hideSprite;
 
     public ParticleSystem fireworks;
 
-    private int gameCost = 2;
+    private int gameCostNoGold = 2;
+    private int gameCostGold = 1;
 
     public void OnEnable()
     {
@@ -34,9 +34,29 @@ public class PlayManager : MonoBehaviour
 
     public void PlayGameAttention()
     {
-        gameAttention.ResetGame();
-        playGameAttention.Play();
-        CurrencyManager.WithdrawAmount(gameCost);
+        if (CheckGameCost())
+        {
+            playGameAttention.Play();
+        } 
+    }
+
+    private bool CheckGameCost()
+    {
+        if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
+        {
+            if (CurrencyManager.WithdrawAmount(gameCostGold))
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (CurrencyManager.WithdrawAmount(gameCostNoGold))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Sprite GetSpriteByIndex(int index)
