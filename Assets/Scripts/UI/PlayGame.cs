@@ -7,7 +7,6 @@ public class PlayGame : MonoBehaviour
 {
     public string gameName;
     public PlayManager playManager;
-    public Text scoreText;
     public Text yourScoreText;
     public Text previousHighScoreText;
     public GameObject perfectIndicator;
