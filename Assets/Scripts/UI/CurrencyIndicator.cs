@@ -48,9 +48,17 @@ public class CurrencyIndicator : MonoBehaviour
         }
     }
 
-    private void ShowBonusText()
+    public void ShowBonusText()
     {
         bonusGivenText.gameObject.SetActive(true);
+        totalAmountText.color = bonusGivenText.color;
+        Invoke("HideBonusGivenText", secondsBeforeHide);
+    }
+
+    public void ShowBonusTextCustomAmount(int amount)
+    {
+        bonusGivenText.gameObject.SetActive(true);
+        bonusGivenText.text = "+" + amount.ToString();
         totalAmountText.color = bonusGivenText.color;
         Invoke("HideBonusGivenText", secondsBeforeHide);
     }

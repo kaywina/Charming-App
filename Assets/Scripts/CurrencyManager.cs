@@ -25,6 +25,8 @@ public class CurrencyManager : MonoBehaviour {
 
     public static string currencyPlayerPref = "Currency";
 
+    public CurrencyIndicator currencyIndicator;
+
     // Use this for initialization
     void Start ()
     {
@@ -168,5 +170,10 @@ public class CurrencyManager : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    public void ShowBonusIndicator(int amount)
+    {
+        currencyIndicator.ShowBonusTextCustomAmount(amount);
     }
 }

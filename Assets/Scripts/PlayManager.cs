@@ -97,9 +97,4 @@ public class PlayManager : MonoBehaviour
     {
         if (fireworks != null) { fireworks.Stop(); }
     }
-
-    public void GiveReward(int amount)
-    {
-        currencyManager.GiveBonus(amount);
-    }
 }

@@ -143,7 +143,7 @@ public class PlayGame : MonoBehaviour
 
     public void SetNextRewardAmount()
     {
-        Debug.Log("Set next reward amount");
+        //Debug.Log("Set next reward amount");
         string rewardPlayerPrefName = gameName + nextRewardPlayerPrefTag;
         int reward = PlayerPrefs.GetInt(rewardPlayerPrefName);
         // only go to next reward size if not exceeded max reward size; otherwise reward just stays at max
@@ -161,7 +161,8 @@ public class PlayGame : MonoBehaviour
 
         if (newHighScoreFlag)
         {
-            playManager.GiveReward(rewardAmount);
+            CurrencyManager.Instance.GiveBonus(rewardAmount);
+            CurrencyManager.Instance.ShowBonusIndicator(rewardAmount);
             SetNextRewardAmount();
             rewardText.text = rewardAmount.ToString();
             rewardObject.SetActive(true);
