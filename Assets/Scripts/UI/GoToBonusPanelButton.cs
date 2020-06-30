@@ -9,7 +9,7 @@ public class GoToBonusPanelButton : MonoBehaviour
     public GameObject bonusPanel;
     public GameObject infoPanel;
 
-    public SetPlayerPrefFromToggle bonusWheelToggle;
+    private string playerPrefName = "ShowBonus"; // don't change this in production!
 
     public void TryOpenBonusPanel()
     {
@@ -18,8 +18,8 @@ public class GoToBonusPanelButton : MonoBehaviour
 
         // this flag allows the user to choose whether or not have bonus wheel appear on start with a toggle
         bool shouldOpen = true;
-        if (PlayerPrefs.HasKey(bonusWheelToggle.GetPlayerPrefName())) {
-            if (PlayerPrefs.GetString(bonusWheelToggle.GetPlayerPrefName()) == "false")
+        if (PlayerPrefs.HasKey(playerPrefName)) {
+            if (PlayerPrefs.GetString(playerPrefName) == "false")
             {
                 shouldOpen = false;
             }
