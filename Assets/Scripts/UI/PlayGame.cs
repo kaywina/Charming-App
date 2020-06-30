@@ -10,6 +10,7 @@ public class PlayGame : MonoBehaviour
     public Text yourScoreText;
     public Text previousHighScoreText;
     public GameObject perfectIndicator;
+    public GameObject awesomeIndicator;
     public GameObject instructions;
     public GameObject gameControls;
     public GameObject highScoreDisplay;
@@ -60,6 +61,7 @@ public class PlayGame : MonoBehaviour
         newHighScore.SetActive(false);
         niceTry.SetActive(false);
         perfectIndicator.SetActive(false);
+        awesomeIndicator.SetActive(false);
         rewardObject.SetActive(false);
         nextRewardObject.SetActive(false);
         beatScoreText.gameObject.SetActive(false);
@@ -171,6 +173,7 @@ public class PlayGame : MonoBehaviour
             newHighScore.SetActive(true);
             niceTry.SetActive(false);
             nextRewardText.text = GetRewardAmount().ToString();
+            awesomeIndicator.SetActive(true);
         }
         else
         {
