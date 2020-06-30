@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameAttentionIndexedObject : MonoBehaviour
 {
     private int shuffledIndex = 0;
     private int orderedIndex = 0;
-    
+    private Button button;
+
+    private void OnEnable()
+    {
+        button = gameObject.GetComponent<Button>();
+        button.interactable = true;
+    }
+
     public void SetOrderedIndex (int i)
     {
         orderedIndex = i;
@@ -29,6 +37,7 @@ public class GameAttentionIndexedObject : MonoBehaviour
 
     public void CheckIndex()
     {
-        GameAttention.CheckIndex(shuffledIndex, orderedIndex);
+        bool isPlaying = GameAttention.CheckIndex(shuffledIndex, orderedIndex);
+        if (isPlaying) { button.interactable = false; }
     }
 }

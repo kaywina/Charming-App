@@ -217,11 +217,11 @@ public class GameAttention : MonoBehaviour
         incorrectIndicator.SetActive(true);
     }
 
-    public static void CheckIndex(int shuffledIndex, int orderedIndex)
+    public static bool CheckIndex(int shuffledIndex, int orderedIndex)
     {
         if (!playingGame)
         {
-            return;
+            return false;
         }
 
         selectedIndex = orderedIndex; // this needs to happen after the playingGame check, to avoid cases where user cicks a button between an incorrect guess and end of game, which results in buttons not showing up on subsequent plays
@@ -249,6 +249,8 @@ public class GameAttention : MonoBehaviour
             //Debug.Log("Go to next level");
             instance.NextLevel();
         }
+
+        return true;
     }
 
     public void DelayedEndGame(float secondsToDelay)
