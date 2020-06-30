@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayManager : MonoBehaviour
 {
+    public CurrencyManager currencyManager;
     public GameObject menuCanvas;
 
     public PlayGame playGameAttention;
@@ -95,5 +96,10 @@ public class PlayManager : MonoBehaviour
     public void StopFireworks()
     {
         if (fireworks != null) { fireworks.Stop(); }
+    }
+
+    public void GiveReward(int amount)
+    {
+        currencyManager.GiveBonus(amount);
     }
 }

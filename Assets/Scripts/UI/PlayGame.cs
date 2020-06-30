@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayGame : MonoBehaviour
 {
-    public string gameName;
+    public string gameName; // don't change these inspector values in production! (or else people will lose their high score data)
     public PlayManager playManager;
     public Text yourScoreText;
     public Text previousHighScoreText;
@@ -17,10 +17,27 @@ public class PlayGame : MonoBehaviour
     public GameObject niceTry;
     public GameObject playButton;
 
+    public GameObject rewardObject;
+    public Text rewardText;
+    public GameObject nextRewardObject;
+    public Text nextRewardText;
+    public GameObject beatScoreText;
+
     bool newHighScoreFlag = false;
 
     private string highScoreDataTag = "_highscore"; // this is used to define the player pref name; so don't change it in production
     private string previousHighScoreDataTag = "_previous_highscore"; // this is used to define the player pref name; so don't change it in production
+    private string nextRewardPlayerPrefTag = "_nextreward"; // don't change in production
+
+    private int maxReward = 32;
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey(gameName + nextRewardPlayerPrefTag))
+        {
+            PlayerPrefs.SetInt(gameName + nextRewardPlayerPrefTag, 2); // 2 is first reward
+        }
+    }
 
     void OnEnable()
     {
@@ -34,6 +51,7 @@ public class PlayGame : MonoBehaviour
 
     public void Reset()
     {
+        newHighScoreFlag = false;
         playManager.StopFireworks();
         gameControls.SetActive(false);
         instructions.SetActive(true);
@@ -42,7 +60,9 @@ public class PlayGame : MonoBehaviour
         newHighScore.SetActive(false);
         niceTry.SetActive(false);
         perfectIndicator.SetActive(false);
-        newHighScoreFlag = false;
+        rewardObject.SetActive(false);
+        nextRewardObject.SetActive(false);
+        beatScoreText.gameObject.SetActive(false);
     }
 
     public void Play()
@@ -106,22 +126,61 @@ public class PlayGame : MonoBehaviour
         //Debug.Log("That's the end of the game");
         gameControls.SetActive(false);
 
-        // show different UI depending on if user got a personal high score or not
-        if (newHighScoreFlag)
-        {
-            playManager.StartFireworks();
-            newHighScore.SetActive(true);
-            niceTry.SetActive(false);
-        }
-        else
-        {
-            newHighScore.SetActive(false);
-            niceTry.SetActive(true);
-        }
+        SetRewardUI(); // this shows different UI depending on if user got a new high score or not
 
         previousHighScoreText.text = LoadPreviousHighScore().ToString();
         SavePreviousHighScore(PlayerPrefs.GetInt(gameName + highScoreDataTag)); // need to do this after updating text
         ShowYourScoreDisplay(score);
         playButton.SetActive(true);
+    }
+
+
+    public int GetRewardAmount()
+    {
+        string rewardPlayerPrefName = gameName + nextRewardPlayerPrefTag;
+        return PlayerPrefs.GetInt(rewardPlayerPrefName);
+    }
+
+    public void SetNextRewardAmount()
+    {
+        Debug.Log("Set next reward amount");
+        string rewardPlayerPrefName = gameName + nextRewardPlayerPrefTag;
+        int reward = PlayerPrefs.GetInt(rewardPlayerPrefName);
+        // only go to next reward size if not exceeded max reward size; otherwise reward just stays at max
+        int doubleReward = reward * 2;
+        if (doubleReward <= maxReward)
+        {
+            PlayerPrefs.SetInt(rewardPlayerPrefName, doubleReward);
+        }
+    }
+
+    // this needs to be called after CheckScore() so that the flag has been updated
+    public void SetRewardUI()
+    {
+        int rewardAmount = GetRewardAmount();
+
+        if (newHighScoreFlag)
+        {
+            playManager.GiveReward(rewardAmount);
+            SetNextRewardAmount();
+            rewardText.text = rewardAmount.ToString();
+            rewardObject.SetActive(true);
+            beatScoreText.gameObject.SetActive(false);
+            playManager.StartFireworks();
+            newHighScore.SetActive(true);
+            niceTry.SetActive(false);
+            nextRewardText.text = GetRewardAmount().ToString();
+        }
+        else
+        {
+            rewardObject.SetActive(false);
+            beatScoreText.gameObject.SetActive(true);
+            newHighScore.SetActive(false);
+            niceTry.SetActive(true);
+            nextRewardText.text = (rewardAmount).ToString();
+        }
+
+        nextRewardObject.SetActive(true);
+        
     }
 }
