@@ -14,8 +14,8 @@ public class PlayManager : MonoBehaviour
 
     public ParticleSystem fireworks;
 
-    private static int gameCostNoGold = 2;
-    private static int gameCostGold = 1;
+    private static int gameCostNoGold = 4;
+    private static int gameCostGold = 2;
 
     public void OnEnable()
     {
