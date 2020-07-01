@@ -16,9 +16,9 @@ public class GameAttention : MonoBehaviour
     public PlayManager playManager;
 
     public GameObject[] levelButtons;
-    public Image[] images;
-    public static int[] indexes;
-    public static GameAttentionIndexedObject[] indexedButtons;
+    private Image[] images;
+    private static int[] indexes;
+    private static GameAttentionIndexedObject[] indexedButtons;
 
     private static bool playingGame = false;
 
@@ -149,9 +149,9 @@ public class GameAttention : MonoBehaviour
 
         if (level >= levelButtons.Length)
         {
-            Debug.Log("Completed all levels");
+            //Debug.Log("Completed all levels");
             level--; //set this back so that corret level buttons get disabled in EndGame
-            playGame.ShowPerfectIndicator();
+            playGame.SetPerfectGameFlag(true);
             instance.EndGame();
             return;
         }

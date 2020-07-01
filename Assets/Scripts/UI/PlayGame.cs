@@ -25,6 +25,7 @@ public class PlayGame : MonoBehaviour
     public GameObject beatScoreText;
 
     bool newHighScoreFlag = false;
+    private bool perfectGameFlag = false;
 
     private string highScoreDataTag = "_highscore"; // this is used to define the player pref name; so don't change it in production
     private string previousHighScoreDataTag = "_previous_highscore"; // this is used to define the player pref name; so don't change it in production
@@ -53,6 +54,7 @@ public class PlayGame : MonoBehaviour
     public void Reset()
     {
         newHighScoreFlag = false;
+        perfectGameFlag = false;
         playManager.StopFireworks();
         gameControls.SetActive(false);
         instructions.SetActive(true);
@@ -173,18 +175,36 @@ public class PlayGame : MonoBehaviour
             newHighScore.SetActive(true);
             niceTry.SetActive(false);
             nextRewardText.text = GetRewardAmount().ToString();
-            awesomeIndicator.SetActive(true);
+            if (perfectGameFlag)
+            {
+                perfectIndicator.SetActive(true);
+            }
+            else
+            {
+                awesomeIndicator.SetActive(true);
+            }
         }
         else
         {
             rewardObject.SetActive(false);
             beatScoreText.gameObject.SetActive(true);
             newHighScore.SetActive(false);
-            niceTry.SetActive(true);
             nextRewardText.text = (rewardAmount).ToString();
+            if (perfectGameFlag)
+            {
+                perfectIndicator.SetActive(true);
+            }
+            else
+            {
+                niceTry.SetActive(true);
+            }
         }
 
-        nextRewardObject.SetActive(true);
-        
+        nextRewardObject.SetActive(true);   
+    }
+
+    public void SetPerfectGameFlag(bool perfectGame)
+    {
+        perfectGameFlag = perfectGame;
     }
 }
