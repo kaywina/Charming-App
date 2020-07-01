@@ -141,6 +141,7 @@ public class GameAttention : MonoBehaviour
     private void NextLevel()
     {
         playingGame = false;
+        UnityAnalyticsController.SendAttentionGameLevelCompletedEvent(level);
         HideGo();
         selectedCount = 0;
         levelButtons[level].SetActive(false);

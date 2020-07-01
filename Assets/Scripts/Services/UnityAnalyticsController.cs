@@ -76,4 +76,9 @@ public class UnityAnalyticsController : MonoBehaviour
         AnalyticsEvent.FirstInteraction("First_Interaction"); // see SendFirstInteractionEvent.cs on Button_OK under Panel_Welcome
     }
 
+    public static void SendAttentionGameLevelCompletedEvent(int level)
+    {
+        string eventName = "Completed_Attention_Level_" + level.ToString();
+        AnalyticsEvent.LevelComplete(eventName);
+    }
 }
