@@ -26,6 +26,16 @@ public class InspectorToolsGUI : Editor
 
             InspectorTools.TakeScreenshotInEditor();
         }
+        if (GUILayout.Button("Enable Main UI"))
+        {
+
+            InspectorTools.EnableMainUI();
+        }
+        if (GUILayout.Button("Disable Main UI"))
+        {
+
+            InspectorTools.DisableMainUI();
+        }
     }
 }
 #endif
