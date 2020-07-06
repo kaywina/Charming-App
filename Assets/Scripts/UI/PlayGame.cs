@@ -16,7 +16,6 @@ public class PlayGame : MonoBehaviour
     public GameObject highScoreDisplay;
     public GameObject newHighScore;
     public GameObject niceTry;
-    public GameObject playButton;
 
     public GameObject rewardObject;
     public Text rewardText;
@@ -58,7 +57,6 @@ public class PlayGame : MonoBehaviour
         playManager.StopFireworks();
         gameControls.SetActive(false);
         instructions.SetActive(true);
-        playButton.SetActive(true);
         highScoreDisplay.SetActive(false);
         newHighScore.SetActive(false);
         niceTry.SetActive(false);
@@ -74,7 +72,6 @@ public class PlayGame : MonoBehaviour
         Reset();
         instructions.SetActive(false);
         gameControls.SetActive(true);
-        playButton.SetActive(false);
     }
 
     public void SaveHighScore(int score)
@@ -135,7 +132,6 @@ public class PlayGame : MonoBehaviour
         previousHighScoreText.text = LoadPreviousHighScore().ToString();
         SavePreviousHighScore(PlayerPrefs.GetInt(gameName + highScoreDataTag)); // need to do this after updating text
         ShowYourScoreDisplay(score);
-        playButton.SetActive(true);
     }
 
 
