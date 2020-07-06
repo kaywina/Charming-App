@@ -7,18 +7,6 @@ public class InspectorTools : MonoBehaviour
 
     private static GameObject[] taggedObjects;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public static void DeleteAllData()
     {
         PlayerPrefs.DeleteAll();
