@@ -18,6 +18,8 @@ public class CongratsPanel : CharmsPanel
 
     public ShareScreenshotAndroid shareScreenshotAndroid;
 
+    public ParticleSystem explosionParticles;
+
     new void OnEnable()
     {
         base.OnEnable();
@@ -26,6 +28,7 @@ public class CongratsPanel : CharmsPanel
         charmText.SetActive(true);
         charmButtons.SetActive(false);
         worldUI.SetActive(true);
+        explosionParticles.Play();
     }
 
     new void OnDisable()
