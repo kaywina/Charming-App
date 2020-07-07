@@ -68,7 +68,7 @@ public class BonusWheel : MonoBehaviour
 
         if (prizeText != null)
         {
-            prizeText.text = prize[itemNumber].ToString();
+            prizeText.text = "+" + prize[itemNumber].ToString();
         }
 
         bonusPanel.CompleteSpin(prize[itemNumber]); 

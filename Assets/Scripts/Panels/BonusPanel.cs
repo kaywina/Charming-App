@@ -80,7 +80,7 @@ public class BonusPanel : CharmsPanel
     {
         //Debug.Log("Complete bonus wheel spin");
         storedBonus = bonus;
-        prizeText.text = bonus.ToString();
+        prizeText.text = "+" + bonus.ToString();
 
         // get and store playerpref for gold subscribers
         bool isGold = false;
@@ -116,7 +116,7 @@ public class BonusPanel : CharmsPanel
     public void DoubleBonus()
     {
         storedBonus = storedBonus * 2;
-        totalBonusText.text = storedBonus.ToString();
+        totalBonusText.text = "+" + storedBonus.ToString();
         if (totalBonusText != null) { totalBonusText.gameObject.SetActive(true); }
     }
 
