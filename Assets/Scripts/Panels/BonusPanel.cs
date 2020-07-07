@@ -23,6 +23,7 @@ public class BonusPanel : CharmsPanel
     {
         bonusWheel.gameObject.SetActive(true);
         StartCoroutine(Enable());
+        rewardedAdButton.SetActive(false);
         base.OnEnable();
     }
 
@@ -52,7 +53,7 @@ public class BonusPanel : CharmsPanel
     {
         if (storedBonus != 0) // on in case where bonus wheel is not skipped
         {
-            CurrencyManager.Instance.GiveBonus(storedBonus);
+            CurrencyManager.Instance.GiveBonus(storedBonus, false, true); // false because not a purchase, then true so that bonus wheel doesn't show again today
         }
 
         storedBonus = 0;
@@ -96,7 +97,6 @@ public class BonusPanel : CharmsPanel
             DoubleBonus();
             doubleBonusText.SetActive(true);
             strikeout.SetActive(true);
-            totalBonusText.gameObject.SetActive(true);
         }
         // if not gold show the rewarded ad button
         else
@@ -117,6 +117,7 @@ public class BonusPanel : CharmsPanel
     {
         storedBonus = storedBonus * 2;
         totalBonusText.text = storedBonus.ToString();
+        if (totalBonusText != null) { totalBonusText.gameObject.SetActive(true); }
     }
 
     public void SkipBonus()

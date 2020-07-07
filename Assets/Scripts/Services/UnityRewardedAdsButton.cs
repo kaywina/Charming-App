@@ -61,7 +61,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 
     void ShowRewardedAd()
     {
-
+        //Debug.Log("Show rewarded ad");
         if (Advertisement.IsReady(placementId))
         {
             //var options = new ShowOptions { resultCallback = HandleShowResult }; // this is old deprecated method

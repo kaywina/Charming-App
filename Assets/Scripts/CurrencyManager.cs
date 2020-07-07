@@ -93,7 +93,7 @@ public class CurrencyManager : MonoBehaviour {
         stackedBonus = 0;
     }
 
-    public void GiveBonus(int bonus, bool isPurchase = false)
+    public void GiveBonus(int bonus, bool isPurchase = false, bool isDailyBonus = false)
     {
         if (bonus <= 0) { return; }
         currencyInBank += bonus;
@@ -111,8 +111,10 @@ public class CurrencyManager : MonoBehaviour {
             if (OnCurrencyAdded != null) { OnCurrencyAdded(bonus); }
             else { Debug.Log("delegate is null"); }
         }
-        canOpenBonusPanel = false;
-        TimeManager.SetPrefsForDailySpin();
+        if (isDailyBonus) {
+            canOpenBonusPanel = false;
+            TimeManager.SetPrefsForDailySpin();
+        }
     }
 
 #if UNITY_EDITOR // disable cheats in builds
