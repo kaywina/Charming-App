@@ -17,6 +17,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     public GameObject watchedRewardedAdText;
     public Text doubleRewardAmountText;
     public GameObject strikeout;
+    public ParticleSystem explosionParticles;
 
     private void OnEnable()
     {
@@ -37,6 +38,11 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
         if (strikeout != null)
         {
             strikeout.SetActive(false);
+        }
+
+        if (explosionParticles != null)
+        {
+            explosionParticles.Play();
         }
     }
 
