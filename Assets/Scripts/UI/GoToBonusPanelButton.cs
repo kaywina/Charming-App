@@ -30,8 +30,8 @@ public class GoToBonusPanelButton : MonoBehaviour
         {
             CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
             charmsPanel.DeactivateObjects();
-            bonusPanel.SetActive(true);
             infoPanel.SetActive(false);
+            bonusPanel.SetActive(true);
         }
 
         // otherwise we don't show the bonus wheel
