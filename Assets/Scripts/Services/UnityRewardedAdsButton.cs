@@ -90,6 +90,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
                 if (buttonIsOnPlayPanel)
                 {
                     CurrencyManager.Instance.GiveBonus(PlayManager.GetAdReward());
+                    CurrencyManager.Instance.ShowBonusIndicator(PlayManager.GetAdReward());
                 }
 
                 if (doubleRewardAmountText != null) { doubleRewardAmountText.gameObject.SetActive(true); }
