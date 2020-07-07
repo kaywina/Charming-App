@@ -24,6 +24,9 @@ public class EscapeHandler : MonoBehaviour
     public Button quitButton;
     public Button quitPanelNoButton;
     public Button subscribePanelBackButton;
+    public Button rankPanelBackButton;
+    public Button playPanelBackButton;
+    public Button closeGameAttentionButton;
 
     private Button[] allButtons;
 
@@ -45,7 +48,10 @@ public class EscapeHandler : MonoBehaviour
             hideSecretButton,
             quitButton,
             quitPanelNoButton,
-            subscribePanelBackButton
+            subscribePanelBackButton,
+            rankPanelBackButton,
+            playPanelBackButton,
+            closeGameAttentionButton
         };
     }
 
