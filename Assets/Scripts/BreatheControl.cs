@@ -41,7 +41,6 @@ public class BreatheControl : MonoBehaviour
     private void OnDisable()
     {
         ResetBreaths();
-        soundManager.StopAllBreathNotes();
         breatheIn = true;
     }
 
