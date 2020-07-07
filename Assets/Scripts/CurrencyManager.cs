@@ -146,20 +146,43 @@ public class CurrencyManager : MonoBehaviour {
         }
         else
         {
-            Instance.FlashYellow();
+            Instance.StartIndicatorFlashing();
             return false;
         }
     }
 
-    private void FlashYellow()
+    private int flashCount = 0;
+    private int maxFlashes = 4;
+
+    private void StartIndicatorFlashing()
     {
         CancelInvoke("ResetToWhite");
+
+        float repeatRate = 0.5f;
+        InvokeRepeating("FlashIndicatorYellow", 0, repeatRate);
+        InvokeRepeating("ResetToWhite", repeatRate * 0.5f, repeatRate);
+    }
+
+    private void FlashIndicatorYellow()
+    {
+        //Debug.Log("Flash indicator yellow");
+
+        if (flashCount >= maxFlashes)
+        {
+            CancelInvoke("FlashIndicatorYellow");
+            CancelInvoke("ResetToWhite");
+            flashCount = 0;
+            //Debug.Log("Stop flashing indicator");
+            return;
+        }
+
         currencyText.color = Color.yellow;
-        Invoke("ResetToWhite", 1f);
+        flashCount++;
     }
 
     private void ResetToWhite()
     {
+        //Debug.Log("Reset indicator ot white");
         currencyText.color = Color.white;
     }
 
