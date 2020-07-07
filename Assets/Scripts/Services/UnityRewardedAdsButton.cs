@@ -8,9 +8,10 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 
     public string placementId = "rewardedVideo";
     private Button adButton;
-    public bool buttonIsOnBonusPanel = true;
     public BonusPanel bonusPanel;
+    public bool buttonIsOnBonusPanel = true;
     public bool buttonIsOnCongratsPanel = false;
+    public bool buttonIsOnPlayPanel = false;
     public ShareScreenshotAndroid shareScreenshotAndroid;
     private bool watched;
     public GameObject watchedRewardedAdText;
@@ -24,6 +25,10 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
         Advertisement.AddListener(this); // for handling callbacks
 
         watched = false; // can only use button once during bonus wheel session
+        if (watchedRewardedAdText != null)
+        {
+            watchedRewardedAdText.gameObject.SetActive(false);
+        }
 
         if (doubleRewardAmountText != null)
         {
@@ -74,6 +79,11 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
                 {
                     shareScreenshotAndroid.SetGivenBonusAmount(shareScreenshotAndroid.baseBonusAmount * 2);
                     doubleRewardAmountText.text = shareScreenshotAndroid.GetGivenBonusAmount().ToString();
+                }
+
+                if (buttonIsOnPlayPanel)
+                {
+                    CurrencyManager.Instance.GiveBonus(PlayManager.GetAdReward());
                 }
 
                 if (doubleRewardAmountText != null) { doubleRewardAmountText.gameObject.SetActive(true); }
