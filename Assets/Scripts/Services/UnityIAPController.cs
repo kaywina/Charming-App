@@ -50,7 +50,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string kProductIDSubscription = "Gold";
 
     // Apple App Store-specific product identifier for the subscription product.
-    private static string kProductNameAppleSubscription = "com.charmingape.charmingapp.gold";
+    private static string kProductNameAppleSubscription = "com.charmingape.charmingapp.goldios";
 
     // Google Play Store-specific product identifier subscription product.
     private static string kProductNameGooglePlaySubscription = "com.charmingape.charmingapp.gold";
