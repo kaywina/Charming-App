@@ -24,7 +24,7 @@ public class AdmobController : MonoBehaviour
 #if UNITY_ANDROID
         adUnitId = "ca-app-pub-8051833160607351/9561028858"; // PRODUCTION ID!!! note this is different from the app id in settings
 #elif UNITY_IPHONE
-                adUnitId = "";
+                adUnitId = ""; // TODO
 #else
                 adUnitId = "unexpected_platform";
 #endif
