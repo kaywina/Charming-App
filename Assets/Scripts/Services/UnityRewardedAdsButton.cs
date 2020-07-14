@@ -3,10 +3,8 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
 [RequireComponent(typeof(Button))]
-public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
+public class UnityRewardedAdsButton : MonoBehaviour
 {
-
-    public string placementId = "rewardedVideo";
     private Button adButton;
     public BonusPanel bonusPanel;
     public bool buttonIsOnBonusPanel = true;
@@ -23,7 +21,6 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     {
         adButton = GetComponent<Button>();
         adButton.onClick.AddListener(ShowRewardedAd);
-        Advertisement.AddListener(this); // for handling callbacks
 
         watched = false; // can only use button once during bonus wheel session
         if (watchedRewardedAdText != null)
@@ -55,52 +52,53 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     {
         if (adButton)
         {
-            adButton.interactable = (!watched && Advertisement.IsReady(placementId));
+            adButton.interactable = (!watched && AdmobController.IsRewardedAdReady());
         }
     }
 
     void ShowRewardedAd()
     {
-        //Debug.Log("Show rewarded ad");
-        if (Advertisement.IsReady(placementId))
-        {
-            //var options = new ShowOptions { resultCallback = HandleShowResult }; // this is old deprecated method
-            Advertisement.Show(placementId);
-            UnityAnalyticsController.SendStartWatchingRewardedAdEvent();
-        }
+        AdmobController.TryToShowRewardedAd();
     }
 
+
+    private void HandleRewardEarned()
+    {
+        if (buttonIsOnBonusPanel && bonusPanel != null)
+        {
+            bonusPanel.DoubleBonus();
+        }
+
+        if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
+        {
+            shareScreenshotAndroid.SetGivenBonusAmount(shareScreenshotAndroid.baseBonusAmount * 2);
+            doubleRewardAmountText.text = shareScreenshotAndroid.GetGivenBonusAmount().ToString();
+        }
+
+        if (buttonIsOnPlayPanel)
+        {
+            CurrencyManager.Instance.GiveBonus(PlayManager.GetAdReward());
+            CurrencyManager.Instance.ShowBonusIndicator(PlayManager.GetAdReward());
+        }
+
+        if (doubleRewardAmountText != null) { doubleRewardAmountText.gameObject.SetActive(true); }
+        if (strikeout != null) { strikeout.SetActive(true); }
+
+        watched = true;
+        if (watchedRewardedAdText != null) { watchedRewardedAdText.SetActive(true); }
+
+        gameObject.SetActive(false); // deactivate button after completion
+    }
+
+
+    /* Deprecated Unity Ads implementation
     // Implement IUnityAdsListener interface methods:
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
         switch (showResult)
         {
             case ShowResult.Finished:
-                if (buttonIsOnBonusPanel && bonusPanel != null)
-                {
-                    bonusPanel.DoubleBonus();
-                }
-
-                if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
-                {
-                    shareScreenshotAndroid.SetGivenBonusAmount(shareScreenshotAndroid.baseBonusAmount * 2);
-                    doubleRewardAmountText.text = shareScreenshotAndroid.GetGivenBonusAmount().ToString();
-                }
-
-                if (buttonIsOnPlayPanel)
-                {
-                    CurrencyManager.Instance.GiveBonus(PlayManager.GetAdReward());
-                    CurrencyManager.Instance.ShowBonusIndicator(PlayManager.GetAdReward());
-                }
-
-                if (doubleRewardAmountText != null) { doubleRewardAmountText.gameObject.SetActive(true); }
-                if (strikeout != null) { strikeout.SetActive(true); }
-
-                watched = true;
-                if (watchedRewardedAdText != null) { watchedRewardedAdText.SetActive(true); }
-
-                gameObject.SetActive(false); // deactivate button after completion
-                UnityAnalyticsController.SendCompleteWatchingRewardedAdEvent();
+                HandleRewardEarned();
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:
@@ -112,25 +110,5 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
                 break;
         }
     }
-
-    public void OnUnityAdsReady(string id)
-    {
-        // If the ready Placement is rewarded, show the ad:
-        /*
-        if (id == placementId)
-        {
-            Advertisement.Show(placementId);
-        }
-        */
-    }
-
-    public void OnUnityAdsDidError(string message)
-    {
-        // Log the error.
-    }
-
-    public void OnUnityAdsDidStart(string placementId)
-    {
-        // Optional actions to take when the end-users triggers an ad.
-    }
+    */
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AdmobController : MonoBehaviour
 {
-    private RewardedAd rewardedAd;
+    private static RewardedAd rewardedAd;
 
     public void Start()
     {
@@ -31,25 +31,25 @@ public class AdmobController : MonoBehaviour
 
     public void CreateAndLoadRewardedAd(string adUnitId)
     {
-        this.rewardedAd = new RewardedAd(adUnitId);
+        rewardedAd = new RewardedAd(adUnitId);
 
         // Called when an ad request has successfully loaded.
-        this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+        rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
         // Called when an ad request failed to load.
-        this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+        rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
         // Called when an ad is shown.
-        this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+        rewardedAd.OnAdOpening += HandleRewardedAdOpening;
         // Called when an ad request failed to show.
-        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
         // Called when the user should be rewarded for interacting with the ad.
-        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         // Called when the ad is closed.
-        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        rewardedAd.OnAdClosed += HandleRewardedAdClosed;
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
-        this.rewardedAd.LoadAd(request);
+        rewardedAd.LoadAd(request);
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
@@ -66,6 +66,7 @@ public class AdmobController : MonoBehaviour
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
     {
+        UnityAnalyticsController.SendStartWatchingRewardedAdEvent();
         MonoBehaviour.print("HandleRewardedAdOpening event received");
     }
 
@@ -89,5 +90,20 @@ public class AdmobController : MonoBehaviour
         MonoBehaviour.print(
             "HandleRewardedAdRewarded event received for "
                         + amount.ToString() + " " + type);
+
+        UnityAnalyticsController.SendCompleteWatchingRewardedAdEvent();
+    }
+
+    public static void TryToShowRewardedAd()
+    {
+        if (IsRewardedAdReady())
+        {
+            rewardedAd.Show();
+        }
+    }
+
+    public static bool IsRewardedAdReady()
+    {
+        return rewardedAd.IsLoaded();
     }
 }
