@@ -20,6 +20,9 @@ public class UnityRewardedAdsButton : MonoBehaviour
     private void OnEnable()
     {
         adButton = GetComponent<Button>();
+
+        adButton.interactable = (!watched && AdmobController.IsRewardedAdReady()); // if ad isn't ready then button is non-interacteable
+
         adButton.onClick.AddListener(ShowRewardedAd);
 
         watched = false; // can only use button once during bonus wheel session
@@ -46,14 +49,6 @@ public class UnityRewardedAdsButton : MonoBehaviour
     private void OnDisable()
     {
         adButton.onClick.RemoveListener(ShowRewardedAd);
-    }
-
-    void Update()
-    {
-        if (adButton)
-        {
-            adButton.interactable = (!watched && AdmobController.IsRewardedAdReady());
-        }
     }
 
     void ShowRewardedAd()

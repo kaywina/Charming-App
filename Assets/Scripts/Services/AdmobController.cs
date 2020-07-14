@@ -20,9 +20,9 @@ public class AdmobController : MonoBehaviour
     {
         string adUnitId;
 #if UNITY_ANDROID
-        adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        adUnitId = "ca-app-pub-8051833160607351/9561028858"; // PRODUCTION ID!!! note this is different from the app id in settings
 #elif UNITY_IPHONE
-                adUnitId = "ca-app-pub-3940256099942544/1712485313";
+                adUnitId = "";
 #else
                 adUnitId = "unexpected_platform";
 #endif
@@ -85,6 +85,12 @@ public class AdmobController : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
+        if (sender == null || args == null)
+        {
+            Debug.Log("Dummy reward");
+            return;
+        }
+
         string type = args.Type;
         double amount = args.Amount;
         MonoBehaviour.print(
