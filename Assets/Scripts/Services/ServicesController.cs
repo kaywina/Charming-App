@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UnityServicesController : MonoBehaviour
+public class ServicesController : MonoBehaviour
 {
+    public string servicesSceneName;
+    
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadSceneAsync("Unity Services", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(servicesSceneName, LoadSceneMode.Additive);
     }
 }
