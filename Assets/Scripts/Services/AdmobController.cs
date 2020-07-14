@@ -9,10 +9,12 @@ public class AdmobController : MonoBehaviour
 {
     private static RewardedAd rewardedAd;
 
+    public delegate void RewardedAdWatchedAction();
+    public static event RewardedAdWatchedAction OnRewardedAdWatched;
+
     public void Start()
     {
         string id = GetAdUnitID();
-
         CreateAndLoadRewardedAd(id);
     }
 
@@ -88,6 +90,7 @@ public class AdmobController : MonoBehaviour
         if (sender == null || args == null)
         {
             Debug.Log("Dummy reward");
+            OnRewardedAdWatched();
             return;
         }
 
@@ -97,6 +100,7 @@ public class AdmobController : MonoBehaviour
             "HandleRewardedAdRewarded event received for "
                         + amount.ToString() + " " + type);
 
+        OnRewardedAdWatched();
         UnityAnalyticsController.SendCompleteWatchingRewardedAdEvent();
     }
 
