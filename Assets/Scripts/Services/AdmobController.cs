@@ -7,17 +7,13 @@ using UnityEngine;
 
 public class AdmobController : MonoBehaviour
 {
-    private RewardedAd bonusWheelRewardedAd;
-    private RewardedAd shareRewardedAd;
-    private RewardedAd gameRewardedAd;
+    private RewardedAd rewardedAd;
 
     public void Start()
     {
         string id = GetAdUnitID();
 
-        this.bonusWheelRewardedAd = CreateAndLoadRewardedAd(id);
-        this.shareRewardedAd = CreateAndLoadRewardedAd(id);
-        this.gameRewardedAd = CreateAndLoadRewardedAd(id);
+        CreateAndLoadRewardedAd(id);
     }
 
     private string GetAdUnitID()
@@ -33,22 +29,27 @@ public class AdmobController : MonoBehaviour
         return adUnitId;
     }
 
-    public RewardedAd CreateAndLoadRewardedAd(string adUnitId)
+    public void CreateAndLoadRewardedAd(string adUnitId)
     {
-        RewardedAd rewardedAd = new RewardedAd(adUnitId);
+        this.rewardedAd = new RewardedAd(adUnitId);
 
-        rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
-        rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
-        rewardedAd.OnAdOpening += HandleRewardedAdOpening;
-        rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
-        rewardedAd.OnAdClosed += HandleRewardedAdClosed;
-        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        // Called when an ad request has successfully loaded.
+        this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+        // Called when an ad request failed to load.
+        this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+        // Called when an ad is shown.
+        this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+        // Called when an ad request failed to show.
+        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        // Called when the ad is closed.
+        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
-        rewardedAd.LoadAd(request);
-        return rewardedAd;
+        this.rewardedAd.LoadAd(request);
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
@@ -78,6 +79,7 @@ public class AdmobController : MonoBehaviour
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdClosed event received");
+        this.CreateAndLoadRewardedAd(GetAdUnitID()); // load a new rewarded ad after this one watched
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
