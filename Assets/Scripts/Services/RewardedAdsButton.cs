@@ -11,7 +11,6 @@ public class RewardedAdsButton : MonoBehaviour
     public bool buttonIsOnCongratsPanel = false;
     public bool buttonIsOnPlayPanel = false;
     public ShareScreenshotAndroid shareScreenshotAndroid;
-    private bool watched;
     public GameObject watchedRewardedAdText;
     public Text doubleRewardAmountText;
     public GameObject strikeout;
@@ -21,12 +20,11 @@ public class RewardedAdsButton : MonoBehaviour
     {
         adButton = GetComponent<Button>();
 
-        adButton.interactable = (!watched && AdmobController.IsRewardedAdReady()); // if ad isn't ready then button is non-interacteable
+        adButton.interactable = (AdmobController.IsRewardedAdReady()); // if ad isn't ready then button is non-interacteable
 
         adButton.onClick.AddListener(ShowRewardedAd);
         AdmobController.OnRewardedAdWatched += HandleRewardEarned;
 
-        watched = false; // can only use button once during bonus wheel session
         if (watchedRewardedAdText != null)
         {
             watchedRewardedAdText.gameObject.SetActive(false);
@@ -82,8 +80,6 @@ public class RewardedAdsButton : MonoBehaviour
 
         if (doubleRewardAmountText != null) { doubleRewardAmountText.gameObject.SetActive(true); }
         if (strikeout != null) { strikeout.SetActive(true); }
-
-        watched = true;
         if (watchedRewardedAdText != null) { watchedRewardedAdText.SetActive(true); }
 
         gameObject.SetActive(false); // deactivate button after completion

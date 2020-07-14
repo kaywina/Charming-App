@@ -72,6 +72,7 @@ namespace GoogleMobileAds.Common
         {
             Debug.Log("Dummy " + MethodBase.GetCurrentMethod().Name);
             OnUserEarnedReward.Invoke(null, null);
+            OnAdClosed.Invoke(null, null);
         }
 
         public string MediationAdapterClassName()
