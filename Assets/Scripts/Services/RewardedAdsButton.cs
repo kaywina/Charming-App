@@ -84,26 +84,4 @@ public class RewardedAdsButton : MonoBehaviour
 
         gameObject.SetActive(false); // deactivate button after completion
     }
-
-
-    /* Deprecated Unity Ads implementation
-    // Implement IUnityAdsListener interface methods:
-    public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
-    {
-        switch (showResult)
-        {
-            case ShowResult.Finished:
-                HandleRewardEarned();
-                //Debug.Log("The ad was successfully shown.");
-                break;
-            case ShowResult.Skipped:
-                //Debug.Log("The ad was skipped before reaching the end.");
-                UnityAnalyticsController.SendSkipWatchingRewardedAdEvent();
-                break;
-            case ShowResult.Failed:
-                //Debug.LogError("The ad failed to be shown.");
-                break;
-        }
-    }
-    */
 }
