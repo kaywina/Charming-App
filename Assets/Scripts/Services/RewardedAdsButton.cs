@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
 [RequireComponent(typeof(Button))]
-public class UnityRewardedAdsButton : MonoBehaviour
+public class RewardedAdsButton : MonoBehaviour
 {
     private Button adButton;
     public BonusPanel bonusPanel;
