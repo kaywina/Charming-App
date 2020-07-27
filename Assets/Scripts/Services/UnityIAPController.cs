@@ -258,7 +258,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
                 if (result)
                 {
-                    PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true"); // hmm this might cause restore purchases to always enable gold regardless of result
+                    Debug.Log("Completed restore purchase.");
                 }
             });
         }
