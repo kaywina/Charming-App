@@ -12,6 +12,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string failedToSubscribePlayerPref = "GoldFail";
     public static string subscribeSuccessPlayerPref = "GoldSuccess";
 
+    public static string onStartRestoreEventName = "onStartRestore";
+    public static string onFinishRestoreEventName = "onFinishRestore";
+    public static string onFailRestoreEventName = "onFailedRestore";
+
+
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
@@ -230,9 +235,12 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             return;
         }
 
+        EventManager.TriggerEvent(onStartRestoreEventName);
+
 #if UNITY_ANDROID
         Debug.Log("Restore transactions on Google Play");
         m_GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored);
+
 #elif UNITY_IOS
         Debug.Log("Restore transactions on the App Store");
         m_AppleExtensions.RestoreTransactions(OnTransactionsRestored);
@@ -259,15 +267,19 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (result)
                 {
                     Debug.Log("Completed restore purchase.");
+                    EventManager.TriggerEvent(onFinishRestoreEventName);
                 }
             });
         }
-        // Otherwise ...
+        // Otherwise the restore process has failed
         else
         {
             // We are not running on an Apple device. No work is necessary to restore purchases.
             Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
+            EventManager.TriggerEvent(onFailRestoreEventName);
+            return;
         }
+
     }
 
     /// <summary>
@@ -275,7 +287,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     /// </summary>
     private void OnTransactionsRestored(bool success)
     {
-        Debug.Log("Transactions restored. Success flag = " + success);       
+        Debug.Log("Transactions restored. Success flag = " + success);
+
+#if UNITY_ANDROID
+        EventManager.TriggerEvent(onFinishRestoreEventName); // always just say finished on Android regardless of outcome
+#endif
     }
 
     //  
