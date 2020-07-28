@@ -12,6 +12,9 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string failedToSubscribePlayerPref = "GoldFail";
     public static string subscribeSuccessPlayerPref = "GoldSuccess";
 
+    public static string onStartPurchaseName = "onStartPurchase";
+    public static string onFinishPurchaseEventName = "onFinishPurchase";
+
     public static string onStartRestoreEventName = "onStartRestore";
     public static string onFinishRestoreEventName = "onFinishRestore";
     public static string onFailRestoreEventName = "onFailedRestore";
@@ -188,38 +191,41 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             Debug.Log("Purchase is already in progress. Do not proceed with buying a new product");
             return;
         }
-        
-        // If Purchasing has been initialized ...
-        if (IsInitialized())
-        {
-            // ... look up the Product reference with the general product identifier and the Purchasing 
-            // system's products collection.
-            Product product = m_StoreController.products.WithID(productId);
 
-            // If the look up found a product for this device's store and that product is ready to be sold ... 
-            if (product != null && product.availableToPurchase)
-            {
-                Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
-                // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed 
-                // asynchronously.
-                m_StoreController.InitiatePurchase(product);
-            }
-            // Otherwise ...
-            else
-            {
-                // ... report the product look-up failure situation  
-                Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
-                EventManager.TriggerEvent(failedToSubscribePlayerPref);
-            }
-        }
-        // Otherwise ...
-        else
+        // If Purchasing has not been initialized ...
+        if (!IsInitialized())
         {
             // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
             // retrying initiailization.
             Debug.Log("BuyProductID FAIL. Not initialized.");
             EventManager.TriggerEvent(failedToSubscribePlayerPref);
+            return;
         }
+
+        EventManager.TriggerEvent(onStartPurchaseName);
+
+        // ... look up the Product reference with the general product identifier and the Purchasing 
+        // system's products collection.
+        Product product = m_StoreController.products.WithID(productId);
+
+        // If the look up found a product for this device's store and that product is ready to be sold ... 
+        if (product != null && product.availableToPurchase)
+        {
+            Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
+            // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed 
+            // asynchronously.
+            m_StoreController.InitiatePurchase(product);
+        }
+        // Otherwise ...
+        else
+        {
+            // ... report the product look-up failure situation  
+            Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
+            EventManager.TriggerEvent(failedToSubscribePlayerPref);
+            return;
+        }
+
+        EventManager.TriggerEvent(onFinishPurchaseEventName);
     }
 
 

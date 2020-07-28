@@ -5,16 +5,22 @@ using UnityEngine;
 public class IAPButton : MonoBehaviour
 {
     public string purchaseID;
-    public GameObject failIndicator;
+
     public GameObject promo;
     public GameObject success;
+
+    public GameObject enableOnStartPurchase;
+    public GameObject enableOnFinishPurchase;
+    public GameObject enableOnFailPurchase;
 
     private void OnEnable()
     {
         EventManager.StartListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
         EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+        EventManager.StartListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
+        EventManager.StartListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
 
-        failIndicator.SetActive(false);
+        enableOnFailPurchase.SetActive(false);
 
         if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
         {
@@ -27,6 +33,9 @@ public class IAPButton : MonoBehaviour
             promo.SetActive(true);
             success.SetActive(false);
         }
+
+        enableOnStartPurchase.SetActive(false);
+        enableOnFinishPurchase.SetActive(false);
         
     }
 
@@ -34,12 +43,26 @@ public class IAPButton : MonoBehaviour
     {
         EventManager.StopListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
         EventManager.StopListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+        EventManager.StopListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
+        EventManager.StopListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
+    }
+
+    private void OnStartPurchase()
+    {
+        enableOnStartPurchase.SetActive(true);
+        enableOnFinishPurchase.SetActive(false);
+    }
+
+    private void OnFinishPurchase()
+    {
+        enableOnStartPurchase.SetActive(true);
+        enableOnFinishPurchase.SetActive(false);
     }
 
     public void MakePurchase()
     {
         // always deactivate fail indicator as part of iap setup
-        failIndicator.SetActive(false);
+        enableOnFailPurchase.SetActive(false);
 
         switch (purchaseID)
         {
@@ -74,13 +97,13 @@ public class IAPButton : MonoBehaviour
     public void ShowFailIndicator()
     {
         Debug.Log("IAP Button receives event message that purchase has failed");
-        if (failIndicator != null) { failIndicator.SetActive(true); }
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
     }
 
     public void OnSuccess()
     {
         Debug.Log("IAP Button receives event message that purchase is successfull");
-        if (failIndicator != null) { failIndicator.SetActive(false); }
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
     }
