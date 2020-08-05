@@ -98,8 +98,8 @@ public class BonusPanel : CharmsPanel
             doubleBonusText.SetActive(true);
             strikeout.SetActive(true);
         }
-        // if not gold show the rewarded ad button
-        else
+        // if not gold show the rewarded ad button and ads are allowed
+        else if (UnityAdsController.GetAllowAds())
         {
             rewardedAdButton.SetActive(true);
         }
