@@ -11,6 +11,7 @@ public class PlayManager : MonoBehaviour
 
     public GameObject rewardedAdButton;
     public GameObject watchedRewardedAdText;
+    public GameObject moreCurrencyText;
 
     public Sprite[] romanNumeralSprites;
     public Sprite hideSprite;
@@ -22,12 +23,18 @@ public class PlayManager : MonoBehaviour
 
     private static int adReward = 8; // amount free users get for watching a rewarded ad
 
-    public void OnEnable()
+    public void SetupGameSelect()
     {
         rewardedAdButton.SetActive(false);
         watchedRewardedAdText.SetActive(false);
         playGameAttention.gameObject.SetActive(false);
         menuCanvasObject.SetActive(true);
+        moreCurrencyText.SetActive(false);
+    }
+
+    public void OnEnable()
+    {
+        SetupGameSelect();
     }
 
     public static int GetGameCost()
@@ -39,7 +46,14 @@ public class PlayManager : MonoBehaviour
     public void ReturnToGameSelect()
     {
         watchedRewardedAdText.SetActive(false);
-        if (UnityAdsController.GetAllowAds()) { rewardedAdButton.SetActive(true); }  // only show ad if user has opted-in and AllowAds is true
+        if (UnityAdsController.GetAllowAds()) {
+            moreCurrencyText.SetActive(false);
+            rewardedAdButton.SetActive(true);
+        }  // only show ad if user has opted-in and AllowAds is true
+        else {
+            moreCurrencyText.SetActive(true);
+            rewardedAdButton.SetActive(false);
+        }
         menuCanvasObject.SetActive(true);
     }
 
