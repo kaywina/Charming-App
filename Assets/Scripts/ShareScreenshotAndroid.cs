@@ -39,7 +39,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
         if (url != null) { url.SetActive(false); }
         if (doubleBonusButton != null) { doubleBonusButton.SetActive(false); }
         if (doubleBonusText != null) { doubleBonusText.SetActive(false); }
-        if (rewardAmountText != null) { rewardAmountText.text = baseBonusAmount.ToString(); }     
+        if (rewardAmountText != null) { rewardAmountText.text = baseBonusAmount.ToString(); }
     }
 
     void OnApplicationFocus(bool focus)
@@ -122,9 +122,12 @@ public class ShareScreenshotAndroid : MonoBehaviour
 
     private void GiveBonus()
     {
+        //Debug.Log("Give bonus");
+        
         // give share bonus kisses one time only
         if (!bonusGiven && baseBonusAmount > 0)
         {
+            //Debug.Log("Only give the bonus once");
             bonusGiven = true;
             givenBonusAmount = baseBonusAmount;
         }
@@ -132,16 +135,22 @@ public class ShareScreenshotAndroid : MonoBehaviour
         // givenBonusAmount will be less than or equal to base amount as long as user has not watched a rewarded video; this prevents the button from showing if the user chooses to share more than once
         if (givenBonusAmount <= baseBonusAmount && doubleBonusButton != null)
         {
-            if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) != "true")
+            //Debug.Log("User has not yet watched a rewarded video ad");
+            // only show the rewarded ad double bonus button if not a gold subscriber and has opted-in to advertising
+            if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) != "true" && UnityAdsController.GetAllowAds())
             {
+                //Debug.Log("Activate rewarded ad double bonus button");
                 doubleBonusButton.SetActive(true);
             }
-            else
+            else if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true") // if a gold subscriber
             {
+                //Debug.Log("Give double bonus to gold subscribers");
                 givenBonusAmount = givenBonusAmount * 2;
                 //rewardAmountText.text = givenBonusAmount.ToString();
                 doubleBonusText.SetActive(true);
-            } 
+            }
+
+            // just show the normal thanks (make sure strike-through and double bonus text are disabled in scene!
         } 
     }
 
