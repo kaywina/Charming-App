@@ -36,10 +36,10 @@ public class PlayManager : MonoBehaviour
         else { return gameCostNoGold;  }
     }
 
-    public void OpenGameSelectMenu(bool showAdButton)
+    public void ReturnToGameSelect()
     {
         watchedRewardedAdText.SetActive(false);
-        if (showAdButton) { rewardedAdButton.SetActive(true); }
+        if (UnityAdsController.GetAllowAds()) { rewardedAdButton.SetActive(true); }  // only show ad if user has opted-in and AllowAds is true
         menuCanvasObject.SetActive(true);
     }
 
@@ -65,7 +65,7 @@ public class PlayManager : MonoBehaviour
         else
         {
             playGameAttention.gameObject.SetActive(false);
-            OpenGameSelectMenu(true);
+            ReturnToGameSelect();
         }
     }
 
