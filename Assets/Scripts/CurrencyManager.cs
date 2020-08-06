@@ -7,11 +7,12 @@ public class CurrencyManager : MonoBehaviour {
 
     public GameObject welcomePanel;
     public GameObject infoPanel;
+    public GameObject optInPanel;
     public GameObject bonusPanel;
     public StorePanel storePanel;
     public Text currencyText;
 
-    private static int welcomeBonusSilver = 32;
+    private static int welcomeBonus = 32;
     public Text welcomeBonusText;
 
     private static int currencyInBank = 0;
@@ -32,20 +33,27 @@ public class CurrencyManager : MonoBehaviour {
     {
         Instance = this;
 
-        welcomeBonusText.text = welcomeBonusSilver.ToString();
+        welcomeBonusText.text = welcomeBonus.ToString();
         canOpenBonusPanel = SetCanOpenBonusPanel();
 
         // on first time running app
         if (!PlayerPrefs.GetString("FirstRun").Equals("False"))
         {
             //Debug.Log("Give currency bonus on first run");
-            SetCurrencyOnStart(welcomeBonusSilver);
+            SetCurrencyOnStart(welcomeBonus);
             welcomePanel.SetActive(true);
         }
         else
         {
             currencyInBank = PlayerPrefs.GetInt(currencyPlayerPref);
-            infoPanel.SetActive(true);
+            if (UnityAdsController.IsAllowAdsSet())
+            {
+                infoPanel.SetActive(true);
+            }
+            else
+            {
+                optInPanel.SetActive(true);
+            }
         }
 
         SetCurrencyText();

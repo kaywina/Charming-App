@@ -34,7 +34,7 @@ public class UnityAdsController : MonoBehaviour
     // Returns true if user has opted-in to ads
     public static bool GetAllowAds()
     {
-        if (!PlayerPrefs.HasKey(ALLOW_ADS_PREF_NAME))
+        if (!IsAllowAdsSet())
         {
             return false;
         }
@@ -55,6 +55,12 @@ public class UnityAdsController : MonoBehaviour
     public static void DisallowAds()
     {
         PlayerPrefs.SetString(ALLOW_ADS_PREF_NAME, "false");
+    }
+
+    public static bool IsAllowAdsSet()
+    {
+        if (PlayerPrefs.HasKey(ALLOW_ADS_PREF_NAME)) { return true; }
+        else { return false; }
     }
 
 }
