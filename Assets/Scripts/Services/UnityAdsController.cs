@@ -25,10 +25,7 @@ public class UnityAdsController : MonoBehaviour
 
     private void Start()
     {
-        if (Advertisement.isSupported)
-        {
-            Advertisement.Initialize(UnityAdsController.GetGameId());
-        }
+        InitializeUnityAds();
     }
 
     // Returns true if user has opted-in to ads
@@ -50,6 +47,7 @@ public class UnityAdsController : MonoBehaviour
     public static void AllowAds()
     {
         PlayerPrefs.SetString(ALLOW_ADS_PREF_NAME, "true");
+        InitializeUnityAds();
     }
 
     public static void DisallowAds()
@@ -63,4 +61,15 @@ public class UnityAdsController : MonoBehaviour
         else { return false; }
     }
 
+    public static void InitializeUnityAds()
+    {
+        if (!Advertisement.isInitialized)
+        {
+            if (Advertisement.isSupported && PlayerPrefs.GetString(ALLOW_ADS_PREF_NAME) == "true")
+            {
+                Advertisement.Initialize(UnityAdsController.GetGameId());
+                Debug.Log("Initialize Unity Ads");
+            }
+        }
+    }
 }
