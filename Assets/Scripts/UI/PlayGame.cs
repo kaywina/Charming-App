@@ -162,7 +162,6 @@ public class PlayGame : MonoBehaviour
         if (newHighScoreFlag)
         {
             CurrencyManager.Instance.GiveBonus(rewardAmount);
-            CurrencyManager.Instance.ShowBonusIndicator(rewardAmount);
             SetNextRewardAmount();
             rewardText.text = rewardAmount.ToString();
             rewardObject.SetActive(true);

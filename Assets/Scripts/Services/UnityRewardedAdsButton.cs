@@ -18,6 +18,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     public Text doubleRewardAmountText;
     public GameObject strikeout;
     public ParticleSystem explosionParticles;
+    public CurrencyIndicator currencyIndicator;
 
     private void OnEnable()
     {
@@ -90,7 +91,6 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
                 if (buttonIsOnPlayPanel)
                 {
                     CurrencyManager.Instance.GiveBonus(PlayManager.GetAdReward());
-                    CurrencyManager.Instance.ShowBonusIndicator(PlayManager.GetAdReward());
                 }
 
                 if (doubleRewardAmountText != null) { doubleRewardAmountText.gameObject.SetActive(true); }
@@ -101,6 +101,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 
                 gameObject.SetActive(false); // deactivate button after completion
                 UnityAnalyticsController.SendCompleteWatchingRewardedAdEvent();
+                if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:

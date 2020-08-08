@@ -10,23 +10,17 @@ public class CurrencyManager : MonoBehaviour {
     public GameObject optInPanel;
     public GameObject bonusPanel;
     public StorePanel storePanel;
-    public Text currencyText;
 
     private static int welcomeBonus = 32;
     public Text welcomeBonusText;
 
     private static int currencyInBank = 0;
 
-    public delegate void CurrencyAddedAction(int n);
-    public static event  CurrencyAddedAction OnCurrencyAdded;
-
     private static int stackedBonus = 0; // to handle multiple store purchases before leaving store
 
     private bool canOpenBonusPanel = false;
 
     public static string currencyPlayerPref = "Currency";
-
-    public CurrencyIndicator currencyIndicator;
 
     // Use this for initialization
     void Start ()
@@ -55,8 +49,6 @@ public class CurrencyManager : MonoBehaviour {
                 optInPanel.SetActive(true);
             }
         }
-
-        SetCurrencyText();
     }
 
     private void OnApplicationQuit()
@@ -88,7 +80,11 @@ public class CurrencyManager : MonoBehaviour {
         currencyInBank = PlayerPrefs.GetInt(currencyPlayerPref); // we do this to respect persistent data file (see DataManager class)
         currencyInBank += amount;
         PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
-        SetCurrencyText();
+    }
+
+    public static int GetCurrencyInBank()
+    {
+        return currencyInBank;
     }
 
     public static int GetStackedBonus()
@@ -106,18 +102,12 @@ public class CurrencyManager : MonoBehaviour {
         if (bonus <= 0) { return; }
         currencyInBank += bonus;
         PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
-        SetCurrencyText(); 
 
         if (isPurchase && storePanel != null) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
         {
             stackedBonus += bonus;
             //Debug.Log("Stacked Bonus Regular is " + stackedBonusRegular);
             storePanel.ShowThankYou();
-        }
-        else // this case handles all other times a bonus is given; i.e. when stacking is not a problem
-        {
-            if (OnCurrencyAdded != null) { OnCurrencyAdded(bonus); }
-            else { Debug.Log("delegate is null"); }
         }
         if (isDailyBonus) {
             canOpenBonusPanel = false;
@@ -130,21 +120,13 @@ public class CurrencyManager : MonoBehaviour {
     {
         currencyInBank = 0;
         PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
-        SetCurrencyText();
     }
 #endif
-
-    public static void SetCurrencyText()
-    {
-
-        Instance.currencyText.text = currencyInBank.ToString();
-    }
 
     public static void SetCurrencyInBank(int amount)
     {
         currencyInBank = amount;
         PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
-        SetCurrencyText();
     }
 
     public static bool WithdrawAmount(int amount)
@@ -156,45 +138,10 @@ public class CurrencyManager : MonoBehaviour {
         }
         else
         {
-            Instance.StartIndicatorFlashing();
             return false;
         }
     }
 
-    private int flashCount = 0;
-    private int maxFlashes = 4;
-
-    private void StartIndicatorFlashing()
-    {
-        CancelInvoke("ResetToWhite");
-
-        float repeatRate = 0.5f;
-        InvokeRepeating("FlashIndicatorYellow", 0, repeatRate);
-        InvokeRepeating("ResetToWhite", repeatRate * 0.5f, repeatRate);
-    }
-
-    private void FlashIndicatorYellow()
-    {
-        //Debug.Log("Flash indicator yellow");
-
-        if (flashCount >= maxFlashes)
-        {
-            CancelInvoke("FlashIndicatorYellow");
-            CancelInvoke("ResetToWhite");
-            flashCount = 0;
-            //Debug.Log("Stop flashing indicator");
-            return;
-        }
-
-        currencyText.color = Color.yellow;
-        flashCount++;
-    }
-
-    private void ResetToWhite()
-    {
-        //Debug.Log("Reset indicator ot white");
-        currencyText.color = Color.white;
-    }
 
     public static bool CanWithdrawAmount(int amount)
     {
@@ -203,10 +150,5 @@ public class CurrencyManager : MonoBehaviour {
             return true;
         }
         return false;
-    }
-
-    public void ShowBonusIndicator(int amount)
-    {
-        currencyIndicator.ShowBonusTextCustomAmount(amount);
     }
 }
