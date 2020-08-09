@@ -75,8 +75,6 @@ public class SubscribePanel : CharmsPanel
         {
             returnToMain = true;
         }
-
-        fireworks.Play();
     }
 
     new void OnDisable()
@@ -104,6 +102,5 @@ public class SubscribePanel : CharmsPanel
         fromLove = false;
         fromVisualOptions = false;
         fromAudioOptions = false;
-        if (fireworks != null) { fireworks.Stop(); } // wrapper to prevent null ref in case where app is closed directly from this panel
     }
 }
