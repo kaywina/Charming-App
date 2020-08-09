@@ -15,6 +15,10 @@ public class SubscribePanel : CharmsPanel
     public OptionsSubPanel audioOptionsPanel;
     public OptionsPanel optionsPanel;
     public CharmsPanel lovePanel;
+    public ParticleSystem fireworks;
+
+    public GameObject promo;
+    public GameObject success;
 
     private bool optionsRTM;
     private bool loveRTM;
@@ -43,6 +47,9 @@ public class SubscribePanel : CharmsPanel
     {
         base.OnEnable();
 
+        promo.SetActive(true);
+        success.SetActive(false);
+
         returnToMain = false;
         if (fromOptions) {
             optionsRTM = optionsPanel.returnToMain;
@@ -68,6 +75,8 @@ public class SubscribePanel : CharmsPanel
         {
             returnToMain = true;
         }
+
+        fireworks.Play();
     }
 
     new void OnDisable()
@@ -95,5 +104,6 @@ public class SubscribePanel : CharmsPanel
         fromLove = false;
         fromVisualOptions = false;
         fromAudioOptions = false;
+        if (fireworks != null) { fireworks.Stop(); } // wrapper to prevent null ref in case where app is closed directly from this panel
     }
 }
