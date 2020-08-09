@@ -22,7 +22,7 @@ public class BreatheControl : MonoBehaviour
 
     public SoundManager soundManager;
 
-    public ParticleSystem yayParticles;
+    public ParticleSystem fireworks;
 
     void OnEnable()
     {
@@ -91,7 +91,9 @@ public class BreatheControl : MonoBehaviour
 
         if (numberOfBreaths != 0 && numberOfBreaths % 10 == 0) // after 10, 20, 30, breaths etc
         {
-            yayParticles.Play();
+            fireworks.Play();
+            float seconds = 5f;
+            Invoke("StopFireworks", seconds);
         }
     }
 
@@ -99,4 +101,10 @@ public class BreatheControl : MonoBehaviour
     {
         return breatheIn;
     }
+
+    private void StopFireworks()
+    {
+        if (fireworks != null) { fireworks.Stop(); }
+    }
+
 }

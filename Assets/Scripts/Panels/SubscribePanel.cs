@@ -15,6 +15,10 @@ public class SubscribePanel : CharmsPanel
     public OptionsSubPanel audioOptionsPanel;
     public OptionsPanel optionsPanel;
     public CharmsPanel lovePanel;
+    public ParticleSystem fireworks;
+
+    public GameObject promo;
+    public GameObject success;
 
     private bool optionsRTM;
     private bool loveRTM;
@@ -42,6 +46,9 @@ public class SubscribePanel : CharmsPanel
     new void OnEnable()
     {
         base.OnEnable();
+
+        promo.SetActive(true);
+        success.SetActive(false);
 
         returnToMain = false;
         if (fromOptions) {
