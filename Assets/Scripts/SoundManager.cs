@@ -13,6 +13,8 @@ public class SoundManager : MonoBehaviour
     private float[] breathSoundsStartVolumes;
     private float[] musicClipsStartVolumes;
 
+    private float defaultVolumeMultipleir = 0.8f;
+
     private static int musicIndex = 0;
     private static int chimeIndex = 0;
     private bool goingUpScale = true;
@@ -63,8 +65,8 @@ public class SoundManager : MonoBehaviour
         // 1 is default value for in-app volume control
         if (!PlayerPrefs.HasKey(musicVolumePlayerPref))
         {
-            PlayerPrefs.SetFloat(musicVolumePlayerPref, 1);
-            Debug.Log("Set default music volume multiplier to 1");
+            PlayerPrefs.SetFloat(musicVolumePlayerPref, defaultVolumeMultipleir);
+            Debug.Log("Set default music volume multiplier");
         }
         // otherwise set the volume multiplier
         else
@@ -76,8 +78,8 @@ public class SoundManager : MonoBehaviour
         // do the same thing for sfx
         if (!PlayerPrefs.HasKey(soundVolumePlayerPref))
         {
-            PlayerPrefs.SetFloat(soundVolumePlayerPref, 1);
-            Debug.Log("Set default sfx volume multiplierto 1");
+            PlayerPrefs.SetFloat(soundVolumePlayerPref, defaultVolumeMultipleir);
+            Debug.Log("Set default sfx volume multiplier");
         }
         else
         {
@@ -310,5 +312,10 @@ public class SoundManager : MonoBehaviour
     public float GetSoundVolumeMultiplier()
     {
         return PlayerPrefs.GetFloat(soundVolumePlayerPref);
+    }
+
+    public float GetDefaultVolumeMultiplier()
+    {
+        return defaultVolumeMultipleir;
     }
 }

@@ -48,7 +48,7 @@ public class VolumeSlider : MonoBehaviour
 
     public void ResetVolumeMultiplier()
     {
-        slider.value = 1;
+        slider.value = soundManager.GetDefaultVolumeMultiplier();
         SetVolumeFromSlider();
     }
 }
