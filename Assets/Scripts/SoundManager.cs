@@ -27,8 +27,8 @@ public class SoundManager : MonoBehaviour
     private string musicIndexPlayerPref = "MusicIndex";
 
     // float values for these player prefs are a multiplier, between 0 and 2 
-    private string musicVolumePlayerPref = "MusicVolume"; // don't change in production
-    private string soundVolumePlayerPref = "SoundVolume"; // don't change in production
+    private string musicVolumePlayerPref = "MusicVolumeMultiplier"; // don't change in production
+    private string soundVolumePlayerPref = "SoundVolumeMultiplier"; // don't change in production
 
     public Toggle musicToggle;
 
@@ -66,25 +66,25 @@ public class SoundManager : MonoBehaviour
         if (!PlayerPrefs.HasKey(musicVolumePlayerPref))
         {
             PlayerPrefs.SetFloat(musicVolumePlayerPref, defaultVolumeMultipleir);
-            Debug.Log("Set default music volume multiplier");
+            //Debug.Log("Set default music volume multiplier");
         }
         // otherwise set the volume multiplier
         else
         {
             SetMusicVolumeMultiplier(PlayerPrefs.GetFloat(musicVolumePlayerPref));
-            Debug.Log("Music volume multiplier set from player pref");
+            //Debug.Log("Music volume multiplier set from player pref");
         }
 
         // do the same thing for sfx
         if (!PlayerPrefs.HasKey(soundVolumePlayerPref))
         {
             PlayerPrefs.SetFloat(soundVolumePlayerPref, defaultVolumeMultipleir);
-            Debug.Log("Set default sfx volume multiplier");
+            //Debug.Log("Set default sfx volume multiplier");
         }
         else
         {
             SetSoundVolumeMultiplier(PlayerPrefs.GetFloat(soundVolumePlayerPref));
-            Debug.Log("Sfx volume multiplier set from player pref");
+            //Debug.Log("Sfx volume multiplier set from player pref");
         }
     }
 
@@ -273,7 +273,7 @@ public class SoundManager : MonoBehaviour
         }
         PlayerPrefs.SetFloat(musicVolumePlayerPref, volumeMultiplier);
 
-        Debug.Log("Music volume multiplier has been set to " + volumeMultiplier.ToString());
+        //Debug.Log("Music volume multiplier has been set to " + volumeMultiplier.ToString());
     }
 
     public void SetSoundVolumeMultiplier(float volumeMultiplier)
@@ -291,7 +291,7 @@ public class SoundManager : MonoBehaviour
 
         PlayerPrefs.SetFloat(soundVolumePlayerPref, volumeMultiplier);
 
-        Debug.Log("Sound volume multiplier has been set to " + volumeMultiplier.ToString());
+        //Debug.Log("Sound volume multiplier has been set to " + volumeMultiplier.ToString());
     }
 
     private bool CheckVolume (float v)

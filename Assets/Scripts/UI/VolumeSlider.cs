@@ -33,11 +33,11 @@ public class VolumeSlider : MonoBehaviour
         switch (sliderType)
         {
             case VolumeSliderType.Music:
-                Debug.Log("Set music volume from slider");
+                //Debug.Log("Set music volume from slider");
                 soundManager.SetMusicVolumeMultiplier(slider.value);
                 break;
             case VolumeSliderType.SFX:
-                Debug.Log("Set sfx volume from slider");
+                //Debug.Log("Set sfx volume from slider");
                 soundManager.SetSoundVolumeMultiplier(slider.value);
                 break;
             default:
