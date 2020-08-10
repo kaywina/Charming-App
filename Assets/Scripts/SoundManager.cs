@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource[] breathSounds;
     public AudioSource wheelPointerSound;
+    public AudioSource[] breathSounds;
     public AudioSource[] musicClips;
+
+    private float wheelPointerSoundStartVolume;
+    private float[] breathSoundsStartVolumes;
+    private float[] musicClipsStartVolumes;
 
     private static int musicIndex = 0;
     private static int chimeIndex = 0;
@@ -19,6 +23,10 @@ public class SoundManager : MonoBehaviour
     public bool enabledByDefault = true;
 
     private string musicIndexPlayerPref = "MusicIndex";
+
+    // float values for these player prefs are a multiplier, between 0 and 2 
+    private string musicVolumePlayerPref = "MusicVolume"; // don't change in production
+    private string soundVolumePlayerPref = "SoundVolume"; // don't change in production
 
     public Toggle musicToggle;
 
@@ -34,6 +42,47 @@ public class SoundManager : MonoBehaviour
             {
                 PlayerPrefs.SetString(musicPlayerPref, "true");
             }
+        }
+
+
+        // get starting relative volumes for all audio clips
+        wheelPointerSoundStartVolume = wheelPointerSound.volume;
+        breathSoundsStartVolumes = new float[breathSounds.Length];
+        musicClipsStartVolumes = new float[musicClips.Length];
+
+        // fill the sfx and music clip arrays
+        for (int i = 0; i < breathSounds.Length; i++)
+        {
+            breathSoundsStartVolumes[i] = breathSounds[i].volume;
+        }
+        for (int i = 0; i < musicClips.Length; i++)
+        {
+            musicClipsStartVolumes[i] = musicClips[i].volume;
+        }
+
+        // 1 is default value for in-app volume control
+        if (!PlayerPrefs.HasKey(musicVolumePlayerPref))
+        {
+            PlayerPrefs.SetFloat(musicVolumePlayerPref, 1);
+            Debug.Log("Set default music volume multiplier to 1");
+        }
+        // otherwise set the volume multiplier
+        else
+        {
+            SetMusicVolumeMultiplier(PlayerPrefs.GetFloat(musicVolumePlayerPref));
+            Debug.Log("Music volume multiplier set from player pref");
+        }
+
+        // do the same thing for sfx
+        if (!PlayerPrefs.HasKey(soundVolumePlayerPref))
+        {
+            PlayerPrefs.SetFloat(soundVolumePlayerPref, 1);
+            Debug.Log("Set default sfx volume multiplierto 1");
+        }
+        else
+        {
+            SetSoundVolumeMultiplier(PlayerPrefs.GetFloat(soundVolumePlayerPref));
+            Debug.Log("Sfx volume multiplier set from player pref");
         }
     }
 
@@ -116,7 +165,6 @@ public class SoundManager : MonoBehaviour
 
         // Add mute function for other sounds below
         wheelPointerSound.mute = mute;
-
     }
 
     private void SetPlayOnMusic(bool doNotPlay)
@@ -208,5 +256,59 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetInt(musicIndexPlayerPref, 0);
         SetPlayMusicFromPlayerPref();
         musicToggle.isOn = false;
+    }
+
+    public void SetMusicVolumeMultiplier(float volumeMultiplier)
+    {
+        if (!CheckVolume(volumeMultiplier)) { return; }
+
+        float tempNewVolume = 0;
+
+        for (int i = 0; i < musicClips.Length; i++)
+        {
+            tempNewVolume = musicClipsStartVolumes[i] * volumeMultiplier;
+            musicClips[i].volume = tempNewVolume;
+        }
+        PlayerPrefs.SetFloat(musicVolumePlayerPref, volumeMultiplier);
+
+        Debug.Log("Music volume multiplier has been set to " + volumeMultiplier.ToString());
+    }
+
+    public void SetSoundVolumeMultiplier(float volumeMultiplier)
+    {
+        if (!CheckVolume(volumeMultiplier)) { return; }
+
+        wheelPointerSound.volume = wheelPointerSoundStartVolume * volumeMultiplier;
+
+        float tempNewVolume = 0;
+        for (int i = 0; i < breathSounds.Length; i++)
+        {
+            tempNewVolume = breathSoundsStartVolumes[i] * volumeMultiplier;
+            breathSounds[i].volume = tempNewVolume;
+        }
+
+        PlayerPrefs.SetFloat(soundVolumePlayerPref, volumeMultiplier);
+
+        Debug.Log("Sound volume multiplier has been set to " + volumeMultiplier.ToString());
+    }
+
+    private bool CheckVolume (float v)
+    {
+        if (v < 0 || v > 1)
+        {
+            Debug.Log(v.ToString() + " is not a valid value for volume");
+            return false;
+        }
+        return true;
+    }
+
+    public float GetMusicVolumeMultiplier()
+    {
+        return PlayerPrefs.GetFloat(musicVolumePlayerPref);
+    }
+
+    public float GetSoundVolumeMultiplier()
+    {
+        return PlayerPrefs.GetFloat(soundVolumePlayerPref);
     }
 }
