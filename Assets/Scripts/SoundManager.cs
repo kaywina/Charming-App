@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
     private float[] breathSoundsStartVolumes;
     private float[] musicClipsStartVolumes;
 
-    private float defaultVolumeMultipleir = 0.8f;
+    private float defaultVolumeMultipleir = 0.1f;
 
     private static int musicIndex = 0;
     private static int chimeIndex = 0;
