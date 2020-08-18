@@ -15,11 +15,11 @@ C:/Charming Ape/Charming-App
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50834
+54299
 Successfully changed project path to: C:/Charming Ape/Charming-App
 C:/Charming Ape/Charming-App
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 131.86 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 148.25 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.2.0a19 (8037ac78137e)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.0a19/Editor/Data/Resources/UnitySubsystems
@@ -35,26 +35,26 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.2.0a19/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.2.0a19/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.2.0a19/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56144
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56044
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.0a19/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003332 seconds.
+Registered in 0.004927 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 62.62 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 220.53 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.645 seconds
+- Completed reload, in  9.985 seconds
 Registering precompiled user dll's ...
-Registered in 0.135752 seconds.
+Registered in 0.391769 seconds.
 Platform modules already initialized, skipping
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Charming Ape\Charming-App\Library\PackageCache\com.unity.ext.nunit@1.0.0\net35\unity-custom\nunit.framework.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 4.93 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 UnityIAP: [InitializeOnLoad] Facebook Check
 UnityIAP: Runtime [2020.2.0a19]
@@ -64,7 +64,7 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.503 seconds
+- Completed reload, in  2.481 seconds
 Platform modules already initialized, skipping
 Script is not up to date after domain reload: guid(01df650e1b86e9f4a8e2b5dc9782506f) path("Packages/com.unity.ugui/Tests/Runtime/NestedLayout/SceneWithNestedLayoutElementsLoads.cs") state(2)
 Script is not up to date after domain reload: guid(3411e19edd44cfd46b548b058c3bc36c) path("Packages/com.unity.test-framework/UnityEditor.TestRunner/TestBuildAssemblyFilter.cs") state(2)
@@ -2626,177 +2626,708 @@ Script is not up to date after domain reload: guid(dd2fe74169b54bf58fca17288513e
 Script is not up to date after domain reload: guid(f4c7193663918411c8f78e3cf844cb9e) path("Packages/com.unity.analytics/Tests/Editor/StoreOpenedTests.cs") state(2)
 Script is not up to date after domain reload: guid(02893ffb522b490a9fa28eedd2584309) path("Packages/com.unity.textmeshpro/Scripts/Editor/TMPro_TextContainerEditor.cs") state(2)
 Script is not up to date after domain reload: guid(0d590dbf8567dae4bbc048927d3b539b) path("Assets/Scripts/UI/WelcomeOKButton.cs") state(2)
-RefreshInternalV2 is called before InitialScriptRefresh has been called and asset database isn't fully initialized.
-
-Refresh completed in 0.000239 seconds.
-RefreshInfo: RefreshV2(NoUpdateAssetOptions) scanfilter: 
-RefreshProfiler: Total: 0.000ms
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
-Refreshing native plugins compatible for Editor in 1.59 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.18 seconds
+Refreshing native plugins compatible for Editor in 2.05 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 86 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 27.5 MB.
-System memory in use after: 27.5 MB.
+System memory in use before: 27.3 MB.
+System memory in use after: 27.3 MB.
 
 Unloading 76 unused Assets to reduce memory usage. Loaded Objects now: 475.
-Total: 4.191100 ms (FindLiveObjects: 0.516200 ms CreateObjectMapping: 0.034400 ms MarkObjects: 3.553300 ms  DeleteObjects: 0.085400 ms)
+Total: 7.909200 ms (FindLiveObjects: 1.178300 ms CreateObjectMapping: 0.032000 ms MarkObjects: 6.539700 ms  DeleteObjects: 0.156400 ms)
 
 ========================================================================
 Received Import Request.
-  path: Assets/Fonts
-  artifactKey: Guid(6ba77dba60066684cba82fd2335d926e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts using Guid(6ba77dba60066684cba82fd2335d926e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88dd3ea49db81295ffc06344d0f47e0b') in 0.020257 seconds
-  Import took 0.022471 seconds .
+  path: Assets/Scripts/Game
+  artifactKey: Guid(9292a06e2029f5a43974cf116e63dfa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Game using Guid(9292a06e2029f5a43974cf116e63dfa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b804f7c6de871164c969559104a9c493') in 0.038110 seconds
+  Import took 0.040530 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000488 seconds.
+  path: Assets/Scripts/DeactivateForSeconds.cs
+  artifactKey: Guid(57a92bc35cb7e9640a7afad61476cde2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/DeactivateForSeconds.cs using Guid(57a92bc35cb7e9640a7afad61476cde2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9679faa2c3f8861fabed0664286f763d') in 0.115110 seconds
+  Import took 0.122519 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000526 seconds.
+  path: Assets/Scripts/ExpandForSeconds.cs
+  artifactKey: Guid(a92ac71818e3c4e48b3318672d481fc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/ExpandForSeconds.cs using Guid(a92ac71818e3c4e48b3318672d481fc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adc4dcec4e71aa63658344469f7eb3e0') in 0.108755 seconds
+  Import took 0.116817 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000403 seconds.
+  path: Assets/Scripts/TriangleExplosion.cs
+  artifactKey: Guid(9fe62f58a16575f45bafbdbab0582f11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TriangleExplosion.cs using Guid(9fe62f58a16575f45bafbdbab0582f11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '239f59bf4d4377b8d86ff3b0f82013ef') in 0.071743 seconds
+  Import took 0.075441 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001747 seconds.
+  path: Assets/Scripts/Secret.cs
+  artifactKey: Guid(d2da953c3b427504599493806f770a67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Secret.cs using Guid(d2da953c3b427504599493806f770a67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '313123514db105e5b94817bf54a7ce00') in 0.034809 seconds
+  Import took 0.037422 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000357 seconds.
+  path: Assets/Scripts/UI
+  artifactKey: Guid(b277c6f18cef655408e5221820a1c03b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/UI using Guid(b277c6f18cef655408e5221820a1c03b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e410c813d08d9edb79623767976ce77') in 0.036740 seconds
+  Import took 0.038873 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000454 seconds.
+  path: Assets/Scripts/CurrencyManager.cs
+  artifactKey: Guid(399cd433876f757449262c3067b4d14c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CurrencyManager.cs using Guid(399cd433876f757449262c3067b4d14c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ecb63b09906622bf8f7b263bad2819f') in 0.028779 seconds
+  Import took 0.030870 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000401 seconds.
+  path: Assets/Scripts/SynchronizeRotation.cs
+  artifactKey: Guid(2e4d5a9add469454b938f76eb8b50640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SynchronizeRotation.cs using Guid(2e4d5a9add469454b938f76eb8b50640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5eac84371e174371da32438a9a76b593') in 0.034930 seconds
+  Import took 0.039057 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000506 seconds.
+  path: Assets/Scripts/PlayManager.cs
+  artifactKey: Guid(9921ca25cac196648ba97037acd49b3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PlayManager.cs using Guid(9921ca25cac196648ba97037acd49b3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1773a3d932451451aea9622658edf20') in 0.046953 seconds
+  Import took 0.050220 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000563 seconds.
+  path: Assets/Scripts/Charms.cs
+  artifactKey: Guid(25e11bc0531a9ff46822a4d709c6f33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Charms.cs using Guid(25e11bc0531a9ff46822a4d709c6f33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57e4160df25c4237ae1cf910f1317591') in 0.026512 seconds
+  Import took 0.029185 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000488 seconds.
+  path: Assets/Scripts/BreatheControl.cs
+  artifactKey: Guid(427d453e30a71354f8ebc7e3508a2855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BreatheControl.cs using Guid(427d453e30a71354f8ebc7e3508a2855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd9421f47d64d060e0cff3b5f4cc0da3') in 0.028967 seconds
+  Import took 0.030952 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000489 seconds.
+  path: Assets/Scripts/DataManager.cs
+  artifactKey: Guid(9b9f7734445db214289b54316a384f4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/DataManager.cs using Guid(9b9f7734445db214289b54316a384f4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34fcba88f41d22454fbdd6339a1b5b63') in 0.030180 seconds
+  Import took 0.032625 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000910 seconds.
+  path: Assets/Scripts/Panels
+  artifactKey: Guid(82a83d78ea070294cb8701668ae2936f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Panels using Guid(82a83d78ea070294cb8701668ae2936f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a303706b5d650eef8b22f0ada074d38f') in 0.027308 seconds
+  Import took 0.029836 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000419 seconds.
+  path: Assets/Scripts/BreatheExpandScaleAnimation.cs
+  artifactKey: Guid(c6d4f5baad4a2d343898e0f98bd51d83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BreatheExpandScaleAnimation.cs using Guid(c6d4f5baad4a2d343898e0f98bd51d83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1f3f25d0876aef72dd969f91b520959') in 0.029152 seconds
+  Import took 0.031264 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000506 seconds.
+  path: Assets/Scripts/TimeManager.cs
+  artifactKey: Guid(c097ee741f6e5a34aac213eaaf62e6d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TimeManager.cs using Guid(c097ee741f6e5a34aac213eaaf62e6d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd258dd453818904a2bf01f584f8a3f4d') in 0.027186 seconds
+  Import took 0.029523 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000441 seconds.
+  path: Assets/Scripts/NotificationManager.cs
+  artifactKey: Guid(c7b5b7c5c195ed14a925215a3d5e6deb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/NotificationManager.cs using Guid(c7b5b7c5c195ed14a925215a3d5e6deb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afa2e611e93c35c5319d8bd908bfe003') in 0.028222 seconds
+  Import took 0.030311 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000500 seconds.
+  path: Assets/Scripts/TimePicker.cs
+  artifactKey: Guid(a5dd75c047e72484fb9791a89edac9b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TimePicker.cs using Guid(a5dd75c047e72484fb9791a89edac9b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79b4ff81ce083516346b99a4ddddc67e') in 0.031689 seconds
+  Import took 0.033866 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000516 seconds.
+  path: Assets/Scripts/SetBackgroundColorFromImage.cs
+  artifactKey: Guid(5a2a021b7436d614ba40b9764b5ede9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SetBackgroundColorFromImage.cs using Guid(5a2a021b7436d614ba40b9764b5ede9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63e68737cace9a9b317c82d6cc50ddef') in 0.026752 seconds
+  Import took 0.030297 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000498 seconds.
+  path: Assets/Scripts/SetBackgroundColor.cs
+  artifactKey: Guid(f8720dc66d3eb8c44bf1c7bb3ac26813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SetBackgroundColor.cs using Guid(f8720dc66d3eb8c44bf1c7bb3ac26813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea8807da7d5d089e3623b8464b7c4915') in 0.023581 seconds
+  Import took 0.027761 seconds .
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000716 seconds.
-  path: Assets/Unity_CSV_Localization
-  artifactKey: Guid(dcd8827dec497074fb57a236564a897b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Unity_CSV_Localization using Guid(dcd8827dec497074fb57a236564a897b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1eeeb49df1e3ae2c01cc1b909ce9d4b') in 0.018676 seconds
-  Import took 0.020418 seconds .
+  path: Assets/Scripts/CycleMaterialOnTap.cs
+  artifactKey: Guid(8826b6f5829c87844bdbd2ed686c7c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CycleMaterialOnTap.cs using Guid(8826b6f5829c87844bdbd2ed686c7c3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd8bf038d9258a98007df2fb59099e80') in 0.034855 seconds
+  Import took 0.036910 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000294 seconds.
-  path: Assets/Animation
-  artifactKey: Guid(e368a09cb5ac11040aa6acac790ef706) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animation using Guid(e368a09cb5ac11040aa6acac790ef706) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d9d931ca5cca0e7f4caa74375dd322a') in 0.017699 seconds
-  Import took 0.019415 seconds .
+  Time since last request: 0.000450 seconds.
+  path: Assets/Scripts/RankManager.cs
+  artifactKey: Guid(ff85b992d30716c47bd4e9a841bf05ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/RankManager.cs using Guid(ff85b992d30716c47bd4e9a841bf05ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42e777c92b55fb0fa1678d4b78006855') in 0.029961 seconds
+  Import took 0.032580 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000411 seconds.
-  path: Assets/Models
-  artifactKey: Guid(b31f2e9eb45d2de4eb8dc67d3a04859f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models using Guid(b31f2e9eb45d2de4eb8dc67d3a04859f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a37e60ea20b2dfb48919f6a7a9b93b45') in 0.018810 seconds
-  Import took 0.020621 seconds .
+  Time since last request: 0.000563 seconds.
+  path: Assets/Scripts/ShareScreenshotAndroid.cs
+  artifactKey: Guid(b92de6eb14fc3644ca77571cac676021) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/ShareScreenshotAndroid.cs using Guid(b92de6eb14fc3644ca77571cac676021) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b98ce4978d94a257a8e09555a019e1ca') in 0.032629 seconds
+  Import took 0.035534 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000140 seconds.
-  path: Assets/Scenes
-  artifactKey: Guid(abc9064c7c8dd3b4e89193005df0ce95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes using Guid(abc9064c7c8dd3b4e89193005df0ce95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e0aceeb3a10f1c6860aa9e5aab7b8c7d') in 0.019866 seconds
-  Import took 0.022314 seconds .
+  Time since last request: 0.000540 seconds.
+  path: Assets/Scripts/SecretManager.cs
+  artifactKey: Guid(efe862f2656a30b4ca8e83ae2c6779ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SecretManager.cs using Guid(efe862f2656a30b4ca8e83ae2c6779ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63f38a30dc4849f8b3fd7fedef845a18') in 0.026541 seconds
+  Import took 0.028765 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.001150 seconds.
-  path: Assets/Textures
-  artifactKey: Guid(56f0883718ac0924299ba97a2ed32ba0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Textures using Guid(56f0883718ac0924299ba97a2ed32ba0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd50008bb798df1e532828f6914219a37') in 0.017478 seconds
-  Import took 0.019781 seconds .
+  Time since last request: 0.000427 seconds.
+  path: Assets/Scripts/SetParticleColorFromCharm.cs
+  artifactKey: Guid(784cd527174e94f4d833188dbbe57c43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SetParticleColorFromCharm.cs using Guid(784cd527174e94f4d833188dbbe57c43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b2069bbce1c1eb1cbc0cd18406c13b5') in 0.031441 seconds
+  Import took 0.033736 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000716 seconds.
-  path: Assets/Materials
-  artifactKey: Guid(ebf34c241bd7e69468a0c52a137dbf44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials using Guid(ebf34c241bd7e69468a0c52a137dbf44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e321c7d5d661d2b551774b403aa688a') in 0.022193 seconds
-  Import took 0.024504 seconds .
+  Time since last request: 0.000517 seconds.
+  path: Assets/Scripts/SetBackgroundParticleEffectOnEnable.cs
+  artifactKey: Guid(b8750cf42deb6164fb5ba08706244604) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SetBackgroundParticleEffectOnEnable.cs using Guid(b8750cf42deb6164fb5ba08706244604) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f17d609323196532c6cc22f00e08a9f') in 0.027223 seconds
+  Import took 0.031210 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000420 seconds.
-  path: Assets/Sounds
-  artifactKey: Guid(f8bf41c0312d3e643b34a360e9128522) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sounds using Guid(f8bf41c0312d3e643b34a360e9128522) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e1f9c204fde9b11e0b1a3c762c4a64b') in 0.018912 seconds
-  Import took 0.020928 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000499 seconds.
-  path: Assets/Images
-  artifactKey: Guid(f82b995c81a525c4f95c4109b4cb4035) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images using Guid(f82b995c81a525c4f95c4109b4cb4035) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5a2c2c3c3c084f8efb95fbc8c0c1ab2') in 0.019686 seconds
-  Import took 0.021658 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000674 seconds.
-  path: Assets/Scripts
-  artifactKey: Guid(9c283727304bcdc4c95d0961b2e26151) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts using Guid(9c283727304bcdc4c95d0961b2e26151) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b85571f15d7baf4235bbe40ad48da5c5') in 0.020539 seconds
-  Import took 0.022668 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000166 seconds.
-  path: Assets/Editor
-  artifactKey: Guid(afa86caf1749a0748b68aac721c5782b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Editor using Guid(afa86caf1749a0748b68aac721c5782b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d14282988b85202ec50631668c1563d') in 0.019949 seconds
-  Import took 0.022322 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000821 seconds.
-  path: Assets/Prefabs
-  artifactKey: Guid(3f52b8d061011324d86f78d58f27daad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs using Guid(3f52b8d061011324d86f78d58f27daad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b2065ed167e2176bf166a4cfecb48a5') in 0.022856 seconds
-  Import took 0.024878 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000438 seconds.
-  path: Assets/Sprites
-  artifactKey: Guid(149d1e37b5d04594cadb078cc8e867cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sprites using Guid(149d1e37b5d04594cadb078cc8e867cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '920d670bfad7f4e6b3c93848ee396664') in 0.017358 seconds
-  Import took 0.019172 seconds .
+  Time since last request: 0.000480 seconds.
+  path: Assets/Scripts/LoveManager.cs
+  artifactKey: Guid(bd03552678edbf944b4ad7f5fd33db50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/LoveManager.cs using Guid(bd03552678edbf944b4ad7f5fd33db50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acd787f39e0008233c21851ad91a017d') in 0.024214 seconds
+  Import took 0.026227 seconds .
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000397 seconds.
-  path: Assets/AuraGlass
-  artifactKey: Guid(ea765f5f307aa12448e731e3e3497358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AuraGlass using Guid(ea765f5f307aa12448e731e3e3497358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '981ec4034a7f981e4c5170386617cec9') in 0.018060 seconds
-  Import took 0.019667 seconds .
+  path: Assets/Scripts/EventManager.cs
+  artifactKey: Guid(04f8aa65aa365784c9ccc31780c39663) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/EventManager.cs using Guid(04f8aa65aa365784c9ccc31780c39663) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59c6a737b72490a3c4bde42bfe1778a7') in 0.038960 seconds
+  Import took 0.041969 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000298 seconds.
-  path: Assets/Plugins
-  artifactKey: Guid(60877fd4c693cd545b78ea112424ca12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Plugins using Guid(60877fd4c693cd545b78ea112424ca12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f712c7159b6938564870f97b431236e') in 0.020796 seconds
-  Import took 0.023047 seconds .
+  Time since last request: 0.000134 seconds.
+  path: Assets/Scripts/Services
+  artifactKey: Guid(f2d40d9c679e4174790bf01bf2e424c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Services using Guid(f2d40d9c679e4174790bf01bf2e424c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e998d0d93d3dbdfd875d4f586e7af0b4') in 0.069656 seconds
+  Import took 0.072640 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000580 seconds.
-  path: Assets/UDPInstaller
-  artifactKey: Guid(78963841866f3476d887ae11e05b58e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UDPInstaller using Guid(78963841866f3476d887ae11e05b58e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab92407c4f33fbc33ceadf15f47a63b9') in 0.019924 seconds
-  Import took 0.022392 seconds .
+  Time since last request: 0.000593 seconds.
+  path: Assets/Scripts/Utility
+  artifactKey: Guid(f4394a612dc4dc447b77c31f1a2d1080) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Utility using Guid(f4394a612dc4dc447b77c31f1a2d1080) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '721e6815e91c09d1f52c9175188abfb4') in 0.061268 seconds
+  Import took 0.064582 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000519 seconds.
-  path: Assets/Resources
-  artifactKey: Guid(63e29157d8dfa3a44a9bf7871fee2735) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources using Guid(63e29157d8dfa3a44a9bf7871fee2735) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d7e1d879b18edfbe09bec3262b9febf') in 0.019783 seconds
-  Import took 0.021662 seconds .
+  Time since last request: 0.000394 seconds.
+  path: Assets/Scripts/CycleMaterialColorOnTap.cs
+  artifactKey: Guid(8173e75a47d65b046805c5ffd5b70da0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CycleMaterialColorOnTap.cs using Guid(8173e75a47d65b046805c5ffd5b70da0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c5ab088f7f64119e65b135a9480e6601') in 0.039723 seconds
+  Import took 0.043101 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/Scripts/SoundManager.cs
+  artifactKey: Guid(dba7d0c131edbc94bb5799a3b2338865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SoundManager.cs using Guid(dba7d0c131edbc94bb5799a3b2338865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef6a35714141c71911ec9d725524b0c2') in 0.038157 seconds
+  Import took 0.043618 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000125 seconds.
+  path: Assets/Scripts/ActiveUntilDeactivated.cs
+  artifactKey: Guid(aa0320e78a8ff3240aa9a31847c05fca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/ActiveUntilDeactivated.cs using Guid(aa0320e78a8ff3240aa9a31847c05fca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '409537e94eca8d2e75965ecf6ecc16e8') in 0.039008 seconds
+  Import took 0.043951 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000497 seconds.
+  path: Assets/Scripts/BonusWheelPointer.cs
+  artifactKey: Guid(f07269255df17584198ace97e1767dd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BonusWheelPointer.cs using Guid(f07269255df17584198ace97e1767dd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '875f4a3a120a2974cd6f367fdf9a48f5') in 0.035043 seconds
+  Import took 0.037157 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000416 seconds.
+  path: Assets/Scripts/BreatheParticleExpandAnimation.cs
+  artifactKey: Guid(0b40e7f95d584874f97213e2e885691d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BreatheParticleExpandAnimation.cs using Guid(0b40e7f95d584874f97213e2e885691d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e16b5661ae838750d01a4b873a88f853') in 0.044410 seconds
+  Import took 0.046414 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000452 seconds.
+  path: Assets/Scripts/PlayerPrefsX.cs
+  artifactKey: Guid(e01cb9ebd5bca6446af1e83b544253b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PlayerPrefsX.cs using Guid(e01cb9ebd5bca6446af1e83b544253b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07a48d5888204dcc1323b83ef8f5334e') in 0.033382 seconds
+  Import took 0.037425 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000356 seconds.
+  path: Assets/Scripts/BonusWheel.cs
+  artifactKey: Guid(bbb5b82c8aa99f14bb18606e3c038c88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BonusWheel.cs using Guid(bbb5b82c8aa99f14bb18606e3c038c88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff2c56265f41e073ad57de425bd468d7') in 0.037618 seconds
+  Import took 0.045363 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000477 seconds.
+  path: Assets/Scripts/EnableFromPlayerPrefToggle.cs
+  artifactKey: Guid(d5db6b9dc2680c54fa2272a51835aad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/EnableFromPlayerPrefToggle.cs using Guid(d5db6b9dc2680c54fa2272a51835aad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a64cd4b4bccbe4e7d94beb8e69deec9b') in 0.034167 seconds
+  Import took 0.036172 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 500.006303 seconds.
+  path: Assets/Images/Ads
+  artifactKey: Guid(c48599d5ada853244997988b65550978) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Ads using Guid(c48599d5ada853244997988b65550978) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b458428d814a59d3b9c4e311be21c68') in 0.025443 seconds
+  Import took 0.028355 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000426 seconds.
+  path: Assets/Images/Facebook_Cover.png
+  artifactKey: Guid(fcd8cd1c98edeea4f93f211b7c52f65b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Facebook_Cover.png using Guid(fcd8cd1c98edeea4f93f211b7c52f65b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a85c2deb3aeeba2282cbcde66d694045') in 0.495635 seconds
+  Import took 0.497324 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000421 seconds.
+  path: Assets/Images/Icons
+  artifactKey: Guid(4c88fec417029cc4099fbe49700f5837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons using Guid(4c88fec417029cc4099fbe49700f5837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '85583c1371a112f03d9a327668eb925b') in 0.020123 seconds
+  Import took 0.021796 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000536 seconds.
+  path: Assets/Images/Google Play_Feature.png
+  artifactKey: Guid(3d80859516dd8c84ebea5ba3af3da92f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Google Play_Feature.png using Guid(3d80859516dd8c84ebea5ba3af3da92f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc0010fb321c78ce3ff64a2413e9457e') in 0.077928 seconds
+  Import took 0.079741 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000385 seconds.
+  path: Assets/Images/Twitter_Cover.png
+  artifactKey: Guid(66ca157770fc4c84ebf3b19915309ada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Twitter_Cover.png using Guid(66ca157770fc4c84ebf3b19915309ada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ec8d39b9feadd8931f18cbce746be77') in 0.120816 seconds
+  Import took 0.123222 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000358 seconds.
+  path: Assets/Images/Web
+  artifactKey: Guid(26d8ab4949c69884a93f219f55c375ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Web using Guid(26d8ab4949c69884a93f219f55c375ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6f57627bd8619925e9abf284fc07801') in 0.019455 seconds
+  Import took 0.021970 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000414 seconds.
+  path: Assets/Images/Logo
+  artifactKey: Guid(5f4077ea7764c374ebc2fe065bd725ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Logo using Guid(5f4077ea7764c374ebc2fe065bd725ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d4c974290832ee2db4d379848c88d80') in 0.017081 seconds
+  Import took 0.018787 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000464 seconds.
+  path: Assets/Images/Google Play_Promo.png
+  artifactKey: Guid(aa2dfc29c55f38948a7ae882dd8a619f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Google Play_Promo.png using Guid(aa2dfc29c55f38948a7ae882dd8a619f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c863ff9107c67d62ba51e63fc433f5ab') in 0.081849 seconds
+  Import took 0.084066 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000625 seconds.
+  path: Assets/Images/web_banner.png
+  artifactKey: Guid(c98aaea44e58f34449128532521240ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/web_banner.png using Guid(c98aaea44e58f34449128532521240ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b1b67c53990a3e90723828f112f45bb') in 0.083498 seconds
+  Import took 0.085663 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000522 seconds.
+  path: Assets/Images/Screenshots
+  artifactKey: Guid(185993d08cad53c4397d83e97824f507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Screenshots using Guid(185993d08cad53c4397d83e97824f507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30023a568423de1ea18d464c6025b05d') in 0.016574 seconds
+  Import took 0.018504 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.082652 seconds.
+  path: Assets/Images/Icons/Android
+  artifactKey: Guid(9cde9fbdb751fb140ba3898f33eef052) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android using Guid(9cde9fbdb751fb140ba3898f33eef052) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a09e1891ca3f7f7fcb83828237b06c0d') in 0.031934 seconds
+  Import took 0.034300 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000408 seconds.
+  path: Assets/Images/Icons/icon_2000x2000_no_stroke.png
+  artifactKey: Guid(2b117e8c15afb124984928668b73de67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/icon_2000x2000_no_stroke.png using Guid(2b117e8c15afb124984928668b73de67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a6a8e0b497d36be5a8a7c57033bd2d10') in 0.495058 seconds
+  Import took 0.498162 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000331 seconds.
+  path: Assets/Images/Icons/icon_512x512_no_stroke.png
+  artifactKey: Guid(7dd1dcd71ff09a64a8333b3b0bfec652) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/icon_512x512_no_stroke.png using Guid(7dd1dcd71ff09a64a8333b3b0bfec652) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf9a2f197bba509b115f5b20dd078534') in 0.089838 seconds
+  Import took 0.091806 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000330 seconds.
+  path: Assets/Images/Icons/2000x2000_centered.png
+  artifactKey: Guid(d4db20ed48e78e7479b2dcf7b9cab2c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/2000x2000_centered.png using Guid(d4db20ed48e78e7479b2dcf7b9cab2c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bf132822601c96341d9629a3c8aa985') in 0.519155 seconds
+  Import took 0.521316 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000448 seconds.
+  path: Assets/Images/Icons/icon_128x128_no_stroke.png
+  artifactKey: Guid(0c10ea522ad7ff14f8df6394a972c87a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/icon_128x128_no_stroke.png using Guid(0c10ea522ad7ff14f8df6394a972c87a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc37979a94bc1737e7347b30ed526298') in 0.066530 seconds
+  Import took 0.072300 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000151 seconds.
+  path: Assets/Images/Icons/unity_icon_600x600.png
+  artifactKey: Guid(dfc24727181833047ad8b872061b5b3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/unity_icon_600x600.png using Guid(dfc24727181833047ad8b872061b5b3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5f738806e34e5c927f53ca4c791b5cb') in 0.083169 seconds
+  Import took 0.087022 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000481 seconds.
+  path: Assets/Images/Icons/black-square-button-editted-hi.png
+  artifactKey: Guid(3f66daacbeda4e44e8bd7fb7cabd7d58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/black-square-button-editted-hi.png using Guid(3f66daacbeda4e44e8bd7fb7cabd7d58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06345be624b81990b1504176dfb84302') in 0.099234 seconds
+  Import took 0.101331 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000440 seconds.
+  path: Assets/Images/Icons/ios
+  artifactKey: Guid(ef49615d68d64374ba29c8ab6da46141) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/ios using Guid(ef49615d68d64374ba29c8ab6da46141) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eea5e6aea85fc94e785526974339241d') in 0.018127 seconds
+  Import took 0.019974 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000326 seconds.
+  path: Assets/Images/Icons/google_play_new.png
+  artifactKey: Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/google_play_new.png using Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f355ec9d48e5f85d8f1325b071d5cb4') in 0.108246 seconds
+  Import took 0.110810 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004435 seconds.
+  path: Assets/Images/Icons/google_play_new.png
+  artifactKey: Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/google_play_new.png using Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f355ec9d48e5f85d8f1325b071d5cb4') in 0.049735 seconds
+  Import took 0.052794 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.167272 seconds.
+  path: Assets/Images/Icons/icon_128x128_white.png
+  artifactKey: Guid(535fd430f03c79848964fcd3932779d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/icon_128x128_white.png using Guid(535fd430f03c79848964fcd3932779d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1112835d019259ebbf452e1acd250f4e') in 0.083484 seconds
+  Import took 0.124910 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.407058 seconds.
+  path: Assets/Images/Icons/icon_128x128_white.png
+  artifactKey: Guid(535fd430f03c79848964fcd3932779d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/icon_128x128_white.png using Guid(535fd430f03c79848964fcd3932779d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b76c292eaac8ca3d4f8e33244e4b3a3') in 0.092644 seconds
+  Import took 0.094851 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 20.689946 seconds.
+  path: Assets/Images/Icons/icon_128x128_white.png
+  artifactKey: Guid(535fd430f03c79848964fcd3932779d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/icon_128x128_white.png using Guid(535fd430f03c79848964fcd3932779d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03a45ed4cc52acc8005865afe34786ed') in 2.574116 seconds
+  Import took 2.580996 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.185508 seconds.
+  path: Assets/Images/Icons/Android/Adaptive
+  artifactKey: Guid(06723441ab14de04aa42cfdb731555f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive using Guid(06723441ab14de04aa42cfdb731555f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '344742aab104790e588511a620e6d32b') in 0.030743 seconds
+  Import took 0.033169 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000500 seconds.
+  path: Assets/Images/Icons/Android/Legacy
+  artifactKey: Guid(6532dee8641e37c4bbd3fc0e15e7e010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy using Guid(6532dee8641e37c4bbd3fc0e15e7e010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77155a60075de22a85a4a9cbe65395fe') in 0.027676 seconds
+  Import took 0.031973 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.915577 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_81.png
+  artifactKey: Guid(42876cafa6179f142bfa79c243e9cdda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_81.png using Guid(42876cafa6179f142bfa79c243e9cdda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b34defb8bc5c76725d9d692b2d8813a') in 0.049718 seconds
+  Import took 0.051603 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000491 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_foreground_432.png
+  artifactKey: Guid(81f393077c370ff4eb06d6cc5142fd28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_foreground_432.png using Guid(81f393077c370ff4eb06d6cc5142fd28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a814e57d9d2a8af92b2de87084af323d') in 0.075587 seconds
+  Import took 0.077851 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000351 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_foreground_162.png
+  artifactKey: Guid(aff55f2b65b868740b8099de43b74f67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_foreground_162.png using Guid(aff55f2b65b868740b8099de43b74f67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f8168fedf017eab40fc69dd4c6d7859') in 0.059199 seconds
+  Import took 0.068263 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000212 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_foreground_216.png
+  artifactKey: Guid(83c690604c4640e47a231c7dedcf11a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_foreground_216.png using Guid(83c690604c4640e47a231c7dedcf11a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c2052e80fde80dd7cab2e1acd230b40') in 0.071663 seconds
+  Import took 0.075983 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000509 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_foreground_108.png
+  artifactKey: Guid(879ee9e7735d96743a9127a14817c219) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_foreground_108.png using Guid(879ee9e7735d96743a9127a14817c219) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f9365c55d9f2501a1fe369701dd40c8') in 0.069856 seconds
+  Import took 0.072373 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000166 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_432.png
+  artifactKey: Guid(1cbf1bfb817d9a144a3a17a70812e2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_432.png using Guid(1cbf1bfb817d9a144a3a17a70812e2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7fae1d7879269224957e9e105af8d5f') in 0.061436 seconds
+  Import took 0.063464 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000410 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_foreground_81.png
+  artifactKey: Guid(35c5d43cc4d480f4aabd9a4138dd8648) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_foreground_81.png using Guid(35c5d43cc4d480f4aabd9a4138dd8648) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21d415af8c78bf36195a011935be32e2') in 0.073188 seconds
+  Import took 0.075939 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000869 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_foreground_324.png
+  artifactKey: Guid(c779dff45683f2a4b9e48984875bde23) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_foreground_324.png using Guid(c779dff45683f2a4b9e48984875bde23) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f7492d180561434148b490573b8ac4a') in 0.069049 seconds
+  Import took 0.073436 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000450 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_162.png
+  artifactKey: Guid(db061a0d1da46fd4688885a037e7c56d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_162.png using Guid(db061a0d1da46fd4688885a037e7c56d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69ab30752a118d1db164a0d426b3c7cc') in 0.068254 seconds
+  Import took 0.070435 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000362 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_108.png
+  artifactKey: Guid(416e25b8f7fbe274587cd319e6f093f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_108.png using Guid(416e25b8f7fbe274587cd319e6f093f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8ff865fd27a6ff57e648461a01fdd96') in 0.061293 seconds
+  Import took 0.064049 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000382 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_216.png
+  artifactKey: Guid(f54f1d91a84391c44a6cdfdbeeb81c22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_216.png using Guid(f54f1d91a84391c44a6cdfdbeeb81c22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50cfb45a35e0ba17e46ea98300b2fe62') in 0.073396 seconds
+  Import took 0.076405 seconds .
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000389 seconds.
-  path: Assets/Demigiant
-  artifactKey: Guid(2584f240cabfc3a418ad9e7907103733) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Demigiant using Guid(2584f240cabfc3a418ad9e7907103733) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96ed6f6eeaab2a610f888dee5284ea85') in 0.019626 seconds
-  Import took 0.021643 seconds .
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_108.png
+  artifactKey: Guid(416e25b8f7fbe274587cd319e6f093f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_108.png using Guid(416e25b8f7fbe274587cd319e6f093f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8ff865fd27a6ff57e648461a01fdd96') in 0.025051 seconds
+  Import took 0.027869 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000550 seconds.
-  path: Assets/Effects
-  artifactKey: Guid(b8f36d3780076d1438bbeb100bf8bf18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Effects using Guid(b8f36d3780076d1438bbeb100bf8bf18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27e28ddd8c31cd5fcc231cf1ac463447') in 0.017477 seconds
-  Import took 0.019838 seconds .
+  Time since last request: 0.000870 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_324.png
+  artifactKey: Guid(e538757a8fbabe747ae8c0d152ff3e1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_324.png using Guid(e538757a8fbabe747ae8c0d152ff3e1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c00e59eba7ec0b96313381ae7b57530') in 0.060036 seconds
+  Import took 0.065365 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.015364 seconds.
-  path: Assets/Effects
-  artifactKey: Guid(b8f36d3780076d1438bbeb100bf8bf18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Effects using Guid(b8f36d3780076d1438bbeb100bf8bf18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27e28ddd8c31cd5fcc231cf1ac463447') in 0.008962 seconds
-  Import took 0.010838 seconds .
+  Time since last request: 0.000351 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_216.png
+  artifactKey: Guid(f54f1d91a84391c44a6cdfdbeeb81c22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_216.png using Guid(f54f1d91a84391c44a6cdfdbeeb81c22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50cfb45a35e0ba17e46ea98300b2fe62') in 0.030775 seconds
+  Import took 0.038141 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000414 seconds.
+  path: Assets/Images/Icons/Android/Adaptive/adaptive_background_324.png
+  artifactKey: Guid(e538757a8fbabe747ae8c0d152ff3e1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Adaptive/adaptive_background_324.png using Guid(e538757a8fbabe747ae8c0d152ff3e1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c00e59eba7ec0b96313381ae7b57530') in 0.036686 seconds
+  Import took 0.038850 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.403504 seconds.
+  path: Assets/Images/Icons/Android/Legacy/unity_icon_36.png
+  artifactKey: Guid(7fdb6b5caa4b0694784572615b16a6f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy/unity_icon_36.png using Guid(7fdb6b5caa4b0694784572615b16a6f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5612da271cdc49f65e5dc2a9cd321466') in 0.054996 seconds
+  Import took 0.057131 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000443 seconds.
+  path: Assets/Images/Icons/Android/Legacy/unity_icon_96.png
+  artifactKey: Guid(b4e527d7aa35e304e9a0f5214a85b0bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy/unity_icon_96.png using Guid(b4e527d7aa35e304e9a0f5214a85b0bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfe7b5fb41d623ea9a1b6b67180b671d') in 0.066108 seconds
+  Import took 0.068116 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000350 seconds.
+  path: Assets/Images/Icons/Android/Legacy/unity_icon_144.png
+  artifactKey: Guid(114d431c45c77d245b1f29b00705491f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy/unity_icon_144.png using Guid(114d431c45c77d245b1f29b00705491f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76bf39567d60874cfba306fd4a62a4ef') in 0.057513 seconds
+  Import took 0.060954 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000137 seconds.
+  path: Assets/Images/Icons/Android/Legacy/unity_icon_72.png
+  artifactKey: Guid(7c18e7529d9a517449cfc38431d797a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy/unity_icon_72.png using Guid(7c18e7529d9a517449cfc38431d797a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93e8c0b01ef84a3d13cccd6ef11fe267') in 0.060487 seconds
+  Import took 0.063241 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.003784 seconds.
+  path: Assets/Images/Icons/Android/Legacy/unity_icon_48.png
+  artifactKey: Guid(3dc3eee84df7f844e82e14eb2b54a5cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy/unity_icon_48.png using Guid(3dc3eee84df7f844e82e14eb2b54a5cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3635f1549c43547f07a4c483f5b05a2') in 0.057282 seconds
+  Import took 0.059852 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000385 seconds.
+  path: Assets/Images/Icons/Android/Legacy/unity_icon_192.png
+  artifactKey: Guid(56ecfe3e19c4c8c44b3fc9fc41f5f282) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy/unity_icon_192.png using Guid(56ecfe3e19c4c8c44b3fc9fc41f5f282) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dc4ce8920079d916dd3299973614382') in 0.079526 seconds
+  Import took 0.082419 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.006873 seconds.
+  path: Assets/Images/Icons/Android/Legacy/unity_icon_192.png
+  artifactKey: Guid(56ecfe3e19c4c8c44b3fc9fc41f5f282) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/Android/Legacy/unity_icon_192.png using Guid(56ecfe3e19c4c8c44b3fc9fc41f5f282) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dc4ce8920079d916dd3299973614382') in 0.033643 seconds
+  Import took 0.038245 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 34.647553 seconds.
+  path: Assets/Images/Icons/google_play_new.png
+  artifactKey: Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/google_play_new.png using Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '892f8be0ef8543ec667e666b7179ede5') in 0.050982 seconds
+  Import took 0.054966 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 20.999175 seconds.
+  path: Assets/Images/Icons/google_play_new.png
+  artifactKey: Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/google_play_new.png using Guid(0e088c8850ef0884d8f138869740d865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6c88fecc5017c91741fa5b47b8544d6') in 0.038220 seconds
+  Import took 0.044431 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.509121 seconds.
+  path: Assets/Images/Icons/icon_512x512_no_stroke.png
+  artifactKey: Guid(7dd1dcd71ff09a64a8333b3b0bfec652) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Icons/icon_512x512_no_stroke.png using Guid(7dd1dcd71ff09a64a8333b3b0bfec652) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a5af489b4d2a001b58f27a8d50f5f7f') in 0.058086 seconds
+  Import took 0.060060 seconds .
 
