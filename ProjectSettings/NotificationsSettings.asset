@@ -4,7 +4,7 @@
         "m_EditorHideFlags": 0,
         "m_Name": "",
         "m_EditorClassIdentifier": "",
-        "ToolbarIndex": 1,
+        "ToolbarIndex": 0,
         "m_iOSNotificationSettingsValues": {
             "m_Keys": [
                 "UnityNotificationRequestAuthorizationOnAppLaunch",
@@ -37,6 +37,25 @@
                 "com.unity3d.player.UnityPlayerActivity"
             ]
         },
-        "DrawableResources": []
+        "DrawableResources": [
+            {
+                "Id": "icon_0",
+                "Type": 0,
+                "Asset": {
+                    "fileID": 2800000,
+                    "guid": "535fd430f03c79848964fcd3932779d2",
+                    "type": 3
+                }
+            },
+            {
+                "Id": "icon_1",
+                "Type": 1,
+                "Asset": {
+                    "fileID": 2800000,
+                    "guid": "7dd1dcd71ff09a64a8333b3b0bfec652",
+                    "type": 3
+                }
+            }
+        ]
     }
 }
