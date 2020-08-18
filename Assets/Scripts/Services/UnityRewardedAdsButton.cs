@@ -27,19 +27,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
         Advertisement.AddListener(this); // for handling callbacks
 
         watched = false; // can only use button once during bonus wheel session
-        if (watchedRewardedAdText != null)
-        {
-            watchedRewardedAdText.gameObject.SetActive(false);
-        }
-
-        if (doubleRewardAmountText != null)
-        {
-            doubleRewardAmountText.gameObject.SetActive(false);
-        }
-        if (strikeout != null)
-        {
-            strikeout.SetActive(false);
-        }
+        DisableRewardTextObjects();
 
         if (explosionParticles != null)
         {
@@ -50,6 +38,22 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     private void OnDisable()
     {
         adButton.onClick.RemoveListener(ShowRewardedAd);
+    }
+
+    private void DisableRewardTextObjects()
+    {
+        if (watchedRewardedAdText != null)
+        {
+            watchedRewardedAdText.gameObject.SetActive(false);
+        }
+        if (doubleRewardAmountText != null)
+        {
+            doubleRewardAmountText.gameObject.SetActive(false);
+        }
+        if (strikeout != null)
+        {
+            strikeout.SetActive(false);
+        }
     }
 
     void Update()
