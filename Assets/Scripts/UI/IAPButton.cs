@@ -19,6 +19,7 @@ public class IAPButton : MonoBehaviour
         EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
         EventManager.StartListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
         EventManager.StartListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
+        EventManager.StartListening(UnityIAPController.onPurchaseFailName, OnFailPurchase);
 
         enableOnFailPurchase.SetActive(false);
 
@@ -45,6 +46,7 @@ public class IAPButton : MonoBehaviour
         EventManager.StopListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
         EventManager.StopListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
         EventManager.StopListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
+        EventManager.StopListening(UnityIAPController.onPurchaseFailName, OnFailPurchase);
     }
 
     private void OnStartPurchase()
@@ -57,6 +59,12 @@ public class IAPButton : MonoBehaviour
     {
         enableOnStartPurchase.SetActive(true);
         enableOnFinishPurchase.SetActive(false);
+    }
+
+    private void OnFailPurchase()
+    {
+        enableOnStartPurchase.SetActive(false);
+        ShowFailIndicator();
     }
 
     public void MakePurchase()

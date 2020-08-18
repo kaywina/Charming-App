@@ -14,6 +14,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
     public static string onStartPurchaseName = "onStartPurchase";
     public static string onFinishPurchaseEventName = "onFinishPurchase";
+    public static string onPurchaseFailName = "onPurchaseFail";
 
     public static string onStartRestoreEventName = "onStartRestore";
     public static string onFinishRestoreEventName = "onFinishRestore";
@@ -616,6 +617,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         }
 
         m_PurchaseInProgress = false;
+
+        EventManager.TriggerEvent(onPurchaseFailName);
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
