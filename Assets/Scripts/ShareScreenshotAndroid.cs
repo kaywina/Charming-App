@@ -152,6 +152,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
                 givenBonusAmount = givenBonusAmount * 2;
                 //rewardAmountText.text = givenBonusAmount.ToString();
                 doubleBonusText.SetActive(true);
+                strikeout.SetActive(true);
+                doubleBonusAmountText.SetActive(true);
             }
 
             // just show the normal thanks (make sure strike-through and double bonus text are disabled in scene!
