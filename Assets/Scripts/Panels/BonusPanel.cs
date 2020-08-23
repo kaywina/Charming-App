@@ -59,7 +59,7 @@ public class BonusPanel : CharmsPanel
 
         storedBonus = 0;
         if (header != null) { header.SetActive(true); }
-        fireworks.Stop();
+        if (fireworks != null) { fireworks.Stop(); }
         base.OnDisable();
     }
 
@@ -75,7 +75,7 @@ public class BonusPanel : CharmsPanel
     public void Spin()
     {
         if (hasSpun) { return; }
-        fireworks.Play();
+        if (fireworks != null) { fireworks.Play(); }
         bonusWheel.Spin();
     }
 
