@@ -9,8 +9,6 @@ public class SwipeLove : SwipeFunction
     new void Start()
     {
         base.Start();
-        yLimitTop = 0.0f;
-        yLimitBottom = 0.5f;
     }
     public override void SwipeLeft()
     {

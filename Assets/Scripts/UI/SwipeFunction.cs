@@ -11,8 +11,8 @@ public class SwipeFunction : MonoBehaviour
     private float minHorizontal = 30f;
 
     // do nothing unless swipe is between 7.5% and 62% of the way down the screen
-    protected float yLimitTop = 0.075f;
-    protected float yLimitBottom = 0.62f;
+    public float yLimitTop = 0.075f;
+    public float yLimitBottom = 0.62f;
 
     // Start is called before the first frame update
     protected void Start()
