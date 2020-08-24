@@ -14,9 +14,8 @@ public class OpenURLByPlatform : MonoBehaviour
 #elif UNITY_IOS
         return iosURL;
 #else
-        Debug.Log("Open URL functionality not defined for this platform;
+        Debug.Log("Open URL functionality not defined for this platform");
         return "http://www.charmingapp.com/faq";
-        return null;
 #endif
     }
 
