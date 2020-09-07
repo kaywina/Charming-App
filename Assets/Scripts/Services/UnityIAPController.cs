@@ -516,8 +516,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                     return true;
                 }
             case AppleAppStore.Name:
+                {
                     Debug.Log("Nothing here implemented for Apple App Store");
-                    return false; // if this doesn't work try just returning true like the implementation for the Mac store
+                    return true;
+                }
+
             case AmazonApps.Name:
             case MacAppStore.Name:
                 {
