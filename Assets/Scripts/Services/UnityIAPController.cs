@@ -261,7 +261,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             Application.platform == RuntimePlatform.OSXPlayer)
         {
             // ... begin restoring purchases
-            Debug.Log("RestorePurchases started ...");
+            //Debug.Log("RestorePurchases started ...");
 
             // Fetch the Apple store-specific subsystem.
             var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
@@ -273,7 +273,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
                 if (result)
                 {
-                    Debug.Log("Completed restore purchase.");
+                    //Debug.Log("Completed restore purchase.");
                     EventManager.TriggerEvent(onFinishRestoreEventName);
                 }
             });
@@ -408,7 +408,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 }
                 else
                 {
-                    Debug.Log("the product should have a valid receipt");
+                    //Debug.Log("the product should have a valid receipt");
                     CheckForCancelledSubscription(item);
 
                 }
