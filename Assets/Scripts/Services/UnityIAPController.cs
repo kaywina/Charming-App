@@ -517,7 +517,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 }
             case AppleAppStore.Name:
                 {
-                    Debug.Log("Nothing here implemented for Apple App Store");
                     return true;
                 }
 
