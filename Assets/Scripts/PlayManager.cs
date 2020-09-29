@@ -70,6 +70,11 @@ public class PlayManager : MonoBehaviour
         playGameAttention.gameObject.SetActive(true);
     }
 
+    public void OpenGameMemory()
+    {
+        Debug.Log("Play memory game!");
+    }
+
     public void PlayGameAttention()
     {
         if (CheckGameCost())
