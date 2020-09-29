@@ -10,6 +10,8 @@ public class LoveManager : MonoBehaviour
     public LocalizationText loveText;
     public LocalizationText toughLoveText;
 
+    public GameObject[] hideOnZeroIndex;
+
     private const string PLAYER_PREF_NAME = "LoveNumber"; // don't change in production
     private const string PLAYER_PREF_NAME_MAX_UNLOCKED = "LoveNumberMaxUnlocked"; // don't change in production
 
@@ -41,6 +43,21 @@ public class LoveManager : MonoBehaviour
         {
             originalIndex = PlayerPrefs.GetInt(PLAYER_PREF_NAME) - 1; // not a new day; player pref was already incremented so less one to make indexing work
             secondOriginalIndex = PlayerPrefs.GetInt(SECOND_PLAYER_PREF_NAME) - 1;
+        }
+
+        if (originalIndex == 0)
+        {
+            for (int i = 0; i < hideOnZeroIndex.Length; i++)
+            {
+                hideOnZeroIndex[i].SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < hideOnZeroIndex.Length; i++)
+            {
+                hideOnZeroIndex[i].SetActive(true);
+            }
         }
 
         InitializeLove();
