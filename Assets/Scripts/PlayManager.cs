@@ -8,6 +8,7 @@ public class PlayManager : MonoBehaviour
     public GameObject menuCanvasObject;
 
     public PlayGame playGameAttention;
+    public PlayGame playGameRemember;
 
     public GameObject rewardedAdButton;
     public GameObject watchedRewardedAdText;
@@ -27,9 +28,11 @@ public class PlayManager : MonoBehaviour
     {
         rewardedAdButton.SetActive(false);
         watchedRewardedAdText.SetActive(false);
-        playGameAttention.gameObject.SetActive(false);
         menuCanvasObject.SetActive(true);
         moreCurrencyText.SetActive(false);
+
+        playGameAttention.gameObject.SetActive(false);
+        playGameRemember.gameObject.SetActive(false);
     }
 
     public void OnEnable()
@@ -72,7 +75,8 @@ public class PlayManager : MonoBehaviour
 
     public void OpenGameMemory()
     {
-        Debug.Log("Play memory game!");
+        CloseGameSelectMenu();
+        playGameRemember.gameObject.SetActive(true);
     }
 
     public void PlayGameAttention()
@@ -84,6 +88,19 @@ public class PlayManager : MonoBehaviour
         else
         {
             playGameAttention.gameObject.SetActive(false);
+            ReturnToGameSelect();
+        }
+    }
+
+    public void PlayGameMemory()
+    {
+        if (CheckGameCost())
+        {
+            playGameRemember.Play();
+        }
+        else
+        {
+            playGameRemember.gameObject.SetActive(false);
             ReturnToGameSelect();
         }
     }
