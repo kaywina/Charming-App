@@ -92,7 +92,7 @@ public class PlayManager : MonoBehaviour
         }
     }
 
-    public void PlayGameMemory()
+    public void PlayGameRemember()
     {
         if (CheckGameCost())
         {
