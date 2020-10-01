@@ -14,6 +14,7 @@ public class RememberGameSlider : MonoBehaviour
 
     public void OnEnable()
     {
+        Debug.Log("On Enable");
         Initialize();
     }
 
@@ -45,5 +46,10 @@ public class RememberGameSlider : MonoBehaviour
    
         gameRemember.EnableButtonsByIndex((int)slider.value);
         
+    }
+
+    public int GetValue()
+    {
+        return (int)slider.value;
     }
 }

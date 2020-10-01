@@ -8,38 +8,17 @@ public class GameRemember : MonoBehaviour
 
     public GameObject[] levelButtons;
     public PlayManager playManager;
+    public RememberGameSlider difficultySlider;
 
-    private int level = 5;
+    private int difficultyIndex = 2;
     private Image[] images;
     private static int[] indexes;
     private static GameAttentionIndexedObject[] indexedButtons;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void EnableButtonsByIndex(int index)
-    {
-        Debug.Log("Enable buttons for index " + index);
-        for (int i = 0; i < levelButtons.Length; i++)
-        {
-            if (i == index)
-            {
-                levelButtons[i].SetActive(true);
-            }
-            else
-            {
-                levelButtons[i].SetActive(false);
-            }
-        }
+        //ResetGame();
+        //SetupButtons(); // this is called on slider function assignments in inspector; including it here results in a redundant call
     }
 
     //for shuffle number from array
@@ -56,14 +35,16 @@ public class GameRemember : MonoBehaviour
         }
     }
 
-    private void SetupLevel()
+    public void SetupButtons()
     {
         //Debug.Log("Setup the level for the attention game");
 
-
         // get an array of all button Images for this level
-        images = levelButtons[level].GetComponentsInChildren<Image>();
-        indexedButtons = levelButtons[level].GetComponentsInChildren<GameAttentionIndexedObject>();
+
+        difficultyIndex = difficultySlider.GetValue();
+
+        images = levelButtons[difficultyIndex].GetComponentsInChildren<Image>();
+        indexedButtons = levelButtons[difficultyIndex].GetComponentsInChildren<GameAttentionIndexedObject>();
 
         // set ordered indexes (we use these to track which button a user selects
         for (int n = 0; n < indexedButtons.Length; n++)
@@ -111,9 +92,21 @@ public class GameRemember : MonoBehaviour
             images[f].sprite = playManager.GetSpriteByIndex(indexes[f]);
             indexedButtons[f].SetShuffledIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
+    }
 
-        levelButtons[level].SetActive(true);
-
-        //CountdownToPlay(); // this is not used in Remember game; come back tomorrow instead
+    public void EnableButtonsByIndex(int index)
+    {
+        //Debug.Log("Enable buttons for index " + index);
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            if (i == index)
+            {
+                levelButtons[i].SetActive(true);
+            }
+            else
+            {
+                levelButtons[i].SetActive(false);
+            }
+        }
     }
 }
