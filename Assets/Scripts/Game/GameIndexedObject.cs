@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameAttentionIndexedObject : MonoBehaviour
+public class GameIndexedObject : MonoBehaviour
 {
     private int shuffledIndex = 0;
     private int orderedIndex = 0;

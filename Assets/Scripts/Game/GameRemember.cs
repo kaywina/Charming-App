@@ -15,7 +15,7 @@ public class GameRemember : MonoBehaviour
     private int difficultyIndex = 2;
     private Image[] images;
     private static int[] indexes;
-    private static GameAttentionIndexedObject[] indexedButtons;
+    private static GameIndexedObject[] indexedButtons;
     private static bool playingGame = false;
     private static int selectedIndex = 0;
     private static int selectedCount = 0;
@@ -68,7 +68,7 @@ public class GameRemember : MonoBehaviour
         difficultyIndex = difficultySlider.GetValue();
 
         images = levelButtons[difficultyIndex].GetComponentsInChildren<Image>();
-        indexedButtons = levelButtons[difficultyIndex].GetComponentsInChildren<GameAttentionIndexedObject>();
+        indexedButtons = levelButtons[difficultyIndex].GetComponentsInChildren<GameIndexedObject>();
 
         // set ordered indexes (we use these to track which button a user selects
         for (int n = 0; n < indexedButtons.Length; n++)

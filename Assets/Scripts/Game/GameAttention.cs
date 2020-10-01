@@ -18,7 +18,7 @@ public class GameAttention : MonoBehaviour
     public GameObject[] levelButtons;
     private Image[] images;
     private static int[] indexes;
-    private static GameAttentionIndexedObject[] indexedButtons;
+    private static GameIndexedObject[] indexedButtons;
 
     private static bool playingGame = false;
 
@@ -62,7 +62,7 @@ public class GameAttention : MonoBehaviour
 
         // get an array of all button Images for this level
         images = levelButtons[level].GetComponentsInChildren<Image>();
-        indexedButtons = levelButtons[level].GetComponentsInChildren<GameAttentionIndexedObject>();
+        indexedButtons = levelButtons[level].GetComponentsInChildren<GameIndexedObject>();
 
         // set ordered indexes (we use these to track which button a user selects
         for (int n = 0; n < indexedButtons.Length; n++)
