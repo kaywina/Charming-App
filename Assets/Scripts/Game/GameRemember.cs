@@ -28,7 +28,7 @@ public class GameRemember : MonoBehaviour
     private void OnEnable()
     {
         difficultySlider.gameObject.SetActive(true);
-        //SetupButtons(); // this is called on slider function assignments in inspector; including it here results in a redundant call
+        SetupButtons();
     }
 
     private void ResetButtons()

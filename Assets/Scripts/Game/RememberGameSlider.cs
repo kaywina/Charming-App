@@ -14,13 +14,12 @@ public class RememberGameSlider : MonoBehaviour
 
     public void OnEnable()
     {
-        Debug.Log("On Enable");
         Initialize();
     }
 
     public void Initialize()
     {
-        Debug.Log("Initialize Remember game slider");
+        //Debug.Log("Initialize Remember game slider");
         if (!PlayerPrefs.HasKey(playerPrefName))
         {
             slider.value = defaultIndex;
