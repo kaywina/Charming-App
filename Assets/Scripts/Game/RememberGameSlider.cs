@@ -28,8 +28,6 @@ public class RememberGameSlider : MonoBehaviour
         {
             slider.value = PlayerPrefs.GetInt(playerPrefName);
         }
-        
-        SetNumberOfButtonsFromSliderValues();
     }
 
     public void SetNumberOfButtonsFromSliderValues()
