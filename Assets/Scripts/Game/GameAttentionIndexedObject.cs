@@ -8,6 +8,8 @@ public class GameAttentionIndexedObject : MonoBehaviour
     private int shuffledIndex = 0;
     private int orderedIndex = 0;
     private Button button;
+    public enum GameType { Attention, Remember };
+    public GameType gameType = GameType.Attention;
 
     private void OnEnable()
     {
@@ -37,7 +39,17 @@ public class GameAttentionIndexedObject : MonoBehaviour
 
     public void CheckIndex()
     {
-        bool isPlaying = GameAttention.CheckIndex(shuffledIndex, orderedIndex);
+        bool isPlaying = false;
+        if (gameType == GameType.Attention)
+        {
+            isPlaying = GameAttention.CheckIndex(shuffledIndex, orderedIndex);
+        }
+        else if (gameType == GameType.Remember)
+        {
+            isPlaying = GameRemember.CheckIndex(shuffledIndex, orderedIndex);
+        }
+
+        //Debug.Log("isPlaying = " + isPlaying);
         if (isPlaying) { button.interactable = false; }
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameRemember : MonoBehaviour
 {
 
+    private static GameRemember instance;
+
     public GameObject[] levelButtons;
     public PlayManager playManager;
     public RememberGameSlider difficultySlider;
@@ -14,11 +16,33 @@ public class GameRemember : MonoBehaviour
     private Image[] images;
     private static int[] indexes;
     private static GameAttentionIndexedObject[] indexedButtons;
+    private static bool playingGame = false;
+    private static int selectedIndex = 0;
+    private static int selectedCount = 0;
+
+    private void Awake()
+    {
+        instance = gameObject.GetComponent<GameRemember>();
+    }
 
     private void OnEnable()
     {
-        //ResetGame();
+        difficultySlider.gameObject.SetActive(true);
         //SetupButtons(); // this is called on slider function assignments in inspector; including it here results in a redundant call
+    }
+
+    private void ResetButtons()
+    {
+        Debug.Log("Reset buttons");
+        for (int i = 0; i < indexedButtons.Length; i++)
+        {
+            indexedButtons[i].gameObject.SetActive(true);
+        }
+    }
+
+    private void EndButtonSelectStage()
+    {
+        difficultySlider.gameObject.SetActive(false);
     }
 
     //for shuffle number from array
@@ -92,6 +116,8 @@ public class GameRemember : MonoBehaviour
             images[f].sprite = playManager.GetSpriteByIndex(indexes[f]);
             indexedButtons[f].SetShuffledIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
+
+        playingGame = true;
     }
 
     public void EnableButtonsByIndex(int index)
@@ -108,5 +134,45 @@ public class GameRemember : MonoBehaviour
                 levelButtons[i].SetActive(false);
             }
         }
+    }
+
+    public void SetImage(int index)
+    {
+        //Debug.Log("index is " + index);
+        //Debug.Log("indexes[index] is " + indexes[index]);
+        indexedButtons[selectedIndex].GetComponent<Image>().sprite = playManager.GetSpriteByIndex(index);
+    }
+
+    public static bool CheckIndex(int shuffledIndex, int orderedIndex)
+    {
+        if (!playingGame)
+        {
+            return false;
+        }
+
+        selectedIndex = orderedIndex; // this needs to happen after the playingGame check, to avoid cases where user cicks a button between an incorrect guess and end of game, which results in buttons not showing up on subsequent plays
+
+        //Debug.Log("selectedCount = " + selectedCount.ToString());
+        //Debug.Log("indexToCheck is " + indexToCheck.ToString());
+
+        if (selectedCount != shuffledIndex)
+        {
+            //Debug.Log("Incorrect"); // do nothing in this case
+        }
+        else
+        {
+            //Debug.Log("Correct");
+            selectedCount++;
+            indexedButtons[selectedIndex].gameObject.SetActive(false);
+        }
+
+        if (selectedCount >= indexes.Length)
+        {
+            instance.EndButtonSelectStage();
+            Debug.Log("Come back tomorrow");
+            instance.ResetButtons();
+        }
+
+        return true;
     }
 }
