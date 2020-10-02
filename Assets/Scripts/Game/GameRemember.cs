@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class GameRemember : MonoBehaviour
 {
-
     private static GameRemember instance;
 
     public GameObject[] levelButtons;
     public PlayManager playManager;
     public RememberGameSlider difficultySlider;
+    public GameObject rememberComeBack;
 
     private int difficultyIndex = 2;
     private Image[] images;
@@ -20,6 +20,8 @@ public class GameRemember : MonoBehaviour
     private static int selectedIndex = 0;
     private static int selectedCount = 0;
 
+    private bool hasSelectedButtons = false;
+
     private void Awake()
     {
         instance = gameObject.GetComponent<GameRemember>();
@@ -27,22 +29,30 @@ public class GameRemember : MonoBehaviour
 
     private void OnEnable()
     {
-        difficultySlider.gameObject.SetActive(true);
-        SetupButtons();
+        if (hasSelectedButtons)
+        {
+            rememberComeBack.SetActive(true);
+        }
+        else
+        {
+            ResetButtonSelect();
+        }
     }
 
-    private void ResetButtons()
+    private void ResetButtonSelect()
     {
         Debug.Log("Reset buttons");
-        for (int i = 0; i < indexedButtons.Length; i++)
-        {
-            indexedButtons[i].gameObject.SetActive(true);
-        }
+        difficultySlider.gameObject.SetActive(true);
+        rememberComeBack.SetActive(false);
+        SetupButtons();
     }
 
     private void EndButtonSelectStage()
     {
+        Debug.Log("Finish Today's Round of Remember");
         difficultySlider.gameObject.SetActive(false);
+        rememberComeBack.SetActive(true);
+        hasSelectedButtons = true;
     }
 
     //for shuffle number from array
@@ -117,6 +127,19 @@ public class GameRemember : MonoBehaviour
             indexedButtons[f].SetShuffledIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
 
+        // activate only the correct button set for the difficulty
+        for (int n = 0; n < levelButtons.Length; n++)
+        {
+            if (n == difficultyIndex)
+            {
+                levelButtons[n].SetActive(true);
+            }
+            else
+            {
+                levelButtons[n].SetActive(false);
+            }
+        }
+
         playingGame = true;
     }
 
@@ -166,11 +189,10 @@ public class GameRemember : MonoBehaviour
             indexedButtons[selectedIndex].gameObject.SetActive(false);
         }
 
+        // has selected all the buttons
         if (selectedCount >= indexes.Length)
         {
             instance.EndButtonSelectStage();
-            Debug.Log("Come back tomorrow");
-            instance.ResetButtons();
         }
 
         return true;
