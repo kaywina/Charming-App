@@ -21,6 +21,7 @@ public class GameRemember : MonoBehaviour
     private static int selectedCount = 0;
 
     private bool hasSelectedButtons = false;
+    private string hasSelectedButtonsPlayerPref = "HasSelectedButtons";
 
     private void Awake()
     {
@@ -29,13 +30,23 @@ public class GameRemember : MonoBehaviour
 
     private void OnEnable()
     {
-        if (hasSelectedButtons)
+        if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
         {
+            difficultySlider.gameObject.SetActive(false);
+            DisableAllButtons();
             rememberComeBack.SetActive(true);
         }
         else
         {
             ResetButtonSelect();
+        }
+    }
+
+    private void DisableAllButtons()
+    {
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            levelButtons[i].SetActive(false);
         }
     }
 
@@ -52,7 +63,7 @@ public class GameRemember : MonoBehaviour
         Debug.Log("Finish Today's Round of Remember");
         difficultySlider.gameObject.SetActive(false);
         rememberComeBack.SetActive(true);
-        hasSelectedButtons = true;
+        PlayerPrefs.SetString(hasSelectedButtonsPlayerPref, "True");
     }
 
     //for shuffle number from array

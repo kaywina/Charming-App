@@ -8,6 +8,7 @@ public class RememberGameSlider : MonoBehaviour
     public Slider slider;
     public GameRemember gameRemember;
 
+    private bool initialized = false;
     private float defaultIndex = 2;
 
     private string playerPrefName = "RememberGameNumberOfButtons"; // don't change this in production
@@ -30,6 +31,7 @@ public class RememberGameSlider : MonoBehaviour
         }
 
         SetNumberOfButtonsFromSliderValues();
+        initialized = true;
     }
 
     public void SetNumberOfButtonsFromSliderValues()
@@ -44,9 +46,8 @@ public class RememberGameSlider : MonoBehaviour
         {
             PlayerPrefs.SetInt(playerPrefName, (int)slider.value);
         }
-   
-        gameRemember.EnableButtonsByIndex((int)slider.value);
-        
+
+        if (initialized) { gameRemember.EnableButtonsByIndex((int)slider.value); }
     }
 
     public int GetValue()
