@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameRemember : MonoBehaviour
 {
     private static GameRemember instance;
+    public RememberGameManager rememberManager;
 
     public GameObject[] levelButtons;
     public PlayManager playManager;
@@ -20,9 +21,6 @@ public class GameRemember : MonoBehaviour
     private static int selectedIndex = 0;
     private static int selectedCount = 0;
 
-    private bool hasSelectedButtons = false;
-    private string hasSelectedButtonsPlayerPref = "HasSelectedButtons";
-
     private void Awake()
     {
         instance = gameObject.GetComponent<GameRemember>();
@@ -30,16 +28,16 @@ public class GameRemember : MonoBehaviour
 
     private void OnEnable()
     {
-        if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
-        {
-            difficultySlider.gameObject.SetActive(false);
-            DisableAllButtons();
-            rememberComeBack.SetActive(true);
-        }
-        else
+        if (rememberManager.SetupButtonSelect())
         {
             ResetButtonSelect();
         }
+    }
+
+    public void DisableControls()
+    {
+        difficultySlider.gameObject.SetActive(false);
+        DisableAllButtons();
     }
 
     private void DisableAllButtons()
@@ -50,7 +48,7 @@ public class GameRemember : MonoBehaviour
         }
     }
 
-    private void ResetButtonSelect()
+    public void ResetButtonSelect()
     {
         Debug.Log("Reset buttons");
         difficultySlider.gameObject.SetActive(true);
@@ -63,7 +61,7 @@ public class GameRemember : MonoBehaviour
         Debug.Log("Finish Today's Round of Remember");
         difficultySlider.gameObject.SetActive(false);
         rememberComeBack.SetActive(true);
-        PlayerPrefs.SetString(hasSelectedButtonsPlayerPref, "True");
+        rememberManager.SetHasSelectedButtonsPlayerPref(true);
     }
 
     //for shuffle number from array
