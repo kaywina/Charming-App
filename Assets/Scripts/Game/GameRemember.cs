@@ -62,6 +62,7 @@ public class GameRemember : MonoBehaviour
         difficultySlider.gameObject.SetActive(false);
         rememberComeBack.SetActive(true);
         rememberManager.SetHasSelectedButtonsPlayerPref(true);
+        rememberManager.SetSavedDifficultyIndex(difficultyIndex);
     }
 
     //for shuffle number from array
