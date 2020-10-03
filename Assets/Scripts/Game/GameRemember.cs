@@ -28,7 +28,7 @@ public class GameRemember : MonoBehaviour
 
     private void OnEnable()
     {
-        if (rememberManager.SetupButtonSelect())
+        if (rememberManager.HasSavedData())
         {
             ResetButtonSelect();
         }

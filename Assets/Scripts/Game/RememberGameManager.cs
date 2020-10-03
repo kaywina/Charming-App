@@ -39,7 +39,7 @@ public class RememberGameManager : MonoBehaviour
         }
     }
 
-    public bool SetupButtonSelect()
+    public bool HasSavedData()
     {
         if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
         {
