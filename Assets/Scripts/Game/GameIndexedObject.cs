@@ -42,12 +42,12 @@ public class GameIndexedObject : MonoBehaviour
         bool isPlaying = false;
         if (gameType == GameType.Attention)
         {
-            isPlaying = GameAttention.CheckIndex(shuffledIndex, orderedIndex);
+            isPlaying = AttentionGame.CheckIndex(shuffledIndex, orderedIndex);
             if (isPlaying) { button.interactable = false; }
         }
         else if (gameType == GameType.Remember)
         {
-            isPlaying = GameRemember.CheckIndex(shuffledIndex, orderedIndex);
+            isPlaying = RememberGame.CheckIndex(shuffledIndex, orderedIndex);
             // can continue playing if wrong button is clicked in Remember game
         }
     }

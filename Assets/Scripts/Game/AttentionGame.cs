@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameAttention : MonoBehaviour
+public class AttentionGame : MonoBehaviour
 {
     private int level = 0;
     private int score = 0;
@@ -24,7 +24,7 @@ public class GameAttention : MonoBehaviour
 
     private static int selectedCount = 0;
 
-    private static GameAttention instance;
+    private static AttentionGame instance;
 
     private static int selectedIndex = 0;
 
@@ -33,7 +33,7 @@ public class GameAttention : MonoBehaviour
 
     private void Awake()
     {
-        instance = gameObject.GetComponent<GameAttention>();
+        instance = gameObject.GetComponent<AttentionGame>();
     }
 
     private void OnEnable()

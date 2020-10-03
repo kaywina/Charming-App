@@ -7,7 +7,7 @@ public class RememberGameManager : MonoBehaviour
     private string hasSelectedButtonsPlayerPref = "HasSelectedButtons";
     private string difficultyPlayerPref = "RememberGameDifficultyIndex";
     private string shuffledIndexPlayerPrefPrefix = "ShuffledIndex_";
-    public GameRemember gameRemember;
+    public RememberGame gameRemember;
     public GameObject rememberComeBack;
     public GameObject instructions;
 

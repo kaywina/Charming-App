@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RememberGameSlider : MonoBehaviour
 {
     public Slider slider;
-    public GameRemember gameRemember;
+    public RememberGame gameRemember;
 
     private bool initialized = false;
     private float defaultIndex = 2;

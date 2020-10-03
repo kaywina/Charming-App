@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameRemember : MonoBehaviour
+public class RememberGame : MonoBehaviour
 {
-    private static GameRemember instance;
+    private static RememberGame instance;
     public RememberGameManager rememberManager;
 
     public GameObject[] levelButtons;
@@ -23,7 +23,7 @@ public class GameRemember : MonoBehaviour
 
     private void Awake()
     {
-        instance = gameObject.GetComponent<GameRemember>();
+        instance = gameObject.GetComponent<RememberGame>();
     }
 
     private void OnEnable()
