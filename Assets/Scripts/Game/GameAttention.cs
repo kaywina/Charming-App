@@ -29,6 +29,7 @@ public class GameAttention : MonoBehaviour
     private static int selectedIndex = 0;
 
     public GameObject incorrectIndicator;
+    public GameObject instructions;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class GameAttention : MonoBehaviour
 
     private void OnEnable()
     {
+        instructions.SetActive(false);
         ResetGame();
         SetupLevel();
     }
@@ -261,7 +263,6 @@ public class GameAttention : MonoBehaviour
 
     public void ResetGame()
     {
-
         if (indexedButtons != null)
         {
             indexedButtons[selectedIndex].gameObject.SetActive(true); // set the last clicked button back to active incase it was deactivated as an incorrect choice

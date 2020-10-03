@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayManager : MonoBehaviour
 {
     public CurrencyManager currencyManager;
+    public GameObject rememberGameManager;
     public GameObject menuCanvasObject;
 
     public PlayGame playGameAttention;
@@ -23,6 +24,11 @@ public class PlayManager : MonoBehaviour
     private static int gameCostGold = 0; // amount to play a game for subscribers (set to free) - don't change this in production!
 
     private static int adReward = 8; // amount free users get for watching a rewarded ad
+
+    private void Awake()
+    {
+        rememberGameManager.SetActive(true); // always set remember game manager active in scene by default
+    }
 
     public void SetupGameSelect()
     {

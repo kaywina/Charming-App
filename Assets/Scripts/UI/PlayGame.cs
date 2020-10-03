@@ -11,7 +11,6 @@ public class PlayGame : MonoBehaviour
     public Text previousHighScoreText;
     public GameObject perfectIndicator;
     public GameObject awesomeIndicator;
-    public GameObject instructions;
     public GameObject gameControls;
     public GameObject highScoreDisplay;
     public GameObject newHighScore;
@@ -52,11 +51,11 @@ public class PlayGame : MonoBehaviour
 
     public void Reset()
     {
+        Debug.Log("Reset game");
         newHighScoreFlag = false;
         perfectGameFlag = false;
         playManager.StopFireworks();
         gameControls.SetActive(false);
-        instructions.SetActive(true);
         highScoreDisplay.SetActive(false);
         newHighScore.SetActive(false);
         niceTry.SetActive(false);
@@ -70,7 +69,6 @@ public class PlayGame : MonoBehaviour
     public void Play()
     {
         Reset();
-        instructions.SetActive(false);
         gameControls.SetActive(true);
     }
 
