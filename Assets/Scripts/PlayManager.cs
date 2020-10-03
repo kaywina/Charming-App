@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayManager : MonoBehaviour
 {
     public CurrencyManager currencyManager;
-    public GameObject rememberGameManager;
     public GameObject menuCanvasObject;
 
-    public PlayGame playGameAttention;
-    public PlayGame playGameRemember;
+    public PlayGame playAttentionGame;
+    public PlayGame playRememberGame;
+
+    public AttentionGameManager attentionGameManager;
+    public RememberGameManager rememberGameManager;
 
     public GameObject rewardedAdButton;
     public GameObject watchedRewardedAdText;
@@ -27,7 +29,8 @@ public class PlayManager : MonoBehaviour
 
     private void Awake()
     {
-        rememberGameManager.SetActive(true); // always set remember game manager active in scene by default
+        attentionGameManager.gameObject.SetActive(true); // always set game manager active in scene by default
+
     }
 
     public void SetupGameSelect()
@@ -37,8 +40,8 @@ public class PlayManager : MonoBehaviour
         menuCanvasObject.SetActive(true);
         moreCurrencyText.SetActive(false);
 
-        playGameAttention.gameObject.SetActive(false);
-        playGameRemember.gameObject.SetActive(false);
+        playAttentionGame.gameObject.SetActive(false);
+        playRememberGame.gameObject.SetActive(false);
     }
 
     public void OnEnable()
@@ -76,24 +79,27 @@ public class PlayManager : MonoBehaviour
     public void OpenGameAttention()
     {
         CloseGameSelectMenu();
-        playGameAttention.gameObject.SetActive(true);
+        attentionGameManager.gameObject.SetActive(true);
+        playAttentionGame.gameObject.SetActive(true);
     }
 
     public void OpenGameMemory()
     {
         CloseGameSelectMenu();
-        playGameRemember.gameObject.SetActive(true);
+        rememberGameManager.gameObject.SetActive(true);
+        playRememberGame.gameObject.SetActive(true);
     }
 
     public void PlayGameAttention()
     {
         if (CheckGameCost())
         {
-            playGameAttention.Play();
+            attentionGameManager.ShowInstructions();
+            playAttentionGame.Play();
         }
         else
         {
-            playGameAttention.gameObject.SetActive(false);
+            playAttentionGame.gameObject.SetActive(false);
             ReturnToGameSelect();
         }
     }
@@ -102,11 +108,11 @@ public class PlayManager : MonoBehaviour
     {
         if (CheckGameCost())
         {
-            playGameRemember.Play();
+            playRememberGame.Play();
         }
         else
         {
-            playGameRemember.gameObject.SetActive(false);
+            playRememberGame.gameObject.SetActive(false);
             ReturnToGameSelect();
         }
     }

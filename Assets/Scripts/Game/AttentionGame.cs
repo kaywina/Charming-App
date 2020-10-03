@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class AttentionGame : MonoBehaviour
 {
-    private int level = 0;
-    private int score = 0;
+    private static AttentionGame instance;
 
     public Text countdownText;
     private int countdown = 3;
@@ -22,10 +21,10 @@ public class AttentionGame : MonoBehaviour
 
     private static bool playingGame = false;
 
+    private int level = 0;
+    private int score = 0;
+
     private static int selectedCount = 0;
-
-    private static AttentionGame instance;
-
     private static int selectedIndex = 0;
 
     public GameObject incorrectIndicator;
