@@ -34,10 +34,9 @@ public class RememberGame : MonoBehaviour
         }
     }
 
-    public void DisableControls()
+    public void DisableDifficultySlider()
     {
         difficultySlider.gameObject.SetActive(false);
-        DisableAllButtons();
     }
 
     private void DisableAllButtons()
@@ -182,6 +181,8 @@ public class RememberGame : MonoBehaviour
         {
             return false;
         }
+
+        instance.DisableDifficultySlider(); // disable the slider immediately following first click on a button
 
         selectedIndex = orderedIndex; // this needs to happen after the playingGame check, to avoid cases where user cicks a button between an incorrect guess and end of game, which results in buttons not showing up on subsequent plays
 
