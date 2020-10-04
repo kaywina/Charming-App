@@ -83,7 +83,6 @@ public class GameRemember : MonoBehaviour
         //Debug.Log("Setup the level for the attention game");
 
         // get an array of all button Images for this level
-
         difficultyIndex = difficultySlider.GetValue();
 
         images = levelButtons[difficultyIndex].GetComponentsInChildren<Image>();

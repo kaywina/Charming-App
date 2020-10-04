@@ -51,7 +51,7 @@ public class PlayGame : MonoBehaviour
 
     public void Reset()
     {
-        Debug.Log("Reset game");
+        //Debug.Log("Reset game");
         newHighScoreFlag = false;
         perfectGameFlag = false;
         playManager.StopFireworks();

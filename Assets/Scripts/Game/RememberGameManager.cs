@@ -11,12 +11,22 @@ public class RememberGameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("On Enable for RememberGameManager");
         if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
         {
-
-            gameRemember.DisableControls();
-            rememberComeBack.SetActive(true);
-            instructions.SetActive(false);
+            if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
+            {
+                Debug.Log("It's a new day, input your numbers!");
+                instructions.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("It's not a new day, come back tomorrow");
+                gameRemember.DisableControls();
+                rememberComeBack.SetActive(true);
+                instructions.SetActive(false);
+            }
+            
         }
         else
         {
@@ -42,6 +52,7 @@ public class RememberGameManager : MonoBehaviour
         if (set)
         {
             PlayerPrefs.SetString(hasSelectedButtonsPlayerPref, "True");
+            TimeManager.SetPrefsForRememberGame();
         }
         else
         {
