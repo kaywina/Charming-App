@@ -79,28 +79,53 @@ public class RememberGame : MonoBehaviour
         }
     }
 
+    public void SetupButtonsFromData()
+    {
+
+    }
+
     public void SetupButtons()
     {
-        //Debug.Log("Setup the level for the attention game");
+        GetImagesAndIndexedButtons();
+        SetOrderedIndexes();
+        CheckImages();
+        BuildIndexesArray();
+        Shuffle(indexes);
+        CheckIndexes();
+        ApplyRandomizedPattern();
+        ActivateCorrectButtons();
+        
+        playingGame = true;
+    }
 
-        // get an array of all button Images for this level
+    // get arrays of all button Images and GameIndexedObjects for this level
+    public void GetImagesAndIndexedButtons()
+    {
         difficultyIndex = difficultySlider.GetValue();
-
         images = levelButtons[difficultyIndex].GetComponentsInChildren<Image>();
         indexedButtons = levelButtons[difficultyIndex].GetComponentsInChildren<GameIndexedObject>();
+    }
 
-        // set ordered indexes (we use these to track which button a user selects
+    // set ordered indexes (we use these to track which button a user selects)
+    public void SetOrderedIndexes()
+    { 
         for (int n = 0; n < indexedButtons.Length; n++)
         {
             indexedButtons[n].SetOrderedIndex(n);
         }
+    }
 
+    public void CheckImages()
+    {
         if (images.Length <= 0)
         {
             Debug.LogError("No button images found; are you missing the inspector hookup? Aborting level setup");
             return;
         }
+    }
 
+    public void BuildIndexesArray()
+    {
         // fill up an array up with numbers from 0 to one less than it's length
         indexes = new int[images.Length];
 
@@ -109,25 +134,20 @@ public class RememberGame : MonoBehaviour
         {
             indexes[i] = i;
         }
+    }
 
-        Shuffle(indexes); // shuffle those numbers
-
+    public void CheckIndexes()
+    {
         // check for error
         if (indexes.Length != images.Length)
         {
             Debug.LogError("Mismatched array lengths in Game Attention; aborting level setup");
             return;
         }
+    }
 
-        /*
-        string output = "";
-        foreach (int i in indexes)
-        {
-            output += " " + i.ToString();
-        }
-        Debug.Log("contents of indexesToShuffle after shuffling =" + output);
-        */
-
+    public void ApplyRandomizedPattern()
+    {
         // this should apply the randomized pattern to the buttons
         for (int f = 0; f < indexes.Length; f++)
         {
@@ -135,7 +155,10 @@ public class RememberGame : MonoBehaviour
             images[f].sprite = playManager.GetSpriteByIndex(indexes[f]);
             indexedButtons[f].SetShuffledIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
+    } 
 
+    public void ActivateCorrectButtons()
+    {
         // activate only the correct button set for the difficulty
         for (int n = 0; n < levelButtons.Length; n++)
         {
@@ -149,7 +172,6 @@ public class RememberGame : MonoBehaviour
             }
         }
 
-        playingGame = true;
     }
 
     public void EnableButtonsByIndex(int index)
