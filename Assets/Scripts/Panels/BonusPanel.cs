@@ -16,6 +16,7 @@ public class BonusPanel : CharmsPanel
     public GameObject doubleBonusText;
     public Text totalBonusText;
     public ParticleSystem fireworks;
+    public GameObject skipButton;
 
     private bool hasSpun;
     private int storedBonus;
@@ -25,6 +26,7 @@ public class BonusPanel : CharmsPanel
         bonusWheel.gameObject.SetActive(true);
         StartCoroutine(Enable());
         rewardedAdButton.SetActive(false);
+        skipButton.SetActive(false);
         base.OnEnable();
     }
 
@@ -77,10 +79,20 @@ public class BonusPanel : CharmsPanel
         if (hasSpun) { return; }
         if (fireworks != null) { fireworks.Play(); }
         bonusWheel.Spin();
+        skipButton.SetActive(true);
+    }
+
+    public void SkipSpinWithTimeScale()
+    {
+        Time.timeScale = 100.0f;
+        skipButton.SetActive(false);
     }
 
     public void CompleteSpin(int bonus)
     {
+        skipButton.SetActive(false);
+        Time.timeScale = 1f; // reset timescale in case user chose to use skip button
+        
         //Debug.Log("Complete bonus wheel spin");
         storedBonus = bonus;
         prizeText.text = "+" + bonus.ToString();
