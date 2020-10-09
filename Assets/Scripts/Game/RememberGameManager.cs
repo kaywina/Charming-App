@@ -7,6 +7,7 @@ public class RememberGameManager : MonoBehaviour
     private string hasSelectedButtonsPlayerPref = "HasSelectedButtons";
     private string difficultyPlayerPref = "RememberGameDifficultyIndex";
     private string shuffledIndexPlayerPrefPrefix = "ShuffledIndex_";
+    public PlayGame rememberPlayGame;
     public RememberGame rememberGameControls;
     public GameObject rememberComeBack;
     public GameObject instructions;
@@ -14,6 +15,7 @@ public class RememberGameManager : MonoBehaviour
     private void OnEnable()
     {
         //Debug.Log("On Enable for RememberGameManager");
+        rememberPlayGame.Reset();
         if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
         {
             if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
@@ -22,7 +24,6 @@ public class RememberGameManager : MonoBehaviour
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
                 rememberGameControls.gameObject.SetActive(true);
-
             }
             else
             {
@@ -33,9 +34,10 @@ public class RememberGameManager : MonoBehaviour
             }
             
         }
-        else
+        else // there is no stored data so start fresh
         {
             instructions.SetActive(true);
+            rememberGameControls.SetupButtons(false);
             rememberComeBack.SetActive(false);
         }
     }
