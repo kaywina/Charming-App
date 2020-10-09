@@ -7,6 +7,7 @@ public class RememberGameManager : MonoBehaviour
     private string hasSelectedButtonsPlayerPref = "HasSelectedButtons";
     private string difficultyPlayerPref = "RememberGameDifficultyIndex";
     private string shuffledIndexPlayerPrefPrefix = "ShuffledIndex_";
+    private string numberOfDailyRoundsPlayerPref = "NumberOfDailyRounds";
     public PlayGame rememberPlayGame;
     public RememberGame rememberGameControls;
     public GameObject rememberComeBack;
@@ -41,6 +42,14 @@ public class RememberGameManager : MonoBehaviour
             rememberGameControls.SetupButtons(false);
             rememberComeBack.SetActive(false);
         }
+    }
+
+    public void NextRound()
+    {
+        int numberOfDailyRounds = PlayerPrefs.GetInt(numberOfDailyRoundsPlayerPref);
+        numberOfDailyRounds++;
+        PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, numberOfDailyRounds);
+        Debug.Log("Number of daily rounds played so far = " + numberOfDailyRounds);
     }
 
     public bool HasSavedData()

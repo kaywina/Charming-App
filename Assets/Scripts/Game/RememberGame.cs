@@ -63,6 +63,7 @@ public class RememberGame : MonoBehaviour
         rememberManager.SetHasSelectedButtonsPlayerPref(true);
         rememberManager.SetSavedDifficultyIndex(difficultyIndex);
         rememberManager.SetSavedShuffledIndexes(indexes);
+        instance.rememberManager.NextRound();
     }
 
     //for shuffle number from array
