@@ -52,7 +52,7 @@ public class RememberGame : MonoBehaviour
         Debug.Log("Reset buttons");
         difficultySlider.gameObject.SetActive(true);
         rememberComeBack.SetActive(false);
-        SetupButtons();
+        SetupButtons(false);
     }
 
     private void EndButtonSelectStage()
@@ -81,20 +81,31 @@ public class RememberGame : MonoBehaviour
 
     public void SetupButtonsFromData()
     {
-
+        Debug.Log("Setup buttons from data for a new daily round");
+        SetupButtons(true);
     }
 
-    public void SetupButtons()
+    public void SetupButtons(bool fromData)
     {
         GetImagesAndIndexedButtons();
         SetOrderedIndexes();
         CheckImages();
         BuildIndexesArray();
-        Shuffle(indexes);
+
+        if (!fromData)
+        {
+            Debug.Log("Shuffle the indexes because this is the first day of play for this game");
+            Shuffle(indexes);
+        }
+        else
+        {
+            Debug.Log("Get the indexes from data since this is not the first day of play for this game");
+            indexes = rememberManager.GetSavedShuffledIndexes();
+        }
+
         CheckIndexes();
-        ApplyRandomizedPattern();
+        ApplyShuffledIndexesToButtons();
         ActivateCorrectButtons();
-        
         playingGame = true;
     }
 
@@ -119,9 +130,11 @@ public class RememberGame : MonoBehaviour
     {
         if (images.Length <= 0)
         {
-            Debug.LogError("No button images found; are you missing the inspector hookup? Aborting level setup");
+            Debug.LogError("CheckImages failed. No button images found; are you missing the inspector hookup? Aborting level setup");
             return;
         }
+
+        Debug.Log("Images checked successfully; no errors found");
     }
 
     public void BuildIndexesArray()
@@ -146,7 +159,7 @@ public class RememberGame : MonoBehaviour
         }
     }
 
-    public void ApplyRandomizedPattern()
+    public void ApplyShuffledIndexesToButtons()
     {
         // this should apply the randomized pattern to the buttons
         for (int f = 0; f < indexes.Length; f++)
@@ -155,6 +168,8 @@ public class RememberGame : MonoBehaviour
             images[f].sprite = playManager.GetSpriteByIndex(indexes[f]);
             indexedButtons[f].SetShuffledIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
+
+        Debug.Log("Shuffled indexes applied to buttons");
     } 
 
     public void ActivateCorrectButtons()
@@ -165,6 +180,7 @@ public class RememberGame : MonoBehaviour
             if (n == difficultyIndex)
             {
                 levelButtons[n].SetActive(true);
+                Debug.Log("Activate buttons for diffulty index " + n);
             }
             else
             {

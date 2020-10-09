@@ -7,7 +7,7 @@ public class RememberGameManager : MonoBehaviour
     private string hasSelectedButtonsPlayerPref = "HasSelectedButtons";
     private string difficultyPlayerPref = "RememberGameDifficultyIndex";
     private string shuffledIndexPlayerPrefPrefix = "ShuffledIndex_";
-    public RememberGame rememberGame;
+    public RememberGame rememberGameControls;
     public GameObject rememberComeBack;
     public GameObject instructions;
 
@@ -20,14 +20,14 @@ public class RememberGameManager : MonoBehaviour
             {
                 Debug.Log("It's a new day, input your numbers!");
                 instructions.SetActive(false);
-                Debug.Log("Saved difficulty index is " + GetSavedDifficultIndex());
-                //GetSavedShuffledIndexes();
+                rememberGameControls.SetupButtonsFromData();
+                rememberGameControls.gameObject.SetActive(true);
 
             }
             else
             {
                 Debug.Log("It's not a new day, come back tomorrow");
-                rememberGame.gameObject.SetActive(false);
+                rememberGameControls.gameObject.SetActive(false);
                 rememberComeBack.SetActive(true);
                 instructions.SetActive(false);
             }
@@ -74,7 +74,7 @@ public class RememberGameManager : MonoBehaviour
     public int GetSavedDifficultIndex()
     {
         int difficultyIndex = PlayerPrefs.GetInt(difficultyPlayerPref);
-        Debug.Log("The saved difficulty index is " + difficultyIndex);
+        Debug.Log("Saved difficulty index is " + difficultyIndex);
         return difficultyIndex;
     }
 
@@ -92,11 +92,16 @@ public class RememberGameManager : MonoBehaviour
         int numberOfButtonsAtIndexZero = 3;
         int[] shuffledIndexes = new int[PlayerPrefs.GetInt(difficultyPlayerPref) + numberOfButtonsAtIndexZero];
 
+
+        string logOutput = "";
+
         for (int i = 0; i < shuffledIndexes.Length; i++)
         {
             shuffledIndexes[i] = PlayerPrefs.GetInt(shuffledIndexPlayerPrefPrefix + i);
-            Debug.Log("Load shuffled index = " + shuffledIndexes[i]);
+            logOutput += shuffledIndexes[i] + " ";
         }
+
+        Debug.Log("Shuffled indexes loaded from data: " + logOutput);
 
         return shuffledIndexes;
     }
