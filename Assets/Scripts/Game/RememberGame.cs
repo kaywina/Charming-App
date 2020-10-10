@@ -80,10 +80,21 @@ public class RememberGame : MonoBehaviour
         }
     }
 
+    private void HideAll()
+    {
+        //Debug.Log("Hide all");
+        for (int i = 0; i < images.Length; i++)
+        {
+            //Debug.Log("Set default sprite for object named - " + levelButtons[level][i].name);
+            images[i].sprite = playManager.GetHideSprite(); // set all sprites to blank
+        }
+    }
+
     public void SetupButtonsFromData()
     {
         Debug.Log("Setup buttons from data for a new daily round");
         SetupButtons(true);
+        HideAll();
     }
 
     public void SetupButtons(bool fromData)
