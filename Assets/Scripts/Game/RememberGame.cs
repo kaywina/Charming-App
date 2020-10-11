@@ -87,6 +87,7 @@ public class RememberGame : MonoBehaviour
 
     public void SetupButtons(bool fromData)
     {
+        Debug.Log("Setup buttons; is there data? = " + fromData);
         GetImagesAndIndexedButtons();
         SetOrderedIndexes();
         CheckImages();

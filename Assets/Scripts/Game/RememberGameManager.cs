@@ -23,6 +23,7 @@ public class RememberGameManager : MonoBehaviour
                 Debug.Log("It's a new day, input your numbers!");
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
+                rememberGameControls.DisableDifficultySlider();
                 rememberGameControls.gameObject.SetActive(true);
             }
             else
