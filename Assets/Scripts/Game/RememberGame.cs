@@ -28,7 +28,7 @@ public class RememberGame : MonoBehaviour
 
     private void OnEnable()
     {
-        if (rememberManager.HasSavedData())
+        if (!rememberManager.HasSavedData())
         {
             ResetButtonSelect();
         }
