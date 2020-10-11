@@ -80,11 +80,13 @@ public class RememberGameManager : MonoBehaviour
 
     public void SetSavedShuffledIndexes(int[] shuffledIndexes)
     {
+        string logOutput = "";
         for (int i = 0; i < shuffledIndexes.Length; i++)
         {
             PlayerPrefs.SetInt(shuffledIndexPlayerPrefPrefix + i, shuffledIndexes[i]);
-            Debug.Log("Saved player pref for shuffled index = " + shuffledIndexes[i]);
+            logOutput += shuffledIndexes[i] + " ";
         }
+        Debug.Log("Saved player prefs for shuffled indexes = " + logOutput);
     }
 
     public int[] GetSavedShuffledIndexes()
