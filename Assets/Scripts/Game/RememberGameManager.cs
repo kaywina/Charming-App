@@ -46,10 +46,15 @@ public class RememberGameManager : MonoBehaviour
 
     public void NextRound()
     {
-        int numberOfDailyRounds = PlayerPrefs.GetInt(numberOfDailyRoundsPlayerPref);
+        int numberOfDailyRounds = GetDailyRound();
         numberOfDailyRounds++;
         PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, numberOfDailyRounds);
         Debug.Log("Number of daily rounds played so far = " + numberOfDailyRounds);
+    }
+
+    public int GetDailyRound()
+    {
+        return PlayerPrefs.GetInt(numberOfDailyRoundsPlayerPref);
     }
 
     public bool HasSavedData()

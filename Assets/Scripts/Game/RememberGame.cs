@@ -12,6 +12,7 @@ public class RememberGame : MonoBehaviour
     public PlayManager playManager;
     public RememberGameSlider difficultySlider;
     public GameObject rememberComeBack;
+    public Text dayText;
 
     private int difficultyIndex = 2;
     private Image[] images;
@@ -100,6 +101,7 @@ public class RememberGame : MonoBehaviour
     public void SetupButtons(bool fromData)
     {
         Debug.Log("Setup buttons; is there data? = " + fromData);
+        dayText.gameObject.SetActive(false);
         GetImagesAndIndexedButtons();
         SetOrderedIndexes();
         CheckImages();
@@ -114,6 +116,10 @@ public class RememberGame : MonoBehaviour
         {
             Debug.Log("Get the indexes from data since this is not the first day of play for this game");
             indexes = rememberManager.GetSavedShuffledIndexes();
+
+            // in this case also show the "Day: 1" "Day: 2" etc label above the buttons
+            dayText.text = Localization.GetTranslationByKey("DAY") + ": " + rememberManager.GetDailyRound().ToString();
+            dayText.gameObject.SetActive(true);
         }
 
         CheckIndexes();
@@ -244,6 +250,7 @@ public class RememberGame : MonoBehaviour
         {
             //Debug.Log("Incorrect"); // do nothing in this case
         }
+
         else
         {
             //Debug.Log("Correct");
@@ -251,7 +258,7 @@ public class RememberGame : MonoBehaviour
             indexedButtons[selectedIndex].gameObject.SetActive(false);
         }
 
-        // has selected all the buttons
+        // has selected all the buttons and completed the round
         if (selectedCount >= indexes.Length)
         {
             instance.EndButtonSelectStage();
