@@ -5,9 +5,11 @@ using UnityEngine;
 public class AttentionGameManager : MonoBehaviour
 {
     public GameObject instructions;
+    public PlayGame attentionPlayGame;
 
     public void OnEnable()
     {
+        attentionPlayGame.Reset();
         ShowInstructions();
     }
 
