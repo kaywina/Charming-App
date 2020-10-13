@@ -39,10 +39,6 @@ public class PlayGame : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-    }
-
     private void OnDisable()
     {
         playManager.StopFireworks();
@@ -63,11 +59,6 @@ public class PlayGame : MonoBehaviour
         rewardObject.SetActive(false);
         nextRewardObject.SetActive(false);
         beatScoreText.gameObject.SetActive(false);
-    }
-
-    public void Play()
-    {
-        gameControls.SetActive(true);
     }
 
     public void SaveHighScore(int score)

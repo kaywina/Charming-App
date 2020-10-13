@@ -6,11 +6,14 @@ public class AttentionGameManager : MonoBehaviour
 {
     public GameObject instructions;
     public PlayGame attentionPlayGame;
+    public AttentionGame attentionGameControls;
 
-    public void OnEnable()
+    public void PlayGame()
     {
+        Debug.Log("Play game Attention");
+        HideInstructions();
         attentionPlayGame.Reset();
-        ShowInstructions();
+        attentionGameControls.gameObject.SetActive(true);
     }
 
     public void ShowInstructions()

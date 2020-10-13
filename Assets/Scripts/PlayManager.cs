@@ -30,7 +30,6 @@ public class PlayManager : MonoBehaviour
     private void Awake()
     {
         attentionGameManager.gameObject.SetActive(true); // always set game manager active in scene by default
-
     }
 
     public void SetupGameSelect()
@@ -94,8 +93,7 @@ public class PlayManager : MonoBehaviour
     {
         if (CheckGameCost())
         {
-            attentionGameManager.ShowInstructions();
-            playAttentionGame.Play();
+            attentionGameManager.PlayGame();
         }
         else
         {
@@ -108,7 +106,7 @@ public class PlayManager : MonoBehaviour
     {
         if (CheckGameCost())
         {
-            playRememberGame.Play();
+            rememberGameManager.PlayGame();
         }
         else
         {

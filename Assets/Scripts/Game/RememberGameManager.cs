@@ -19,33 +19,7 @@ public class RememberGameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //Debug.Log("On Enable for RememberGameManager");
-        rememberPlayGame.Reset();
-        if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
-        {
-            if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
-            {
-                //Debug.Log("It's a new day, input your numbers!");
-                instructions.SetActive(false);
-                rememberGameControls.SetupButtonsFromData();
-                rememberGameControls.DisableDifficultySlider();
-                rememberGameControls.gameObject.SetActive(true);
-            }
-            else
-            {
-                //Debug.Log("It's not a new day, come back tomorrow");
-                rememberGameControls.gameObject.SetActive(false);
-                rememberComeBack.SetActive(true);
-                instructions.SetActive(false);
-            }
-            
-        }
-        else // there is no stored data so start fresh
-        {
-            instructions.SetActive(true);
-            rememberGameControls.SetupButtons(false);
-            rememberComeBack.SetActive(false);
-        }
+        PlayGame();
     }
 
     public void NextRound()
@@ -148,5 +122,34 @@ public class RememberGameManager : MonoBehaviour
         return shuffledIndexes;
     }
 
+    public void PlayGame()
+    {
+        Debug.Log("Play Remember Game");
+        rememberPlayGame.Reset();
+        if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
+        {
+            if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
+            {
+                //Debug.Log("It's a new day, input your numbers!");
+                instructions.SetActive(false);
+                rememberGameControls.SetupButtonsFromData();
+                rememberGameControls.DisableDifficultySlider();
+                rememberGameControls.gameObject.SetActive(true);
+            }
+            else
+            {
+                //Debug.Log("It's not a new day, come back tomorrow");
+                rememberGameControls.gameObject.SetActive(false);
+                rememberComeBack.SetActive(true);
+                instructions.SetActive(false);
+            }
 
+        }
+        else // there is no stored data so start fresh
+        {
+            instructions.SetActive(true);
+            rememberGameControls.SetupButtons(false);
+            rememberComeBack.SetActive(false);
+        }
+    }
 }

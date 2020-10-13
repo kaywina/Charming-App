@@ -28,7 +28,6 @@ public class AttentionGame : MonoBehaviour
     private static int selectedIndex = 0;
 
     public GameObject incorrectIndicator;
-    public GameObject instructions;
 
     private void Awake()
     {
@@ -37,7 +36,6 @@ public class AttentionGame : MonoBehaviour
 
     private void OnEnable()
     {
-        instructions.SetActive(false);
         ResetGame();
         SetupLevel();
     }
