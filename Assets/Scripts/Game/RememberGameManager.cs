@@ -28,15 +28,13 @@ public class RememberGameManager : MonoBehaviour
 
         numberOfDailyRounds++;
 
+        PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, numberOfDailyRounds);
+
         if (numberOfDailyRounds > daysToWin)
         {
             Debug.Log("Completed " + daysToWin + " rounds for a perfect game!");
             rememberPlayGame.SetPerfectGameFlag(true);
             rememberGameControls.EndGame();
-        }
-        else
-        {
-            PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, numberOfDailyRounds);
         }
     }
 
@@ -56,7 +54,7 @@ public class RememberGameManager : MonoBehaviour
     private int CalculateScore()
     {
         int score = 0;
-        score = GetDailyRound() * (GetSavedDifficultIndex() + 1);
+        score = (GetDailyRound() - 1) * (GetSavedDifficultIndex() + 1);
         return score;
     }
 
