@@ -30,7 +30,9 @@ public class RememberGameManager : MonoBehaviour
 
         if (numberOfDailyRounds > daysToWin)
         {
-            EndGame();
+            Debug.Log("Completed " + daysToWin + " rounds for a perfect game!");
+            rememberPlayGame.SetPerfectGameFlag(true);
+            rememberGameControls.EndGame();
         }
         else
         {
@@ -41,11 +43,12 @@ public class RememberGameManager : MonoBehaviour
     // reset data and UI
     public void EndGame()
     {
-        Debug.Log("You win!");
+        Debug.Log("End game");
         SetHasSelectedButtonsPlayerPref(false);
         rememberComeBack.SetActive(false);
         int score = CalculateScore();
         //Debug.Log("score is " + score);
+
         rememberPlayGame.EndGame(score);
         PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, 0); // do this after calculating the score
     }

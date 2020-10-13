@@ -13,6 +13,7 @@ public class RememberGame : MonoBehaviour
     public RememberGameSlider difficultySlider;
     public GameObject rememberComeBack;
     public Text dayText;
+    public GameObject incorrectIndicator;
 
     private int difficultyIndex = 2;
     public Image[] images;
@@ -29,6 +30,7 @@ public class RememberGame : MonoBehaviour
 
     private void OnEnable()
     {
+        incorrectIndicator.SetActive(false);
         if (!rememberManager.HasSavedData())
         {
             ResetButtonSelect();
@@ -259,6 +261,14 @@ public class RememberGame : MonoBehaviour
         if (selectedCount != shuffledIndex)
         {
             Debug.Log("Incorrect"); // do nothing in this case
+
+            // end the game if incorrect input is made on any round after the first
+            if (instance.rememberManager.GetDailyRound() != 0)
+            {
+                instance.ShowIncorrectIndicator();
+                playingGame = false; // stop ability to press more game buttons
+                instance.DelayedEndGame(1f);
+            }
         }
 
         else
@@ -273,14 +283,30 @@ public class RememberGame : MonoBehaviour
         {
             Debug.Log("All buttons have been selected");
             instance.EndButtonSelectStage();
-
-            // reset all the buttons to active so there is no null ref on images[] when trying to start a new game from high score display
-            for (int i = 0; i < indexedButtons.Length; i++)
-            {
-                indexedButtons[i].gameObject.SetActive(true);
-            }
         }
 
         return true;
+    }
+
+    public void DelayedEndGame(float secondsToDelay)
+    {
+        Invoke("EndGame", secondsToDelay);
+    }
+
+    public void EndGame()
+    {
+        // reset all the buttons to active so there is no null ref on images[] when trying to start a new game from high score display
+        for (int i = 0; i < indexedButtons.Length; i++)
+        {
+            indexedButtons[i].gameObject.SetActive(true);
+        }
+        rememberManager.EndGame();
+    }
+
+    public void ShowIncorrectIndicator()
+    {
+        indexedButtons[selectedIndex].gameObject.SetActive(false);
+        incorrectIndicator.transform.position = indexedButtons[selectedIndex].transform.position;
+        incorrectIndicator.SetActive(true);
     }
 }
