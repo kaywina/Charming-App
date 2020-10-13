@@ -180,7 +180,7 @@ public class RememberGame : MonoBehaviour
             if (n == difficultyIndex)
             {
                 levelButtons[n].SetActive(true);
-                Debug.Log("Activate buttons for diffulty index " + n);
+                Debug.Log("Activate buttons for difficulty index " + n);
             }
             else
             {
