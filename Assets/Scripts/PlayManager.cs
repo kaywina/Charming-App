@@ -7,7 +7,11 @@ public class PlayManager : MonoBehaviour
     public CurrencyManager currencyManager;
     public GameObject menuCanvasObject;
 
-    public PlayGame playGameAttention;
+    public PlayGame playAttentionGame;
+    public PlayGame playRememberGame;
+
+    public AttentionGameManager attentionGameManager;
+    public RememberGameManager rememberGameManager;
 
     public GameObject rewardedAdButton;
     public GameObject watchedRewardedAdText;
@@ -23,13 +27,20 @@ public class PlayManager : MonoBehaviour
 
     private static int adReward = 8; // amount free users get for watching a rewarded ad
 
+    private void Awake()
+    {
+        attentionGameManager.gameObject.SetActive(true); // always set game manager active in scene by default
+    }
+
     public void SetupGameSelect()
     {
         rewardedAdButton.SetActive(false);
         watchedRewardedAdText.SetActive(false);
-        playGameAttention.gameObject.SetActive(false);
         menuCanvasObject.SetActive(true);
         moreCurrencyText.SetActive(false);
+
+        playAttentionGame.gameObject.SetActive(false);
+        playRememberGame.gameObject.SetActive(false);
     }
 
     public void OnEnable()
@@ -67,18 +78,39 @@ public class PlayManager : MonoBehaviour
     public void OpenGameAttention()
     {
         CloseGameSelectMenu();
-        playGameAttention.gameObject.SetActive(true);
+        attentionGameManager.gameObject.SetActive(true);
+        playAttentionGame.gameObject.SetActive(true);
+    }
+
+    public void OpenGameMemory()
+    {
+        CloseGameSelectMenu();
+        rememberGameManager.gameObject.SetActive(true);
+        playRememberGame.gameObject.SetActive(true);
     }
 
     public void PlayGameAttention()
     {
         if (CheckGameCost())
         {
-            playGameAttention.Play();
+            attentionGameManager.PlayGame();
         }
         else
         {
-            playGameAttention.gameObject.SetActive(false);
+            playAttentionGame.gameObject.SetActive(false);
+            ReturnToGameSelect();
+        }
+    }
+
+    public void PlayGameRemember()
+    {
+        if (CheckGameCost())
+        {
+            rememberGameManager.PlayGame();
+        }
+        else
+        {
+            playRememberGame.gameObject.SetActive(false);
             ReturnToGameSelect();
         }
     }

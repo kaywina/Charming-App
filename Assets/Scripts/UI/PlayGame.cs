@@ -11,7 +11,6 @@ public class PlayGame : MonoBehaviour
     public Text previousHighScoreText;
     public GameObject perfectIndicator;
     public GameObject awesomeIndicator;
-    public GameObject instructions;
     public GameObject gameControls;
     public GameObject highScoreDisplay;
     public GameObject newHighScore;
@@ -40,11 +39,6 @@ public class PlayGame : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        Reset();
-    }
-
     private void OnDisable()
     {
         playManager.StopFireworks();
@@ -52,11 +46,11 @@ public class PlayGame : MonoBehaviour
 
     public void Reset()
     {
+        Debug.Log("Reset game via PlayGame script");
         newHighScoreFlag = false;
         perfectGameFlag = false;
         playManager.StopFireworks();
         gameControls.SetActive(false);
-        instructions.SetActive(true);
         highScoreDisplay.SetActive(false);
         newHighScore.SetActive(false);
         niceTry.SetActive(false);
@@ -65,13 +59,6 @@ public class PlayGame : MonoBehaviour
         rewardObject.SetActive(false);
         nextRewardObject.SetActive(false);
         beatScoreText.gameObject.SetActive(false);
-    }
-
-    public void Play()
-    {
-        Reset();
-        instructions.SetActive(false);
-        gameControls.SetActive(true);
     }
 
     public void SaveHighScore(int score)
@@ -127,10 +114,18 @@ public class PlayGame : MonoBehaviour
         //Debug.Log("That's the end of the game");
         gameControls.SetActive(false);
 
-        SetRewardUI(); // this shows different UI depending on if user got a new high score or not
+        // check if there is a new high score and save it if so
+        if (CheckScore(score))
+        {
+            SaveHighScore(score);
+        }
 
+        // show the previous high score and save it
         previousHighScoreText.text = LoadPreviousHighScore().ToString();
         SavePreviousHighScore(PlayerPrefs.GetInt(gameName + highScoreDataTag)); // need to do this after updating text
+
+        // show the high score display
+        SetRewardUI(); // this shows different UI depending on if user got a new high score or not
         ShowYourScoreDisplay(score);
     }
 

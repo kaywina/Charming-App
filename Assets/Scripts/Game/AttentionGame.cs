@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameAttention : MonoBehaviour
+public class AttentionGame : MonoBehaviour
 {
-    private int level = 0;
-    private int score = 0;
+    private static AttentionGame instance;
 
     public Text countdownText;
     private int countdown = 3;
@@ -18,27 +17,41 @@ public class GameAttention : MonoBehaviour
     public GameObject[] levelButtons;
     private Image[] images;
     private static int[] indexes;
-    private static GameAttentionIndexedObject[] indexedButtons;
+    private static GameIndexedObject[] indexedButtons;
 
     private static bool playingGame = false;
 
+    private int level = 0;
+    private int score = 0;
+
     private static int selectedCount = 0;
-
-    private static GameAttention instance;
-
     private static int selectedIndex = 0;
 
     public GameObject incorrectIndicator;
 
     private void Awake()
     {
-        instance = gameObject.GetComponent<GameAttention>();
+        instance = gameObject.GetComponent<AttentionGame>();
     }
 
     private void OnEnable()
     {
         ResetGame();
         SetupLevel();
+    }
+
+    //for shuffle number from array
+    void Shuffle(int[] array)
+    {
+        System.Random _random = new System.Random();
+        int p = array.Length;
+        for (int n = p - 1; n > 0; n--)
+        {
+            int r = _random.Next(0, n);
+            int t = array[r];
+            array[r] = array[n];
+            array[n] = t;
+        }
     }
 
     private void SetupLevel()
@@ -48,7 +61,7 @@ public class GameAttention : MonoBehaviour
 
         // get an array of all button Images for this level
         images = levelButtons[level].GetComponentsInChildren<Image>();
-        indexedButtons = levelButtons[level].GetComponentsInChildren<GameAttentionIndexedObject>();
+        indexedButtons = levelButtons[level].GetComponentsInChildren<GameIndexedObject>();
 
         // set ordered indexes (we use these to track which button a user selects
         for (int n = 0; n < indexedButtons.Length; n++)
@@ -102,20 +115,6 @@ public class GameAttention : MonoBehaviour
         CountdownToPlay();
     }
 
-    //for shuffle number from array
-    void Shuffle(int[] array)
-    {
-        System.Random _random = new System.Random();
-        int p = array.Length;
-        for (int n = p - 1; n > 0; n--)
-        {
-            int r = _random.Next(0, n);
-            int t = array[r];
-            array[r] = array[n];
-            array[n] = t;
-        }
-    }
-
     private void HideAll()
     {
         //Debug.Log("Hide all");
@@ -131,10 +130,6 @@ public class GameAttention : MonoBehaviour
         playingGame = false;
         levelButtons[level].SetActive(false);
         indexedButtons[selectedIndex].gameObject.SetActive(true); // set the last clicked button back to active incase it was deactivated as an incorrect choice
-        if (playGame.CheckScore(score))
-        {
-            playGame.SaveHighScore(score);
-        }
         playGame.EndGame(score);
     }
 
@@ -261,7 +256,6 @@ public class GameAttention : MonoBehaviour
 
     public void ResetGame()
     {
-
         if (indexedButtons != null)
         {
             indexedButtons[selectedIndex].gameObject.SetActive(true); // set the last clicked button back to active incase it was deactivated as an incorrect choice
