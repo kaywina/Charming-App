@@ -102,11 +102,11 @@ public class PlayManager : MonoBehaviour
         }
     }
 
-    public void PlayGameRemember()
+    public void PlayGameRemember(bool onInstructions = false)
     {
         if (CheckGameCost())
         {
-            rememberGameManager.PlayGame();
+            rememberGameManager.PlayGame(onInstructions);
         }
         else
         {

@@ -13,8 +13,6 @@ public class RememberGameManager : MonoBehaviour
     public GameObject rememberComeBack;
     public GameObject instructions;
 
-    private bool onInstructions = false;
-
     public int daysToWin = 10;
 
     private void OnEnable()
@@ -131,7 +129,7 @@ public class RememberGameManager : MonoBehaviour
         return shuffledIndexes;
     }
 
-    public void PlayGame()
+    public void PlayGame(bool onInstructions = false)
     {
         //Debug.Log("Play Remember Game");
         rememberPlayGame.Reset();
@@ -152,8 +150,8 @@ public class RememberGameManager : MonoBehaviour
                 rememberComeBack.SetActive(true);
                 instructions.SetActive(false);
             }
-
         }
+
         else // there is no stored data so start fresh
         {
             rememberComeBack.SetActive(false);
@@ -161,7 +159,6 @@ public class RememberGameManager : MonoBehaviour
             {
                 Debug.Log("Coming from the menu select screen, or high score screen");
                 instructions.SetActive(true);
-                onInstructions = true;
             }
             else
             {
@@ -169,8 +166,7 @@ public class RememberGameManager : MonoBehaviour
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtons(false);
                 rememberGameControls.gameObject.SetActive(true);
-                onInstructions = false;
-            }          
+            }       
         }
     }
 }
