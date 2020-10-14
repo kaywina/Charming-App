@@ -30,7 +30,7 @@ public class RememberGameManager : MonoBehaviour
 
         if (numberOfDailyRounds > daysToWin)
         {
-            Debug.Log("Completed " + daysToWin + " rounds for a perfect game!");
+            //Debug.Log("Completed " + daysToWin + " rounds for a perfect game!");
             rememberPlayGame.SetPerfectGameFlag(true);
             rememberGameControls.EndGame();
         }
@@ -39,7 +39,7 @@ public class RememberGameManager : MonoBehaviour
     // reset data and UI
     public void EndGame()
     {
-        Debug.Log("End game");
+        //Debug.Log("End game");
         SetHasSelectedButtonsPlayerPref(false);
         rememberComeBack.SetActive(false);
         int score = CalculateScore();
@@ -137,7 +137,7 @@ public class RememberGameManager : MonoBehaviour
         {
             if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
             {
-                Debug.Log("It's a new day, input your numbers!");
+                //Debug.Log("It's a new day, input your numbers!");
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
                 rememberGameControls.DisableDifficultySlider();
@@ -145,7 +145,7 @@ public class RememberGameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("It's not a new day, come back tomorrow");
+                //Debug.Log("It's not a new day, come back tomorrow");
                 rememberGameControls.gameObject.SetActive(false);
                 rememberComeBack.SetActive(true);
                 instructions.SetActive(false);
@@ -157,12 +157,12 @@ public class RememberGameManager : MonoBehaviour
             rememberComeBack.SetActive(false);
             if (!onInstructions)
             {
-                Debug.Log("Coming from the menu select screen, or high score screen");
+                //Debug.Log("Coming from the menu select screen, or high score screen");
                 instructions.SetActive(true);
             }
             else
             {
-                Debug.Log("Playing from instructions screen; setup first daily round");
+                //Debug.Log("Playing from instructions screen; setup first daily round");
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtons(false);
                 rememberGameControls.gameObject.SetActive(true);

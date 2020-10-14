@@ -97,14 +97,14 @@ public class RememberGame : MonoBehaviour
 
         if (!fromData)
         {
-            Debug.Log("Shuffle the indexes because this is the first day of play for this game");
+            //Debug.Log("Shuffle the indexes because this is the first day of play for this game");
             Shuffle(indexes);
             difficultySlider.gameObject.SetActive(true);
             rememberComeBack.SetActive(false);
         }
         else
         {
-            Debug.Log("Get the indexes from data since this is not the first day of play for this game");
+            //Debug.Log("Get the indexes from data since this is not the first day of play for this game");
             indexes = rememberManager.GetSavedShuffledIndexes();
 
             // in this case also show the "Day: 1" "Day: 2" etc label above the buttons
@@ -242,8 +242,7 @@ public class RememberGame : MonoBehaviour
 
         if (selectedCount != shuffledIndex)
         {
-            Debug.Log("Incorrect"); // do nothing in this case
-
+            //Debug.Log("Incorrect"); // do nothing in this case
             // end the game if incorrect input is made on any round after the first
             if (instance.rememberManager.GetDailyRound() != 0)
             {
@@ -256,7 +255,7 @@ public class RememberGame : MonoBehaviour
 
         else
         {
-            Debug.Log("Correct");
+            //Debug.Log("Correct");
             selectedCount++;
             indexedButtons[selectedIndex].gameObject.SetActive(false);
         }
@@ -264,7 +263,7 @@ public class RememberGame : MonoBehaviour
         // has selected all the buttons and completed the round
         if (selectedCount >= indexes.Length)
         {
-            Debug.Log("All buttons have been selected");
+            //Debug.Log("All buttons have been selected");
             instance.EndButtonSelectStage();
         }
 
