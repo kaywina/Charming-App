@@ -50,7 +50,7 @@ public class RememberGame : MonoBehaviour
 
     public void ResetButtonSelect()
     {
-        //Debug.Log("Reset buttons");
+        Debug.Log("Reset buttons");
         difficultySlider.gameObject.SetActive(true);
         rememberComeBack.SetActive(false);
         SetupButtons(false);

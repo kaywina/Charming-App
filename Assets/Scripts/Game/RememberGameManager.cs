@@ -13,6 +13,8 @@ public class RememberGameManager : MonoBehaviour
     public GameObject rememberComeBack;
     public GameObject instructions;
 
+    private bool onInstructions = false;
+
     public int daysToWin = 10;
 
     private int score = 0;
@@ -126,11 +128,11 @@ public class RememberGameManager : MonoBehaviour
     {
         Debug.Log("Play Remember Game");
         rememberPlayGame.Reset();
-        if (PlayerPrefs.GetString(hasSelectedButtonsPlayerPref) == "True")
+        if (HasSavedData())
         {
             if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
             {
-                //Debug.Log("It's a new day, input your numbers!");
+                Debug.Log("It's a new day, input your numbers!");
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
                 rememberGameControls.DisableDifficultySlider();
@@ -138,7 +140,7 @@ public class RememberGameManager : MonoBehaviour
             }
             else
             {
-                //Debug.Log("It's not a new day, come back tomorrow");
+                Debug.Log("It's not a new day, come back tomorrow");
                 rememberGameControls.gameObject.SetActive(false);
                 rememberComeBack.SetActive(true);
                 instructions.SetActive(false);
@@ -147,9 +149,21 @@ public class RememberGameManager : MonoBehaviour
         }
         else // there is no stored data so start fresh
         {
-            instructions.SetActive(true);
-            rememberGameControls.SetupButtons(false);
             rememberComeBack.SetActive(false);
+            if (!onInstructions)
+            {
+                Debug.Log("Coming from the menu select screen");
+                instructions.SetActive(true);
+                onInstructions = true;
+            }
+            else
+            {
+                Debug.Log("Playing from instructions screen; setup first daily round");
+                instructions.SetActive(false);
+                rememberGameControls.SetupButtons(false);
+                rememberGameControls.gameObject.SetActive(true);
+                onInstructions = false;
+            }          
         }
     }
 }
