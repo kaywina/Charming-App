@@ -152,7 +152,7 @@ public class RememberGameManager : MonoBehaviour
             rememberComeBack.SetActive(false);
             if (!onInstructions)
             {
-                Debug.Log("Coming from the menu select screen");
+                Debug.Log("Coming from the menu select screen, or high score screen");
                 instructions.SetActive(true);
                 onInstructions = true;
             }

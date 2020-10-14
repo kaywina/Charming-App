@@ -15,7 +15,7 @@ public class RememberGame : MonoBehaviour
     public Text dayText;
 
     private int difficultyIndex = 2;
-    private Image[] images;
+    public Image[] images;
     private static int[] indexes;
     private static GameIndexedObject[] indexedButtons;
     private static bool playingGame = false;
@@ -60,6 +60,7 @@ public class RememberGame : MonoBehaviour
     {
         //Debug.Log("Finish Today's Round of Remember");
         difficultySlider.gameObject.SetActive(false);
+        levelButtons[difficultyIndex].SetActive(false);
         rememberComeBack.SetActive(true);
         rememberManager.SetHasSelectedButtonsPlayerPref(true);
         rememberManager.SetSavedDifficultyIndex(difficultyIndex);
@@ -131,7 +132,11 @@ public class RememberGame : MonoBehaviour
     // get arrays of all button Images and GameIndexedObjects for this level
     public void GetImagesAndIndexedButtons()
     {
+        Debug.Log("Get images and indexed buttons");
         difficultyIndex = difficultySlider.GetValue();
+
+        Debug.Log("Difficulty index is " + difficultyIndex);
+
         images = levelButtons[difficultyIndex].GetComponentsInChildren<Image>();
         indexedButtons = levelButtons[difficultyIndex].GetComponentsInChildren<GameIndexedObject>();
     }
@@ -158,6 +163,8 @@ public class RememberGame : MonoBehaviour
 
     public void BuildIndexesArray()
     {
+        Debug.Log("Build the indexes array");
+        
         // fill up an array up with numbers from 0 to one less than it's length
         indexes = new int[images.Length];
 
@@ -180,6 +187,8 @@ public class RememberGame : MonoBehaviour
 
     public void ApplyShuffledIndexesToButtons()
     {
+        Debug.Log("Apply shuffled indexes to buttons");
+        
         // this should apply the randomized pattern to the buttons
         for (int f = 0; f < indexes.Length; f++)
         {
@@ -262,6 +271,12 @@ public class RememberGame : MonoBehaviour
         if (selectedCount >= indexes.Length)
         {
             instance.EndButtonSelectStage();
+
+            // reset all the buttons to active so there is no null ref on images[] when trying to start a new game from high score display
+            for (int i = 0; i < indexedButtons.Length; i++)
+            {
+                indexedButtons[i].gameObject.SetActive(true);
+            }
         }
 
         return true;
