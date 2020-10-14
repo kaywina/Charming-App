@@ -51,7 +51,6 @@ public class RememberGame : MonoBehaviour
         rememberManager.SetSavedDifficultyIndex(difficultyIndex);
         rememberManager.SetSavedShuffledIndexes(indexes);
         selectedCount = 0; // reset the counter so next game doesn't end after first click
-        selectedIndex = 0; 
         instance.rememberManager.NextRound();
     }
 
@@ -239,11 +238,7 @@ public class RememberGame : MonoBehaviour
         }
 
         instance.DisableDifficultySlider(); // disable the slider immediately following first click on a button
-
         selectedIndex = orderedIndex; // this needs to happen after the playingGame check, to avoid cases where user cicks a button between an incorrect guess and end of game, which results in buttons not showing up on subsequent plays
-
-        //Debug.Log("selectedCount = " + selectedCount.ToString());
-        //Debug.Log("indexToCheck is " + indexToCheck.ToString());
 
         if (selectedCount != shuffledIndex)
         {
@@ -254,6 +249,7 @@ public class RememberGame : MonoBehaviour
             {
                 instance.ShowIncorrectIndicator();
                 playingGame = false; // stop ability to press more game buttons
+                selectedCount = 0; // reset this so count works properly if game is played again directly from high score screen
                 instance.DelayedEndGame(1f);
             }
         }
