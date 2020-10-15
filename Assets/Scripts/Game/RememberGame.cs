@@ -175,9 +175,6 @@ public class RememberGame : MonoBehaviour
 
     public void CheckIndexes()
     {
-        Debug.Log("indexes length is " + indexes.Length);
-        Debug.Log("images length is " + images.Length);
-        Debug.Log("difficultyIndex is " + difficultyIndex);
         // check for error
         if (indexes.Length != images.Length)
         {

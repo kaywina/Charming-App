@@ -88,7 +88,7 @@ public class RememberGameManager : MonoBehaviour
 
     public void SetSavedDifficultyIndex(int difficultyIndex)
     {
-        Debug.Log("Save the difficulty index of " + difficultyIndex);
+        //Debug.Log("Save the difficulty index of " + difficultyIndex);
         PlayerPrefs.SetInt(difficultyPlayerPref, difficultyIndex);
     }
 
@@ -96,7 +96,7 @@ public class RememberGameManager : MonoBehaviour
     {
 
         int difficultyIndex = PlayerPrefs.GetInt(difficultyPlayerPref);
-        Debug.Log("Get the saved difficulty index of " + difficultyIndex);
+        //Debug.Log("Get the saved difficulty index of " + difficultyIndex);
         return difficultyIndex;
     }
 
@@ -140,7 +140,7 @@ public class RememberGameManager : MonoBehaviour
         {
             if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
             {
-                Debug.Log("It's a new day, input your numbers!");
+                //Debug.Log("It's a new day, input your numbers!");
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
                 rememberGameControls.DisableDifficultySlider();
@@ -148,7 +148,7 @@ public class RememberGameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("It's not a new day, come back tomorrow");
+                //Debug.Log("It's not a new day, come back tomorrow");
                 rememberGameControls.gameObject.SetActive(false);
                 rememberComeBack.SetActive(true);
                 instructions.SetActive(false);
@@ -160,12 +160,12 @@ public class RememberGameManager : MonoBehaviour
             rememberComeBack.SetActive(false);
             if (!onInstructions)
             {
-                Debug.Log("Coming from the menu select screen, or high score screen");
+                //Debug.Log("Coming from the menu select screen, or high score screen");
                 instructions.SetActive(true);
             }
             else
             {
-                Debug.Log("Playing from instructions screen; setup first daily round");
+                //Debug.Log("Playing from instructions screen; setup first daily round");
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtons(false);
                 rememberGameControls.gameObject.SetActive(true);
