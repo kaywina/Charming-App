@@ -90,7 +90,7 @@ public class RememberGame : MonoBehaviour
         //Debug.Log("Setup buttons; is there data? = " + fromData);
         incorrectIndicator.SetActive(false);
         dayText.gameObject.SetActive(false);
-        GetImagesAndIndexedButtons();
+        GetImagesAndIndexedButtons(fromData);
         SetOrderedIndexes();
         CheckImages();
         BuildIndexesArray();
@@ -119,10 +119,19 @@ public class RememberGame : MonoBehaviour
     }
 
     // get arrays of all button Images and GameIndexedObjects for this level
-    public void GetImagesAndIndexedButtons()
+    public void GetImagesAndIndexedButtons(bool fromData)
     {
         //Debug.Log("Get images and indexed buttons");
-        difficultyIndex = difficultySlider.GetValue();
+
+        // if data has been saved and this is running from playing on a new day, need to get saved difficulty index to avoid array mismatch and crash on ios
+        if (fromData)
+        {
+            difficultyIndex = rememberManager.GetSavedDifficultyIndex();
+        }
+        else
+        {
+            difficultyIndex = difficultySlider.GetValue();
+        }
 
         //Debug.Log("Difficulty index is " + difficultyIndex);
 
@@ -166,6 +175,9 @@ public class RememberGame : MonoBehaviour
 
     public void CheckIndexes()
     {
+        Debug.Log("indexes length is " + indexes.Length);
+        Debug.Log("images length is " + images.Length);
+        Debug.Log("difficultyIndex is " + difficultyIndex);
         // check for error
         if (indexes.Length != images.Length)
         {
