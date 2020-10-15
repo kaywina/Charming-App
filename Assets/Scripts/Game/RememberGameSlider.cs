@@ -13,6 +13,8 @@ public class RememberGameSlider : MonoBehaviour
 
     private string playerPrefName = "RememberGameNumberOfButtons"; // don't change this in production
 
+    public Text scoreMultiplierText;
+
     public void OnEnable()
     {
         Initialize();
@@ -48,6 +50,9 @@ public class RememberGameSlider : MonoBehaviour
         }
 
         if (initialized) { gameRemember.EnableButtonsByIndex((int)slider.value); }
+
+        int scoreMultiplier = (int)slider.value + 1;
+        scoreMultiplierText.text = Localization.GetTranslationByKey("SCORE_MULTIPLIER") + " = " + scoreMultiplier.ToString();
     }
 
     public int GetValue()
