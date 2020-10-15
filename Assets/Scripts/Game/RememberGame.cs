@@ -28,15 +28,6 @@ public class RememberGame : MonoBehaviour
         instance = gameObject.GetComponent<RememberGame>();
     }
 
-    private void OnEnable()
-    {
-        incorrectIndicator.SetActive(false);
-        if (!rememberManager.HasSavedData())
-        {
-            ResetButtonSelect();
-        }
-    }
-
     public void DisableDifficultySlider()
     {
         difficultySlider.gameObject.SetActive(false);
@@ -50,14 +41,6 @@ public class RememberGame : MonoBehaviour
         }
     }
 
-    public void ResetButtonSelect()
-    {
-        Debug.Log("Reset buttons");
-        difficultySlider.gameObject.SetActive(true);
-        rememberComeBack.SetActive(false);
-        SetupButtons(false);
-    }
-
     private void EndButtonSelectStage()
     {
         //Debug.Log("Finish Today's Round of Remember");
@@ -68,6 +51,7 @@ public class RememberGame : MonoBehaviour
         rememberManager.SetSavedDifficultyIndex(difficultyIndex);
         rememberManager.SetSavedShuffledIndexes(indexes);
         selectedCount = 0; // reset the counter so next game doesn't end after first click
+        selectedIndex = 0; 
         instance.rememberManager.NextRound();
     }
 
@@ -105,6 +89,7 @@ public class RememberGame : MonoBehaviour
     public void SetupButtons(bool fromData)
     {
         //Debug.Log("Setup buttons; is there data? = " + fromData);
+        incorrectIndicator.SetActive(false);
         dayText.gameObject.SetActive(false);
         GetImagesAndIndexedButtons();
         SetOrderedIndexes();
@@ -113,12 +98,14 @@ public class RememberGame : MonoBehaviour
 
         if (!fromData)
         {
-            //Debug.Log("Shuffle the indexes because this is the first day of play for this game");
+            Debug.Log("Shuffle the indexes because this is the first day of play for this game");
             Shuffle(indexes);
+            difficultySlider.gameObject.SetActive(true);
+            rememberComeBack.SetActive(false);
         }
         else
         {
-            //Debug.Log("Get the indexes from data since this is not the first day of play for this game");
+            Debug.Log("Get the indexes from data since this is not the first day of play for this game");
             indexes = rememberManager.GetSavedShuffledIndexes();
 
             // in this case also show the "Day: 1" "Day: 2" etc label above the buttons
