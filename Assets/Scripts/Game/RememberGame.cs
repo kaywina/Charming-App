@@ -65,6 +65,7 @@ public class RememberGame : MonoBehaviour
         rememberManager.SetHasSelectedButtonsPlayerPref(true);
         rememberManager.SetSavedDifficultyIndex(difficultyIndex);
         rememberManager.SetSavedShuffledIndexes(indexes);
+        selectedCount = 0; // reset the counter so next game doesn't end after first click
         instance.rememberManager.NextRound();
     }
 
@@ -132,10 +133,10 @@ public class RememberGame : MonoBehaviour
     // get arrays of all button Images and GameIndexedObjects for this level
     public void GetImagesAndIndexedButtons()
     {
-        Debug.Log("Get images and indexed buttons");
+        //Debug.Log("Get images and indexed buttons");
         difficultyIndex = difficultySlider.GetValue();
 
-        Debug.Log("Difficulty index is " + difficultyIndex);
+        //Debug.Log("Difficulty index is " + difficultyIndex);
 
         images = levelButtons[difficultyIndex].GetComponentsInChildren<Image>();
         indexedButtons = levelButtons[difficultyIndex].GetComponentsInChildren<GameIndexedObject>();
@@ -163,7 +164,7 @@ public class RememberGame : MonoBehaviour
 
     public void BuildIndexesArray()
     {
-        Debug.Log("Build the indexes array");
+        //Debug.Log("Build the indexes array");
         
         // fill up an array up with numbers from 0 to one less than it's length
         indexes = new int[images.Length];
@@ -187,7 +188,7 @@ public class RememberGame : MonoBehaviour
 
     public void ApplyShuffledIndexesToButtons()
     {
-        Debug.Log("Apply shuffled indexes to buttons");
+        //Debug.Log("Apply shuffled indexes to buttons");
         
         // this should apply the randomized pattern to the buttons
         for (int f = 0; f < indexes.Length; f++)
@@ -257,12 +258,12 @@ public class RememberGame : MonoBehaviour
 
         if (selectedCount != shuffledIndex)
         {
-            //Debug.Log("Incorrect"); // do nothing in this case
+            Debug.Log("Incorrect"); // do nothing in this case
         }
 
         else
         {
-            //Debug.Log("Correct");
+            Debug.Log("Correct");
             selectedCount++;
             indexedButtons[selectedIndex].gameObject.SetActive(false);
         }
@@ -270,6 +271,7 @@ public class RememberGame : MonoBehaviour
         // has selected all the buttons and completed the round
         if (selectedCount >= indexes.Length)
         {
+            Debug.Log("All buttons have been selected");
             instance.EndButtonSelectStage();
 
             // reset all the buttons to active so there is no null ref on images[] when trying to start a new game from high score display
