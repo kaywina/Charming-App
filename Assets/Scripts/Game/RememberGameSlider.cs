@@ -13,12 +13,20 @@ public class RememberGameSlider : MonoBehaviour
 
     private string playerPrefName = "RememberGameNumberOfButtons"; // don't change this in production
 
+    public GameObject sliderHintObject;
     public Text scoreMultiplierText;
 
-    public void OnEnable()
+    void OnEnable()
     {
         Initialize();
     }
+
+    void OnDisable()
+    {
+        sliderHintObject.SetActive(false);
+    }
+
+
 
     public void Initialize()
     {
@@ -34,6 +42,7 @@ public class RememberGameSlider : MonoBehaviour
 
         SetNumberOfButtonsFromSliderValues();
         initialized = true;
+        sliderHintObject.SetActive(true);
     }
 
     public void SetNumberOfButtonsFromSliderValues()
