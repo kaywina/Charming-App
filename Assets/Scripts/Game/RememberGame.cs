@@ -169,7 +169,7 @@ public class RememberGame : MonoBehaviour
         // check for error
         if (indexes.Length != images.Length)
         {
-            Debug.LogError("Mismatched array lengths in Game Attention; aborting level setup");
+            Debug.LogError("Mismatched array lengths in Game Remember; aborting level setup");
             return;
         }
     }
