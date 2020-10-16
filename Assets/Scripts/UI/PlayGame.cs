@@ -114,10 +114,18 @@ public class PlayGame : MonoBehaviour
         //Debug.Log("That's the end of the game");
         gameControls.SetActive(false);
 
-        SetRewardUI(); // this shows different UI depending on if user got a new high score or not
+        // check if there is a new high score and save it if so
+        if (CheckScore(score))
+        {
+            SaveHighScore(score);
+        }
 
+        // show the previous high score and save it
         previousHighScoreText.text = LoadPreviousHighScore().ToString();
         SavePreviousHighScore(PlayerPrefs.GetInt(gameName + highScoreDataTag)); // need to do this after updating text
+
+        // show the high score display
+        SetRewardUI(); // this shows different UI depending on if user got a new high score or not
         ShowYourScoreDisplay(score);
     }
 

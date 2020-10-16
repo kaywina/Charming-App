@@ -130,10 +130,6 @@ public class AttentionGame : MonoBehaviour
         playingGame = false;
         levelButtons[level].SetActive(false);
         indexedButtons[selectedIndex].gameObject.SetActive(true); // set the last clicked button back to active incase it was deactivated as an incorrect choice
-        if (playGame.CheckScore(score))
-        {
-            playGame.SaveHighScore(score);
-        }
         playGame.EndGame(score);
     }
 

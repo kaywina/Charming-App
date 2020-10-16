@@ -45,7 +45,7 @@ public class RememberGameManager : MonoBehaviour
         SetHasSelectedButtonsPlayerPref(false);
         rememberComeBack.SetActive(false);
         int score = CalculateScore();
-        Debug.Log("score is " + score);
+        //Debug.Log("score is " + score);
         rememberPlayGame.EndGame(score);
         PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, 0); // do this after calculating the score
     }
@@ -132,7 +132,7 @@ public class RememberGameManager : MonoBehaviour
 
     public void PlayGame()
     {
-        Debug.Log("Play Remember Game");
+        //Debug.Log("Play Remember Game");
         rememberPlayGame.Reset();
         if (HasSavedData())
         {
