@@ -12,6 +12,7 @@ public class RememberGameManager : MonoBehaviour
     public RememberGame rememberGameControls;
     public GameObject rememberComeBack;
     public GameObject instructions;
+    public GameObject sliderHintObject;
 
     public int daysToWin = 10;
 
@@ -141,6 +142,7 @@ public class RememberGameManager : MonoBehaviour
             if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
             {
                 //Debug.Log("It's a new day, input your numbers!");
+                sliderHintObject.SetActive(false);
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
                 rememberGameControls.DisableDifficultySlider();
