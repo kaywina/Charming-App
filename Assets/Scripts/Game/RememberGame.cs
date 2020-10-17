@@ -315,4 +315,19 @@ public class RememberGame : MonoBehaviour
     {
         correctIndicator.SetActive(false);
     }
+
+    public void ResetButtons()
+    {
+        if (indexedButtons == null || indexedButtons.Length <= 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < indexedButtons.Length; i++)
+        {
+            indexedButtons[i].gameObject.SetActive(true);
+        }
+
+        selectedCount = 0;
+    }
 }

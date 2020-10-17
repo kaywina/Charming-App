@@ -137,6 +137,7 @@ public class RememberGameManager : MonoBehaviour
     {
         //Debug.Log("Play Remember Game");
         rememberPlayGame.Reset();
+        rememberGameControls.ResetButtons();
         if (HasSavedData())
         {
             if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
