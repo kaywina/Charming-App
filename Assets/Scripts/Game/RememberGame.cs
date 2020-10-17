@@ -13,6 +13,7 @@ public class RememberGame : MonoBehaviour
     public RememberGameSlider difficultySlider;
     public GameObject rememberComeBack;
     public Text dayText;
+    public GameObject correctIndicator;
     public GameObject incorrectIndicator;
 
     private int difficultyIndex = 2;
@@ -88,6 +89,7 @@ public class RememberGame : MonoBehaviour
     public void SetupButtons(bool fromData)
     {
         //Debug.Log("Setup buttons; is there data? = " + fromData);
+        correctIndicator.SetActive(false);
         incorrectIndicator.SetActive(false);
         dayText.gameObject.SetActive(false);
         GetImagesAndIndexedButtons(fromData);
@@ -266,12 +268,13 @@ public class RememberGame : MonoBehaviour
         {
             //Debug.Log("Correct");
             selectedCount++;
-            indexedButtons[selectedIndex].gameObject.SetActive(false);
+            instance.ShowCorrectIndicator();
         }
 
         // has selected all the buttons and completed the round
         if (selectedCount >= indexes.Length)
         {
+            instance.HideCorrectIndicator();
             //Debug.Log("All buttons have been selected");
             instance.EndButtonSelectStage();
         }
@@ -299,5 +302,17 @@ public class RememberGame : MonoBehaviour
         indexedButtons[selectedIndex].gameObject.SetActive(false);
         incorrectIndicator.transform.position = indexedButtons[selectedIndex].transform.position;
         incorrectIndicator.SetActive(true);
+    }
+
+    public void ShowCorrectIndicator()
+    {
+        indexedButtons[selectedIndex].gameObject.SetActive(false);
+        correctIndicator.transform.position = indexedButtons[selectedIndex].transform.position;
+        correctIndicator.SetActive(true);
+    }
+
+    public void HideCorrectIndicator()
+    {
+        correctIndicator.SetActive(false);
     }
 }
