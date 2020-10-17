@@ -13,6 +13,8 @@ public class RememberGameManager : MonoBehaviour
     public GameObject rememberComeBack;
     public GameObject instructions;
 
+    public int daysToWin = 10;
+
     private void OnEnable()
     {
         //Debug.Log("On Enable for RememberGameManager");
@@ -21,7 +23,7 @@ public class RememberGameManager : MonoBehaviour
         {
             if (TimeManager.IsNewDay(TimeManager.TimeType.RememberGame))
             {
-                Debug.Log("It's a new day, input your numbers!");
+                //Debug.Log("It's a new day, input your numbers!");
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
                 rememberGameControls.DisableDifficultySlider();
@@ -29,7 +31,7 @@ public class RememberGameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("It's not a new day, come back tomorrow");
+                //Debug.Log("It's not a new day, come back tomorrow");
                 rememberGameControls.gameObject.SetActive(false);
                 rememberComeBack.SetActive(true);
                 instructions.SetActive(false);
@@ -47,7 +49,14 @@ public class RememberGameManager : MonoBehaviour
     public void NextRound()
     {
         int numberOfDailyRounds = GetDailyRound();
+
         numberOfDailyRounds++;
+
+        if (numberOfDailyRounds > daysToWin)
+        {
+            Debug.Log("You win!");
+        }
+
         PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, numberOfDailyRounds);
         Debug.Log("Number of daily rounds played so far = " + numberOfDailyRounds);
     }
@@ -84,14 +93,14 @@ public class RememberGameManager : MonoBehaviour
 
     public void SetSavedDifficultyIndex(int difficultyIndex)
     {
-        Debug.Log("Save the difficulty index of " + difficultyIndex);
+        //Debug.Log("Save the difficulty index of " + difficultyIndex);
         PlayerPrefs.SetInt(difficultyPlayerPref, difficultyIndex);
     }
 
     public int GetSavedDifficultIndex()
     {
         int difficultyIndex = PlayerPrefs.GetInt(difficultyPlayerPref);
-        Debug.Log("Saved difficulty index is " + difficultyIndex);
+        //Debug.Log("Saved difficulty index is " + difficultyIndex);
         return difficultyIndex;
     }
 
@@ -103,7 +112,7 @@ public class RememberGameManager : MonoBehaviour
             PlayerPrefs.SetInt(shuffledIndexPlayerPrefPrefix + i, shuffledIndexes[i]);
             logOutput += shuffledIndexes[i] + " ";
         }
-        Debug.Log("Saved player prefs for shuffled indexes = " + logOutput);
+        //Debug.Log("Saved player prefs for shuffled indexes = " + logOutput);
     }
 
     public int[] GetSavedShuffledIndexes()
@@ -120,7 +129,7 @@ public class RememberGameManager : MonoBehaviour
             logOutput += shuffledIndexes[i] + " ";
         }
 
-        Debug.Log("Shuffled indexes loaded from data: " + logOutput);
+        //Debug.Log("Shuffled indexes loaded from data: " + logOutput);
 
         return shuffledIndexes;
     }

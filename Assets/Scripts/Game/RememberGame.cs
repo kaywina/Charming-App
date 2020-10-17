@@ -50,7 +50,7 @@ public class RememberGame : MonoBehaviour
 
     public void ResetButtonSelect()
     {
-        Debug.Log("Reset buttons");
+        //Debug.Log("Reset buttons");
         difficultySlider.gameObject.SetActive(true);
         rememberComeBack.SetActive(false);
         SetupButtons(false);
@@ -58,7 +58,7 @@ public class RememberGame : MonoBehaviour
 
     private void EndButtonSelectStage()
     {
-        Debug.Log("Finish Today's Round of Remember");
+        //Debug.Log("Finish Today's Round of Remember");
         difficultySlider.gameObject.SetActive(false);
         rememberComeBack.SetActive(true);
         rememberManager.SetHasSelectedButtonsPlayerPref(true);
@@ -93,14 +93,14 @@ public class RememberGame : MonoBehaviour
 
     public void SetupButtonsFromData()
     {
-        Debug.Log("Setup buttons from data for a new daily round");
+        //Debug.Log("Setup buttons from data for a new daily round");
         SetupButtons(true);
         HideAll();
     }
 
     public void SetupButtons(bool fromData)
     {
-        Debug.Log("Setup buttons; is there data? = " + fromData);
+        //Debug.Log("Setup buttons; is there data? = " + fromData);
         dayText.gameObject.SetActive(false);
         GetImagesAndIndexedButtons();
         SetOrderedIndexes();
@@ -109,12 +109,12 @@ public class RememberGame : MonoBehaviour
 
         if (!fromData)
         {
-            Debug.Log("Shuffle the indexes because this is the first day of play for this game");
+            //Debug.Log("Shuffle the indexes because this is the first day of play for this game");
             Shuffle(indexes);
         }
         else
         {
-            Debug.Log("Get the indexes from data since this is not the first day of play for this game");
+            //Debug.Log("Get the indexes from data since this is not the first day of play for this game");
             indexes = rememberManager.GetSavedShuffledIndexes();
 
             // in this case also show the "Day: 1" "Day: 2" etc label above the buttons
@@ -153,7 +153,7 @@ public class RememberGame : MonoBehaviour
             return;
         }
 
-        Debug.Log("Images checked successfully; no errors found");
+        //Debug.Log("Images checked successfully; no errors found");
     }
 
     public void BuildIndexesArray()
@@ -188,7 +188,7 @@ public class RememberGame : MonoBehaviour
             indexedButtons[f].SetShuffledIndex(indexes[f]); // also set the index on the button, which we use to track which buttons the user has selected
         }
 
-        Debug.Log("Shuffled indexes applied to buttons");
+        //Debug.Log("Shuffled indexes applied to buttons");
     } 
 
     public void ActivateCorrectButtons()
@@ -199,7 +199,7 @@ public class RememberGame : MonoBehaviour
             if (n == difficultyIndex)
             {
                 levelButtons[n].SetActive(true);
-                Debug.Log("Activate buttons for difficulty index " + n);
+                //Debug.Log("Activate buttons for difficulty index " + n);
             }
             else
             {
