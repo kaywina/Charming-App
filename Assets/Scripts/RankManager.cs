@@ -11,6 +11,15 @@ public class RankManager : MonoBehaviour
     public static string maxRankLocKey = "REACHED_MAX_RANK"; // don't change this in production!
 
     private int newDays = 0;
+    private int rankIndex = 0;
+    private int daysToNextRank = 0;
+
+    // match number of rank cases to length of rankTextObjects array
+    private const int firstRankDays = 3; // hack to make zero indexing work to display 2 days until first rank
+    private const int secondRankDays = 4 + firstRankDays;
+    private const int thirdRankDays = 8 + secondRankDays;
+    private const int fourthRankDays = 16 + thirdRankDays;
+    private const int fifthRankDays = 32 + fourthRankDays;
 
     // Start is called before the first frame update
     void Start()
@@ -41,22 +50,51 @@ public class RankManager : MonoBehaviour
         TimeManager.SetPrefsForRank();
     }
 
+    private static int GetDays()
+    {
+        return PlayerPrefs.GetInt(daysPlayerPref);
+    }
+
+
+    public static int GetRank()
+    {
+        int rank = 0;
+        int tempDays = GetDays();
+
+        if (tempDays >= fifthRankDays)
+        {
+            rank = 5; // archon
+            // this is the maximum rank
+        }
+        else if (tempDays >= fourthRankDays)
+        {
+            rank = 4; // acolyte
+        }
+        else if (tempDays >= thirdRankDays)
+        {
+            rank = 3; // adept
+        }
+        else if (tempDays >= secondRankDays)
+        {
+            rank = 2; // apprentice
+        }
+        else if (tempDays >= firstRankDays)
+        {
+            rank = 1; // amateur
+        }
+        else
+        {
+            rank = 0; // unranked
+        }
+
+        Debug.Log("Rank is " + rank);
+        return rank;
+    }
+
     private void SetRank(int days)
     {
         DisableAllRankTextObjects();
         //Debug.Log("Set a rank based on number of unique daily spin days");
-
-        int rankIndex = 0;
-        int daysToNextRank = 0;
-
-        // match number of rank cases to length of rankTextObjects array
-
-        int firstRankDays = 3; // hack to make zero indexing work to display 2 days until first rank
-        int secondRankDays = 4 + firstRankDays;
-        int thirdRankDays = 8 + secondRankDays;
-        int fourthRankDays = 16 + thirdRankDays;
-        int fifthRankDays = 32 + fourthRankDays;
-
 
         if (days >= fifthRankDays)
         {
@@ -93,7 +131,6 @@ public class RankManager : MonoBehaviour
             rankIndex = 0; // unranked
             daysToNextRank = firstRankDays - days;
         }
-
 
         // special loc case for having reached maximum rank
         if (rankIndex == 5)
