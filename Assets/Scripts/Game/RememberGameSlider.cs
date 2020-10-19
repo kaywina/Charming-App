@@ -42,13 +42,13 @@ public class RememberGameSlider : MonoBehaviour
             slider.value = PlayerPrefs.GetInt(playerPrefName);
         }
 
-        SetNumberOfButtonsFromSliderValues();
-        initialized = true;
+        SetNumberOfButtonsFromSliderValues(); // this is getting called twice, also from OnValueChanged
         sliderHintObject.SetActive(true);
     }
 
     public void SetNumberOfButtonsFromSliderValues()
     {
+        Debug.Log("Set number of buttons from slider values");
         if (slider.value < 0)
         {
             Debug.Log("Slider value is less than zero; that shouldn't happen");
@@ -60,28 +60,25 @@ public class RememberGameSlider : MonoBehaviour
             PlayerPrefs.SetInt(playerPrefName, (int)slider.value);
         }
 
-        if (initialized) {
+        // there is where we control whether to show the buttons if a particular rank has been achieved, or the lock if not
+        int rank = RankManager.GetRank();
 
-            // there is where we control whether to show the buttons if a particular rank has been achieved, or the lock if not
-            int rank = RankManager.GetRank();
-
-            // for unranked players; lock difficulties above 5 buttons
-            if (rank == 0)
+        // for unranked players; lock difficulties above 5 buttons
+        if (rank == 0)
+        {
+            int lockoutAboveThisIndex = 2;
+            if (slider.value <= lockoutAboveThisIndex)
             {
-                int lockoutAboveThisIndex = 2;
-                if (slider.value <= lockoutAboveThisIndex)
-                {
-                    Debug.Log("Show and setup the buttons");
-                    lockObject.SetActive(false);
-                    gameRemember.EnableButtonsByIndex((int)slider.value);
-                    gameRemember.SetupButtons(false);
-                }
-                else
-                {
-                    Debug.Log("Show the lock");
-                    lockObject.SetActive(true);
-                    gameRemember.HideAllButtons(); // hide the last shown set of buttons; ugh this is awful
-                }
+                Debug.Log("Show and setup the buttons");
+                lockObject.SetActive(false);
+                gameRemember.EnableButtonsByIndex((int)slider.value);
+                gameRemember.SetupButtons(false);
+            }
+            else
+            {
+                Debug.Log("Show the lock");
+                lockObject.SetActive(true);
+                gameRemember.HideAllButtons(); // hide the last shown set of buttons; ugh this is awful
             }
         }
 
