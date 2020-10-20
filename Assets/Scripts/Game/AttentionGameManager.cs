@@ -9,6 +9,11 @@ public class AttentionGameManager : MonoBehaviour
     public PlayGame attentionPlayGame;
     public AttentionGame attentionGameControls;
 
+    private void OnEnable()
+    {
+        ResetToInstructions();
+    }
+
     private void OnDisable()
     {
         ResetToInstructions();
