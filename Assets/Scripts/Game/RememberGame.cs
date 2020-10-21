@@ -220,7 +220,7 @@ public class RememberGame : MonoBehaviour
 
     public void HideAllButtons()
     {
-        Debug.Log("Hide all buttons");
+        //Debug.Log("Hide all buttons");
         for (int i = 0; i < levelButtons.Length; i++)
         {
             levelButtons[i].SetActive(false);
@@ -229,7 +229,7 @@ public class RememberGame : MonoBehaviour
 
     public void HideButtonsByIndex (int index)
     {
-        Debug.Log("Hide buttons for index " + index);
+        //Debug.Log("Hide buttons for index " + index);
         for (int i = 0; i < levelButtons.Length; i++)
         {
             if (i == index)
@@ -241,7 +241,7 @@ public class RememberGame : MonoBehaviour
 
     public void EnableButtonsByIndex(int index)
     {
-        Debug.Log("Enable buttons for index " + index);
+        //Debug.Log("Enable buttons for index " + index);
         for (int i = 0; i < levelButtons.Length; i++)
         {
             if (i == index)

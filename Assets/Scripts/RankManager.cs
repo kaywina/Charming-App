@@ -87,7 +87,7 @@ public class RankManager : MonoBehaviour
             rank = 0; // unranked
         }
 
-        Debug.Log("Rank is " + rank);
+        //Debug.Log("Rank is " + rank);
         return rank;
     }
 

@@ -9,7 +9,6 @@ public class RememberGameSlider : MonoBehaviour
     public RememberGame gameRemember;
     public GameObject lockObject;
 
-    private bool initialized = false;
     private float defaultIndex = 2;
 
     private string playerPrefName = "RememberGameNumberOfButtons"; // don't change this in production
@@ -32,7 +31,7 @@ public class RememberGameSlider : MonoBehaviour
 
     public void Initialize()
     {
-        Debug.Log("Initialize Remember game slider");
+        //Debug.Log("Initialize Remember game slider");
         if (!PlayerPrefs.HasKey(playerPrefName))
         {
             slider.value = defaultIndex;
@@ -48,7 +47,7 @@ public class RememberGameSlider : MonoBehaviour
 
     public void SetNumberOfButtonsFromSliderValues()
     {
-        Debug.Log("Set number of buttons from slider values");
+        //Debug.Log("Set number of buttons from slider values");
         if (slider.value < 0)
         {
             Debug.Log("Slider value is less than zero; that shouldn't happen");
@@ -101,14 +100,14 @@ public class RememberGameSlider : MonoBehaviour
     {
         if (slider.value <= index)
         {
-            Debug.Log("Show and setup the buttons");
+            //Debug.Log("Show and setup the buttons");
             lockObject.SetActive(false);
             gameRemember.EnableButtonsByIndex((int)slider.value);
             gameRemember.SetupButtons(false);
         }
         else
         {
-            Debug.Log("Show the lock");
+            //Debug.Log("Show the lock");
             lockObject.SetActive(true);
             gameRemember.HideAllButtons(); // hide the last shown set of buttons; ugh this is awful
         }
