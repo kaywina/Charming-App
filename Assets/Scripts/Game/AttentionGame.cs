@@ -40,6 +40,11 @@ public class AttentionGame : MonoBehaviour
         SetupLevel();
     }
 
+    private void OnDisable()
+    {
+        CancelInvoke("EndGame");
+    }
+
     //for shuffle number from array
     void Shuffle(int[] array)
     {

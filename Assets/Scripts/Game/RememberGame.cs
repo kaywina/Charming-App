@@ -29,6 +29,11 @@ public class RememberGame : MonoBehaviour
         instance = gameObject.GetComponent<RememberGame>();
     }
 
+    private void OnDisable()
+    {
+        CancelInvoke("EndGame");
+    }
+
     public void DisableDifficultySlider()
     {
         difficultySlider.gameObject.SetActive(false);
