@@ -17,8 +17,6 @@ public class RememberGameManager : MonoBehaviour
 
     public int daysToWin = 10;
 
-    private int score = 0;
-
     private void OnEnable()
     {
         PlayGame();
@@ -38,17 +36,25 @@ public class RememberGameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, numberOfDailyRounds);
         }
-        Debug.Log("Number of daily rounds played so far = " + numberOfDailyRounds);
     }
 
     // reset data and UI
     public void EndGame()
     {
         Debug.Log("You win!");
-        PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, 0);
         SetHasSelectedButtonsPlayerPref(false);
         rememberComeBack.SetActive(false);
+        int score = CalculateScore();
+        Debug.Log("score is " + score);
         rememberPlayGame.EndGame(score);
+        PlayerPrefs.SetInt(numberOfDailyRoundsPlayerPref, 0); // do this after calculating the score
+    }
+
+    private int CalculateScore()
+    {
+        int score = 0;
+        score = GetDailyRound() * (GetSavedDifficultIndex() + 1);
+        return score;
     }
 
     public int GetDailyRound()
