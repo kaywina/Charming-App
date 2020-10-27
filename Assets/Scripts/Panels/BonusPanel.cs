@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BonusPanel : CharmsPanel
 {
-    public GameObject header;
+    public GameObject overlayControls;
     public BonusWheel bonusWheel;
     public GameObject[] deactivateOnReadySpin;
     public GameObject[] activateAfterSpin;
@@ -36,7 +36,7 @@ public class BonusPanel : CharmsPanel
         doubleBonusText.SetActive(false);
         totalBonusText.gameObject.SetActive(false);
 
-        header.SetActive(false);
+        overlayControls.SetActive(false);
         hasSpun = false;
 
         for (int i = 0; i < activateAfterSpin.Length; i++)
@@ -60,7 +60,7 @@ public class BonusPanel : CharmsPanel
         }
 
         storedBonus = 0;
-        if (header != null) { header.SetActive(true); }
+        if (overlayControls != null) { overlayControls.SetActive(true); }
         if (fireworks != null) { fireworks.Stop(); }
         base.OnDisable();
     }

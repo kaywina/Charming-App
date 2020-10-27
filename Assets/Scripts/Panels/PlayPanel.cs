@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayPanel : CharmsPanel
 {
-    public GameObject headerControls;
+    public GameObject overlayControls; // in this case we need the canvasOverlay active to show the currency indicator, so that is whey we have this explicit reference to the Controls scene object
     public GameObject arrowControls;
     public GameObject gameSelectMenu;
     public PlayManager playManager;
@@ -12,7 +12,7 @@ public class PlayPanel : CharmsPanel
     new void OnEnable()
     {
         base.OnEnable();
-        headerControls.SetActive(false);
+        overlayControls.SetActive(false);
         arrowControls.SetActive(false);
         canvasOverlay.SetActive(true); // inherited
         gameSelectMenu.SetActive(true);
@@ -22,7 +22,7 @@ public class PlayPanel : CharmsPanel
     new void OnDisable()
     {
         base.OnDisable();
-        headerControls.SetActive(true);
+        overlayControls.SetActive(true);
         arrowControls.SetActive(true);
         canvasOverlay.SetActive(true); // inherited
     }
