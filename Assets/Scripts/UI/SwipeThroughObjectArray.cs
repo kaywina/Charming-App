@@ -27,7 +27,7 @@ public class SwipeThroughObjectArray : SwipeFunction
 
     public override void SwipeLeft()
     {
-        Debug.Log("Swipe left");
+        //Debug.Log("Swipe left");
         objects[index].SetActive(false);
         index++;
         if (index >= objects.Length) { index = 0; }
@@ -36,7 +36,7 @@ public class SwipeThroughObjectArray : SwipeFunction
 
     public override void SwipeRight()
     {
-        Debug.Log("Swipe right");
+        //Debug.Log("Swipe right");
         objects[index].SetActive(false);
         index--;
         if (index < 0) { index = objects.Length - 1; }
