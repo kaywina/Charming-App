@@ -9,12 +9,16 @@ using UnityEngine;
 public class EnableMainUIOnAwake : MonoBehaviour
 {
 
-    public GameObject coreObject;
-    public GameObject overlayObject;
+    public GameObject mainCameraCoreObject;
+    public GameObject rootCoreObject;
+    public GameObject canvasOverlayObject;
+    public GameObject panelsParentObject;
 
     private void Awake()
     {
-        coreObject.SetActive(true);
-        overlayObject.SetActive(true);
+        mainCameraCoreObject.SetActive(true);
+        rootCoreObject.SetActive(true);
+        canvasOverlayObject.SetActive(true);
+        panelsParentObject.SetActive(true);
     }
 }
