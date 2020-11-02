@@ -5,7 +5,6 @@ public class CurrencyManager : MonoBehaviour {
 
     public static CurrencyManager Instance;
 
-    public GameObject welcomePanel;
     public GameObject infoPanel;
     public GameObject optInPanel;
     public GameObject bonusPanel;
@@ -35,7 +34,14 @@ public class CurrencyManager : MonoBehaviour {
         {
             //Debug.Log("Give currency bonus on first run");
             SetCurrencyOnStart(welcomeBonus);
-            welcomePanel.SetActive(true);
+            if (UnityAdsController.IsAllowAdsSet())
+            {
+                infoPanel.SetActive(true);
+            }
+            else
+            {
+                optInPanel.SetActive(true);
+            }
         }
         else
         {
