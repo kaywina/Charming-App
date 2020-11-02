@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class TutorialPanel : CharmsPanel
 {
-    bool respectPlayerPref = true; // this is used for the ? button in options
+    bool respectPlayerPref = true;
     public GoToBonusPanelButton goToBonusPanelButton;
+    public GameObject welcomeBonusIndicator;
 
     new void OnEnable()
     {
+        // only show the welcome bonus indicator on first time running the app; but always show the welcome screen if tutorial is enabled
+        if (CurrencyManager.IsFirstRun())
+        {
+            welcomeBonusIndicator.SetActive(true);
+        }
+        else
+        {
+            welcomeBonusIndicator.SetActive(false);
+        }
+
+        // if tutorial is not enabled, then try to open the bonus panel
         if (PlayerPrefs.GetString("ShowInfo") == "false" && respectPlayerPref)
         {
             gameObject.SetActive(false);
@@ -20,6 +32,7 @@ public class TutorialPanel : CharmsPanel
         base.OnEnable();
     }
 
+    // this is used for the ? button in options to show the tutorial even if it has been toggled off on start
     public void DoNotRespectPlayerPrefThisTime ()
     {
         respectPlayerPref = false;

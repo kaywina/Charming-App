@@ -57,6 +57,18 @@ public class CurrencyManager : MonoBehaviour {
         }
     }
 
+    public static bool IsFirstRun()
+    {
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void OnApplicationQuit()
     {
         PlayerPrefs.SetString("FirstRun", "False");
