@@ -5,8 +5,8 @@ public class CurrencyManager : MonoBehaviour {
 
     public static CurrencyManager Instance;
 
-    public GameObject infoPanel;
-    public GameObject optInPanel;
+    public GameObject tutorialPanel;
+    public GameObject adsOptInPanel;
     public GameObject bonusPanel;
     public StorePanel storePanel;
 
@@ -36,11 +36,11 @@ public class CurrencyManager : MonoBehaviour {
             SetCurrencyOnStart(welcomeBonus);
             if (UnityAdsController.IsAllowAdsSet())
             {
-                infoPanel.SetActive(true);
+                tutorialPanel.SetActive(true);
             }
             else
             {
-                optInPanel.SetActive(true);
+                adsOptInPanel.SetActive(true);
             }
         }
         else
@@ -48,11 +48,11 @@ public class CurrencyManager : MonoBehaviour {
             currencyInBank = PlayerPrefs.GetInt(currencyPlayerPref);
             if (UnityAdsController.IsAllowAdsSet())
             {
-                infoPanel.SetActive(true);
+                tutorialPanel.SetActive(true);
             }
             else
             {
-                optInPanel.SetActive(true);
+                adsOptInPanel.SetActive(true);
             }
         }
     }
