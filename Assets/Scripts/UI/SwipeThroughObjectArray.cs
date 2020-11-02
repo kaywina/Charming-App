@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwipeThroughObjectArray : SwipeFunction
 {
     public GameObject[] objects;
     int index = 0;
+
+    public Text currentPageText;
+    public Text totalPagesText;
 
     new void Start()
     {
@@ -22,7 +26,9 @@ public class SwipeThroughObjectArray : SwipeFunction
             {
                 objects[i].SetActive(false);
             }
-        } 
+        }
+
+        SetPageIndicatorText();
     }
 
     public override void SwipeLeft()
@@ -32,6 +38,7 @@ public class SwipeThroughObjectArray : SwipeFunction
         index++;
         if (index >= objects.Length) { index = 0; }
         objects[index].SetActive(true);
+        SetPageIndicatorText();
     }
 
     public override void SwipeRight()
@@ -41,5 +48,19 @@ public class SwipeThroughObjectArray : SwipeFunction
         index--;
         if (index < 0) { index = objects.Length - 1; }
         objects[index].SetActive(true);
+        SetPageIndicatorText();
+    }
+
+    private void SetPageIndicatorText()
+    {
+        if (currentPageText != null)
+        {
+            currentPageText.text = (index + 1).ToString();
+        }
+
+        if (totalPagesText != null)
+        {
+            totalPagesText.text = objects.Length.ToString();
+        }
     }
 }
