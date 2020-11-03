@@ -15,7 +15,6 @@ public class PlayManager : MonoBehaviour
 
     public GameObject rewardedAdButton;
     public GameObject watchedRewardedAdText;
-    public GameObject moreCurrencyText;
 
     public Sprite[] romanNumeralSprites;
     public Sprite hideSprite;
@@ -37,7 +36,6 @@ public class PlayManager : MonoBehaviour
         rewardedAdButton.SetActive(false);
         watchedRewardedAdText.SetActive(false);
         menuCanvasObject.SetActive(true);
-        moreCurrencyText.SetActive(false);
 
         playAttentionGame.gameObject.SetActive(false);
         playRememberGame.gameObject.SetActive(false);
@@ -58,11 +56,9 @@ public class PlayManager : MonoBehaviour
     {
         watchedRewardedAdText.SetActive(false);
         if (UnityAdsController.GetAllowAds()) {
-            moreCurrencyText.SetActive(false);
             rewardedAdButton.SetActive(true);
         }  // only show ad if user has opted-in and AllowAds is true
         else {
-            moreCurrencyText.SetActive(true);
             rewardedAdButton.SetActive(false);
         }
         menuCanvasObject.SetActive(true);
