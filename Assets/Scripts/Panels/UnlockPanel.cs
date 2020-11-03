@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UnlockPanel : CharmsPanel
 {
     public Charms charms;
-    public GameObject notEnoughText;
+    //public GameObject notEnoughText;
     public GameObject storeButton; // showing the store button functionality has been disabled in v1.0.4 while sorting out monetization options
     public Button buyButton;
     public Text costText;
@@ -33,13 +33,13 @@ public class UnlockPanel : CharmsPanel
         {
             buyButton.interactable = true;
             if (storeButton != null) { storeButton.SetActive(false); }
-            notEnoughText.SetActive(false);
+            //notEnoughText.SetActive(false);
         }
         else
         {
             buyButton.interactable = false;
             if (storeButton != null) { storeButton.SetActive(true); }
-            notEnoughText.SetActive(true);
+            //notEnoughText.SetActive(true);
         }
 
         
