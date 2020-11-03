@@ -6,19 +6,27 @@ public class TutorialPanel : CharmsPanel
 {
     bool respectPlayerPref = true;
     public GoToBonusPanelButton goToBonusPanelButton;
+
+    /*
     public GameObject welcomeBonusIndicator;
+    public GameObject alternativeIndicator; // collect keys text
+    */
 
     new void OnEnable()
     {
+        /*
         // only show the welcome bonus indicator on first time running the app; but always show the welcome screen if tutorial is enabled
         if (CurrencyManager.IsFirstRun())
         {
             welcomeBonusIndicator.SetActive(true);
+            alternativeIndicator.SetActive(false);
         }
         else
         {
             welcomeBonusIndicator.SetActive(false);
+            alternativeIndicator.SetActive(true);
         }
+        */
 
         // if tutorial is not enabled, then try to open the bonus panel
         if (PlayerPrefs.GetString("ShowInfo") == "false" && respectPlayerPref)

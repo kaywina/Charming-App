@@ -20,18 +20,15 @@ public class SwipeThroughObjectArray : SwipeFunction
 
         // always enable the first object in the array by default and disable the rest
 
-        if (usingButtons)
+        for (int i = 0; i < objects.Length; i++)
         {
-            for (int i = 0; i < objects.Length; i++)
+            if (i == index)
             {
-                if (i == index)
-                {
-                    objects[i].SetActive(true);
-                }
-                else
-                {
-                    objects[i].SetActive(false);
-                }
+                objects[i].SetActive(true);
+            }
+            else
+            {
+                objects[i].SetActive(false);
             }
         }
 
@@ -51,6 +48,7 @@ public class SwipeThroughObjectArray : SwipeFunction
         {
             if (index >= objects.Length) { index--; }
         }
+        //Debug.Log("Swipe left, index is " + index);
 
         objects[index].SetActive(true);
         SetPageIndicatorText();
@@ -58,7 +56,6 @@ public class SwipeThroughObjectArray : SwipeFunction
 
     public override void SwipeRight()
     {
-        //Debug.Log("Swipe right");
         objects[index].SetActive(false);
         index--;
 
@@ -68,10 +65,10 @@ public class SwipeThroughObjectArray : SwipeFunction
         }
         else
         {
-            if (index < 0) { index = 0; }
+            if (index < 0) { index++; }
         }
 
-        if (index < 0) { index = objects.Length - 1; }
+        //Debug.Log("Swipe right, index is " + index);
         objects[index].SetActive(true);
         SetPageIndicatorText();
     }
