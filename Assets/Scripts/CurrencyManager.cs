@@ -5,9 +5,8 @@ public class CurrencyManager : MonoBehaviour {
 
     public static CurrencyManager Instance;
 
-    public GameObject welcomePanel;
-    public GameObject infoPanel;
-    public GameObject optInPanel;
+    public GameObject tutorialPanel;
+    public GameObject adsOptInPanel;
     public GameObject bonusPanel;
     public StorePanel storePanel;
 
@@ -35,19 +34,38 @@ public class CurrencyManager : MonoBehaviour {
         {
             //Debug.Log("Give currency bonus on first run");
             SetCurrencyOnStart(welcomeBonus);
-            welcomePanel.SetActive(true);
+            if (UnityAdsController.IsAllowAdsSet())
+            {
+                tutorialPanel.SetActive(true);
+            }
+            else
+            {
+                adsOptInPanel.SetActive(true);
+            }
         }
         else
         {
             currencyInBank = PlayerPrefs.GetInt(currencyPlayerPref);
             if (UnityAdsController.IsAllowAdsSet())
             {
-                infoPanel.SetActive(true);
+                tutorialPanel.SetActive(true);
             }
             else
             {
-                optInPanel.SetActive(true);
+                adsOptInPanel.SetActive(true);
             }
+        }
+    }
+
+    public static bool IsFirstRun()
+    {
+        if (!PlayerPrefs.GetString("FirstRun").Equals("False"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

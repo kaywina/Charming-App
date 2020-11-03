@@ -14,36 +14,25 @@ public class SwipeFunction : MonoBehaviour
     public float yLimitTop = 0.075f;
     public float yLimitBottom = 0.62f;
 
-    // Start is called before the first frame update
-    protected void Start()
+    protected void OnEnable()
     {
         startPosition = Vector3.zero;
         endPosition = Vector3.zero;
     }
 
-    protected void OnEnable()
-    {
-
-    }
-
-    protected void OnDisable()
-    {
-
-    }
-
     // Update is called once per frame
     private void Update()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_STANDALONE
         SimulateSwipesInEditor();
-#endif
-#if UNITY_IOS || UNITY_ANDROID
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
         DetectSwipesOnMobile();
 #endif
     }
 
     private void DetectSwipesOnMobile()
     {
+        //Debug.Log("Swipe on mobile");
         if (Input.touchCount == 1)
         {
             // GET TOUCH 0
@@ -63,8 +52,10 @@ public class SwipeFunction : MonoBehaviour
         }
     }
 
+    /* Deprecated as the Unity bug that caused the requirement for this appears to have been fixed
     private void SimulateSwipesInEditor()
     {
+        Debug.Log("Swipe on editor");
         if (Input.GetMouseButtonDown(0))
         {
             startPosition = Input.mousePosition;
@@ -75,6 +66,7 @@ public class SwipeFunction : MonoBehaviour
             CheckForSwipe(startPosition, endPosition);
         }
     }
+    */
 
     private void CheckForSwipe(Vector3 startPos, Vector3 endPos)
     {
@@ -109,11 +101,9 @@ public class SwipeFunction : MonoBehaviour
 
     public virtual void SwipeLeft()
     {
-
     }
 
     public virtual void SwipeRight()
     {
-
     }
 }

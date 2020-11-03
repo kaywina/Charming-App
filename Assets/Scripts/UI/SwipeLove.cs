@@ -6,10 +6,6 @@ public class SwipeLove : SwipeFunction
 {
     public LoveManager loveManager;
 
-    new void Start()
-    {
-        base.Start();
-    }
     public override void SwipeLeft()
     {
         //Debug.Log("Swile easy love left");
