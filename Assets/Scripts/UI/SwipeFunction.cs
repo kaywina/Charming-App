@@ -14,21 +14,10 @@ public class SwipeFunction : MonoBehaviour
     public float yLimitTop = 0.075f;
     public float yLimitBottom = 0.62f;
 
-    // Start is called before the first frame update
-    protected void Start()
+    protected void OnEnable()
     {
         startPosition = Vector3.zero;
         endPosition = Vector3.zero;
-    }
-
-    protected void OnEnable()
-    {
-
-    }
-
-    protected void OnDisable()
-    {
-
     }
 
     // Update is called once per frame

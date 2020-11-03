@@ -14,12 +14,17 @@ public class SwipeThroughObjectArray : SwipeFunction
     public bool usingButtons = true;
     public bool allowCycling = true;
 
-    new void Start()
+    new void OnEnable()
     {
-        base.Start();
+        Reset();
+        base.OnEnable();
+    }
 
-        // always enable the first object in the array by default and disable the rest
-
+    // always enable the first object in the array by default and disable the rest
+    public void Reset()
+    {
+        //Debug.Log("Reset");
+        index = 0;
         for (int i = 0; i < objects.Length; i++)
         {
             if (i == index)
@@ -31,7 +36,6 @@ public class SwipeThroughObjectArray : SwipeFunction
                 objects[i].SetActive(false);
             }
         }
-
         SetPageIndicatorText();
     }
 
