@@ -21,23 +21,23 @@ public class IAPButton : MonoBehaviour
         EventManager.StartListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
         EventManager.StartListening(UnityIAPController.onPurchaseFailName, OnFailPurchase);
 
-        enableOnFailPurchase.SetActive(false);
 
         if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
         {
-            promo.SetActive(false);
-            success.SetActive(true);
+            if (promo != null) { promo.SetActive(false); }
+            if (success != null) { success.SetActive(true); }
 
         }
         else
         {
-            promo.SetActive(true);
-            success.SetActive(false);
+            if (promo != null) { promo.SetActive(true); }
+            if (success != null) { success.SetActive(false); }
         }
 
-        enableOnStartPurchase.SetActive(false);
-        enableOnFinishPurchase.SetActive(false);
-        
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
+        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
+
     }
 
     private void OnDisable()
@@ -51,49 +51,48 @@ public class IAPButton : MonoBehaviour
 
     private void OnStartPurchase()
     {
-        enableOnStartPurchase.SetActive(true);
-        enableOnFinishPurchase.SetActive(false);
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
+        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
     }
 
     private void OnFinishPurchase()
     {
-        enableOnStartPurchase.SetActive(true);
-        enableOnFinishPurchase.SetActive(false);
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
+        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
     }
 
     private void OnFailPurchase()
     {
-        enableOnStartPurchase.SetActive(false);
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         ShowFailIndicator();
     }
 
     public void MakePurchase()
     {
         // always deactivate fail indicator as part of iap setup
-        enableOnFailPurchase.SetActive(false);
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
 
         switch (purchaseID)
         {
             case "Gold":
                 UnityIAPController.BuyGoldSubscription();
                 break;
-            /* // these have been disabled following change from consumables store to gold subscription
+            // these have been disabled following change from consumables store to gold subscription
             case "16":
-                iapController.BuyConsumable16();
+                UnityIAPController.BuyConsumable16();
                 break;
             case "32":
-                iapController.BuyConsumable32();
+                UnityIAPController.BuyConsumable32();
                 break;
             case "64":
-                iapController.BuyConsumable64();
+                UnityIAPController.BuyConsumable64();
                 break;
             case "128":
-                iapController.BuyConsumable128();
+                UnityIAPController.BuyConsumable128();
                 break;
             case "256":
-                iapController.BuyConsumable256();
+                UnityIAPController.BuyConsumable256();
                 break;
-            */
             default:
                 Debug.LogWarning("ProductID not implemented in IAPButton class");
                 break;

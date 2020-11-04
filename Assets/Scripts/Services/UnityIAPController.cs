@@ -46,13 +46,19 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     // when defining the Product Identifiers on the store. Except, for illustration purposes, the 
     // kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
     // specific mapping to Unity Purchasing's AddProduct, below.
-    /*
+#if UNITY_ANDROID
     public static string consumable16 = "16";
     public static string consumable32 = "32";
     public static string consumable64 = "64";
     public static string consumable128 = "128";
     public static string consumable256 = "256";
-    */
+#elif UNITY_IOS
+    public static string consumable16 = "16_keys";
+    public static string consumable32 = "32_keys";
+    public static string consumable64 = "64_keys";
+    public static string consumable128 = "128_keys";
+    public static string consumable256 = "256_keys";
+#endif
 
     //public static string kProductIDNonConsumable = "nonconsumable";
 
@@ -90,13 +96,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
         // Add a product to sell / restore by way of its identifier, associating the general identifier
         // with its store-specific identifiers.
-        /*
         builder.AddProduct(consumable16, ProductType.Consumable);
         builder.AddProduct(consumable32, ProductType.Consumable);
         builder.AddProduct(consumable64, ProductType.Consumable);
         builder.AddProduct(consumable128, ProductType.Consumable);
         builder.AddProduct(consumable256, ProductType.Consumable);
-        */
 
         // Continue adding the non-consumable product.
         //builder.AddProduct(kProductIDNonConsumable, ProductType.NonConsumable);
@@ -123,44 +127,42 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     }
 
     /*
-        * Methods called by store buttons
-        * */
-    /*
-    public void BuyConsumable16()
+     * Methods called by store buttons
+     */
+    public static void BuyConsumable16()
     {
         // Buy the consumable product using its general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
         BuyProductID(consumable16);
     }
-    public void BuyConsumable32()
+    public static void BuyConsumable32()
     {
         // Buy the consumable product using its general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
         BuyProductID(consumable32);
     }
-    public void BuyConsumable64()
+    public static void BuyConsumable64()
     {
         // Buy the consumable product using its general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
         BuyProductID(consumable64);
     }
-    public void BuyConsumable128()
+    public static void BuyConsumable128()
     {
         // Buy the consumable product using its general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
         BuyProductID(consumable128);
     }
-    public void BuyConsumable256()
+    public static void BuyConsumable256()
     {
         // Buy the consumable product using its general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
         BuyProductID(consumable256);
     }
-    */
 
     /*
-        * Additional button methods for non-consumable products
-        * */
+     * Additional button methods for non-consumable products
+     */
 
     /*
     public void BuyNonConsumable()
@@ -172,8 +174,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     */
 
     /*
-        * Additional button methods for subscription products
-        * */
+     * Additional button methods for subscription products
+     */
 
     public static void BuyGoldSubscription()
     {
@@ -544,7 +546,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             EventManager.TriggerEvent(subscribeSuccessPlayerPref);
         }
         // Cases where a consumable product has been purchased by this user.
-        /*
         else if (String.Equals(args.purchasedProduct.definition.id, consumable16, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
@@ -579,7 +580,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(256, true);
         }
-        */
         /*
         // Or ... a non-consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, kProductIDNonConsumable, StringComparison.Ordinal))
