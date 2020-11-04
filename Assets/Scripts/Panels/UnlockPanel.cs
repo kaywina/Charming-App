@@ -160,7 +160,6 @@ public class UnlockPanel : CharmsPanel
         gameObject.SetActive(false);
     }
 
-
     public void OpenStore()
     {
         storePanel.SetFromUnlock(true);
