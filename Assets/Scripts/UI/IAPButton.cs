@@ -13,10 +13,27 @@ public class IAPButton : MonoBehaviour
     public GameObject enableOnFinishPurchase;
     public GameObject enableOnFailPurchase;
 
+    public CurrencyIndicator currencyIndicator;
+
+    public enum BUTTON_TYPE { Subscribe, Consumable };
+    public BUTTON_TYPE buttonType = BUTTON_TYPE.Consumable;
+
     private void OnEnable()
     {
         EventManager.StartListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
-        EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+        
+
+        switch (buttonType) {
+            case BUTTON_TYPE.Subscribe:
+                EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+                break;
+            case BUTTON_TYPE.Consumable:
+                EventManager.StartListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
+                break;
+            default:
+                EventManager.StartListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
+                break;
+        }
         EventManager.StartListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
         EventManager.StartListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
         EventManager.StartListening(UnityIAPController.onPurchaseFailName, OnFailPurchase);
@@ -43,7 +60,20 @@ public class IAPButton : MonoBehaviour
     private void OnDisable()
     {
         EventManager.StopListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
-        EventManager.StopListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+
+        switch (buttonType)
+        {
+            case BUTTON_TYPE.Subscribe:
+                EventManager.StopListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+                break;
+            case BUTTON_TYPE.Consumable:
+                EventManager.StopListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
+                break;
+            default:
+                EventManager.StopListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
+                break;
+        }
+
         EventManager.StopListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
         EventManager.StopListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
         EventManager.StopListening(UnityIAPController.onPurchaseFailName, OnFailPurchase);
@@ -111,8 +141,13 @@ public class IAPButton : MonoBehaviour
     {
         Debug.Log("IAP Button receives event message that purchase is successfull");
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
+        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(true); }
+
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
+
+        if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
     }
 
 }

@@ -12,6 +12,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string failedToSubscribePlayerPref = "GoldFail";
     public static string subscribeSuccessPlayerPref = "GoldSuccess";
 
+    public static string consumablePurchaseSuccess = "ConsumableSuccess";
+
     public static string onStartPurchaseName = "onStartPurchase";
     public static string onFinishPurchaseEventName = "onFinishPurchase";
     public static string onPurchaseFailName = "onPurchaseFail";
@@ -537,7 +539,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
-    {
+    {        
         // Or ... a subscription product has been purchased by this user.
         if (String.Equals(args.purchasedProduct.definition.id, kProductIDSubscription, StringComparison.Ordinal))
         {
@@ -551,6 +553,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(16, true);
+            EventManager.TriggerEvent(consumablePurchaseSuccess);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable32, StringComparison.Ordinal))
@@ -558,6 +561,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(32, true);
+            EventManager.TriggerEvent(consumablePurchaseSuccess);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable64, StringComparison.Ordinal))
@@ -565,6 +569,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(64, true);
+            EventManager.TriggerEvent(consumablePurchaseSuccess);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable128, StringComparison.Ordinal))
@@ -572,6 +577,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(128, true);
+            EventManager.TriggerEvent(consumablePurchaseSuccess);
         }
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable256, StringComparison.Ordinal))
@@ -579,6 +585,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(256, true);
+            EventManager.TriggerEvent(consumablePurchaseSuccess);
         }
         /*
         // Or ... a non-consumable product has been purchased by this user.
@@ -598,7 +605,10 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
         // Return a flag indicating whether this product has completely been received, or if the application needs 
         // to be reminded of this purchase at next app launch. Use PurchaseProcessingResult.Pending when still 
-        // saving purchased products to the cloud, and when that save is delayed. 
+        // saving purchased products to the cloud, and when that save is delayed.
+
+
+
         return PurchaseProcessingResult.Complete;
     }
 
