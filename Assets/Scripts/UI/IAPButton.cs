@@ -87,13 +87,15 @@ public class IAPButton : MonoBehaviour
 
     private void OnFinishPurchase()
     {
-        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
-        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
+        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(true); }
     }
 
     private void OnFailPurchase()
     {
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
+        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
         ShowFailIndicator();
     }
 
@@ -133,17 +135,13 @@ public class IAPButton : MonoBehaviour
 
     public void ShowFailIndicator()
     {
-        Debug.Log("IAP Button receives event message that purchase has failed");
+        //Debug.Log("IAP Button receives event message that purchase has failed");
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
     }
 
     public void OnSuccess()
     {
-        Debug.Log("IAP Button receives event message that purchase is successfull");
-        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
-        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
-        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(true); }
-
+        //Debug.Log("IAP Button receives event message that purchase is successful");
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
 
