@@ -290,7 +290,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (result)
                 {
                     //Debug.Log("Completed restore purchase.");
-                    EventManager.TriggerEvent(onRestoreFinish);
                 }
             });
         }
@@ -310,10 +309,9 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     /// </summary>
     private void OnTransactionsRestored(bool success)
     {
+#if UNITY_IOS
         Debug.Log("Transactions restored. Success flag = " + success);
-
-#if UNITY_ANDROID
-        EventManager.TriggerEvent(onFinishRestoreEventName); // always just say finished on Android regardless of outcome
+        if (success) { EventManager.TriggerEvent(onRestoreFinish); }
 #endif
     }
 
