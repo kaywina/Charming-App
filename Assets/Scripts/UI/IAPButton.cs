@@ -74,12 +74,16 @@ public class IAPButton : MonoBehaviour
     private void onStartPurchase()
     {
         button.interactable = false;
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
+        if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
     }
 
     private void OnFailPurchase()
     {
         button.interactable = false;
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
+        if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
     }
 
@@ -89,13 +93,15 @@ public class IAPButton : MonoBehaviour
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
         if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
+
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(true); }
     }
 
     // this fires after OnSuccess
     private void OnPurchaseComplete()
     {
-        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         button.interactable = true;
     }
 
