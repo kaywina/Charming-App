@@ -27,9 +27,9 @@ public class RestorePurchaseButton : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        EventManager.StartListening(UnityIAPController.onStartRestoreEventName, OnStartRestoreProcess);
-        EventManager.StartListening(UnityIAPController.onFinishRestoreEventName, OnFinishRestoreProcess);
-        EventManager.StartListening(UnityIAPController.onFailRestoreEventName, OnFailRestorePurchase);
+        EventManager.StartListening(UnityIAPController.onRestoreStart, OnStartRestoreProcess);
+        EventManager.StartListening(UnityIAPController.onRestoreFinish, OnFinishRestoreProcess);
+        EventManager.StartListening(UnityIAPController.onRestoreFail, OnFailRestorePurchase);
 
         DisableAllDisplayObjects();
         restorePurchaseButton.interactable = true;
@@ -37,9 +37,9 @@ public class RestorePurchaseButton : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.StopListening(UnityIAPController.onStartRestoreEventName, OnStartRestoreProcess);
-        EventManager.StopListening(UnityIAPController.onFinishRestoreEventName, OnFinishRestoreProcess);
-        EventManager.StopListening(UnityIAPController.onFailRestoreEventName, OnFailRestorePurchase);
+        EventManager.StopListening(UnityIAPController.onRestoreStart, OnStartRestoreProcess);
+        EventManager.StopListening(UnityIAPController.onRestoreFinish, OnFinishRestoreProcess);
+        EventManager.StopListening(UnityIAPController.onRestoreFail, OnFailRestorePurchase);
     }
 
     private void OnStartRestoreProcess()

@@ -20,12 +20,9 @@ public class IAPButton : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
-        
-
         switch (buttonType) {
             case BUTTON_TYPE.Subscribe:
-                EventManager.StartListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+                EventManager.StartListening(UnityIAPController.subscriptionPurchaseSuccess, OnSuccess);
                 break;
             case BUTTON_TYPE.Consumable:
                 EventManager.StartListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
@@ -34,10 +31,9 @@ public class IAPButton : MonoBehaviour
                 EventManager.StartListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
                 break;
         }
-        EventManager.StartListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
-        EventManager.StartListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
-        EventManager.StartListening(UnityIAPController.onPurchaseFailName, OnFailPurchase);
-
+        EventManager.StartListening(UnityIAPController.onPurchaseStart, OnStartPurchase);
+        EventManager.StartListening(UnityIAPController.onPurchaseFinish, OnFinishPurchase);
+        EventManager.StartListening(UnityIAPController.onPurchaseFail, OnFailPurchase);
 
         if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
         {
@@ -59,12 +55,11 @@ public class IAPButton : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.StopListening(UnityIAPController.failedToSubscribePlayerPref, ShowFailIndicator);
-
+        // different code paths for success on subscription vs consumable products
         switch (buttonType)
         {
             case BUTTON_TYPE.Subscribe:
-                EventManager.StopListening(UnityIAPController.subscribeSuccessPlayerPref, OnSuccess);
+                EventManager.StopListening(UnityIAPController.subscriptionPurchaseSuccess, OnSuccess);
                 break;
             case BUTTON_TYPE.Consumable:
                 EventManager.StopListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
@@ -74,9 +69,9 @@ public class IAPButton : MonoBehaviour
                 break;
         }
 
-        EventManager.StopListening(UnityIAPController.onStartPurchaseName, OnStartPurchase);
-        EventManager.StopListening(UnityIAPController.onFinishPurchaseEventName, OnFinishPurchase);
-        EventManager.StopListening(UnityIAPController.onPurchaseFailName, OnFailPurchase);
+        EventManager.StopListening(UnityIAPController.onPurchaseStart, OnStartPurchase);
+        EventManager.StopListening(UnityIAPController.onPurchaseFinish, OnFinishPurchase);
+        EventManager.StopListening(UnityIAPController.onPurchaseFail, OnFailPurchase);
     }
 
     private void OnStartPurchase()
@@ -96,7 +91,7 @@ public class IAPButton : MonoBehaviour
     {
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
-        ShowFailIndicator();
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
     }
 
     public void MakePurchase()
@@ -106,10 +101,12 @@ public class IAPButton : MonoBehaviour
 
         switch (purchaseID)
         {
+            // subscription
             case "Gold":
                 UnityIAPController.BuyGoldSubscription();
                 break;
-            // these have been disabled following change from consumables store to gold subscription
+            
+            // consumables
             case "16":
                 UnityIAPController.BuyConsumable16();
                 break;
@@ -125,6 +122,8 @@ public class IAPButton : MonoBehaviour
             case "256":
                 UnityIAPController.BuyConsumable256();
                 break;
+            
+            // this should not be reached
             default:
                 Debug.LogWarning("ProductID not implemented in IAPButton class");
                 break;
@@ -133,18 +132,11 @@ public class IAPButton : MonoBehaviour
         return;
     }
 
-    public void ShowFailIndicator()
-    {
-        //Debug.Log("IAP Button receives event message that purchase has failed");
-        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
-    }
-
     public void OnSuccess()
     {
         //Debug.Log("IAP Button receives event message that purchase is successful");
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
-
         if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
     }
 

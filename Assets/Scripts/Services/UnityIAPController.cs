@@ -9,18 +9,16 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string goldSubscriptionPlayerPref = "Gold";
     public SetPlayerPrefFromToggle goldTogglePrefab;
 
-    public static string failedToSubscribePlayerPref = "GoldFail";
-    public static string subscribeSuccessPlayerPref = "GoldSuccess";
-
+    public static string subscriptionPurchaseSuccess = "GoldSuccess";
     public static string consumablePurchaseSuccess = "ConsumableSuccess";
 
-    public static string onStartPurchaseName = "onStartPurchase";
-    public static string onFinishPurchaseEventName = "onFinishPurchase";
-    public static string onPurchaseFailName = "onPurchaseFail";
+    public static string onPurchaseStart = "onStartPurchase";
+    public static string onPurchaseFinish = "onFinishPurchase";
+    public static string onPurchaseFail = "onPurchaseFail";
 
-    public static string onStartRestoreEventName = "onStartRestore";
-    public static string onFinishRestoreEventName = "onFinishRestore";
-    public static string onFailRestoreEventName = "onFailedRestore";
+    public static string onRestoreStart = "onStartRestore";
+    public static string onRestoreFinish = "onFinishRestore";
+    public static string onRestoreFail = "onFailedRestore";
 
 
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
@@ -203,11 +201,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
             // retrying initiailization.
             Debug.Log("BuyProductID FAIL. Not initialized.");
-            EventManager.TriggerEvent(failedToSubscribePlayerPref);
+            EventManager.TriggerEvent(onPurchaseFail);
             return;
         }
 
-        EventManager.TriggerEvent(onStartPurchaseName);
+        EventManager.TriggerEvent(onPurchaseStart);
 
         // ... look up the Product reference with the general product identifier and the Purchasing 
         // system's products collection.
@@ -226,11 +224,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             // ... report the product look-up failure situation  
             Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
-            EventManager.TriggerEvent(failedToSubscribePlayerPref);
+            EventManager.TriggerEvent(onPurchaseFail);
             return;
         }
 
-        EventManager.TriggerEvent(onFinishPurchaseEventName);
+        EventManager.TriggerEvent(onPurchaseFinish);
     }
 
 
@@ -246,7 +244,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             return;
         }
 
-        EventManager.TriggerEvent(onStartRestoreEventName);
+        EventManager.TriggerEvent(onRestoreStart);
 
 #if UNITY_ANDROID
         Debug.Log("Restore transactions on Google Play");
@@ -278,7 +276,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (result)
                 {
                     //Debug.Log("Completed restore purchase.");
-                    EventManager.TriggerEvent(onFinishRestoreEventName);
+                    EventManager.TriggerEvent(onRestoreFinish);
                 }
             });
         }
@@ -287,7 +285,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             // We are not running on an Apple device. No work is necessary to restore purchases.
             Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
-            EventManager.TriggerEvent(onFailRestoreEventName);
+            EventManager.TriggerEvent(onRestoreFail);
             return;
         }
 
@@ -545,7 +543,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true"); // if the gold subscription has been restored set the player pref
-            EventManager.TriggerEvent(subscribeSuccessPlayerPref);
+            EventManager.TriggerEvent(subscriptionPurchaseSuccess);
         }
         // Cases where a consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable16, StringComparison.Ordinal))
@@ -615,10 +613,40 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     /// <summary>
     /// This will be called if an attempted purchase fails.
     /// </summary>
-    public void OnPurchaseFailed(Product item, PurchaseFailureReason r)
+    public void OnPurchaseFailed(Product item, PurchaseFailureReason error)
     {
         Debug.Log("Purchase failed: " + item.definition.id);
-        Debug.Log(r);
+
+        switch (error)
+        {
+            case PurchaseFailureReason.DuplicateTransaction:
+                Debug.Log("Purchase incomplete - Duplicate transaction");
+                break;
+            case PurchaseFailureReason.ExistingPurchasePending:
+                Debug.Log("Purchase incomplete - Existing purchase pending");
+                break;
+            case PurchaseFailureReason.PaymentDeclined:
+                Debug.Log("Purchase incomplete - Payment declined");
+                break;
+            case PurchaseFailureReason.ProductUnavailable:
+                Debug.Log("Purchase incomplete - Product unavailable");
+                break;
+            case PurchaseFailureReason.PurchasingUnavailable:
+                Debug.Log("Purchase incomplete - Purchasing unavailable");
+                break;
+            case PurchaseFailureReason.SignatureInvalid:
+                Debug.Log("Purchase incomplete - Signature invalid");
+                break;
+            case PurchaseFailureReason.UserCancelled:
+                Debug.Log("Purchase incomplete - User cancelled");
+                break;
+            case PurchaseFailureReason.Unknown:
+                Debug.Log("Purchase incomplete - Reason unknown");
+                break;
+            default:
+                Debug.Log("Purchase incomplete - What happened?");
+                break;
+        }
 
         // Detailed debugging information
         Debug.Log("Store specific error code: " + m_TransactionHistoryExtensions.GetLastStoreSpecificPurchaseErrorCode());
@@ -630,7 +658,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
         m_PurchaseInProgress = false;
 
-        EventManager.TriggerEvent(onPurchaseFailName);
+        EventManager.TriggerEvent(onPurchaseFail);
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
