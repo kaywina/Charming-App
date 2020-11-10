@@ -712,4 +712,10 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     {
         Debug.Log("Purchase deferred: " + item.definition.id);
     }
+
+    static public void OpenGoogleManageSubscriptionDeepLink()
+    {
+        string url = "https://play.google.com/store/account/subscriptions?sku=" + kProductNameGooglePlaySubscription + "&package=" + Application.identifier;
+        Application.OpenURL(url);
+    }
 }
