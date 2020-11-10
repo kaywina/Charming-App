@@ -7,6 +7,7 @@ public class BreatheControl : MonoBehaviour
 {
     private float breatheInOutSeconds = 3f;
     private int numberOfBreaths = 0;
+    private int breathsUntilBonus = 10;
 
     public Text breathsText;
     public Slider secondsSlider;
@@ -66,7 +67,7 @@ public class BreatheControl : MonoBehaviour
     {
         //Debug.Log("Reset breaths");
         numberOfBreaths = 0;
-        breathsText.text = "0";
+        breathsText.text = breathsUntilBonus.ToString();
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
     }
 
@@ -78,7 +79,10 @@ public class BreatheControl : MonoBehaviour
         {
             if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
             numberOfBreaths++;
-            breathsText.text = numberOfBreaths.ToString();
+
+            // instead of showing total number of breaths, now show the remainder until bonus is reached
+            //breathsText.text = numberOfBreaths.ToString(); // this was when breaths text was just the total number
+            breathsText.text = (breathsUntilBonus - numberOfBreaths % breathsUntilBonus).ToString();
         }
         else
         {
@@ -89,7 +93,7 @@ public class BreatheControl : MonoBehaviour
 
         soundManager.PlayBreathNoteInScale();
 
-        if (numberOfBreaths != 0 && numberOfBreaths % 10 == 0) // after 10, 20, 30, breaths etc
+        if (numberOfBreaths != 0 && numberOfBreaths % breathsUntilBonus == 0) // after 10, 20, 30, breaths etc
         {
             fireworks.Play();
             float seconds = 5f;
