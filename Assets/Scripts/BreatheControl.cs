@@ -120,7 +120,7 @@ public class BreatheControl : MonoBehaviour
 
     private void ShowBonusIndicatorAndGiveBonus()
     {
-        Debug.Log("Show bonus indicator and give bonus");
+        //Debug.Log("Show bonus indicator and give bonus");
         if (UnityIAPController.IsGold())
         {
             bonusIndicatorGold.SetActive(true);
@@ -132,7 +132,7 @@ public class BreatheControl : MonoBehaviour
             currencyManager.GiveBonus(bonusKeysForBreaths * 3);
         }
         CancelInvoke("DisableBonusIndicators");
-        float secondsToShowBonusIndicator = 5f;
+        float secondsToShowBonusIndicator = 8f;
         Invoke("DisableBonusIndicators", secondsToShowBonusIndicator); // show indicator for two seconds
     }
 
