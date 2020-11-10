@@ -90,7 +90,6 @@ public class IAPButton : MonoBehaviour
         if (success != null) { success.SetActive(true); }
         if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(true); }
-        Debug.Log("Success");
     }
 
     // this fires after OnSuccess
