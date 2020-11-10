@@ -14,6 +14,11 @@ public class BreatheControl : MonoBehaviour
     public LocalizationTextMesh breatheInOutLocMesh;
     public Text secondsValueText;
 
+    public GameObject bonusIndicatorGold;
+    public GameObject bonusIndicatorNonGold;
+    public CurrencyManager currencyManager;
+    public int bonusKeysForBreaths = 1;
+
     private bool breatheIn = true; // flag for breathing in or out
 
     public delegate void SliderChangedAction();
@@ -27,6 +32,7 @@ public class BreatheControl : MonoBehaviour
 
     void OnEnable()
     {
+        DisableBonusIndicators();
         ResetBreaths(); // not tracking number of breaths between sessions
         float storedSecondsValue = PlayerPrefs.GetFloat(playerPrefName);
         //Debug.Log("storedSecondsValue = " + storedSecondsValue);
@@ -93,11 +99,12 @@ public class BreatheControl : MonoBehaviour
 
         soundManager.PlayBreathNoteInScale();
 
-        if (numberOfBreaths != 0 && numberOfBreaths % breathsUntilBonus == 0) // after 10, 20, 30, breaths etc
+        if (breatheIn && numberOfBreaths != 0 && numberOfBreaths % breathsUntilBonus == 0) // after 10, 20, 30, breaths etc
         {
             fireworks.Play();
             float seconds = 5f;
             Invoke("StopFireworks", seconds);
+            ShowBonusIndicatorAndGiveBonus();
         }
     }
 
@@ -109,6 +116,30 @@ public class BreatheControl : MonoBehaviour
     private void StopFireworks()
     {
         if (fireworks != null) { fireworks.Stop(); }
+    }
+
+    private void ShowBonusIndicatorAndGiveBonus()
+    {
+        Debug.Log("Show bonus indicator and give bonus");
+        if (UnityIAPController.IsGold())
+        {
+            bonusIndicatorGold.SetActive(true);
+            currencyManager.GiveBonus(bonusKeysForBreaths);
+        }
+        else
+        {
+            bonusIndicatorNonGold.SetActive(true);
+            currencyManager.GiveBonus(bonusKeysForBreaths * 3);
+        }
+        CancelInvoke("DisableBonusIndicators");
+        float secondsToShowBonusIndicator = 5f;
+        Invoke("DisableBonusIndicators", secondsToShowBonusIndicator); // show indicator for two seconds
+    }
+
+    private void DisableBonusIndicators()
+    {
+        bonusIndicatorGold.SetActive(false);
+        bonusIndicatorNonGold.SetActive(false);
     }
 
 }

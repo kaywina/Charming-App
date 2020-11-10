@@ -48,7 +48,7 @@ public class PlayManager : MonoBehaviour
 
     public static int GetGameCost()
     {
-        if (IsGold()) { return gameCostGold; }
+        if (UnityIAPController.IsGold()) { return gameCostGold; }
         else { return gameCostNoGold;  }
     }
 
@@ -111,21 +111,9 @@ public class PlayManager : MonoBehaviour
         }
     }
 
-    private static bool IsGold()
-    {
-        if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     private bool CheckGameCost()
     {
-        if (IsGold())
+        if (UnityIAPController.IsGold())
         {
             if (CurrencyManager.WithdrawAmount(gameCostGold))
             {

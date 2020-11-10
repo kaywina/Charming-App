@@ -82,6 +82,18 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         goldTogglePrefab.SetPlayerPrefName(goldSubscriptionPlayerPref); //to-do: clean up this UI dependency
     }
 
+    static public bool IsGold()
+    {
+        if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void InitializePurchasing()
     {
         // If we have already connected to Purchasing ...
