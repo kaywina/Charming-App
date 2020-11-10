@@ -6,13 +6,16 @@ public class IAPButton : MonoBehaviour
 {
     public string purchaseID;
 
+    // these are used to handle UI change on subscription panel
     public GameObject promo;
     public GameObject success;
 
+    // events shared between all iap buttons
     public GameObject enableOnStartPurchase;
     public GameObject enableOnFinishPurchase;
     public GameObject enableOnFailPurchase;
 
+    // currency indicator is used on store panel
     public CurrencyIndicator currencyIndicator;
 
     public enum BUTTON_TYPE { Subscribe, Consumable };
@@ -20,6 +23,10 @@ public class IAPButton : MonoBehaviour
 
     private void OnEnable()
     {
+
+        if (promo != null) { promo.SetActive(true); }
+        if (success != null) { success.SetActive(false); }
+
         switch (buttonType) {
             case BUTTON_TYPE.Subscribe:
                 EventManager.StartListening(UnityIAPController.subscriptionPurchaseSuccess, OnSuccess);
@@ -35,18 +42,6 @@ public class IAPButton : MonoBehaviour
         EventManager.StartListening(UnityIAPController.onPurchaseFinish, OnFinishPurchase);
         EventManager.StartListening(UnityIAPController.onPurchaseFail, OnFailPurchase);
 
-        if (PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref) == "true")
-        {
-            if (promo != null) { promo.SetActive(false); }
-            if (success != null) { success.SetActive(true); }
-
-        }
-        else
-        {
-            if (promo != null) { promo.SetActive(true); }
-            if (success != null) { success.SetActive(false); }
-        }
-
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
@@ -55,7 +50,7 @@ public class IAPButton : MonoBehaviour
 
     private void OnDisable()
     {
-        // different code paths for success on subscription vs consumable products
+        // different code paths for success on subscription vs consumable products; so EnableFromPlayerPrefToggle is only updated in case of subscription purchase not consumable
         switch (buttonType)
         {
             case BUTTON_TYPE.Subscribe:
@@ -77,6 +72,7 @@ public class IAPButton : MonoBehaviour
     private void OnStartPurchase()
     {
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
+        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
         if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
     }
 
@@ -96,9 +92,6 @@ public class IAPButton : MonoBehaviour
 
     public void MakePurchase()
     {
-        // always deactivate fail indicator as part of iap setup
-        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
-
         switch (purchaseID)
         {
             // subscription

@@ -8,7 +8,6 @@ public class CurrencyManager : MonoBehaviour {
     public GameObject tutorialPanel;
     public GameObject adsOptInPanel;
     public GameObject bonusPanel;
-    public StorePanel storePanel;
 
     private static int welcomeBonus = 32;
     public Text welcomeBonusText;
@@ -121,11 +120,10 @@ public class CurrencyManager : MonoBehaviour {
         currencyInBank += bonus;
         PlayerPrefs.SetInt(currencyPlayerPref, currencyInBank);
 
-        if (isPurchase && storePanel != null) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
+        if (isPurchase) // this case handles times when a purchase is made in the store, and we want to be sure that the currency indicator on main ui is updated properly if multiple purchases are made before leaving store
         {
             stackedBonus += bonus;
             //Debug.Log("Stacked Bonus Regular is " + stackedBonusRegular);
-            storePanel.ShowThankYou();
         }
         if (isDailyBonus) {
             canOpenBonusPanel = false;

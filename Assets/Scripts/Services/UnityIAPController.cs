@@ -201,6 +201,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
             // retrying initiailization.
             Debug.Log("BuyProductID FAIL. Not initialized.");
+            Debug.Log("Trigger onPurchaseFail event");
             EventManager.TriggerEvent(onPurchaseFail);
             return;
         }
@@ -224,6 +225,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             // ... report the product look-up failure situation  
             Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
+            Debug.Log("Trigger onPurchaseFail event");
             EventManager.TriggerEvent(onPurchaseFail);
             return;
         }
@@ -659,6 +661,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         m_PurchaseInProgress = false;
 
         EventManager.TriggerEvent(onPurchaseFail);
+        Debug.Log("Trigger onPurchaseFail event");
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
