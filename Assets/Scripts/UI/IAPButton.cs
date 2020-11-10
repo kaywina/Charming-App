@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IAPButton : MonoBehaviour
 {
     public string purchaseID;
+    public Button button;
 
     // these are used to handle UI change on subscription panel
     public GameObject promo;
@@ -12,8 +14,8 @@ public class IAPButton : MonoBehaviour
 
     // events shared between all iap buttons
     public GameObject enableOnStartPurchase;
-    public GameObject enableOnFinishPurchase;
     public GameObject enableOnFailPurchase;
+    public GameObject enableOnSuccessfulPurchase;
 
     // currency indicator is used on store panel
     public CurrencyIndicator currencyIndicator;
@@ -23,6 +25,7 @@ public class IAPButton : MonoBehaviour
 
     private void OnEnable()
     {
+        button.interactable = true; // edge case - button will be interactable if user goes out of store panel while transaction in progress then returns after
 
         if (promo != null) { promo.SetActive(true); }
         if (success != null) { success.SetActive(false); }
@@ -38,14 +41,13 @@ public class IAPButton : MonoBehaviour
                 EventManager.StartListening(UnityIAPController.consumablePurchaseSuccess, OnSuccess);
                 break;
         }
-        EventManager.StartListening(UnityIAPController.onPurchaseStart, OnStartPurchase);
-        EventManager.StartListening(UnityIAPController.onPurchaseFinish, OnFinishPurchase);
+        EventManager.StartListening(UnityIAPController.onPurchaseStart, onStartPurchase);
+        EventManager.StartListening(UnityIAPController.onPurchaseComplete, OnPurchaseComplete);
         EventManager.StartListening(UnityIAPController.onPurchaseFail, OnFailPurchase);
 
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
-        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
-
+        if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
     }
 
     private void OnDisable()
@@ -64,30 +66,38 @@ public class IAPButton : MonoBehaviour
                 break;
         }
 
-        EventManager.StopListening(UnityIAPController.onPurchaseStart, OnStartPurchase);
-        EventManager.StopListening(UnityIAPController.onPurchaseFinish, OnFinishPurchase);
+        EventManager.StopListening(UnityIAPController.onPurchaseStart, onStartPurchase);
+        EventManager.StopListening(UnityIAPController.onPurchaseComplete, OnPurchaseComplete);
         EventManager.StopListening(UnityIAPController.onPurchaseFail, OnFailPurchase);
     }
 
-    private void OnStartPurchase()
+    private void onStartPurchase()
     {
+        button.interactable = false;
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
-        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
-        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
-    }
-
-    private void OnFinishPurchase()
-    {
-        if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
-        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
-        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(true); }
     }
 
     private void OnFailPurchase()
     {
-        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
-        if (enableOnFinishPurchase != null) { enableOnFinishPurchase.SetActive(false); }
+        button.interactable = false;
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
+    }
+
+    public void OnSuccess()
+    {
+        //Debug.Log("IAP Button receives event message that purchase is successful");
+        if (promo != null) { promo.SetActive(false); }
+        if (success != null) { success.SetActive(true); }
+        if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
+        if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(true); }
+        Debug.Log("Success");
+    }
+
+    // this fires after OnSuccess
+    private void OnPurchaseComplete()
+    {
+        if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
+        button.interactable = true;
     }
 
     public void MakePurchase()
@@ -124,13 +134,4 @@ public class IAPButton : MonoBehaviour
 
         return;
     }
-
-    public void OnSuccess()
-    {
-        //Debug.Log("IAP Button receives event message that purchase is successful");
-        if (promo != null) { promo.SetActive(false); }
-        if (success != null) { success.SetActive(true); }
-        if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
-    }
-
 }
