@@ -261,23 +261,20 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         EventManager.TriggerEvent(onRestoreStart);
 
 #if UNITY_ANDROID
-        Debug.Log("Restore transactions on Google Play");
-        m_GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored);
+        Debug.Log("Restoring transactions is not supported on Android platform.");
+        EventManager.TriggerEvent(onRestoreFail); // automatically fail by default on Android
+        //m_GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored); // if restore was supported, this is the code
+        return;
 
 #elif UNITY_IOS
         Debug.Log("Restore transactions on the App Store");
         m_AppleExtensions.RestoreTransactions(OnTransactionsRestored);
-#else
-        Debug.Log("Restoring transactions is not supported on this platform.");
-        return;
-#endif
-
         // If we are running on an Apple device ... 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
             Application.platform == RuntimePlatform.OSXPlayer)
         {
             // ... begin restoring purchases
-            //Debug.Log("RestorePurchases started ...");
+            Debug.Log("RestorePurchases started on ...");
 
             // Fetch the Apple store-specific subsystem.
             var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
@@ -289,19 +286,16 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
                 if (result)
                 {
-                    //Debug.Log("Completed restore purchase.");
+                    Debug.Log("Completed restore purchase. One or more product(s) available to restore.");
                 }
             });
         }
-        // Otherwise the restore process has failed
-        else
-        {
-            // We are not running on an Apple device. No work is necessary to restore purchases.
-            Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
-            EventManager.TriggerEvent(onRestoreFail);
-            return;
-        }
-
+#else
+        // We are not running on an Apple device. No work is necessary to restore purchases.
+        Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
+        EventManager.TriggerEvent(onRestoreFail); // this is default behavoir on non-ios platforms, which shouldn't even have a restore button (i.e. no restore button on android, but if there were this would be the result)
+        return;
+#endif
     }
 
     /// <summary>
@@ -311,7 +305,14 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     {
 #if UNITY_IOS
         Debug.Log("Transactions restored. Success flag = " + success);
-        if (success) { EventManager.TriggerEvent(onRestoreFinish); }
+        if (success)
+        {
+            EventManager.TriggerEvent(onRestoreFinish);
+        }
+        else
+        {
+            EventManager.TriggerEvent(onRestoreFail);
+        }
 #endif
     }
 
@@ -476,7 +477,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             case Result.True:
                 Debug.Log("This user is subscribed to Charming App Gold");
-                PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true");
+                EnableGold();
                 break;
             case Result.False:
                 Debug.Log("This user is not subscribed to Charming App Gold");
@@ -554,7 +555,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         if (String.Equals(args.purchasedProduct.definition.id, kProductIDSubscription, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-            PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true"); // if the gold subscription has been restored set the player pref
+            EnableGold();
             EventManager.TriggerEvent(subscriptionPurchaseSuccess);
         }
         // Cases where a consumable product has been purchased by this user.
@@ -715,5 +716,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     {
         string url = "https://play.google.com/store/account/subscriptions?sku=" + kProductNameGooglePlaySubscription + "&package=" + Application.identifier;
         Application.OpenURL(url);
+    }
+
+    private void EnableGold()
+    {
+        Debug.Log("Enable gold");
+        PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true");
     }
 }
