@@ -288,8 +288,9 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (result)
                 {
                     Debug.Log("Completed restore purchase. One or more product(s) available to restore.");
-                    EventManager.TriggerEvent(onRestoreFinish);
+                    
                 }
+                EventManager.TriggerEvent(onRestoreFinish);
             });
         }
 #else
@@ -306,13 +307,15 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     private void OnTransactionsRestored(bool success)
     {
 #if UNITY_IOS
-        Debug.Log("Transactions restored. Success flag = " + success);
+        Debug.Log("OnTransactionsRestored in UnityIAPController.");
         if (success)
         {
+            Debug.Log("Restore transactions was successfull.");
             EventManager.TriggerEvent(onRestoreSuccess);
         }
         else
         {
+            Debug.Log("Restore transactions was  not successfull.");
             EventManager.TriggerEvent(onRestoreFail);
         }
 #endif

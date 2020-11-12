@@ -45,6 +45,8 @@ public class RestorePurchaseButton : MonoBehaviour
 
     private void OnStartRestoreProcess()
     {
+        Debug.Log("OnStartRestoreProcess in RestorePurchaseButton");
+
         restorePurchaseButton.interactable = false;
 
         enableWhenSuccessful.SetActive(false);
@@ -54,11 +56,14 @@ public class RestorePurchaseButton : MonoBehaviour
 
     private void OnFinishRestoreProcess()
     {
+        Debug.Log("OnFinishRestoreProcess in RestorePurchaseButton");
         restorePurchaseButton.interactable = true;
     }
 
     private void OnFailRestorePurchase()
     {
+        Debug.Log("OnFailRestorePurchase in RestorePurchaseButton");
+
         restorePurchaseButton.interactable = true;
 
         enableWhileProcessing.SetActive(false);
@@ -68,6 +73,7 @@ public class RestorePurchaseButton : MonoBehaviour
 
     private void OnSuccessfulRestorePurchase()
     {
+        Debug.Log("OnSuccessfulRestorePurchase in RestorePurchaseButton");
         enableWhileProcessing.SetActive(false);
         enableWhenFailed.SetActive(false);
         enableWhenSuccessful.SetActive(true);
