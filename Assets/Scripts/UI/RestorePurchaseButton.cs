@@ -57,6 +57,7 @@ public class RestorePurchaseButton : MonoBehaviour
     private void OnFinishRestoreProcess()
     {
         Debug.Log("OnFinishRestoreProcess in RestorePurchaseButton");
+        enableWhileProcessing.SetActive(false);
         restorePurchaseButton.interactable = true;
     }
 

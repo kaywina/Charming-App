@@ -42,7 +42,6 @@ public class IAPButton : MonoBehaviour
                 break;
         }
         EventManager.StartListening(UnityIAPController.onPurchaseStart, OnStartPurchase);
-        EventManager.StartListening(UnityIAPController.onPurchaseComplete, OnPurchaseComplete);
         EventManager.StartListening(UnityIAPController.onPurchaseFail, OnFailPurchase);
 
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
@@ -67,13 +66,13 @@ public class IAPButton : MonoBehaviour
         }
 
         EventManager.StopListening(UnityIAPController.onPurchaseStart, OnStartPurchase);
-        EventManager.StopListening(UnityIAPController.onPurchaseComplete, OnPurchaseComplete);
         EventManager.StopListening(UnityIAPController.onPurchaseFail, OnFailPurchase);
     }
 
     private void OnStartPurchase()
     {
         Debug.Log("OnStartPurchase in IAPButton");
+        button.interactable = false;
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
@@ -103,16 +102,8 @@ public class IAPButton : MonoBehaviour
         button.interactable = true;
     }
 
-    // this fires after OnSuccess
-    private void OnPurchaseComplete()
-    {
-        Debug.Log("OnPurchaseComplete in IAPButton");
-        button.interactable = true;
-    }
-
     public void MakePurchase()
     {
-        button.interactable = false;
         switch (purchaseID)
         {
             // subscription

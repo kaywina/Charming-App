@@ -13,7 +13,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string consumablePurchaseSuccess = "ConsumableSuccess";
 
     public static string onPurchaseStart = "onStartPurchase";
-    public static string onPurchaseComplete = "onCompletePurchase";
     public static string onPurchaseFail = "onFailPurchase";
 
     public static string onRestoreStart = "onStartRestore";
@@ -242,8 +241,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             EventManager.TriggerEvent(onPurchaseFail);
             return;
         }
-
-        EventManager.TriggerEvent(onPurchaseComplete);
     }
 
 
