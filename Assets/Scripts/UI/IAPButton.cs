@@ -73,7 +73,6 @@ public class IAPButton : MonoBehaviour
 
     private void onStartPurchase()
     {
-        button.interactable = false;
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(true); }
@@ -81,15 +80,16 @@ public class IAPButton : MonoBehaviour
 
     private void OnFailPurchase()
     {
-        button.interactable = false;
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
+
+        button.interactable = true;
     }
 
     public void OnSuccess()
     {
-        //Debug.Log("IAP Button receives event message that purchase is successful");
+        //Debug.Log("IAP Button receives event message that purchase is successful"); 
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
         if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
@@ -97,6 +97,8 @@ public class IAPButton : MonoBehaviour
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(true); }
+
+        button.interactable = true;
     }
 
     // this fires after OnSuccess
@@ -107,6 +109,7 @@ public class IAPButton : MonoBehaviour
 
     public void MakePurchase()
     {
+        button.interactable = false;
         switch (purchaseID)
         {
             // subscription
