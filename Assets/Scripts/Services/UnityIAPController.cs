@@ -19,6 +19,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string onRestoreStart = "onStartRestore";
     public static string onRestoreFinish = "onFinishRestore";
     public static string onRestoreFail = "onFailedRestore";
+    public static string onRestoreSuccess = "onSuccessfulRestore";
 
 
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
@@ -287,6 +288,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (result)
                 {
                     Debug.Log("Completed restore purchase. One or more product(s) available to restore.");
+                    EventManager.TriggerEvent(onRestoreFinish);
                 }
             });
         }
@@ -307,7 +309,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         Debug.Log("Transactions restored. Success flag = " + success);
         if (success)
         {
-            EventManager.TriggerEvent(onRestoreFinish);
+            EventManager.TriggerEvent(onRestoreSuccess);
         }
         else
         {
