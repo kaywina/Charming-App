@@ -714,9 +714,26 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         Debug.Log("Purchase deferred: " + item.definition.id);
     }
 
-    static public void OpenGoogleManageSubscriptionDeepLink()
+    public static void OpenManageSubscriptionByPlatform()
+    {
+#if UNITY_ANDROID
+        OpenGoogleManageSubscriptionDeepLink();
+#elif UNITY_IOS
+        OpenIOSManageSubscriptionLink();
+#else
+        Debug.Log("Manage subscription not supported on this platform);
+#endif
+    }
+
+    private static void OpenGoogleManageSubscriptionDeepLink()
     {
         string url = "https://play.google.com/store/account/subscriptions?sku=" + kProductNameGooglePlaySubscription + "&package=" + Application.identifier;
+        Application.OpenURL(url);
+    }
+
+    private static void OpenIOSManageSubscriptionLink()
+    {
+        string url = "https://apps.apple.com/account/subscriptions";
         Application.OpenURL(url);
     }
 

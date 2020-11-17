@@ -6,6 +6,6 @@ public class ManageSubscriptionButton : MonoBehaviour
 {
     public void ManageSubscription ()
     {
-        UnityIAPController.OpenGoogleManageSubscriptionDeepLink();
+        UnityIAPController.OpenManageSubscriptionByPlatform();
     }
 }
