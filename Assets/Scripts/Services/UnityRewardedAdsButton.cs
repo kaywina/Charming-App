@@ -20,6 +20,9 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     public ParticleSystem explosionParticles;
     public CurrencyIndicator currencyIndicator;
 
+    public GameObject adsHaveAudio;
+    public GameObject waitingForAd;
+
     private void OnEnable()
     {
         adButton = GetComponent<Button>();
@@ -33,6 +36,8 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
         {
             explosionParticles.Play();
         }
+
+        CheckIfAdIsReadyAndEnableCorrectTextObject();
     }
 
     private void OnDisable()
@@ -120,13 +125,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 
     public void OnUnityAdsReady(string id)
     {
-        // If the ready Placement is rewarded, show the ad:
-        /*
-        if (id == placementId)
-        {
-            Advertisement.Show(placementId);
-        }
-        */
+        CheckIfAdIsReadyAndEnableCorrectTextObject();
     }
 
     public void OnUnityAdsDidError(string message)
@@ -137,5 +136,14 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     public void OnUnityAdsDidStart(string placementId)
     {
         // Optional actions to take when the end-users triggers an ad.
+    }
+
+
+    private void CheckIfAdIsReadyAndEnableCorrectTextObject()
+    {
+        // show different text depending on if button is ready or not
+        bool adIsReady = Advertisement.IsReady(placementId);
+        if (adsHaveAudio != null) { adsHaveAudio.SetActive(adIsReady); }
+        if (waitingForAd != null) { waitingForAd.SetActive(!adIsReady); }
     }
 }
