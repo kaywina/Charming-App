@@ -18,8 +18,8 @@ public class LoveManager : MonoBehaviour
     private const string SECOND_PLAYER_PREF_NAME = "ToughLoveNumber"; // don't change in production
     private const string SECOND_PLAYER_PREF_NAME_MAX_UNLOCKED = "ToughLoveNumberMaxUnlocked"; // don't change in production
 
-    private int maxLoveLocIndex = 79; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_0 to LOVE_68
-    private int maxToughLoveLocIndex = 79; // number of TOUGH_LOVE_X key + value pairs in loc csv; i.e. values go from TOUGH_LOVE_0 to TOUGH_LOVE_68
+    private int maxLoveLocIndex = 87; // number of LOVE_X key + value pairs in loc csv; i.e. values go from LOVE_0 to LOVE_68
+    private int maxToughLoveLocIndex = 87; // number of TOUGH_LOVE_X key + value pairs in loc csv; i.e. values go from TOUGH_LOVE_0 to TOUGH_LOVE_68
 
     private static bool unlockedThisSession = false;
     private static bool secondUnlockedThisSession = false;
