@@ -33,4 +33,9 @@ public class SetPositionFromSlider : MonoBehaviour
                 break;
         }
     }
+
+    public void ResetSlider()
+    {
+        slider.value = 0;
+    }
 }

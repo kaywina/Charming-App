@@ -36,4 +36,9 @@ public class SetRotationFromSlider : MonoBehaviour
         }
         t.localRotation = newRot;
     }
+
+    public void ResetSlider()
+    {
+        slider.value = 0;
+    }
 }
