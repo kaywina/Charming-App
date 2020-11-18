@@ -14,6 +14,7 @@ public class BackgroundParticles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadTornadoTransformValues();
         emitSlider.Initialize(); // this sets the number of particles correctly from stored playerpref data
 
         int startIndex = PlayerPrefs.GetInt(playerPrefName, -1);
@@ -84,5 +85,41 @@ public class BackgroundParticles : MonoBehaviour
     {
         tornadoParent.transform.localPosition = new Vector3(0, 0, 0);
         tornadoParent.transform.localRotation = new Quaternion(0, 0, 0, 0);
+    }
+
+    /*
+     * This Save function is used by the 'Set as Background' and back button in the secrets panel, for data persistence on the adjustments made to Tornado particles
+     * */
+    private string posXPrefName = "TornadoPosX";
+    private string posYPrefName = "TornadoPosY";
+    private string rotXPrefName = "TornadoRotX";
+    private string rotZPrefName = "TornadoRotZ";
+
+    public void SaveTornadoTransformValues()
+    {
+        Debug.Log("Save transform values for Tornado particles");
+        PlayerPrefs.SetFloat(posXPrefName, tornadoParent.transform.localPosition.x);
+        PlayerPrefs.SetFloat(posYPrefName, tornadoParent.transform.localPosition.y);
+
+        PlayerPrefs.SetFloat(rotXPrefName, tornadoParent.transform.localRotation.x);
+        PlayerPrefs.SetFloat(rotZPrefName, tornadoParent.transform.localRotation.z);
+    }
+
+    public void LoadTornadoTransformValues()
+    {
+        Debug.Log("Load transform values for Tornado particles");
+        float posX = PlayerPrefs.GetFloat(posXPrefName);
+        float posY = PlayerPrefs.GetFloat(posYPrefName);
+        float rotX = PlayerPrefs.GetFloat(rotXPrefName);
+        float rotZ = PlayerPrefs.GetFloat(rotZPrefName);
+
+        // set the loaded position
+        tornadoParent.transform.localPosition = new Vector3(posX, posY, 0);
+
+        // set the loaded rotation
+        Quaternion savedRotation = Quaternion.Euler(rotX, 0, rotZ);
+        tornadoParent.transform.localRotation = savedRotation;
+
+
     }
 }
