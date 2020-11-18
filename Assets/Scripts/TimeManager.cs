@@ -83,8 +83,27 @@ public class TimeManager
                 Debug.Log("Reached default case in IsNewDay, this should not happen");
                 break;
         }
- 
-        if (currentDayOfYear > storedDayOfYear && currentYear >= storedYear)
+
+        //Debug.Log("currentDayOfYear = " + currentDayOfYear);
+        //Debug.Log("storedDayOfYear = " + storedDayOfYear);
+        //Debug.Log("currentYear = " + currentYear);
+        //Debug.Log("storedYear = " + storedYear);
+
+        // this catches edge case where app is opened after just the year has incremented 
+        if (currentYear > storedYear)
+        {
+            //Debug.Log("It's a new year! So it must be a new day too...");
+            return true;
+        }
+
+        else if (currentYear < storedYear)
+        {
+            //Debug.Log("You have gone back in time, how?");
+            return false;
+        }
+
+        // most commone cases below
+        else if (currentYear == storedYear && currentDayOfYear > storedDayOfYear)
         {
             //Debug.Log("It's a new day!");
             return true;
