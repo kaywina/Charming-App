@@ -24,7 +24,7 @@ public class ActiveUntilDeactivated : MonoBehaviour
 
     public void Reactivate()
     {
-        Debug.Log("Reactivate");
+        //Debug.Log("Reactivate");
         PlayerPrefs.SetInt(PlayerPrefName, 0);
         gameObject.SetActive(true);
     }

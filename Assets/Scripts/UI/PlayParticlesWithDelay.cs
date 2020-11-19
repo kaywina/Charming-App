@@ -26,6 +26,7 @@ public class PlayParticlesWithDelay: MonoBehaviour
 
     private void StopParticles()
     {
+        CancelInvoke("PlayParticles");
         if (particles != null) { particles.Stop(); }
     }
 }
