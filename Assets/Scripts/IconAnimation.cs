@@ -8,10 +8,15 @@ public class IconAnimation : MonoBehaviour
 
     public GameObject objectToMove;
 
-    private Vector3 startHandPosition;
+    private Vector3 initialScenePosition;
     private float speed = 500;
 
     private bool animating;
+
+    private void Awake()
+    {
+        initialScenePosition = objectToMove.transform.position;
+    }
 
     private void OnEnable()
     {
@@ -21,6 +26,7 @@ public class IconAnimation : MonoBehaviour
     private void OnDisable()
     {
         StopCoroutine("AnimateIcon");
+        objectToMove.transform.position = initialScenePosition;
     }
 
     private IEnumerator AnimateIcon()
@@ -28,7 +34,7 @@ public class IconAnimation : MonoBehaviour
         //Debug.Log("Start animation coroutine");
         objectToMove.SetActive(true);
         bool animating = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f); // if you want a delay before start of animation
         while (animating)
         {
             //Debug.Log("Start animating");
@@ -42,20 +48,6 @@ public class IconAnimation : MonoBehaviour
             //Debug.Log("Stop Animating");
             animating = false;
             yield return null;
-
-            /*
-                objectToMove.transform.position = targetGameObject.transform.position;
-                objectToMove.SetActive(false);
-
-                yield return new WaitForSeconds(1f);
-
-                objectToMove.SetActive(false);
-                yield return new WaitForSeconds(1f);
-
-                objectToMove.transform.position = startHandPosition;
-                objectToMove.SetActive(false);
-            */
         }
-
     }
 }
