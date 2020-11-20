@@ -18,6 +18,8 @@ public class UnlockPanel : CharmsPanel
     public GameObject silverKeyImage;
     public StorePanel storePanel;
     public LocalizationText hintText;
+    public GameObject needMoreKeysText;
+    public GameObject goForItText;
 
     // don't need these two variables if the store button is always shown
     //public GameObject notEnoughText;
@@ -36,13 +38,17 @@ public class UnlockPanel : CharmsPanel
         {
             buyButton.interactable = true;
             //if (storeButton != null) { storeButton.SetActive(false); }
-            //notEnoughText.SetActive(false);
+            needMoreKeysText.SetActive(false);
+            goForItText.SetActive(true);
+
+            
         }
         else
         {
             buyButton.interactable = false;
             //if (storeButton != null) { storeButton.SetActive(true); }
-            //notEnoughText.SetActive(true);
+            goForItText.SetActive(false);
+            needMoreKeysText.SetActive(true);
         }
 
         
