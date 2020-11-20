@@ -6,11 +6,15 @@ public class PlayParticlesWithDelay: MonoBehaviour
 {
     public ParticleSystem particles;
     public float delaySeconds = 1f;
+    public bool invokeOnEnable = true;
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        Invoke("PlayParticles", delaySeconds);
+        if (invokeOnEnable)
+        {
+            Invoke("PlayParticles", delaySeconds);
+        }
     }
 
     // Update is called once per frame
