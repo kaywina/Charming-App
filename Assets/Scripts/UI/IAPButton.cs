@@ -71,7 +71,7 @@ public class IAPButton : MonoBehaviour
 
     private void OnStartPurchase()
     {
-        Debug.Log("OnStartPurchase in IAPButton");
+        //Debug.Log("OnStartPurchase in IAPButton");
         button.interactable = false;
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
@@ -80,7 +80,7 @@ public class IAPButton : MonoBehaviour
 
     private void OnFailPurchase()
     {
-        Debug.Log("OnFailPurchase in IAPButton");
+        //Debug.Log("OnFailPurchase in IAPButton");
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
         if (enableOnSuccessfulPurchase != null) { enableOnSuccessfulPurchase.SetActive(false); }
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(true); }
@@ -90,7 +90,7 @@ public class IAPButton : MonoBehaviour
 
     public void OnSuccessfulPurchase()
     {
-        Debug.Log("OnSuccessfulPurchase in IAPButton");
+        //Debug.Log("OnSuccessfulPurchase in IAPButton");
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
         if (currencyIndicator != null) { currencyIndicator.UpdateIndicatorAnimated(); }
