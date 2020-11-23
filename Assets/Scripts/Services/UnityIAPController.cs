@@ -478,7 +478,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         switch (i.isSubscribed())
         {
             case Result.True:
-                Debug.Log("This user is subscribed to Charming App Gold");
+                Debug.Log("This user is subscribed to Charming App Gold; enable Gold member functionality");
                 EnableGold();
                 break;
             case Result.False:
@@ -739,7 +739,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
     private void EnableGold()
     {
-        Debug.Log("Enable gold");
+        //Debug.Log("Enable gold");
         PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true");
     }
 }
