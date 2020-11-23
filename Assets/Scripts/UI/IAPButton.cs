@@ -93,7 +93,7 @@ public class IAPButton : MonoBehaviour
         Debug.Log("OnSuccessfulPurchase in IAPButton");
         if (promo != null) { promo.SetActive(false); }
         if (success != null) { success.SetActive(true); }
-        if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
+        if (currencyIndicator != null) { currencyIndicator.UpdateIndicatorAnimated(); }
 
         if (enableOnFailPurchase != null) { enableOnFailPurchase.SetActive(false); }
         if (enableOnStartPurchase != null) { enableOnStartPurchase.SetActive(false); }
