@@ -25,7 +25,7 @@ public class CurrencyIndicator : MonoBehaviour
 
     public void UpdateIndicator()
     {
-        Debug.Log("Update Indicator");
+        //Debug.Log("Update Indicator");
         currencyAmountText.text = CurrencyManager.GetCurrencyInBank().ToString();
     }
     
@@ -35,7 +35,7 @@ public class CurrencyIndicator : MonoBehaviour
         // so we use the flag to make sure the animation is only triggered once
         if (!animating)
         {
-            Debug.Log("Update Indicator Animated");
+            //Debug.Log("Update Indicator Animated");
             newCurrencyAmount = int.Parse(currencyAmountText.text);
             currencyAmountText.color = Color.cyan;
             InvokeRepeating("IncrementCurrencyIndicator", 0, repeatRate);
@@ -45,7 +45,7 @@ public class CurrencyIndicator : MonoBehaviour
 
     private void IncrementCurrencyIndicator()
     {
-        Debug.Log("Increment Currency Indicator");
+        //Debug.Log("Increment Currency Indicator");
         newCurrencyAmount++;
 
         if (newCurrencyAmount >= CurrencyManager.GetCurrencyInBank())
