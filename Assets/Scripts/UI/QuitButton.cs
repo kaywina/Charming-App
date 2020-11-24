@@ -11,6 +11,9 @@ public class QuitButton : MonoBehaviour
     public GameObject yesButton;
     public GameObject noButton;
 
+    public GameObject hearty;
+    public GameObject starry;
+
     // Animation component references for four quadrants of the icon
     public Animation topLeftAnim;
     public Animation topRightAnim;
@@ -24,6 +27,8 @@ public class QuitButton : MonoBehaviour
         exitText.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
+        hearty.SetActive(false);
+        starry.SetActive(false);
 
         particles.Play();
 
