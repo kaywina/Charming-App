@@ -50,8 +50,13 @@ public class DataManager : MonoBehaviour
             string ppName = playerPrefData[0];
             string ppValue = playerPrefData[1];
 
-            // special case for int player prefs
-            if (ppName == RankManager.daysPlayerPref || ppName == CurrencyManager.currencyPlayerPref)
+            // special case for non-string player prefs
+            if (ppName == RankManager.daysPlayerPref 
+                || ppName == CurrencyManager.currencyPlayerPref
+                || ppName == LoveManager.PLAYER_PREF_NAME
+                || ppName == LoveManager.PLAYER_PREF_NAME_MAX_UNLOCKED
+                || ppName == LoveManager.SECOND_PLAYER_PREF_NAME
+                || ppName == LoveManager.SECOND_PLAYER_PREF_NAME_MAX_UNLOCKED)
             {
                 PlayerPrefs.SetInt(ppName, int.Parse(ppValue));
             }
@@ -60,7 +65,8 @@ public class DataManager : MonoBehaviour
             else
             {
                 PlayerPrefs.SetString(ppName, ppValue);
-            } 
+            }
+            Debug.Log("Parsed data for " + ppName + " is " + ppValue);
         }
     }
 
@@ -71,20 +77,31 @@ public class DataManager : MonoBehaviour
 
     private void WritePersistentSaveData()
     {
-        string saveData = "";
+        string saveData = ""; // start with an empty string
 
+        // add save data for each of the unlock buttons (data for which charms are unlocked on main ui)
         for (int i = 0; i < unlockObjects.Length; i++)
         {
             if (i != 0)
             {
                 // add a delimiter for each entry after first
-                saveData += "*";
+                saveData += pairSeparator;
             }
-            saveData = saveData + unlockObjects[i].objectToEnable.name + " " + PlayerPrefs.GetString(unlockObjects[i].objectToEnable.name);
+            saveData = saveData + unlockObjects[i].objectToEnable.name + nameValueSeparator + PlayerPrefs.GetString(unlockObjects[i].objectToEnable.name);
         }
 
-        saveData += pairSeparator + RankManager.daysPlayerPref + nameValueSeparator + PlayerPrefs.GetInt(RankManager.daysPlayerPref).ToString();
-        saveData += pairSeparator + CurrencyManager.currencyPlayerPref + nameValueSeparator + PlayerPrefs.GetInt(CurrencyManager.currencyPlayerPref).ToString();
+        // data for gold subscription
+        saveData += pairSeparator + UnityIAPController.goldSubscriptionPlayerPref + nameValueSeparator + PlayerPrefs.GetString(UnityIAPController.goldSubscriptionPlayerPref);
+
+        // data for Easy and Tough Love sayings
+        saveData += pairSeparator + LoveManager.PLAYER_PREF_NAME + nameValueSeparator + PlayerPrefs.GetInt(LoveManager.PLAYER_PREF_NAME).ToString();
+        saveData += pairSeparator + LoveManager.PLAYER_PREF_NAME_MAX_UNLOCKED + nameValueSeparator + PlayerPrefs.GetInt(LoveManager.PLAYER_PREF_NAME_MAX_UNLOCKED).ToString();
+        saveData += pairSeparator + LoveManager.SECOND_PLAYER_PREF_NAME + nameValueSeparator + PlayerPrefs.GetInt(LoveManager.SECOND_PLAYER_PREF_NAME).ToString();
+        saveData += pairSeparator + LoveManager.SECOND_PLAYER_PREF_NAME_MAX_UNLOCKED + nameValueSeparator + PlayerPrefs.GetInt(LoveManager.SECOND_PLAYER_PREF_NAME_MAX_UNLOCKED).ToString();
+
+        // additional saved data
+        saveData += pairSeparator + RankManager.daysPlayerPref + nameValueSeparator + PlayerPrefs.GetInt(RankManager.daysPlayerPref).ToString(); // data for achieved rank
+        saveData += pairSeparator + CurrencyManager.currencyPlayerPref + nameValueSeparator + PlayerPrefs.GetInt(CurrencyManager.currencyPlayerPref).ToString(); // data for number of keys
 
         File.WriteAllText(Application.persistentDataPath + "/" + saveFileName, saveData);
     }
