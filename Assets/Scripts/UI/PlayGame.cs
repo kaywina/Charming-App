@@ -25,17 +25,33 @@ public class PlayGame : MonoBehaviour
     bool newHighScoreFlag = false;
     private bool perfectGameFlag = false;
 
+    // persistent data of these values are handled as a special case in DataManager
     private string highScoreDataTag = "_highscore"; // this is used to define the player pref name; so don't change it in production
     private string previousHighScoreDataTag = "_previous_highscore"; // this is used to define the player pref name; so don't change it in production
     private string nextRewardPlayerPrefTag = "_nextreward"; // don't change in production
 
     private int maxReward = 32;
 
+    public string GetHighScorePlayerPrefName()
+    {
+        return gameName + highScoreDataTag;
+    }
+
+    public string GetPreviousHighScorePlayerPrefName()
+    {
+        return gameName + previousHighScoreDataTag;
+    }
+
+    public string GetNextRewardPlayerPrefName()
+    {
+        return gameName + nextRewardPlayerPrefTag;
+    }
+
     private void Awake()
     {
-        if (!PlayerPrefs.HasKey(gameName + nextRewardPlayerPrefTag))
+        if (!PlayerPrefs.HasKey(GetNextRewardPlayerPrefName()))
         {
-            PlayerPrefs.SetInt(gameName + nextRewardPlayerPrefTag, 2); // 2 is first reward
+            PlayerPrefs.SetInt(GetNextRewardPlayerPrefName(), 2); // 2 is first reward
         }
     }
 
@@ -63,29 +79,29 @@ public class PlayGame : MonoBehaviour
 
     public void SaveHighScore(int score)
     {
-        PlayerPrefs.SetInt(gameName + highScoreDataTag, score);
+        PlayerPrefs.SetInt(GetHighScorePlayerPrefName(), score);
     }
 
     public int LoadHighScore()
     {
-        return PlayerPrefs.GetInt(gameName + highScoreDataTag);
+        return PlayerPrefs.GetInt(GetHighScorePlayerPrefName());
     }
 
     public void SavePreviousHighScore(int score)
     {
-        PlayerPrefs.SetInt(gameName + previousHighScoreDataTag, score);
+        PlayerPrefs.SetInt(GetPreviousHighScorePlayerPrefName(), score);
     }
 
     public int LoadPreviousHighScore()
     {
-        return PlayerPrefs.GetInt(gameName + previousHighScoreDataTag);
+        return PlayerPrefs.GetInt(GetPreviousHighScorePlayerPrefName());
     }
 
     // returns true if there is a new high score
     public bool CheckScore(int score)
     {
-        if (!PlayerPrefs.HasKey(gameName + highScoreDataTag) && score != 0 
-                || score > PlayerPrefs.GetInt(gameName + highScoreDataTag))
+        if (!PlayerPrefs.HasKey(GetHighScorePlayerPrefName()) && score != 0 
+                || score > PlayerPrefs.GetInt(GetHighScorePlayerPrefName()))
         {
             newHighScoreFlag = true;
             return true;
@@ -122,7 +138,7 @@ public class PlayGame : MonoBehaviour
 
         // show the previous high score and save it
         previousHighScoreText.text = LoadPreviousHighScore().ToString();
-        SavePreviousHighScore(PlayerPrefs.GetInt(gameName + highScoreDataTag)); // need to do this after updating text
+        SavePreviousHighScore(PlayerPrefs.GetInt(GetHighScorePlayerPrefName())); // need to do this after updating text
 
         // show the high score display
         SetRewardUI(); // this shows different UI depending on if user got a new high score or not
@@ -132,20 +148,18 @@ public class PlayGame : MonoBehaviour
 
     public int GetRewardAmount()
     {
-        string rewardPlayerPrefName = gameName + nextRewardPlayerPrefTag;
-        return PlayerPrefs.GetInt(rewardPlayerPrefName);
+        return PlayerPrefs.GetInt(GetNextRewardPlayerPrefName());
     }
 
     public void SetNextRewardAmount()
     {
         //Debug.Log("Set next reward amount");
-        string rewardPlayerPrefName = gameName + nextRewardPlayerPrefTag;
-        int reward = PlayerPrefs.GetInt(rewardPlayerPrefName);
+        int reward = PlayerPrefs.GetInt(GetNextRewardPlayerPrefName());
         // only go to next reward size if not exceeded max reward size; otherwise reward just stays at max
         int doubleReward = reward * 2;
         if (doubleReward <= maxReward)
         {
-            PlayerPrefs.SetInt(rewardPlayerPrefName, doubleReward);
+            PlayerPrefs.SetInt(GetNextRewardPlayerPrefName(), doubleReward);
         }
     }
 

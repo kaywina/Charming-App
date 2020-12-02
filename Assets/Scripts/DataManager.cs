@@ -5,7 +5,8 @@ using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    public UnlockButton[] unlockObjects;
+    public UnlockButton[] unlockObjects; // objects that store data for main ui unlockables i.e. charms
+    public PlayGame[] playGames; // scripts that store data for the memory excercise games
 
     private static string saveFileName = "charmProgessData.txt"; // do not change this in production!
     private string persistentData;
@@ -56,8 +57,19 @@ public class DataManager : MonoBehaviour
             string ppName = playerPrefData[0];
             string ppValue = playerPrefData[1];
 
+            // handle case for PlayGame scripts that are int data
+            bool isDataForPlayGame = false;
+            for (int i = 0; i < playGames.Length; i++)
+            {
+                if (ppName.Contains(playGames[i].gameName))
+                {
+                    isDataForPlayGame = true;
+                }
+            }
+
             // special case for non-string player prefs
-            if (ppName == RankManager.daysPlayerPref 
+            if (isDataForPlayGame
+                || ppName == RankManager.daysPlayerPref 
                 || ppName == CurrencyManager.currencyPlayerPref
                 || ppName == LoveManager.PLAYER_PREF_NAME
                 || ppName == LoveManager.PLAYER_PREF_NAME_MAX_UNLOCKED
@@ -88,12 +100,20 @@ public class DataManager : MonoBehaviour
         // add save data for each of the unlock buttons (data for which charms are unlocked on main ui)
         for (int i = 0; i < unlockObjects.Length; i++)
         {
+            // add a delimiter for each entry after very first
             if (i != 0)
             {
-                // add a delimiter for each entry after first
                 saveData += pairSeparator;
             }
             saveData = saveData + unlockObjects[i].objectToEnable.name + nameValueSeparator + PlayerPrefs.GetString(unlockObjects[i].objectToEnable.name);
+        }
+
+        // data for memory excercise game high scores
+        for (int i = 0; i < playGames.Length; i++)
+        {
+            saveData += pairSeparator + playGames[i].GetHighScorePlayerPrefName() + nameValueSeparator + PlayerPrefs.GetInt(playGames[i].GetHighScorePlayerPrefName());
+            saveData += pairSeparator + playGames[i].GetNextRewardPlayerPrefName() + nameValueSeparator + PlayerPrefs.GetInt(playGames[i].GetNextRewardPlayerPrefName());
+            saveData += pairSeparator + playGames[i].GetPreviousHighScorePlayerPrefName() + nameValueSeparator + PlayerPrefs.GetInt(playGames[i].GetPreviousHighScorePlayerPrefName());
         }
 
         // data for gold subscription
