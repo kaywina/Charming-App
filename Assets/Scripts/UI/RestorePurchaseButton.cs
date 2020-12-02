@@ -11,8 +11,11 @@ public class RestorePurchaseButton : MonoBehaviour
     public GameObject enableWhenFailed;
     public GameObject enableWhenSuccessful;
 
+    public DataManager dataManager;
+
     public void RestorePurchase()
     {
+        dataManager.LoadPersistentData();
         GameObject controlObject = GameObject.FindGameObjectWithTag("IAPController");
         controlObject.GetComponent<UnityIAPController>().RestorePurchases();
     }

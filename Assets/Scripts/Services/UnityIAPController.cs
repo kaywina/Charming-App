@@ -259,8 +259,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         EventManager.TriggerEvent(onRestoreStart);
 
 #if UNITY_ANDROID
-        Debug.Log("Restoring transactions is not supported on Android platform.");
-        EventManager.TriggerEvent(onRestoreFail); // automatically fail by default on Android
+        Debug.Log("Restoring transactions through UnityIAPController is not supported on Android.");
+        EventManager.TriggerEvent(onRestoreFinish) // automatically finish by default on Android
         //m_GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored); // if restore was supported, this is the code
         return;
 
@@ -367,11 +367,11 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (item.definition.storeSpecificId == goldProductID)
                 {
                     string localizedPrice = item.metadata.localizedPriceString;
-                    //Debug.Log("localizedPrice for " + goldProductID + " is " + localizedPrice);
+                    Debug.Log("localizedPrice for " + goldProductID + " is " + localizedPrice);
                     PlayerPrefs.SetString(localizedPricePlayerPrefName, item.metadata.localizedPriceString);
                 }
                 
-                /*
+                
                 Debug.Log(string.Join(" - ",
                     new[]
                     {
@@ -384,7 +384,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                         item.receipt
                     }));
                 
-                */
+                
                 // this is the usage of SubscriptionManager class
                 if (item.receipt != null)
                 {
@@ -395,7 +395,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
                             SubscriptionManager p = new SubscriptionManager(item, intro_json);
                             info = p.getSubscriptionInfo();
-                            /*
+                            
                             Debug.Log("product id is: " + info.getProductId());
                             Debug.Log("purchase date is: " + info.getPurchaseDate());
                             Debug.Log("subscription next billing date is: " + info.getExpireDate());
@@ -409,7 +409,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                             Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                             Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-                            */
+                            
                             ValidateSubscription(info);
 
                         }
@@ -420,12 +420,12 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                     }
                     else
                     {
-                        Debug.Log("the product is not a subscription product");
+                        Debug.Log("The product is not a subscription product");
                     }
                 }
                 else
                 {
-                    //Debug.Log("the product should have a valid receipt");
+                    Debug.Log("The product does not have a valid receipt");
                     CheckForCancelledSubscription(item);
 
                 }
@@ -450,6 +450,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     // Validate the Charming App Gold Subscription
     private void ValidateSubscription(SubscriptionInfo i)
     {
+        Debug.Log("Attempt to validate subscription");
         string productIdFromInfo;
         productIdFromInfo = i.getProductId();
 
