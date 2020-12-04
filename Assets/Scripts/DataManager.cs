@@ -84,7 +84,7 @@ public class DataManager : MonoBehaviour
             {
                 PlayerPrefs.SetString(ppName, ppValue);
             }
-            Debug.Log("Parsed data for " + ppName + " is " + ppValue);
+            //Debug.Log("Parsed data for " + ppName + " is " + ppValue);
         }
     }
 
