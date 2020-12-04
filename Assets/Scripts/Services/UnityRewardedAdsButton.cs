@@ -110,7 +110,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 
                 gameObject.SetActive(false); // deactivate button after completion
                 UnityAnalyticsController.SendCompleteWatchingRewardedAdEvent();
-                if (currencyIndicator != null) { currencyIndicator.UpdateIndicator(); }
+                if (currencyIndicator != null) { currencyIndicator.UpdateIndicatorAnimated(); }
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:

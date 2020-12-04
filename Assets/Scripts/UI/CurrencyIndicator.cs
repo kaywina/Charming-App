@@ -15,7 +15,7 @@ public class CurrencyIndicator : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateIndicator();
+        UpdateIndicatorWithoutAnimation();
     }
 
     private void OnDisable()
@@ -23,7 +23,7 @@ public class CurrencyIndicator : MonoBehaviour
         CancelAnimation();
     }
 
-    public void UpdateIndicator()
+    public void UpdateIndicatorWithoutAnimation()
     {
         //Debug.Log("Update Indicator");
         currencyAmountText.text = CurrencyManager.GetCurrencyInBank().ToString();
@@ -48,7 +48,7 @@ public class CurrencyIndicator : MonoBehaviour
         //Debug.Log("Increment Currency Indicator");
         newCurrencyAmount++;
 
-        if (newCurrencyAmount >= CurrencyManager.GetCurrencyInBank())
+        if (newCurrencyAmount > CurrencyManager.GetCurrencyInBank())
         {
             CancelAnimation();
         }
