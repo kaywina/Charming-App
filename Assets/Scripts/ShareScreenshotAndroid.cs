@@ -25,7 +25,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
     public GameObject okButton;
 
     public Text rewardAmountText;
-
+    public CurrencyManager currencyManager;
+    public CurrencyIndicator currencyIndicator;
 
     public int baseBonusAmount = 8;
     private int givenBonusAmount = 0;
@@ -134,6 +135,8 @@ public class ShareScreenshotAndroid : MonoBehaviour
             //Debug.Log("Only give the bonus once");
             bonusGiven = true;
             givenBonusAmount = baseBonusAmount;
+            currencyManager.GiveBonus(baseBonusAmount); ;
+            if (currencyIndicator != null) { currencyIndicator.UpdateIndicatorAnimated(); }
         }
 
         // givenBonusAmount will be less than or equal to base amount as long as user has not watched a rewarded video; this prevents the button from showing if the user chooses to share more than once
@@ -155,8 +158,7 @@ public class ShareScreenshotAndroid : MonoBehaviour
                 strikeout.SetActive(true);
                 doubleBonusAmountText.SetActive(true);
             }
-
-            // just show the normal thanks (make sure strike-through and double bonus text are disabled in scene!
+            // just show the normal thanks (make sure strike-through and double bonus text are disabled in scene!    
         } 
     }
 

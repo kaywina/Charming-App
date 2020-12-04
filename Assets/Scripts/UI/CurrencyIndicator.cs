@@ -15,6 +15,7 @@ public class CurrencyIndicator : MonoBehaviour
 
     private void OnEnable()
     {
+        CancelAnimation();
         UpdateIndicatorWithoutAnimation();
     }
 
@@ -33,14 +34,19 @@ public class CurrencyIndicator : MonoBehaviour
     {
         // currency indicator gets told to start animating by all the iap buttons at once (because it is called in the listener for iap success, which triggers one each button)
         // so we use the flag to make sure the animation is only triggered once
+
         if (!animating)
         {
-            //Debug.Log("Update Indicator Animated");
+            Debug.Log("Update Indicator Animated");
             newCurrencyAmount = int.Parse(currencyAmountText.text);
             currencyAmountText.color = Color.cyan;
             InvokeRepeating("IncrementCurrencyIndicator", 0, repeatRate);
             animating = true;
-        }  
+        }
+        else
+        {
+            Debug.Log("Already animating the currency indicator");
+        }
     }
 
     private void IncrementCurrencyIndicator()

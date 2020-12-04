@@ -93,8 +93,8 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 
                 if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
                 {
-                    shareScreenshotAndroid.SetGivenBonusAmount(shareScreenshotAndroid.baseBonusAmount * 2);
-                    doubleRewardAmountText.text = shareScreenshotAndroid.GetGivenBonusAmount().ToString();
+                    doubleRewardAmountText.text = (shareScreenshotAndroid.baseBonusAmount * 2).ToString();
+                    CurrencyManager.Instance.GiveBonus(shareScreenshotAndroid.GetGivenBonusAmount());
                 }
 
                 if (buttonIsOnPlayPanel)
@@ -107,10 +107,12 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
 
                 watched = true;
                 if (watchedRewardedAdText != null) { watchedRewardedAdText.SetActive(true); }
-
-                gameObject.SetActive(false); // deactivate button after completion
+     
                 UnityAnalyticsController.SendCompleteWatchingRewardedAdEvent();
-                if (currencyIndicator != null) { currencyIndicator.UpdateIndicatorAnimated(); }
+                if (currencyIndicator != null) {
+                    currencyIndicator.UpdateIndicatorAnimated();
+                }
+                gameObject.SetActive(false); // deactivate button after completion
                 //Debug.Log("The ad was successfully shown.");
                 break;
             case ShowResult.Skipped:
