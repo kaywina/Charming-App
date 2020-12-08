@@ -173,20 +173,26 @@ public class ShareScreenshotAndroid : MonoBehaviour
         ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         ss.Apply();
 
-        string filePath = Path.Combine(Application.temporaryCachePath, screenshotName);
-        File.WriteAllBytes(filePath, ss.EncodeToPNG());
+        string filePath = SaveTexture2DAsFile(ss);
+        ShareImageFile(filePath);
+        File.Delete(filePath);
 
-        Destroy(ss);
+        isProcessing = false;
+    }
+
+    public string SaveTexture2DAsFile(Texture2D tex)
+    {
+        string filePath = Path.Combine(Application.temporaryCachePath, screenshotName);
+        File.WriteAllBytes(filePath, tex.EncodeToPNG());
+        Destroy(tex);
         ResetScene();
         GiveBonus();
+        return filePath;
+    }
 
+    public void ShareImageFile(string filePath)
+    {
         new NativeShare().AddFile(filePath).SetSubject(shareSubject).SetText(shareMessage).Share();
-
-        // Share on WhatsApp only, if installed (Android only)
-        //if( NativeShare.TargetExists( "com.whatsapp" ) )
-        //	new NativeShare().AddFile( filePath ).SetText( "Hello world!" ).SetTarget( "com.whatsapp" ).Share();
- 
-        isProcessing = false;
     }
 
     public bool GetBonusGive ()
