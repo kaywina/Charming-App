@@ -107,8 +107,9 @@ public class ShareScreenshot : MonoBehaviour
             //Debug.Log("hide " + hideOnShare[i].name);
         }
 
-        // hide ok button if it's linked in inspector
+        // hide ok button and currency indicator if they are linked in inspector
         if (okButton != null) { okButton.SetActive(false); }
+        if (currencyIndicator != null) { currencyIndicator.gameObject.SetActive(false); }
 
         // hide the share button and make it non-interactable
         Button shareButton = GetComponent<Button>();
@@ -140,9 +141,10 @@ public class ShareScreenshot : MonoBehaviour
             }
         }
 
-        // always say thank you and show ok button
+        // always say thank you and re-show ok button and currency indicator as required
         if (thanksObject != null) { thanksObject.SetActive(true); }
         if (okButton != null) { okButton.SetActive(true); }
+        if (currencyIndicator != null) { currencyIndicator.gameObject.SetActive(true); }
     }
 
     private void GiveBonus()
