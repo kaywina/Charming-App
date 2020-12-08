@@ -5,6 +5,12 @@ using System.IO;
 
 public class ShareScreenshot : MonoBehaviour
 {
+    public bool cropImage = false;
+    public int cropAtX = 0;
+    public int cropAtY = 0;
+    public int cropWidth = 100;
+    public int cropHeight = 100;
+
     public Button shareButton;
     public Image shareButtonImage;
     private bool isFocus = false;
@@ -169,8 +175,18 @@ public class ShareScreenshot : MonoBehaviour
         SetUpScene();
 
         yield return new WaitForEndOfFrame();
+
         Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+
+        // if we crop the screenshot down then differnet path
+        if (cropImage)
+        {
+            Color[] pix = ss.GetPixels(cropAtX, cropAtY, cropWidth, cropHeight);
+            ss = new Texture2D(cropWidth, cropHeight);
+            ss.SetPixels(pix);
+        }
+
         ss.Apply();
 
         string filePath = SaveTexture2DAsFile(ss);
@@ -183,6 +199,7 @@ public class ShareScreenshot : MonoBehaviour
     {
         string filePath = Path.Combine(Application.temporaryCachePath, screenshotName);
         File.WriteAllBytes(filePath, tex.EncodeToPNG());
+        Debug.Log("Screenshot texture saved at path " + filePath);
         Destroy(tex);
         ResetScene();
         GiveBonus();
