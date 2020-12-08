@@ -5,6 +5,18 @@ using System.IO;
 
 public class ShareScreenshot : MonoBehaviour
 {
+    public bool cropImage = false;
+
+    public float cropAtXRelative = 0f;
+    public float cropAtYRelative = 0f;
+    public float cropWidthRelative = 1f;
+    public float cropHeightRelative = 1f;
+
+    private int cropAtX = 0;
+    private int cropAtY = 0;
+    private int cropWidth = 0;
+    private int cropHeight = 0;
+
     public Button shareButton;
     public Image shareButtonImage;
     private bool isFocus = false;
@@ -33,6 +45,8 @@ public class ShareScreenshot : MonoBehaviour
     private bool bonusGiven;
 
     private float sceneResetDelayInSeconds = 2f;
+
+    private bool[] alreadyHiddenIndices;
 
     private void OnEnable()
     {
@@ -84,8 +98,11 @@ public class ShareScreenshot : MonoBehaviour
     {
         // hide some objects while taking screenshot
         if (shareBonusIndicator != null) { shareBonusIndicator.SetActive(false); }
+
+        alreadyHiddenIndices = new bool[hideOnShare.Length];
         for (int i = 0; i < hideOnShare.Length; i++)
         {
+            alreadyHiddenIndices[i] = hideOnShare[i].activeSelf;
             hideOnShare[i].SetActive(false);
             //Debug.Log("hide " + hideOnShare[i].name);
         }
@@ -116,7 +133,10 @@ public class ShareScreenshot : MonoBehaviour
         {
             for (int i = 0; i < hideOnShare.Length; i++)
             {
-                hideOnShare[i].SetActive(true);
+                if (alreadyHiddenIndices[i] == true)
+                {
+                    hideOnShare[i].SetActive(true);
+                }
             }
         }
 
@@ -169,8 +189,23 @@ public class ShareScreenshot : MonoBehaviour
         SetUpScene();
 
         yield return new WaitForEndOfFrame();
+
         Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+
+        // if we crop the screenshot down then differnet path
+        if (cropImage)
+        {
+            cropAtX = (int)(Screen.width * cropAtXRelative);
+            cropAtY = (int)(Screen.height * cropAtYRelative);
+            cropWidth = (int)(Screen.width * cropWidthRelative);
+            cropHeight = (int)(Screen.height * cropHeightRelative);
+
+            Color[] pix = ss.GetPixels(cropAtX, cropAtY, cropWidth, cropHeight);
+            ss = new Texture2D(cropWidth, cropHeight);
+            ss.SetPixels(pix);
+        }
+
         ss.Apply();
 
         string filePath = SaveTexture2DAsFile(ss);
@@ -183,6 +218,7 @@ public class ShareScreenshot : MonoBehaviour
     {
         string filePath = Path.Combine(Application.temporaryCachePath, screenshotName);
         File.WriteAllBytes(filePath, tex.EncodeToPNG());
+        Debug.Log("Screenshot texture saved at path " + filePath);
         Destroy(tex);
         ResetScene();
         GiveBonus();
