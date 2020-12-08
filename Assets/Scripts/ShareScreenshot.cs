@@ -6,10 +6,16 @@ using System.IO;
 public class ShareScreenshot : MonoBehaviour
 {
     public bool cropImage = false;
-    public int cropAtX = 0;
-    public int cropAtY = 0;
-    public int cropWidth = 100;
-    public int cropHeight = 100;
+
+    public float cropAtXRelative = 0f;
+    public float cropAtYRelative = 0f;
+    public float cropWidthRelative = 1f;
+    public float cropHeightRelative = 1f;
+
+    private int cropAtX = 0;
+    private int cropAtY = 0;
+    private int cropWidth = 0;
+    private int cropHeight = 0;
 
     public Button shareButton;
     public Image shareButtonImage;
@@ -182,6 +188,11 @@ public class ShareScreenshot : MonoBehaviour
         // if we crop the screenshot down then differnet path
         if (cropImage)
         {
+            cropAtX = (int)(Screen.width * cropAtXRelative);
+            cropAtY = (int)(Screen.height * cropAtYRelative);
+            cropWidth = (int)(Screen.width * cropWidthRelative);
+            cropHeight = (int)(Screen.height * cropHeightRelative);
+
             Color[] pix = ss.GetPixels(cropAtX, cropAtY, cropWidth, cropHeight);
             ss = new Texture2D(cropWidth, cropHeight);
             ss.SetPixels(pix);
