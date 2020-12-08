@@ -175,7 +175,6 @@ public class ShareScreenshot : MonoBehaviour
 
         string filePath = SaveTexture2DAsFile(ss);
         ShareImageFile(filePath);
-        File.Delete(filePath);
 
         isProcessing = false;
     }
