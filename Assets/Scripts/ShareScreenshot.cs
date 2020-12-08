@@ -46,6 +46,8 @@ public class ShareScreenshot : MonoBehaviour
 
     private float sceneResetDelayInSeconds = 2f;
 
+    private bool[] alreadyHiddenIndices;
+
     private void OnEnable()
     {
         shareButton.onClick.AddListener(OnShareButtonClick);
@@ -96,8 +98,11 @@ public class ShareScreenshot : MonoBehaviour
     {
         // hide some objects while taking screenshot
         if (shareBonusIndicator != null) { shareBonusIndicator.SetActive(false); }
+
+        alreadyHiddenIndices = new bool[hideOnShare.Length];
         for (int i = 0; i < hideOnShare.Length; i++)
         {
+            alreadyHiddenIndices[i] = hideOnShare[i].activeSelf;
             hideOnShare[i].SetActive(false);
             //Debug.Log("hide " + hideOnShare[i].name);
         }
@@ -128,7 +133,10 @@ public class ShareScreenshot : MonoBehaviour
         {
             for (int i = 0; i < hideOnShare.Length; i++)
             {
-                hideOnShare[i].SetActive(true);
+                if (alreadyHiddenIndices[i] == true)
+                {
+                    hideOnShare[i].SetActive(true);
+                }
             }
         }
 
