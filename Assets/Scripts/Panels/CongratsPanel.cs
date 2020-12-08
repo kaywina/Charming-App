@@ -16,7 +16,7 @@ public class CongratsPanel : CharmsPanel
 
     private GameObject unlocked;
 
-    public ShareScreenshotAndroid shareScreenshotAndroid;
+    public ShareScreenshot shareScreenshotAndroid;
 
     public ParticleSystem explosionParticles;
 

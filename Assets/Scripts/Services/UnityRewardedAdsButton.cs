@@ -12,7 +12,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
     public bool buttonIsOnBonusPanel = true;
     public bool buttonIsOnCongratsPanel = false;
     public bool buttonIsOnPlayPanel = false;
-    public ShareScreenshotAndroid shareScreenshotAndroid;
+    public ShareScreenshot shareScreenshotAndroid;
     private bool watched;
     public GameObject watchedRewardedAdText;
     public Text doubleRewardAmountText;
