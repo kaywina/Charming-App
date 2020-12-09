@@ -5,6 +5,7 @@ using System.IO;
 
 public class ShareScreenshot : MonoBehaviour
 {
+    public bool includeImage = true;
     public bool cropImage = false;
 
     public float cropAtXRelative = 0f;
@@ -92,7 +93,7 @@ public class ShareScreenshot : MonoBehaviour
         if (!isProcessing)
         {
             StartCoroutine(TakeSSAndShare());
-            DelaySceneReset(sceneResetDelayInSeconds);
+            if (includeImage) { DelaySceneReset(sceneResetDelayInSeconds); }
         }
 
 #else
@@ -199,6 +200,14 @@ public class ShareScreenshot : MonoBehaviour
     {
         isProcessing = true;
 
+        if (!includeImage)
+        {
+            ShareMessage();
+            isProcessing = false;
+            yield break;
+        }
+
+        // if we are including the image the continue
         SetUpScene();
 
         yield return new WaitForEndOfFrame();
@@ -224,6 +233,8 @@ public class ShareScreenshot : MonoBehaviour
         string filePath = SaveTexture2DAsFile(ss);
         ShareImageFile(filePath);
 
+        Debug.Log("Finished sharing image");
+
         isProcessing = false;
     }
 
@@ -241,6 +252,11 @@ public class ShareScreenshot : MonoBehaviour
     public void ShareImageFile(string filePath)
     {
         new NativeShare().AddFile(filePath).SetSubject(shareSubject).SetText(shareMessage).Share();
+    }
+
+    public void ShareMessage()
+    {
+        new NativeShare().SetSubject(shareSubject).SetText(shareMessage).Share();
     }
 
     public bool GetBonusGive ()
