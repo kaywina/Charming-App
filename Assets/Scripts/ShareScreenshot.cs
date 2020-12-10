@@ -17,6 +17,9 @@ public class ShareScreenshot : MonoBehaviour
     private int cropWidth = 0;
     private int cropHeight = 0;
 
+    public bool useCustomFileName = false;
+    public string customFileName = "";
+
     public Button shareButton;
     public Image shareButtonImage;
     private bool isFocus = false;
@@ -68,7 +71,15 @@ public class ShareScreenshot : MonoBehaviour
 
     public void OnShareButtonClick()
     {
-        screenshotName = string.Format("{0}.png", PlayerPrefs.GetString("Charm"));
+        if (useCustomFileName)
+        {
+            screenshotName = customFileName;
+        }
+        else
+        {
+            screenshotName = string.Format("{0}.png", PlayerPrefs.GetString("Charm"));
+        }
+        
         shareSubject = PlayerPrefs.GetString("Charm");
         shareLink = "www.charmingapp.com";
         shareMessage = string.Format("{0} - {1}", Application.productName, shareLink);
