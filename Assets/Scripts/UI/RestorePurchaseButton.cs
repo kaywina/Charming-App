@@ -43,6 +43,7 @@ public class RestorePurchaseButton : MonoBehaviour
         EventManager.StopListening(UnityIAPController.onRestoreStart, OnStartRestoreProcess);
         EventManager.StopListening(UnityIAPController.onRestoreFinish, OnFinishRestoreProcess);
         EventManager.StopListening(UnityIAPController.onRestoreFail, OnFailRestorePurchase);
+        EventManager.StopListening(UnityIAPController.onRestoreSuccess, OnSuccessfulRestorePurchase);
     }
 
     private void OnStartRestoreProcess()
