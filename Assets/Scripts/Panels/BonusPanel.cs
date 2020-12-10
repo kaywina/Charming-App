@@ -9,6 +9,7 @@ public class BonusPanel : CharmsPanel
     public BonusWheel bonusWheel;
     public GameObject[] deactivateOnReadySpin;
     public GameObject[] activateAfterSpin;
+    public CurrencyIndicator currencyIndicator;
     public GameObject rewardedAdButton;
     public SetPlayerPrefFromToggle goldTogglePrefab;
     public Text prizeText;
@@ -19,14 +20,16 @@ public class BonusPanel : CharmsPanel
     public GameObject skipButton;
 
     private bool hasSpun;
-    private int storedBonus;
+    private int bonusAmount;
 
     new void OnEnable()
     {
+        bonusAmount = 0;
         bonusWheel.gameObject.SetActive(true);
         StartCoroutine(Enable());
         rewardedAdButton.SetActive(false);
         skipButton.SetActive(false);
+        currencyIndicator.gameObject.SetActive(false);
         base.OnEnable();
     }
 
@@ -54,12 +57,6 @@ public class BonusPanel : CharmsPanel
 
     new void OnDisable()
     {
-        if (storedBonus != 0) // on in case where bonus wheel is not skipped
-        {
-            CurrencyManager.Instance.GiveBonus(storedBonus, false, true); // false because not a purchase, then true so that bonus wheel doesn't show again today
-        }
-
-        storedBonus = 0;
         if (overlayControls != null) { overlayControls.SetActive(true); }
         if (fireworks != null) { fireworks.Stop(); }
         base.OnDisable();
@@ -94,7 +91,7 @@ public class BonusPanel : CharmsPanel
         Time.timeScale = 1f; // reset timescale in case user chose to use skip button
         
         //Debug.Log("Complete bonus wheel spin");
-        storedBonus = bonus;
+        bonusAmount = bonus;
         prizeText.text = "+" + bonus.ToString();
 
         // get and store playerpref for gold subscribers
@@ -109,7 +106,7 @@ public class BonusPanel : CharmsPanel
         {
             //Debug.Log("Gold subscribers automatically get double bonus");
             rewardedAdButton.SetActive(false); //this needs to be done before the code below or the double bonus objects don't show up
-            DoubleBonus();
+            GiveDoubleBonus();
             doubleBonusText.SetActive(true);
             strikeout.SetActive(true);
         }
@@ -126,12 +123,18 @@ public class BonusPanel : CharmsPanel
 
         bonusWheel.gameObject.SetActive(false);
         hasSpun = true;
+
+        // order matters here; first we activate the currency indicator so it has old number of keys, then we give the bonus, then we update the indicator so it shows keys being added
+        currencyIndicator.gameObject.SetActive(true);
+        CurrencyManager.Instance.GiveBonus(bonusAmount, false, true); // false because not a purchase, then true so that bonus wheel doesn't show again today
+        currencyIndicator.UpdateIndicatorAnimated();
     }
 
-    public void DoubleBonus()
+    public void GiveDoubleBonus()
     {
-        storedBonus = storedBonus * 2;
-        totalBonusText.text = "+" + storedBonus.ToString();
+        // give the bonus again and update relevant UI
+        CurrencyManager.Instance.GiveBonus(bonusAmount, false, false); // passing false as second parameter this time since we only need to do that once, and it has already been done when spin was completed
+        totalBonusText.text = "+" + (bonusAmount * 2).ToString();
         if (totalBonusText != null) { totalBonusText.gameObject.SetActive(true); }
     }
 
@@ -143,6 +146,6 @@ public class BonusPanel : CharmsPanel
 
     public int GetStoredBonus()
     {
-        return storedBonus;
+        return bonusAmount;
     }
 }

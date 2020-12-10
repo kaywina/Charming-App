@@ -253,7 +253,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         {
             // ... report the situation and stop restoring. Consider either waiting longer, or retrying initialization.
             Debug.Log("RestorePurchases FAIL. Not initialized.");
-            EventManager.TriggerEvent(onRestoreFail);
+            EventManager.TriggerEvent(onRestoreStart);
             return;
         }
 

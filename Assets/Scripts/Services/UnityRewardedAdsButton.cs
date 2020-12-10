@@ -88,7 +88,7 @@ public class UnityRewardedAdsButton : MonoBehaviour, IUnityAdsListener
             case ShowResult.Finished:
                 if (buttonIsOnBonusPanel && bonusPanel != null)
                 {
-                    bonusPanel.DoubleBonus();
+                    bonusPanel.GiveDoubleBonus();
                 }
 
                 if (buttonIsOnCongratsPanel && shareScreenshotAndroid != null)
