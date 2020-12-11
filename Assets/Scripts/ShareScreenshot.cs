@@ -21,6 +21,9 @@ public class ShareScreenshot : MonoBehaviour
     public bool useCustomFileName = false;
     public string customFileName = "";
 
+    public bool useLocKeyForSubject = false;
+    public string subjectLocKey = "";
+
     public Button shareButton;
     public Image shareButtonImage;
     private bool isFocus = false;
@@ -54,7 +57,6 @@ public class ShareScreenshot : MonoBehaviour
 
     private void OnEnable()
     {
-        shareButton.onClick.AddListener(OnShareButtonClick);
         bonusGiven = false;
         if (thanksObject != null) { thanksObject.SetActive(false); }
         if (url != null) { url.SetActive(false); }
@@ -81,9 +83,19 @@ public class ShareScreenshot : MonoBehaviour
             screenshotName = string.Format("{0}.png", PlayerPrefs.GetString("Charm"));
         }
         
-        shareSubject = PlayerPrefs.GetString("Charm");
+        string tempSubject = Localization.GetTranslationByKey(subjectLocKey);
+        if (useLocKeyForSubject && !string.IsNullOrEmpty(tempSubject))
+        {
+            shareSubject = tempSubject;
+        }
+        else
+        {
+            shareSubject = PlayerPrefs.GetString("Charm"); // default to using the currently active charm name if no valid loc key is used or provided
+        }
+
+        Debug.Log("Sharing with subject - " + shareSubject);
         shareLink = "www.charmingapp.com";
-        shareMessage = string.Format("{0} - {1}", Application.productName, shareLink);
+        shareMessage = string.Format("{0} - {1}", Application.productName, shareLink); // share message is always app name + url
         ShareSS();
     }
 
