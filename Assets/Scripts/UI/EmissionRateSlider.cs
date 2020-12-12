@@ -24,11 +24,11 @@ public class EmissionRateSlider : MonoBehaviour
 
     public void SetEmissionRateFromSliderValues()
     {
-        if (slider.value < 0)
+        if (slider.value < 1)
         {
             Debug.Log("Slider value is less than zero; that shouldn't happen");
             bgParticles.SetEmissionRateMultiplier(defaultRate / 2);
-            slider.value = 0;
+            slider.value = 1;
             return;
         }
 
