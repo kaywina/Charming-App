@@ -31,18 +31,18 @@ public class DataManager : MonoBehaviour
 
     public void LoadPersistentData()
     {
-        Debug.Log("Attempt to load persistent data");
+        //Debug.Log("Attempt to load persistent data");
         persistentData = ReadPersistentSaveData();
         //Debug.Log("persistentData = " + persistentData);
 
         if (string.IsNullOrEmpty(persistentData))
         {
-            Debug.Log("No persistent data was found; initialize normally");
+            //Debug.Log("No persistent data was found; initialize normally");
             return;
         }
         else
         {
-            Debug.Log("Persistent data was found; set player prefs from stored values");
+            //Debug.Log("Persistent data was found; set player prefs from stored values");
             ParseSaveData();
         }
     }

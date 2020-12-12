@@ -213,7 +213,6 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
             // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
             // retrying initiailization.
             Debug.Log("BuyProductID FAIL. Not initialized.");
-            Debug.Log("Trigger onPurchaseFail event");
             EventManager.TriggerEvent(onPurchaseFail);
             return;
         }
@@ -236,8 +235,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         else
         {
             // ... report the product look-up failure situation  
-            Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
-            Debug.Log("Trigger onPurchaseFail event");
+            //Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
             EventManager.TriggerEvent(onPurchaseFail);
             return;
         }
@@ -252,7 +250,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         if (!IsInitialized())
         {
             // ... report the situation and stop restoring. Consider either waiting longer, or retrying initialization.
-            Debug.Log("RestorePurchases FAIL. Not initialized.");
+            //Debug.Log("RestorePurchases FAIL. Not initialized.");
             EventManager.TriggerEvent(onRestoreStart);
             return;
         }
@@ -266,7 +264,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         return;
 
 #elif UNITY_IOS
-        Debug.Log("Restore transactions on the App Store");
+        //Debug.Log("Restore transactions on the App Store");
         m_AppleExtensions.RestoreTransactions(OnTransactionsRestored);
         // If we are running on an Apple device ... 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
@@ -305,15 +303,15 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     private void OnTransactionsRestored(bool success)
     {
 #if UNITY_IOS
-        Debug.Log("OnTransactionsRestored in UnityIAPController.");
+        //Debug.Log("OnTransactionsRestored in UnityIAPController.");
         if (success)
         {
-            Debug.Log("Restore transactions was successfull.");
+            //Debug.Log("Restore transactions was successfull.");
             EventManager.TriggerEvent(onRestoreSuccess);
         }
         else
         {
-            Debug.Log("Restore transactions was  not successfull.");
+            //Debug.Log("Restore transactions was  not successfull.");
             EventManager.TriggerEvent(onRestoreFail);
         }
 #endif
@@ -325,7 +323,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         // Purchasing has succeeded initializing. Collect our Purchasing references.
-        Debug.Log("OnInitialized: PASS");
+        //Debug.Log("OnInitialized: PASS");
 
         // Overall Purchasing system, configured with products for this application.
         m_StoreController = controller;
@@ -368,7 +366,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 if (item.definition.storeSpecificId == goldProductID)
                 {
                     string localizedPrice = item.metadata.localizedPriceString;
-                    Debug.Log("localizedPrice for " + goldProductID + " is " + localizedPrice);
+                    //Debug.Log("localizedPrice for " + goldProductID + " is " + localizedPrice);
                     PlayerPrefs.SetString(localizedPricePlayerPrefName, item.metadata.localizedPriceString);
                 }
                 
@@ -397,6 +395,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             SubscriptionManager p = new SubscriptionManager(item, intro_json);
                             info = p.getSubscriptionInfo();
                             
+                            /*
                             Debug.Log("product id is: " + info.getProductId());
                             Debug.Log("purchase date is: " + info.getPurchaseDate());
                             Debug.Log("subscription next billing date is: " + info.getExpireDate());
@@ -410,7 +409,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                             Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                             Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-                            
+                            */
+
                             ValidateSubscription(info);
 
                         }

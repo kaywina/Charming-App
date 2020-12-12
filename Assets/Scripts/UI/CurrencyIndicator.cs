@@ -45,7 +45,7 @@ public class CurrencyIndicator : MonoBehaviour
         }
         else
         {
-            Debug.Log("Already animating the currency indicator");
+            //Debug.Log("Already animating the currency indicator");
         }
     }
 
