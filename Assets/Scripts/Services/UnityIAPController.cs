@@ -370,7 +370,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                     PlayerPrefs.SetString(localizedPricePlayerPrefName, item.metadata.localizedPriceString);
                 }
                 
-                
+                /*
                 Debug.Log(string.Join(" - ",
                     new[]
                     {
@@ -382,7 +382,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                         item.transactionID,
                         item.receipt
                     }));
-                
+                */
                 
                 // this is the usage of SubscriptionManager class
                 if (item.receipt != null)

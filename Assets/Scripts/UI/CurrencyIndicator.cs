@@ -37,7 +37,7 @@ public class CurrencyIndicator : MonoBehaviour
 
         if (!animating)
         {
-            Debug.Log("Update Indicator Animated");
+            //Debug.Log("Update Indicator Animated");
             newCurrencyAmount = int.Parse(currencyAmountText.text);
             currencyAmountText.color = Color.cyan;
             InvokeRepeating("IncrementCurrencyIndicator", 0, repeatRate);

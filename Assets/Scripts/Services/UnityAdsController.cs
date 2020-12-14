@@ -68,7 +68,7 @@ public class UnityAdsController : MonoBehaviour
             if (Advertisement.isSupported && PlayerPrefs.GetString(ALLOW_ADS_PREF_NAME) == "true")
             {
                 Advertisement.Initialize(UnityAdsController.GetGameId());
-                Debug.Log("Initialize Unity Ads");
+                //Debug.Log("Initialize Unity Ads");
             }
         }
     }
