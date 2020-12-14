@@ -93,7 +93,7 @@ public class ShareScreenshot : MonoBehaviour
             shareSubject = PlayerPrefs.GetString("Charm"); // default to using the currently active charm name if no valid loc key is used or provided
         }
 
-        Debug.Log("Sharing with subject - " + shareSubject);
+        //Debug.Log("Sharing with subject - " + shareSubject);
         shareLink = "www.charmingapp.com";
         shareMessage = string.Format("{0} - {1}", Application.productName, shareLink); // share message is always app name + url
         ShareSS();
@@ -245,7 +245,7 @@ public class ShareScreenshot : MonoBehaviour
         string filePath = SaveTexture2DAsFile(ss);
         ShareImageFile(filePath);
 
-        Debug.Log("Finished sharing image");
+        //Debug.Log("Finished sharing image");
 
         isProcessing = false;
     }
@@ -254,7 +254,7 @@ public class ShareScreenshot : MonoBehaviour
     {
         string filePath = Path.Combine(Application.temporaryCachePath, screenshotName);
         File.WriteAllBytes(filePath, tex.EncodeToPNG());
-        Debug.Log("Screenshot texture saved at path " + filePath);
+        //Debug.Log("Screenshot texture saved at path " + filePath);
         Destroy(tex);
         ResetScene();
         GiveBonus();

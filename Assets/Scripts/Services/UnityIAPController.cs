@@ -741,7 +741,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
     private void EnableGold()
     {
-        Debug.Log("ESet Gold data to true");
+        //Debug.Log("Set Gold data to true");
         PlayerPrefs.SetString(goldSubscriptionPlayerPref, "true");
     }
 }
