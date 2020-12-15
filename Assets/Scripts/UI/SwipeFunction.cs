@@ -24,7 +24,7 @@ public class SwipeFunction : MonoBehaviour
     private void Update()
     {
 #if UNITY_STANDALONE
-        SimulateSwipesInEditor();
+        //SimulateSwipesInEditor();
 #elif UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
         DetectSwipesOnMobile();
 #endif

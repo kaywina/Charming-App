@@ -723,7 +723,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 #elif UNITY_IOS
         OpenIOSManageSubscriptionLink();
 #else
-        Debug.Log("Manage subscription not supported on this platform);
+        Debug.Log("Manage subscription not supported on this platform");
 #endif
     }
 
