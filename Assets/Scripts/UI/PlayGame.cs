@@ -49,9 +49,13 @@ public class PlayGame : MonoBehaviour
 
     private void Awake()
     {
-        if (!PlayerPrefs.HasKey(GetNextRewardPlayerPrefName()))
+        if (!PlayerPrefs.HasKey(GetNextRewardPlayerPrefName()) || PlayerPrefs.GetInt(GetNextRewardPlayerPrefName()) <= 0)
         {
             PlayerPrefs.SetInt(GetNextRewardPlayerPrefName(), 2); // 2 is first reward
+
+            // if something has gone wrong and the key exists but value is zero, we will also reset high scores to avoid bugs
+            PlayerPrefs.SetInt(GetHighScorePlayerPrefName(), 0);
+            PlayerPrefs.SetInt(GetPreviousHighScorePlayerPrefName(), 0);
         }
     }
 
