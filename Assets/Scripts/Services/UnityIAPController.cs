@@ -426,7 +426,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 }
                 else
                 {
-                    Debug.Log("The product does not have a valid receipt");
+                    //Debug.Log("The product does not have a valid receipt");
                     CheckForCancelledSubscription(item);
 
                 }
@@ -558,14 +558,14 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         // Or ... a subscription product has been purchased by this user.
         if (String.Equals(args.purchasedProduct.definition.id, kProductIDSubscription, StringComparison.Ordinal))
         {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            //Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             EnableGold();
             EventManager.TriggerEvent(subscriptionPurchaseSuccess);
         }
         // Cases where a consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable16, StringComparison.Ordinal))
         {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            //Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(16, true);
             EventManager.TriggerEvent(consumablePurchaseSuccess);
@@ -573,7 +573,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable32, StringComparison.Ordinal))
         {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            //Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(32, true);
             EventManager.TriggerEvent(consumablePurchaseSuccess);
@@ -581,7 +581,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable64, StringComparison.Ordinal))
         {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            //Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(64, true);
             EventManager.TriggerEvent(consumablePurchaseSuccess);
@@ -589,7 +589,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable128, StringComparison.Ordinal))
         {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            //Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(128, true);
             EventManager.TriggerEvent(consumablePurchaseSuccess);
@@ -597,7 +597,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         // A consumable product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, consumable256, StringComparison.Ordinal))
         {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            //Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // The consumable item has been successfully purchased
             CurrencyManager.Instance.GiveBonus(256, true);
             EventManager.TriggerEvent(consumablePurchaseSuccess);
