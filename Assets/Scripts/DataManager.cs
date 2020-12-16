@@ -84,7 +84,7 @@ public class DataManager : MonoBehaviour
             {
                 PlayerPrefs.SetString(ppName, ppValue);
             }
-            //Debug.Log("Parsed data for " + ppName + " is " + ppValue);
+            Debug.Log("Parsed data for " + ppName + " is " + ppValue);
         }
     }
 
@@ -139,12 +139,12 @@ public class DataManager : MonoBehaviour
 
         try
         {
-            //Debug.Log("Attempting to read text from save file");
+            Debug.Log("Attempting to read text from save file");
             allText = File.ReadAllText(Application.persistentDataPath + "/" + saveFileName);
         }
         catch
         {
-            //Debug.Log("Save file has not yet been created");
+            Debug.Log("Save file has not yet been created");
             allText = null;
         }
 
