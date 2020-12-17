@@ -226,7 +226,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         // If the look up found a product for this device's store and that product is ready to be sold ... 
         if (product != null && product.availableToPurchase)
         {
-            Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
+            //Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
             // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed 
             // asynchronously.
             m_StoreController.InitiatePurchase(product);
