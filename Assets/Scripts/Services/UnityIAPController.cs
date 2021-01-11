@@ -58,6 +58,12 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     public static string consumable64 = "64_keys";
     public static string consumable128 = "128_keys";
     public static string consumable256 = "256_keys";
+#else
+    public static string consumable16 = "16";
+    public static string consumable32 = "32";
+    public static string consumable64 = "64";
+    public static string consumable128 = "128";
+    public static string consumable256 = "256";
 #endif
 
     //public static string kProductIDNonConsumable = "nonconsumable";
@@ -342,6 +348,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
         Dictionary<string, string> introductory_info_dict = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
 #elif UNITY_IOS
         Dictionary<string, string> introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
+#else
+        Dictionary<string, string> introductory_info_dict = null;
 #endif
 
 
