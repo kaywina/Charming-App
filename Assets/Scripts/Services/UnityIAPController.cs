@@ -345,7 +345,9 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 #endif
 
 #if UNITY_ANDROID
-        Dictionary<string, string> introductory_info_dict = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
+        /* Android implementation, using IGooglePlayStoreExtensions.GetProductJSONDictionary() is/was deprecated; 
+         * and is no longer required as product metadata is retrieved directly from the controller below*/
+        Dictionary<string, string> introductory_info_dict = null;
 #elif UNITY_IOS
         Dictionary<string, string> introductory_info_dict = m_AppleExtensions.GetIntroductoryPriceDictionary();
 #else
@@ -378,7 +380,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                     PlayerPrefs.SetString(localizedPricePlayerPrefName, item.metadata.localizedPriceString);
                 }
                 
-                /*
+                
                 Debug.Log(string.Join(" - ",
                     new[]
                     {
@@ -390,7 +392,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                         item.transactionID,
                         item.receipt
                     }));
-                */
+                
                 
                 // this is the usage of SubscriptionManager class
                 if (item.receipt != null)
@@ -403,7 +405,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             SubscriptionManager p = new SubscriptionManager(item, intro_json);
                             info = p.getSubscriptionInfo();
                             
-                            /*
+                            
                             Debug.Log("product id is: " + info.getProductId());
                             Debug.Log("purchase date is: " + info.getPurchaseDate());
                             Debug.Log("subscription next billing date is: " + info.getExpireDate());
@@ -417,7 +419,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                             Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                             Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-                            */
+                            
 
                             ValidateSubscription(info);
 
