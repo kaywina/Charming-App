@@ -265,8 +265,8 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
 #if UNITY_ANDROID
         Debug.Log("Restoring transactions through UnityIAPController is not supported on Android.");
+        m_GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored); // is this supported?
         EventManager.TriggerEvent(onRestoreFinish); // automatically finish by default on Android
-        //m_GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored); // if restore was supported, this is the code
         return;
 
 #elif UNITY_IOS
