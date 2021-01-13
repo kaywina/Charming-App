@@ -55,12 +55,18 @@ public class PlayManager : MonoBehaviour
     public void ReturnToGameSelect()
     {
         watchedRewardedAdText.SetActive(false);
+
+        //Unity Ads have been disabled
+        rewardedAdButton.SetActive(false);
+        /* 
         if (UnityAdsController.GetAllowAds()) {
             rewardedAdButton.SetActive(true);
         }  // only show ad if user has opted-in and AllowAds is true
         else {
             rewardedAdButton.SetActive(false);
         }
+        */
+
         menuCanvasObject.SetActive(true);
     }
 
