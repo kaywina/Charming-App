@@ -111,10 +111,12 @@ public class BonusPanel : CharmsPanel
             strikeout.SetActive(true);
         }
         // if not gold show the rewarded ad button and ads are allowed
+        /* Unity Ads have been disabled
         else if (UnityAdsController.GetAllowAds())
         {
             rewardedAdButton.SetActive(true);
         }
+        */
 
         for (int i = 0; i < activateAfterSpin.Length; i++)
         {

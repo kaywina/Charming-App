@@ -190,12 +190,17 @@ public class ShareScreenshot : MonoBehaviour
         {
             //Debug.Log("User has not yet watched a rewarded video ad");
             // only show the rewarded ad double bonus button if not a gold subscriber and has opted-in to advertising
+
+            /* Unity Ads have been disabled
             if (!UnityIAPController.IsGold() && UnityAdsController.GetAllowAds())
             {
                 //Debug.Log("Activate rewarded ad double bonus button");
                 doubleBonusButton.SetActive(true);
             }
             else if (UnityIAPController.IsGold()) // if a gold subscriber
+            */
+
+            if (UnityIAPController.IsGold()) // if a gold subscriber
             {
                 //Debug.Log("Give double bonus to gold subscribers");
                 givenBonusAmount = givenBonusAmount * 2;
