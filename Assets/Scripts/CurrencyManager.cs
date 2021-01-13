@@ -33,6 +33,12 @@ public class CurrencyManager : MonoBehaviour {
         {
             //Debug.Log("Give currency bonus on first run");
             SetCurrencyOnStart(welcomeBonus);
+
+            // Ads opt-in panel is deprecated with removal of Unity Ads
+            // so we always show tutorial panel
+            tutorialPanel.SetActive(true);
+
+            /* This is no longer required
             if (UnityAdsController.IsAllowAdsSet())
             {
                 tutorialPanel.SetActive(true);
@@ -41,10 +47,17 @@ public class CurrencyManager : MonoBehaviour {
             {
                 adsOptInPanel.SetActive(true);
             }
+            */
         }
         else
         {
             currencyInBank = PlayerPrefs.GetInt(currencyPlayerPref);
+
+            // Ads opt-in panel is deprecated with removal of Unity Ads
+            // so we always show tutorial panel
+            tutorialPanel.SetActive(true);
+
+            /* This is no longer required
             if (UnityAdsController.IsAllowAdsSet())
             {
                 tutorialPanel.SetActive(true);
@@ -53,6 +66,7 @@ public class CurrencyManager : MonoBehaviour {
             {
                 adsOptInPanel.SetActive(true);
             }
+            */
         }
     }
 

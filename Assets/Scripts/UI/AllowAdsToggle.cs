@@ -6,6 +6,6 @@ public class AllowAdsToggle : MonoBehaviour
 {
     public void OnToggleAds()
     {
-        UnityAdsController.InitializeUnityAds();
+        //UnityAdsController.InitializeUnityAds(); //Unity Ads have been disabled
     }
 }

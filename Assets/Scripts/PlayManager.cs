@@ -55,12 +55,18 @@ public class PlayManager : MonoBehaviour
     public void ReturnToGameSelect()
     {
         watchedRewardedAdText.SetActive(false);
+
+        //Unity Ads have been disabled
+        rewardedAdButton.SetActive(false);
+        /* 
         if (UnityAdsController.GetAllowAds()) {
             rewardedAdButton.SetActive(true);
         }  // only show ad if user has opted-in and AllowAds is true
         else {
             rewardedAdButton.SetActive(false);
         }
+        */
+
         menuCanvasObject.SetActive(true);
     }
 
@@ -73,21 +79,35 @@ public class PlayManager : MonoBehaviour
 
     public void OpenGameAttention()
     {
-        CloseGameSelectMenu();
-        attentionGameManager.gameObject.SetActive(true);
-        playAttentionGame.gameObject.SetActive(true);
+        if (CheckGameCost(false))
+        {
+            CloseGameSelectMenu();
+            attentionGameManager.gameObject.SetActive(true);
+            playAttentionGame.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Not enough keys");
+        }
     }
 
     public void OpenGameMemory()
     {
-        CloseGameSelectMenu();
-        rememberGameManager.gameObject.SetActive(true);
-        playRememberGame.gameObject.SetActive(true);
+        if (CheckGameCost(false))
+        {
+            CloseGameSelectMenu();
+            rememberGameManager.gameObject.SetActive(true);
+            playRememberGame.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Not enough keys");
+        }
     }
 
     public void PlayGameAttention()
     {
-        if (CheckGameCost())
+        if (CheckGameCost(true))
         {
             attentionGameManager.PlayGame();
         }
@@ -100,7 +120,7 @@ public class PlayManager : MonoBehaviour
 
     public void PlayGameRemember(bool onInstructions = false)
     {
-        if (CheckGameCost())
+        if (CheckGameCost(true))
         {
             rememberGameManager.PlayGame(onInstructions);
         }
@@ -111,19 +131,21 @@ public class PlayManager : MonoBehaviour
         }
     }
 
-    private bool CheckGameCost()
+    private bool CheckGameCost(bool withdraw)
     {
         if (UnityIAPController.IsGold())
         {
-            if (CurrencyManager.WithdrawAmount(gameCostGold))
+            if (CurrencyManager.CanWithdrawAmount(gameCostGold))
             {
+                if (withdraw) { CurrencyManager.WithdrawAmount(gameCostGold); }
                 return true;
             }
         }
         else
         {
-            if (CurrencyManager.WithdrawAmount(gameCostNoGold))
+            if (CurrencyManager.CanWithdrawAmount(gameCostNoGold))
             {
+                if (withdraw) { CurrencyManager.WithdrawAmount(gameCostNoGold); }
                 return true;
             }
         }
