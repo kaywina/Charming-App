@@ -380,7 +380,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                     PlayerPrefs.SetString(localizedPricePlayerPrefName, item.metadata.localizedPriceString);
                 }
                 
-                
+                /*
                 Debug.Log(string.Join(" - ",
                     new[]
                     {
@@ -392,6 +392,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                         item.transactionID,
                         item.receipt
                     }));
+                */
                 
                 
                 // this is the usage of SubscriptionManager class
@@ -405,7 +406,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             SubscriptionManager p = new SubscriptionManager(item, intro_json);
                             info = p.getSubscriptionInfo();
                             
-                            
+                            /*
                             Debug.Log("product id is: " + info.getProductId());
                             Debug.Log("purchase date is: " + info.getPurchaseDate());
                             Debug.Log("subscription next billing date is: " + info.getExpireDate());
@@ -419,7 +420,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                             Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                             Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                             Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-                            
+                            */
 
                             ValidateSubscription(info);
 
@@ -461,7 +462,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
     // Validate the Charming App Gold Subscription
     private void ValidateSubscription(SubscriptionInfo i)
     {
-        Debug.Log("Attempt to validate subscription");
+        //Debug.Log("Attempt to validate subscription");
         string productIdFromInfo;
         productIdFromInfo = i.getProductId();
 
@@ -482,7 +483,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
         if (isValid == false)
         {
-            Debug.Log("Product ID exist but is not valid, exiting validation");
+            Debug.Log("Product ID exists but is not valid, exiting validation");
             return;
         }
 
