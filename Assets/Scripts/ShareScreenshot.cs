@@ -48,7 +48,7 @@ public class ShareScreenshot : MonoBehaviour
     public CurrencyIndicator currencyIndicator;
 
     public int baseBonusAmount = 8;
-    private int givenBonusAmount = 0;
+    private int giveBonusAmount = 0;
     private bool bonusGiven;
 
     private float sceneResetDelayInSeconds = 2f;
@@ -174,19 +174,20 @@ public class ShareScreenshot : MonoBehaviour
     private void GiveBonus()
     {
         //Debug.Log("Give bonus");
-        
+
+        bool giveBonus = false;
+
         // give share bonus kisses one time only
         if (!bonusGiven && baseBonusAmount > 0)
         {
             //Debug.Log("Only give the bonus once");
             bonusGiven = true;
-            givenBonusAmount = baseBonusAmount;
-            currencyManager.GiveBonus(baseBonusAmount); ;
-            if (currencyIndicator != null) { currencyIndicator.UpdateIndicatorAnimated(); }
+            giveBonusAmount = baseBonusAmount;
+            giveBonus = true;
         }
 
         // givenBonusAmount will be less than or equal to base amount as long as user has not watched a rewarded video; this prevents the button from showing if the user chooses to share more than once
-        if (givenBonusAmount <= baseBonusAmount && doubleBonusButton != null)
+        if (giveBonusAmount <= baseBonusAmount && doubleBonusButton != null)
         {
             //Debug.Log("User has not yet watched a rewarded video ad");
             // only show the rewarded ad double bonus button if not a gold subscriber and has opted-in to advertising
@@ -203,14 +204,20 @@ public class ShareScreenshot : MonoBehaviour
             if (UnityIAPController.IsGold()) // if a gold subscriber
             {
                 //Debug.Log("Give double bonus to gold subscribers");
-                givenBonusAmount = givenBonusAmount * 2;
+                giveBonusAmount = giveBonusAmount * 2;
                 //rewardAmountText.text = givenBonusAmount.ToString();
                 doubleBonusText.SetActive(true);
                 strikeout.SetActive(true);
                 doubleBonusAmountText.SetActive(true);
+                giveBonus = true;
             }
             // just show the normal thanks (make sure strike-through and double bonus text are disabled in scene!    
-        } 
+        }
+        if (giveBonus)
+        {
+            currencyManager.GiveBonus(giveBonusAmount); ;
+            if (currencyIndicator != null) { currencyIndicator.UpdateIndicatorAnimated(); }
+        }
     }
 
     private IEnumerator TakeSSAndShare()
@@ -283,11 +290,11 @@ public class ShareScreenshot : MonoBehaviour
 
     public int GetGivenBonusAmount()
     {
-        return givenBonusAmount;
+        return giveBonusAmount;
     }
 
     public void SetGivenBonusAmount(int amount)
     {
-        givenBonusAmount = amount;
+        giveBonusAmount = amount;
     }
 }
