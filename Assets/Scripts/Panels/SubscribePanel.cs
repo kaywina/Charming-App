@@ -11,6 +11,8 @@ public class SubscribePanel : CharmsPanel
     private bool fromAudioOptions = false;
     private bool fromLove = false;
 
+    public GameObject charmButtons;
+
     public OptionsSubPanel visualOptionsPanel;
     public OptionsSubPanel audioOptionsPanel;
     public OptionsPanel optionsPanel;
@@ -96,6 +98,12 @@ public class SubscribePanel : CharmsPanel
         {
             lovePanel.SetReturnToMain(loveRTM);
             lovePanel.gameObject.SetActive(true);
+        }
+
+        else
+        {
+            // for case when returning to main ui after non-subscriber is redirected to subscribe panel from exit of meditate panel
+            charmButtons.SetActive(true);
         }
 
         fromOptions = false;

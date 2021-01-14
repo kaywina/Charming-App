@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeditatePanel : CharmsPanel
 {
     public GameObject charmButtons;
+    public GameObject subscribePanel;
 
     // world space models for Meditation screen
     public GameObject[] charms;
@@ -23,9 +24,20 @@ public class MeditatePanel : CharmsPanel
     new void OnDisable()
     {
         SetCharmModel(false);
-        if (charmButtons != null) { charmButtons.SetActive(true); }
-        base.OnDisable();
+
         Screen.sleepTimeout = SleepTimeout.SystemSetting;
+
+        // gold subscribers return to main UI, non-subscribers are directed to subscribe panel
+        if (UnityIAPController.IsGold())
+        {
+            if (charmButtons != null) { charmButtons.SetActive(true); }
+            base.OnDisable();
+        }
+        else
+        {
+            DeactivateObjects();
+            subscribePanel.SetActive(true);
+        }
     }
 
     void SetCharmModel(bool enable)
