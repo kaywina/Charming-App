@@ -7,6 +7,8 @@ public class PlayManager : MonoBehaviour
     public CurrencyManager currencyManager;
     public GameObject menuCanvasObject;
 
+    public PlayPanel playPanel;
+
     public PlayGame playAttentionGame;
     public PlayGame playRememberGame;
 
@@ -87,7 +89,8 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough keys");
+            //Debug.Log("Not enough keys");
+            playPanel.OpenStoreFromGameSelect();
         }
     }
 
@@ -101,7 +104,8 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough keys");
+            //Debug.Log("Not enough keys");
+            playPanel.OpenStoreFromGameSelect();
         }
     }
 
@@ -138,7 +142,12 @@ public class PlayManager : MonoBehaviour
             if (CurrencyManager.CanWithdrawAmount(gameCostGold))
             {
                 if (withdraw) { CurrencyManager.WithdrawAmount(gameCostGold); }
+                //Debug.Log("Can withdraw amount for gold subscriber");
                 return true;
+            }
+            else
+            {
+                //Debug.Log("Not enough currency for gold cost");
             }
         }
         else
@@ -146,9 +155,15 @@ public class PlayManager : MonoBehaviour
             if (CurrencyManager.CanWithdrawAmount(gameCostNoGold))
             {
                 if (withdraw) { CurrencyManager.WithdrawAmount(gameCostNoGold); }
+                //Debug.Log("Can withdraw amount for non-gold subscriber");
                 return true;
             }
+            else
+            {
+                //Debug.Log("Not enough currency for non-gold cost");
+            }
         }
+        
         return false;
     }
 
