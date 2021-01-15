@@ -201,6 +201,7 @@ public class ShareScreenshot : MonoBehaviour
             else if (UnityIAPController.IsGold()) // if a gold subscriber
             */
 
+            /* Disabling the double share bonus for gold subscribers
             if (UnityIAPController.IsGold()) // if a gold subscriber
             {
                 //Debug.Log("Give double bonus to gold subscribers");
@@ -211,6 +212,7 @@ public class ShareScreenshot : MonoBehaviour
                 doubleBonusAmountText.SetActive(true);
                 giveBonus = true;
             }
+            */
             // just show the normal thanks (make sure strike-through and double bonus text are disabled in scene!    
         }
         if (giveBonus)
