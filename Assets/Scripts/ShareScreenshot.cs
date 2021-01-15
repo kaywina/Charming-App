@@ -229,6 +229,7 @@ public class ShareScreenshot : MonoBehaviour
         if (!includeImage)
         {
             ShareMessage();
+            UnityAnalyticsController.SendShareAnalyticsEvent(includeImage);
             isProcessing = false;
             yield break;
         }
@@ -260,6 +261,8 @@ public class ShareScreenshot : MonoBehaviour
         ShareImageFile(filePath);
 
         //Debug.Log("Finished sharing image");
+
+        UnityAnalyticsController.SendShareAnalyticsEvent(includeImage);
 
         isProcessing = false;
     }

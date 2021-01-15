@@ -81,4 +81,18 @@ public class UnityAnalyticsController : MonoBehaviour
         string eventName = "Completed_Attention_Level_" + level.ToString();
         AnalyticsEvent.LevelComplete(eventName);
     }
+
+    public static void SendShareAnalyticsEvent(bool includeImage)
+    {
+        if (includeImage)
+        {
+            AnalyticsEvent.SocialShare(ShareType.Image, SocialNetwork.None);
+            Debug.Log("Send share anlalytics event for image");
+        }
+        else
+        {
+            AnalyticsEvent.SocialShare(ShareType.TextOnly, SocialNetwork.None);
+            Debug.Log("Send share anlalytics event for text only");
+        }
+    }
 }
