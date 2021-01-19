@@ -17,7 +17,6 @@ public class SubscribePanel : CharmsPanel
     public OptionsSubPanel audioOptionsPanel;
     public OptionsPanel optionsPanel;
     public CharmsPanel lovePanel;
-    public ParticleSystem fireworks;
 
     public GameObject promo;
     public GameObject success;
