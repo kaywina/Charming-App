@@ -102,7 +102,7 @@ public class SubscribePanel : CharmsPanel
         else
         {
             // for case when returning to main ui after non-subscriber is redirected to subscribe panel from exit of meditate panel
-            charmButtons.SetActive(true);
+            if (charmButtons != null) { charmButtons.SetActive(true); }
         }
 
         fromOptions = false;
