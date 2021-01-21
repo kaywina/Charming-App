@@ -9,6 +9,8 @@ public class BreatheControl : MonoBehaviour
     private int numberOfBreaths = 0;
     private int breathsUntilBonus = 10;
 
+    private bool vibrateOnBreathe = true;
+
     public Text breathsText;
     public Slider secondsSlider;
     public LocalizationTextMesh breatheInOutLocMesh;
@@ -33,7 +35,7 @@ public class BreatheControl : MonoBehaviour
     void OnEnable()
     {
         DisableBonusIndicators();
-        ResetBreaths(); // not tracking number of breaths between sessions
+        ResetBreaths(true); // not tracking number of breaths between sessions
         float storedSecondsValue = PlayerPrefs.GetFloat(playerPrefName);
         //Debug.Log("storedSecondsValue = " + storedSecondsValue);
         if (storedSecondsValue >= secondsSlider.minValue && storedSecondsValue <= secondsSlider.maxValue) // if in valid range
@@ -47,7 +49,7 @@ public class BreatheControl : MonoBehaviour
 
     private void OnDisable()
     {
-        ResetBreaths();
+        ResetBreaths(false);
         breatheIn = true;
     }
 
@@ -69,20 +71,34 @@ public class BreatheControl : MonoBehaviour
         if (OnSliderChanged != null) { OnSliderChanged(); } // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
     }
 
-    public void ResetBreaths()
+    public void ResetBreaths(bool fromOnEnable)
     {
         //Debug.Log("Reset breaths");
         numberOfBreaths = 0;
         breathsText.text = breathsUntilBonus.ToString();
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
+
+        // vibrate on first breathe in when meditation panel is open
+        if (fromOnEnable && vibrateOnBreathe)
+        {
+            Handheld.Vibrate();
+        }
     }
 
     public void Breathe(bool breatheIsIn) // true if breathing in; false if breathing out
     {
         //Debug.Log("Breathe");
+
+        // vibrate every breathe in/out cycle
+        if (vibrateOnBreathe)
+        {
+            Handheld.Vibrate();
+        }
+
         breatheIn = breatheIsIn;
         if (breatheIn == true)
         {
+
             if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
             numberOfBreaths++;
 
