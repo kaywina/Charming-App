@@ -9,8 +9,6 @@ public class BreatheControl : MonoBehaviour
     private int numberOfBreaths = 0;
     private int breathsUntilBonus = 10;
 
-    private bool vibrateOnBreathe = true;
-
     public Text breathsText;
     public Slider secondsSlider;
     public LocalizationTextMesh breatheInOutLocMesh;
@@ -71,6 +69,11 @@ public class BreatheControl : MonoBehaviour
         if (OnSliderChanged != null) { OnSliderChanged(); } // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
     }
 
+    private void Vibrate()
+    {
+        Handheld.Vibrate();
+    }
+
     public void ResetBreaths(bool fromOnEnable)
     {
         //Debug.Log("Reset breaths");
@@ -79,9 +82,9 @@ public class BreatheControl : MonoBehaviour
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
 
         // vibrate on first breathe in when meditation panel is open
-        if (fromOnEnable && vibrateOnBreathe)
+        if (fromOnEnable)
         {
-            Handheld.Vibrate();
+            Vibrate();
         }
     }
 
@@ -90,10 +93,7 @@ public class BreatheControl : MonoBehaviour
         //Debug.Log("Breathe");
 
         // vibrate every breathe in/out cycle
-        if (vibrateOnBreathe)
-        {
-            Handheld.Vibrate();
-        }
+        Vibrate();
 
         breatheIn = breatheIsIn;
         if (breatheIn == true)
