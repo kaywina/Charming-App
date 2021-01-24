@@ -10,6 +10,7 @@ public class BreatheControl : MonoBehaviour
     private int breathsUntilBonus = 10;
 
     public SetPlayerPrefFromToggle vibrateToggle;
+    public VibrateSpeedButton vibrateSpeedButton;
 
     public Text breathsText;
     public Slider secondsSlider;
@@ -45,12 +46,42 @@ public class BreatheControl : MonoBehaviour
             breatheInOutSeconds = storedSecondsValue;
         }
         secondsValueText.text = breatheInOutSeconds.ToString();
+        StartVibrating();
     }
 
     private void OnDisable()
     {
         ResetBreaths(false);
         breatheIn = true;
+        StopVibrating();
+    }
+
+    private void StartVibrating()
+    {
+        switch (vibrateSpeedButton.GetSpeedIndex())
+        {
+            case 0:
+                Debug.Log("Start vibrating slow");
+                InvokeRepeating("Vibrate", 0, breatheInOutSeconds); // one vibration per in/out breath cycle
+                break;
+            case 1:
+                Debug.Log("Start vibrating medium");
+                InvokeRepeating("Vibrate", 1, 1f); // one vibration per second
+                break;
+            case 2:
+                Debug.Log("Start vibrating fast");
+                InvokeRepeating("Vibrate", 1, 0.5f); // two vibrations per second
+                break;
+            default:
+                Debug.Log("Start vibrating medium");
+                InvokeRepeating("Vibrate", 1, 1f); // one vibration per second
+                break;
+        }
+    }
+
+    private void StopVibrating()
+    {
+        CancelInvoke("Vibrate");
     }
 
     public float GetBreatheInOutSeconds()
@@ -62,6 +93,8 @@ public class BreatheControl : MonoBehaviour
     {
         breatheInOutSeconds = seconds;
         PlayerPrefs.SetFloat(playerPrefName, breatheInOutSeconds);
+        StopVibrating();
+        StartVibrating();
     }
 
     public void SetSecondsFromSlider()
@@ -83,20 +116,11 @@ public class BreatheControl : MonoBehaviour
         numberOfBreaths = 0;
         breathsText.text = breathsUntilBonus.ToString();
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
-
-        // vibrate on first breathe in when meditation panel is open
-        if (fromOnEnable)
-        {
-            Vibrate();
-        }
     }
 
     public void Breathe(bool breatheIsIn) // true if breathing in; false if breathing out
     {
         //Debug.Log("Breathe");
-
-        // vibrate every breathe in/out cycle
-        Vibrate();
 
         breatheIn = breatheIsIn;
         if (breatheIn == true)

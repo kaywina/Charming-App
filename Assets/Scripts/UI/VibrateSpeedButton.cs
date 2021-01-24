@@ -31,4 +31,10 @@ public class VibrateSpeedButton : MonoBehaviour
         speedIndex = PlayerPrefs.GetInt(playerPrefName);
         buttonImage.sprite = buttonImageFiles[speedIndex];
     }
+
+    public int GetSpeedIndex()
+    {
+        return speedIndex;
+    }
+
 }
