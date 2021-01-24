@@ -9,6 +9,8 @@ public class BreatheControl : MonoBehaviour
     private int numberOfBreaths = 0;
     private int breathsUntilBonus = 10;
 
+    public SetPlayerPrefFromToggle vibrateToggle;
+
     public Text breathsText;
     public Slider secondsSlider;
     public LocalizationTextMesh breatheInOutLocMesh;
@@ -71,7 +73,8 @@ public class BreatheControl : MonoBehaviour
 
     private void Vibrate()
     {
-        Handheld.Vibrate();
+        bool shouldVibrate = vibrateToggle.GetValue();
+        if (shouldVibrate) { Handheld.Vibrate(); }
     }
 
     public void ResetBreaths(bool fromOnEnable)
