@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class VibrateSpeedButton : MonoBehaviour
 {
 
-    private string playerPrefName = "VibrateSpeed";
+    public BreatheControl breatheControl;
     public Sprite slowSprite;
     public Sprite fastSprite;
     public Image buttonImage;
@@ -18,12 +18,6 @@ public class VibrateSpeedButton : MonoBehaviour
     private string slowLocKey = "SLOW";
     private string fastLocKey = "FAST";
 
-
-    private void Start()
-    {
-        Initialize();
-    }
-
     private void OnEnable()
     {
         Initialize();
@@ -31,33 +25,37 @@ public class VibrateSpeedButton : MonoBehaviour
 
     private void Initialize()
     {
-        string slowOrFast = PlayerPrefs.GetString(playerPrefName);
-
+        Debug.Log("Initialize vibrate speed button");
         // this is opposite that in ChangeSpeed, since we are setting the speed instead of toggling it
-        switch (slowOrFast)
+        switch (breatheControl.GetVibrateFast())
         {
-            case "Slow":
-                SetSpeedToSlow();
+            case false:
+                Debug.Log("Initialize vibrate button to slow");
+                buttonImage.sprite = slowSprite;
+                label.text = Localization.GetTranslationByKey(slowLocKey);
                 break;
-            case "Fast":
-                SetSpeedToFast();
+            case true:
+                Debug.Log("Initialize vibrate button to fast");
+                buttonImage.sprite = fastSprite;
+                label.text = Localization.GetTranslationByKey(fastLocKey);
                 break;
             default:
-                SetSpeedToSlow();
+                Debug.Log("Deefault case; initialize vibrate button to slow");
+                buttonImage.sprite = slowSprite;
+                label.text = Localization.GetTranslationByKey(slowLocKey);
                 break;
         }
     }
 
     public void ChangeSpeed()
     {
-        string slowOrFast = PlayerPrefs.GetString(playerPrefName);
-
-        switch (slowOrFast)
+        Debug.Log("Change vibrate speed");
+        switch (breatheControl.GetVibrateFast())
         {
-            case "Slow":
+            case false:
                 SetSpeedToFast();
                 break;
-            case "Fast":
+            case true:
                 SetSpeedToSlow();
                 break;
             default:
@@ -68,15 +66,15 @@ public class VibrateSpeedButton : MonoBehaviour
 
     private void SetSpeedToSlow()
     {
-        PlayerPrefs.SetString(playerPrefName, "Slow");
+        breatheControl.SetVibrateFast(false);
         buttonImage.sprite = slowSprite;
-        label.text = Localization.GetTranslationByKey(slowLocKey); 
+        label.text = Localization.GetTranslationByKey(slowLocKey);
         Debug.Log("Set speed to slow");
     }
 
     private void SetSpeedToFast()
     {
-        PlayerPrefs.SetString(playerPrefName, "Fast");
+        breatheControl.SetVibrateFast(true);
         buttonImage.sprite = fastSprite;
         label.text = Localization.GetTranslationByKey(fastLocKey);
         Debug.Log("Set speed to fast");

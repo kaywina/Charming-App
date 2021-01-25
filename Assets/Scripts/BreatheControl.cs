@@ -9,7 +9,7 @@ public class BreatheControl : MonoBehaviour
     private int numberOfBreaths = 0;
     private int breathsUntilBonus = 10;
 
-    public SetPlayerPrefFromToggle vibrateToggle;
+    private static string vibratePlayerPrefName = "VibrateSpeed";
 
     public Text breathsText;
     public Slider secondsSlider;
@@ -32,6 +32,13 @@ public class BreatheControl : MonoBehaviour
 
     public ParticleSystem fireworks;
 
+    private bool vibrateFast;
+
+    public static string GetVibratePlayerPrefName()
+    {
+        return vibratePlayerPrefName;
+    }
+
     void OnEnable()
     {
         DisableBonusIndicators();
@@ -46,13 +53,23 @@ public class BreatheControl : MonoBehaviour
         }
         secondsValueText.text = breatheInOutSeconds.ToString();
 
-        Vibrate();
+        if (GetVibrateFast())
+        {
+            Debug.Log("Start fast vibration in OnEnable");
+            StartFastVibration();
+        }
+        else
+        {
+            Debug.Log("Start slow vibration in OnEnable");
+            Vibrate();
+        }
     }
 
     private void OnDisable()
     {
         ResetBreaths();
         breatheIn = true;
+        StopFastVibration();
     }
 
     public float GetBreatheInOutSeconds()
@@ -64,6 +81,10 @@ public class BreatheControl : MonoBehaviour
     {
         breatheInOutSeconds = seconds;
         PlayerPrefs.SetFloat(playerPrefName, breatheInOutSeconds);
+        if (GetVibrateFast())
+        {
+            ResetFastVibration();
+        }
     }
 
     public void SetSecondsFromSlider()
@@ -73,10 +94,27 @@ public class BreatheControl : MonoBehaviour
         if (OnSliderChanged != null) { OnSliderChanged(); } // this triggers the method in BreatheAnimation to update the frame time and re-invoke animation method
     }
 
+    public void StartFastVibration()
+    {
+        InvokeRepeating("Vibrate", 1, 1f);
+        Debug.Log("Start fast vibration");
+    }
+
+    public void StopFastVibration()
+    {
+        CancelInvoke("Vibrate");
+        Debug.Log("Stop fast vibration");
+    }
+
+    public void ResetFastVibration()
+    {
+        StopFastVibration();
+        StartFastVibration();
+    }
+
     private void Vibrate()
     {
-        bool shouldVibrate = vibrateToggle.GetValue();
-        if (shouldVibrate) { Handheld.Vibrate(); }
+        Handheld.Vibrate();
     }
 
     public void ResetBreaths()
@@ -91,8 +129,11 @@ public class BreatheControl : MonoBehaviour
     {
         //Debug.Log("Breathe");
 
-        // vibrate every breathe in/out cycle
-        Vibrate();
+        // For SLOW vibration speed - vibrate every breathe in/out cycle
+        if (!GetVibrateFast())
+        {
+            Vibrate();
+        }
 
         breatheIn = breatheIsIn;
         if (breatheIn == true)
@@ -155,6 +196,37 @@ public class BreatheControl : MonoBehaviour
     {
         bonusIndicatorGold.SetActive(false);
         bonusIndicatorNonGold.SetActive(false);
+    }
+
+
+    public void SetVibrateFast(bool fast)
+    {
+        if (fast)
+        {
+            PlayerPrefs.SetString(GetVibratePlayerPrefName(), "Fast");
+            ResetFastVibration();
+            
+        }
+        else
+        {
+            PlayerPrefs.SetString(GetVibratePlayerPrefName(), "Slow");
+            StopFastVibration();
+        }
+    }
+
+    public bool GetVibrateFast()
+    {
+        string slowOrFast = PlayerPrefs.GetString(GetVibratePlayerPrefName());
+
+        switch (slowOrFast)
+        {
+            case "Slow":
+                return false;
+            case "Fast":
+                return true;
+            default:
+                return false;
+        }
     }
 
 }

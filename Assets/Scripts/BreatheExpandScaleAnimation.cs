@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Deprecated; does not have ipmlementation for slow/fast vibrate speed and no long used in scene
+ * */
+
 public class BreathExpandScaleAnimation : MonoBehaviour
 {
 
