@@ -35,7 +35,7 @@ public class BreatheControl : MonoBehaviour
     void OnEnable()
     {
         DisableBonusIndicators();
-        ResetBreaths(true); // not tracking number of breaths between sessions
+        ResetBreaths(); // not tracking number of breaths between sessions
         float storedSecondsValue = PlayerPrefs.GetFloat(playerPrefName);
         //Debug.Log("storedSecondsValue = " + storedSecondsValue);
         if (storedSecondsValue >= secondsSlider.minValue && storedSecondsValue <= secondsSlider.maxValue) // if in valid range
@@ -45,11 +45,13 @@ public class BreatheControl : MonoBehaviour
             breatheInOutSeconds = storedSecondsValue;
         }
         secondsValueText.text = breatheInOutSeconds.ToString();
+
+        Vibrate();
     }
 
     private void OnDisable()
     {
-        ResetBreaths(false);
+        ResetBreaths();
         breatheIn = true;
     }
 
@@ -77,18 +79,12 @@ public class BreatheControl : MonoBehaviour
         if (shouldVibrate) { Handheld.Vibrate(); }
     }
 
-    public void ResetBreaths(bool fromOnEnable)
+    public void ResetBreaths()
     {
         //Debug.Log("Reset breaths");
         numberOfBreaths = 0;
         breathsText.text = breathsUntilBonus.ToString();
         if (Localization.CheckLocalization()) { breatheInOutLocMesh.localizationKey = "BREATHE_IN"; }
-
-        // vibrate on first breathe in when meditation panel is open
-        if (fromOnEnable)
-        {
-            Vibrate();
-        }
     }
 
     public void Breathe(bool breatheIsIn) // true if breathing in; false if breathing out
