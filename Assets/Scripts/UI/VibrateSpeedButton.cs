@@ -29,12 +29,12 @@ public class VibrateSpeedButton : MonoBehaviour
         // this is opposite that in ChangeSpeed, since we are setting the speed instead of toggling it
         switch (breatheControl.GetVibrateFast())
         {
-            case false:
+            case true:
                 Debug.Log("Initialize vibrate button to slow");
                 buttonImage.sprite = slowSprite;
                 label.text = Localization.GetTranslationByKey(slowLocKey);
                 break;
-            case true:
+            case false:
                 Debug.Log("Initialize vibrate button to fast");
                 buttonImage.sprite = fastSprite;
                 label.text = Localization.GetTranslationByKey(fastLocKey);
@@ -68,7 +68,7 @@ public class VibrateSpeedButton : MonoBehaviour
     {
         breatheControl.SetVibrateFast(false);
         buttonImage.sprite = slowSprite;
-        label.text = Localization.GetTranslationByKey(slowLocKey);
+        label.text = Localization.GetTranslationByKey(fastLocKey);
         Debug.Log("Set speed to slow");
     }
 
@@ -76,7 +76,7 @@ public class VibrateSpeedButton : MonoBehaviour
     {
         breatheControl.SetVibrateFast(true);
         buttonImage.sprite = fastSprite;
-        label.text = Localization.GetTranslationByKey(fastLocKey);
+        label.text = Localization.GetTranslationByKey(slowLocKey);
         Debug.Log("Set speed to fast");
     }
 }
