@@ -10,6 +10,8 @@ public class BreatheControl : MonoBehaviour
     private int breathsUntilBonus = 10;
 
     private static string vibratePlayerPrefName = "VibrateSpeed";
+    public SetPlayerPrefFromToggle vibrateToggle;
+    private bool fastVibrating = false;
 
     public Text breathsText;
     public Slider secondsSlider;
@@ -53,15 +55,23 @@ public class BreatheControl : MonoBehaviour
         }
         secondsValueText.text = breatheInOutSeconds.ToString();
 
-        if (GetVibrateFast())
+        // this allows for initial vibration on meditate panel open for slow speed setting
+        if (vibrateToggle.GetPlayerPrefValue())
         {
-            Debug.Log("Start fast vibration in OnEnable");
-            StartFastVibration();
-        }
-        else
-        {
-            Debug.Log("Start slow vibration in OnEnable");
-            Vibrate();
+            if (GetVibrateFast())
+            {
+                if (!fastVibrating)
+                {
+                    Debug.Log("Start fast vibration in OnEnable");
+                    StartFastVibration();
+                }
+            }
+            else
+            {
+                Debug.Log("Start slow vibration in OnEnable");
+                Vibrate();
+            }
+            
         }
     }
 
@@ -81,8 +91,9 @@ public class BreatheControl : MonoBehaviour
     {
         breatheInOutSeconds = seconds;
         PlayerPrefs.SetFloat(playerPrefName, breatheInOutSeconds);
-        if (GetVibrateFast())
+        if (vibrateToggle.GetPlayerPrefValue() && GetVibrateFast())
         {
+            Debug.Log("Reset fast vibration for SetBreathInOutSeconds");
             ResetFastVibration();
         }
     }
@@ -98,12 +109,14 @@ public class BreatheControl : MonoBehaviour
     {
         InvokeRepeating("Vibrate", 1, 1f);
         Debug.Log("Start fast vibration");
+        fastVibrating = true;
     }
 
     public void StopFastVibration()
     {
         CancelInvoke("Vibrate");
         Debug.Log("Stop fast vibration");
+        fastVibrating = false;
     }
 
     public void ResetFastVibration()
@@ -130,7 +143,7 @@ public class BreatheControl : MonoBehaviour
         //Debug.Log("Breathe");
 
         // For SLOW vibration speed - vibrate every breathe in/out cycle
-        if (!GetVibrateFast())
+        if (vibrateToggle.GetPlayerPrefValue() && !GetVibrateFast())
         {
             Vibrate();
         }
@@ -204,7 +217,7 @@ public class BreatheControl : MonoBehaviour
         if (fast)
         {
             PlayerPrefs.SetString(GetVibratePlayerPrefName(), "Fast");
-            ResetFastVibration();
+            if (vibrateToggle.GetPlayerPrefValue()) { ResetFastVibration(); }
             
         }
         else

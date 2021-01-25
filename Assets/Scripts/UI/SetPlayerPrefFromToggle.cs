@@ -19,16 +19,18 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
         playerPrefName = name;
     }
 
-    public bool GetValue()
+    public bool GetPlayerPrefValue()
     {
-        if (toggle.isOn)
-        {
-            return true;
-        }
+        string value = PlayerPrefs.GetString(playerPrefName);
 
-        else
+        switch (value)
         {
-            return false;
+            case "true":
+                return true;
+            case "false":
+                return false;
+            default:
+                return false;
         }
     }
 
