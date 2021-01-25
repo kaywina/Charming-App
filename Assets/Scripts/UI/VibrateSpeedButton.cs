@@ -67,7 +67,7 @@ public class VibrateSpeedButton : MonoBehaviour
     private void SetSpeedToSlow()
     {
         breatheControl.SetVibrateFast(false);
-        buttonImage.sprite = slowSprite;
+        buttonImage.sprite = fastSprite;
         label.text = Localization.GetTranslationByKey(fastLocKey);
         Debug.Log("Set speed to slow");
     }
@@ -75,7 +75,7 @@ public class VibrateSpeedButton : MonoBehaviour
     private void SetSpeedToFast()
     {
         breatheControl.SetVibrateFast(true);
-        buttonImage.sprite = fastSprite;
+        buttonImage.sprite = slowSprite;
         label.text = Localization.GetTranslationByKey(slowLocKey);
         Debug.Log("Set speed to fast");
     }
