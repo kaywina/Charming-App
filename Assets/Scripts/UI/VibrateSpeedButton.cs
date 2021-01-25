@@ -30,12 +30,12 @@ public class VibrateSpeedButton : MonoBehaviour
         switch (breatheControl.GetVibrateFast())
         {
             case true:
-                Debug.Log("Initialize vibrate button to slow");
+                //Debug.Log("Initialize vibrate button to show slow text and sprite");
                 buttonImage.sprite = slowSprite;
                 label.text = Localization.GetTranslationByKey(slowLocKey);
                 break;
             case false:
-                Debug.Log("Initialize vibrate button to fast");
+                //Debug.Log("Initialize vibrate button to show fast text and sprite");
                 buttonImage.sprite = fastSprite;
                 label.text = Localization.GetTranslationByKey(fastLocKey);
                 break;
