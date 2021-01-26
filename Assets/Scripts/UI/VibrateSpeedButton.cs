@@ -31,13 +31,13 @@ public class VibrateSpeedButton : MonoBehaviour
         {
             case true:
                 //Debug.Log("Initialize vibrate button to show slow text and sprite");
-                buttonImage.sprite = slowSprite;
-                label.text = Localization.GetTranslationByKey(slowLocKey);
+                buttonImage.sprite = fastSprite;
+                label.text = Localization.GetTranslationByKey(fastLocKey);
                 break;
             case false:
                 //Debug.Log("Initialize vibrate button to show fast text and sprite");
-                buttonImage.sprite = fastSprite;
-                label.text = Localization.GetTranslationByKey(fastLocKey);
+                buttonImage.sprite = slowSprite;
+                label.text = Localization.GetTranslationByKey(slowLocKey);
                 break;
         }
     }
@@ -59,16 +59,16 @@ public class VibrateSpeedButton : MonoBehaviour
     private void SetSpeedToSlow()
     {
         breatheControl.SetVibrateFast(false);
-        buttonImage.sprite = fastSprite;
-        label.text = Localization.GetTranslationByKey(fastLocKey);
+        buttonImage.sprite = slowSprite;
+        label.text = Localization.GetTranslationByKey(slowLocKey);
         Debug.Log("Set speed to slow");
     }
 
     private void SetSpeedToFast()
     {
         breatheControl.SetVibrateFast(true);
-        buttonImage.sprite = slowSprite;
-        label.text = Localization.GetTranslationByKey(slowLocKey);
+        buttonImage.sprite = fastSprite;
+        label.text = Localization.GetTranslationByKey(fastLocKey);
         Debug.Log("Set speed to fast");
     }
 }
