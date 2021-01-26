@@ -34,8 +34,6 @@ public class BreatheControl : MonoBehaviour
 
     public ParticleSystem fireworks;
 
-    private bool vibrateFast;
-
     public static string GetVibratePlayerPrefName()
     {
         return vibratePlayerPrefName;
@@ -72,6 +70,18 @@ public class BreatheControl : MonoBehaviour
                 Vibrate();
             }
             
+        }
+    }
+
+    public void ToggleVibration(bool toggleOn)
+    {
+        if (toggleOn)
+        {
+            if (GetVibrateFast()) { StartFastVibration(); }
+        }
+        else
+        {
+            if (GetVibrateFast()) { StopFastVibration(); }
         }
     }
 
@@ -223,7 +233,7 @@ public class BreatheControl : MonoBehaviour
         else
         {
             PlayerPrefs.SetString(GetVibratePlayerPrefName(), "Slow");
-            StopFastVibration();
+            if (vibrateToggle.GetPlayerPrefValue()) { StopFastVibration(); }
         }
     }
 
