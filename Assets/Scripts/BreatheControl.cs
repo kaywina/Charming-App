@@ -12,6 +12,7 @@ public class BreatheControl : MonoBehaviour
     private static string vibratePlayerPrefName = "VibrateSpeed";
     public SetPlayerPrefFromToggle vibrateToggle;
     private bool fastVibrating = false;
+    private float fastVibrationInterval = 1f;
 
     public Text breathsText;
     public Slider secondsSlider;
@@ -117,7 +118,7 @@ public class BreatheControl : MonoBehaviour
 
     public void StartFastVibration()
     {
-        InvokeRepeating("Vibrate", 0, 1f);
+        InvokeRepeating("Vibrate", fastVibrationInterval, fastVibrationInterval);
         Debug.Log("Start fast vibration");
         fastVibrating = true;
     }
