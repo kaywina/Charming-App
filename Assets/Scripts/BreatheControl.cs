@@ -117,7 +117,7 @@ public class BreatheControl : MonoBehaviour
 
     public void StartFastVibration()
     {
-        InvokeRepeating("Vibrate", 1, 1f);
+        InvokeRepeating("Vibrate", 0, 1f);
         Debug.Log("Start fast vibration");
         fastVibrating = true;
     }
