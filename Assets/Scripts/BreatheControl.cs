@@ -13,6 +13,7 @@ public class BreatheControl : MonoBehaviour
     public SetPlayerPrefFromToggle vibrateToggle;
     private bool fastVibrating = false;
     private float fastVibrationInterval = 1f;
+    private string vibrateIntervalPlayerPrefName = "Vibrateinterval";
 
     public Text breathsText;
     public Slider secondsSlider;
@@ -54,6 +55,12 @@ public class BreatheControl : MonoBehaviour
         }
         secondsValueText.text = breatheInOutSeconds.ToString();
 
+        // set the vibrate interval from data
+        if (PlayerPrefs.HasKey(vibrateIntervalPlayerPrefName)) 
+        {
+            fastVibrationInterval = PlayerPrefs.GetFloat(vibrateIntervalPlayerPrefName);
+        }
+
         // this allows for initial vibration on meditate panel open for slow speed setting
         if (vibrateToggle.GetPlayerPrefValue())
         {
@@ -72,6 +79,12 @@ public class BreatheControl : MonoBehaviour
             }
             
         }
+    }
+
+    public void SetFastVibrationInterval(float interval)
+    {
+        fastVibrationInterval = interval;
+        PlayerPrefs.SetFloat(vibrateIntervalPlayerPrefName, interval);
     }
 
     public void ToggleVibration(bool toggleOn)
