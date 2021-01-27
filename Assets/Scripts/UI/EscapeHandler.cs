@@ -10,14 +10,13 @@ using UnityEngine.UI;
 public class EscapeHandler : MonoBehaviour
 {
     public Button optionsBackButton;
+    public Button generalOptionsBackButton;
+    public Button visualOptionsBackButton;
+    public Button audioOptionsBackButton;
     public Button meditateBackButton;
-    public Button bonusSkipButton;
-    public Button bonusOKButton;
     public Button storeCloseButton;
-    public Button infoOKButton;
-    public Button welcomeOKButton;
-    public Button unlockNoButton;
-    public Button congratsOKButton;
+    public Button unlockBackButton;
+    public Button congratsBackButton;
     public Button loveBackButton;
     public Button secretsBackButton;
     public Button hideSecretButton;
@@ -35,14 +34,13 @@ public class EscapeHandler : MonoBehaviour
     {
         allButtons = new Button[] {
             optionsBackButton,
+            generalOptionsBackButton,
+            visualOptionsBackButton,
+            audioOptionsBackButton,
             meditateBackButton,
-            bonusSkipButton,
-            bonusOKButton,
             storeCloseButton,
-            infoOKButton,
-            welcomeOKButton,
-            unlockNoButton,
-            congratsOKButton,
+            unlockBackButton,
+            congratsBackButton,
             loveBackButton,
             secretsBackButton,
             hideSecretButton,
