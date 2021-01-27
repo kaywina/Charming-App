@@ -8,7 +8,7 @@ public class VibrationSlider : MonoBehaviour
     public BreatheControl breatheControl;
     public Slider slider;
     public Text valueText;
-    private int defaultValue = 2;
+    private int defaultValue = 3;
 
     public void SetIntervalFromSliderValue()
     {
