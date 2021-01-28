@@ -10,13 +10,16 @@ public class SubscribePanel : CharmsPanel
     private bool fromVisualOptions = false;
     private bool fromAudioOptions = false;
     private bool fromLove = false;
+    private bool fromMeditate = false;
 
     public GameObject charmButtons;
+    public GameObject meditationWoldSpace;
 
     public OptionsSubPanel visualOptionsPanel;
     public OptionsSubPanel audioOptionsPanel;
     public OptionsPanel optionsPanel;
     public CharmsPanel lovePanel;
+    public MeditatePanel meditatePanel;
 
     public GameObject promo;
     public GameObject success;
@@ -42,6 +45,11 @@ public class SubscribePanel : CharmsPanel
     public void SetFromLoveFlag (bool flag)
     {
         fromLove = flag;
+    }
+
+    public void SetFromMeditateFlag (bool flag)
+    {
+        fromMeditate = flag;
     }
 
     new void OnEnable()
@@ -72,6 +80,11 @@ public class SubscribePanel : CharmsPanel
             lovePanel.SetReturnToMain(false);
             lovePanel.gameObject.SetActive(false);
         }
+        else if (fromMeditate)
+        {
+            meditationWoldSpace.SetActive(false);
+            meditatePanel.gameObject.SetActive(false);
+        }
         else
         {
             returnToMain = true;
@@ -98,7 +111,11 @@ public class SubscribePanel : CharmsPanel
             lovePanel.SetReturnToMain(loveRTM);
             lovePanel.gameObject.SetActive(true);
         }
-
+        else if (fromMeditate)
+        {
+            meditationWoldSpace.SetActive(true);
+            meditatePanel.gameObject.SetActive(true);
+        }
         else
         {
             // for case when returning to main ui after non-subscriber is redirected to subscribe panel from exit of meditate panel
@@ -109,5 +126,6 @@ public class SubscribePanel : CharmsPanel
         fromLove = false;
         fromVisualOptions = false;
         fromAudioOptions = false;
+        fromMeditate = false;
     }
 }
