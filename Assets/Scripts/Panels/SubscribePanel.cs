@@ -14,6 +14,7 @@ public class SubscribePanel : CharmsPanel
 
     public GameObject charmButtons;
     public GameObject meditationWoldSpace;
+    public ToggleGameObject meditateOptionsToggle;
 
     public OptionsSubPanel visualOptionsPanel;
     public OptionsSubPanel audioOptionsPanel;
@@ -115,6 +116,7 @@ public class SubscribePanel : CharmsPanel
         {
             meditationWoldSpace.SetActive(true);
             meditatePanel.gameObject.SetActive(true);
+            meditateOptionsToggle.Toggle();
         }
         else
         {
