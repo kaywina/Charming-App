@@ -8,7 +8,34 @@ public class VibrationSlider : MonoBehaviour
     public BreatheControl breatheControl;
     public Slider slider;
     public Text valueText;
-    private int defaultValue = 3;
+    private int defaultValue = 2;
+
+    private void OnEnable()
+    {
+        SetSliderValueFromInterval();
+    }
+
+    public void SetSliderValueFromInterval()
+    {
+        float interval = breatheControl.GetFastVibrationInteval();
+
+        switch (interval)
+        {
+            case 2.0f:
+                slider.value = 1;
+                break;
+            case 1.5f:
+                slider.value = 2;
+                break;
+            case 1.0f:
+                slider.value = 3;
+                break;
+            default:
+                slider.value = 2;
+                break;
+        }
+        valueText.text = slider.value.ToString();
+    }
 
     public void SetIntervalFromSliderValue()
     {
@@ -23,11 +50,8 @@ public class VibrationSlider : MonoBehaviour
             case 3:
                 breatheControl.SetFastVibrationInterval(1.0f);
                 break;
-            case 4:
-                breatheControl.SetFastVibrationInterval(0.5f);
-                break;
             default:
-                breatheControl.SetFastVibrationInterval(1.0f);
+                breatheControl.SetFastVibrationInterval(1.5f);
                 break;
         }
         valueText.text = slider.value.ToString();

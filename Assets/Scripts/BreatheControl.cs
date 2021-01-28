@@ -12,7 +12,7 @@ public class BreatheControl : MonoBehaviour
     private static string vibratePlayerPrefName = "VibrateSpeed";
     public SetPlayerPrefFromToggle vibrateToggle;
     private bool fastVibrating = false;
-    private float fastVibrationInterval = 1f;
+    private float fastVibrationInterval = 1.5f;
     private string vibrateIntervalPlayerPrefName = "Vibrateinterval";
 
     public Text breathsText;
@@ -79,6 +79,11 @@ public class BreatheControl : MonoBehaviour
             }
             
         }
+    }
+
+    public float GetFastVibrationInteval()
+    {
+        return PlayerPrefs.GetFloat(vibrateIntervalPlayerPrefName);
     }
 
     public void SetFastVibrationInterval(float interval)
