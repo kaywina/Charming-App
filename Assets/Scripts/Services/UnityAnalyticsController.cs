@@ -87,12 +87,12 @@ public class UnityAnalyticsController : MonoBehaviour
         if (includeImage)
         {
             AnalyticsEvent.SocialShare(ShareType.Image, SocialNetwork.None);
-            Debug.Log("Send share anlalytics event for image");
+            //Debug.Log("Send share anlalytics event for image");
         }
         else
         {
             AnalyticsEvent.SocialShare(ShareType.TextOnly, SocialNetwork.None);
-            Debug.Log("Send share anlalytics event for text only");
+            //Debug.Log("Send share anlalytics event for text only");
         }
     }
 }

@@ -68,13 +68,13 @@ public class BreatheControl : MonoBehaviour
             {
                 if (!fastVibrating)
                 {
-                    Debug.Log("Start fast vibration in OnEnable");
+                    //Debug.Log("Start fast vibration in OnEnable");
                     StartFastVibration();
                 }
             }
             else
             {
-                Debug.Log("Start slow vibration in OnEnable");
+                //Debug.Log("Start slow vibration in OnEnable");
                 Vibrate();
             }
             
@@ -122,7 +122,7 @@ public class BreatheControl : MonoBehaviour
         PlayerPrefs.SetFloat(playerPrefName, breatheInOutSeconds);
         if (vibrateToggle.GetPlayerPrefValue() && GetVibrateFast())
         {
-            Debug.Log("Reset fast vibration for SetBreathInOutSeconds");
+            //Debug.Log("Reset fast vibration for SetBreathInOutSeconds");
             ResetFastVibration();
         }
     }
@@ -137,14 +137,14 @@ public class BreatheControl : MonoBehaviour
     public void StartFastVibration()
     {
         InvokeRepeating("Vibrate", fastVibrationInterval, fastVibrationInterval);
-        Debug.Log("Start fast vibration");
+        //Debug.Log("Start fast vibration");
         fastVibrating = true;
     }
 
     public void StopFastVibration()
     {
         CancelInvoke("Vibrate");
-        Debug.Log("Stop fast vibration");
+        //Debug.Log("Stop fast vibration");
         fastVibrating = false;
     }
 

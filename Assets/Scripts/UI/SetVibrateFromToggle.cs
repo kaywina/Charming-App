@@ -14,14 +14,14 @@ public class SetVibrateFromToggle : SetPlayerPrefFromToggle
             PlayerPrefs.SetString(playerPrefName, "true");
             toggle.isOn = true;
             breatheControl.ToggleVibration(true);
-            Debug.Log("Toggle on vibration");
+            //Debug.Log("Toggle on vibration");
         }
         else
         {
             PlayerPrefs.SetString(playerPrefName, "false");
             toggle.isOn = false;
             breatheControl.ToggleVibration(false);
-            Debug.Log("Toggle off vibration");
+            //Debug.Log("Toggle off vibration");
         }
     }
 }
