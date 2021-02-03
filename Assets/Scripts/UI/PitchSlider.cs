@@ -6,32 +6,28 @@ using UnityEngine.UI;
 public class PitchSlider : MonoBehaviour
 {
 
-    public AudioSource[] sources;
+    public SoundManager soundManager;
     public Slider slider;
     public Text valueText;
 
+    private void OnEnable()
+    {
+        float pitch = soundManager.GetPitch();
+        slider.value = pitch;
+        valueText.text = pitch.ToString("F2");
+    }
+
     public void SetPitchFromSliderValue()
     {
-        for (int s = 0; s < sources.Length; s++)
-        {
-            sources[s].pitch = slider.value;
-        }
-
+        soundManager.SetPitch(slider.value);
         valueText.text = slider.value.ToString("F2");
     }
 
     public void Reset()
     {
-        slider.value = 1f;
-        ResetSources();
-        valueText.text = "1.00";
-    }
-
-    public void ResetSources()
-    {
-        for (int s = 0; s < sources.Length; s++)
-        {
-            sources[s].pitch = 1;
-        }
+        float defaultPitch = soundManager.GetDefaultPitch();
+        soundManager.ResetPitch();
+        slider.value = defaultPitch;
+        valueText.text = defaultPitch.ToString("F2");
     }
 }

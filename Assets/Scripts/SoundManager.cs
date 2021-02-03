@@ -30,6 +30,10 @@ public class SoundManager : MonoBehaviour
     private string musicVolumePlayerPref = "MusicVolumeMultiplier"; // don't change in production
     private string soundVolumePlayerPref = "SoundVolumeMultiplier"; // don't change in production
 
+    // this is for the pitch value set in the subscriber menu options
+    private string pitchPlayerPref = "Pitch"; // don't change in production
+    private float defaultPitch = 1f;
+
     public Toggle musicToggle;
 
     private void Awake()
@@ -86,6 +90,9 @@ public class SoundManager : MonoBehaviour
             SetSoundVolumeMultiplier(PlayerPrefs.GetFloat(soundVolumePlayerPref));
             //Debug.Log("Sfx volume multiplier set from player pref");
         }
+
+        // set the pitch from data; sets default value if no data is stored
+        SetPitch(GetPitch());
     }
 
     private void OnEnable()
@@ -317,5 +324,44 @@ public class SoundManager : MonoBehaviour
     public float GetDefaultVolumeMultiplier()
     {
         return defaultVolumeMultiplier;
+    }
+
+    public void SetPitch(float pitch)
+    {
+        //wheelPointerSound.pitch = pitch;
+        for (int i = 0; i < breathSounds.Length; i++)
+        {
+            breathSounds[i].pitch = pitch;
+        }
+
+        for (int n = 0; n < musicClips.Length; n++)
+        {
+            musicClips[n].pitch = pitch;
+        }
+
+        PlayerPrefs.SetFloat(pitchPlayerPref, pitch);
+    }
+
+    public float GetPitch()
+    {
+        if (PlayerPrefs.HasKey(pitchPlayerPref))
+        {
+            return PlayerPrefs.GetFloat(pitchPlayerPref);
+        }
+        else
+        {
+            return defaultPitch;
+        }
+        
+    }
+
+    public void ResetPitch()
+    {
+        SetPitch(defaultPitch);
+    }
+
+    public float GetDefaultPitch()
+    {
+        return defaultPitch;
     }
 }
