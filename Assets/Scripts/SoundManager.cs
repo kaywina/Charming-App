@@ -66,30 +66,9 @@ public class SoundManager : MonoBehaviour
             musicClipsStartVolumes[i] = musicClips[i].volume;
         }
 
-        // 1 is default value for in-app volume control
-        if (!PlayerPrefs.HasKey(musicVolumePlayerPref))
-        {
-            PlayerPrefs.SetFloat(musicVolumePlayerPref, defaultVolumeMultiplier);
-            //Debug.Log("Set default music volume multiplier");
-        }
-        // otherwise set the volume multiplier
-        else
-        {
-            SetMusicVolumeMultiplier(PlayerPrefs.GetFloat(musicVolumePlayerPref));
-            //Debug.Log("Music volume multiplier set from player pref");
-        }
-
-        // do the same thing for sfx
-        if (!PlayerPrefs.HasKey(soundVolumePlayerPref))
-        {
-            PlayerPrefs.SetFloat(soundVolumePlayerPref, defaultVolumeMultiplier);
-            //Debug.Log("Set default sfx volume multiplier");
-        }
-        else
-        {
-            SetSoundVolumeMultiplier(PlayerPrefs.GetFloat(soundVolumePlayerPref));
-            //Debug.Log("Sfx volume multiplier set from player pref");
-        }
+        // set audio volume
+        SetMusicVolumeMultiplier(GetMusicVolumeMultiplier());
+        SetSoundVolumeMultiplier(GetSoundVolumeMultiplier());
 
         // set the pitch from data; sets default value if no data is stored
         SetPitch(GetPitch());
@@ -267,6 +246,36 @@ public class SoundManager : MonoBehaviour
         musicToggle.isOn = false;
     }
 
+    public float GetDefaultVolumeMultiplier()
+    {
+        return defaultVolumeMultiplier;
+    }
+
+    public float GetMusicVolumeMultiplier()
+    {
+        if (PlayerPrefs.HasKey(musicVolumePlayerPref))
+        {
+            return PlayerPrefs.GetFloat(musicVolumePlayerPref);
+        }
+        // otherwise set the volume multiplier
+        else
+        {
+            return defaultVolumeMultiplier;
+        }
+    }
+
+    public float GetSoundVolumeMultiplier()
+    {
+        if (PlayerPrefs.HasKey(soundVolumePlayerPref))
+        {
+            return PlayerPrefs.GetFloat(soundVolumePlayerPref);
+        }
+        else
+        {
+            return defaultVolumeMultiplier;
+        }
+    }
+
     public void SetMusicVolumeMultiplier(float volumeMultiplier)
     {
         if (!CheckVolume(volumeMultiplier)) { return; }
@@ -309,21 +318,6 @@ public class SoundManager : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    public float GetMusicVolumeMultiplier()
-    {
-        return PlayerPrefs.GetFloat(musicVolumePlayerPref);
-    }
-
-    public float GetSoundVolumeMultiplier()
-    {
-        return PlayerPrefs.GetFloat(soundVolumePlayerPref);
-    }
-
-    public float GetDefaultVolumeMultiplier()
-    {
-        return defaultVolumeMultiplier;
     }
 
     public void SetPitch(float pitch)
