@@ -7,14 +7,19 @@ public class AttentionGameSlider : MonoBehaviour
 {
     public Slider slider;
     public AttentionGame attentionGame;
+    public Text secondsText;
 
     private void OnEnable()
     {
-        slider.value = attentionGame.GetSecondsToCoundDown();
+        int seconds = attentionGame.GetSecondsToCoundDown();
+        slider.value = seconds;
+        secondsText.text = seconds.ToString();
     }
 
     public void SetSecondsFromSlider()
     {
-        attentionGame.SetSecondsToCountdown((int)slider.value); // slider should be set to whole numbers only in inspector
+        int seconds = (int)slider.value;
+        attentionGame.SetSecondsToCountdown(seconds); // slider should be set to whole numbers only in inspector
+        secondsText.text = seconds.ToString();
     }
 }
