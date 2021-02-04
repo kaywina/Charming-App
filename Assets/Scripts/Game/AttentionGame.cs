@@ -8,7 +8,8 @@ public class AttentionGame : MonoBehaviour
     private static AttentionGame instance;
 
     public Text countdownText;
-    private int countdown = 3;
+    private int secondsToCountdown = 6;
+    private int countdown = 0;
     public GameObject go;
 
     public PlayGame playGame;
@@ -164,6 +165,7 @@ public class AttentionGame : MonoBehaviour
     {
         //Debug.Log("Start 3 2 1 countdown to play");
         countdownText.text = countdown.ToString();
+        countdown = secondsToCountdown;
         InvokeRepeating("CountdownByOne", 1f, 1f);
     }
 
@@ -189,11 +191,21 @@ public class AttentionGame : MonoBehaviour
         go.SetActive(false);
     }
 
+    public int GetSecondsToCoundDown()
+    {
+        return secondsToCountdown;
+    }
+
+    public void SetSecondsToCountdown(int seconds)
+    {
+        secondsToCountdown = seconds;
+    }
+
     private void ResetCountdown()
     {
         CancelInvoke("CountdownByOne");
         //Debug.Log("Reset countdown");
-        countdown = 3;
+        countdown = secondsToCountdown;
         countdownText.text = "";
         go.SetActive(false);
 
