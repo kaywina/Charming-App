@@ -213,7 +213,30 @@ public class AttentionGame : MonoBehaviour
 
     public void IncrementScore()
     {
-        score++;
+        switch (secondsToCountdown)
+        {
+            case 6:
+                score++;
+                break;
+            case 5:
+                score += 2;
+                break;
+            case 4:
+                score += 3;
+                break;
+            case 3:
+                score += 4;
+                break;
+            case 2:
+                score += 5;
+                break;
+            case 1:
+                score += 6;
+                break;
+            default:
+                score++;
+                break;
+        }
     }
 
     public void SetImage(int index)
