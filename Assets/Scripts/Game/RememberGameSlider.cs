@@ -7,7 +7,7 @@ public class RememberGameSlider : MonoBehaviour
 {
     public Slider slider;
     public RememberGame gameRemember;
-    public GameObject lockObject;
+    public GameObject showIfLocked;
 
     private float defaultIndex = 2;
 
@@ -18,7 +18,7 @@ public class RememberGameSlider : MonoBehaviour
 
     void OnEnable()
     {
-        lockObject.SetActive(false);
+        showIfLocked.SetActive(false);
         Initialize();
     }
 
@@ -59,6 +59,14 @@ public class RememberGameSlider : MonoBehaviour
             PlayerPrefs.SetInt(playerPrefName, (int)slider.value);
         }
 
+        LockObjectsBasedOnRank();
+
+        int scoreMultiplier = (int)slider.value + 1;
+        scoreMultiplierText.text = Localization.GetTranslationByKey("SCORE_MULTIPLIER") + " = " + scoreMultiplier.ToString();
+    }
+
+    private void LockObjectsBasedOnRank()
+    {
         // there is where we control whether to show the buttons if a particular rank has been achieved, or the lock if not
         int rank = RankManager.GetRank();
 
@@ -71,15 +79,15 @@ public class RememberGameSlider : MonoBehaviour
         {
             LockButtonsAboveIndex(3);
         }
-        else if(rank == 2)
+        else if (rank == 2)
         {
             LockButtonsAboveIndex(4);
         }
-        else if(rank == 3)
+        else if (rank == 3)
         {
             LockButtonsAboveIndex(5);
         }
-        else if(rank == 4)
+        else if (rank == 4)
         {
             LockButtonsAboveIndex(6);
         }
@@ -91,9 +99,6 @@ public class RememberGameSlider : MonoBehaviour
         {
             LockButtonsAboveIndex(7); // this should unlock everything as long as there are only seven difficulty levels
         }
-
-        int scoreMultiplier = (int)slider.value + 1;
-        scoreMultiplierText.text = Localization.GetTranslationByKey("SCORE_MULTIPLIER") + " = " + scoreMultiplier.ToString();
     }
 
     private void LockButtonsAboveIndex (int index)
@@ -101,14 +106,14 @@ public class RememberGameSlider : MonoBehaviour
         if (slider.value <= index)
         {
             //Debug.Log("Show and setup the buttons");
-            lockObject.SetActive(false);
+            showIfLocked.SetActive(false);
             gameRemember.EnableButtonsByIndex((int)slider.value);
             gameRemember.SetupButtons(false);
         }
         else
         {
             //Debug.Log("Show the lock");
-            lockObject.SetActive(true);
+            showIfLocked.SetActive(true);
             gameRemember.HideAllButtons(); // hide the last shown set of buttons; ugh this is awful
         }
     }
