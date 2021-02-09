@@ -13,10 +13,10 @@ public class AttentionGameSlider : MonoBehaviour
 
     private void OnEnable()
     {
-        showIfLocked.SetActive(false);
         int seconds = attentionGame.GetSecondsToCoundDown();
         slider.value = seconds;
         secondsText.text = seconds.ToString();
+        LockObjectsBasedOnRank();
     }
 
     public void SetSecondsFromSlider()
