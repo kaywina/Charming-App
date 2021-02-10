@@ -364,7 +364,7 @@ SET_AS_BACKGROUND*Set as background*Définir comme arrière-plan*Puesto como fon
 RESTORE_PURCHASE*Restore purchase*Restaurer l'achat*Restaurar compra*Restaurar compra*Kauf wiederherstellen*恢复购买*購入商品を復元する*구매 복구*Kembalikan pembelian*पुनःस्थापन क्रय*Восстановить покупку*استعادة شراء
 PITCH*Pitch*Ton*Tono*Tom*Ton*音调*調子*음조*Nada*स्वर*тон*نغمة
 HELLO*Hello!*Salut!*¡Hola!*Olá!*Hallo!*你好！*こんにちは！*여보세요!*Halo!*नमस्कार!*Привет!*مرحبا!
-PLEASE*Please?*S'il vous plaît?*¿Por favor?*Por favor?*Bitte?*请？*お願いします？*부디?*Silahkan?*कृप्या?*Пожалуйста?*رجاء؟
+PLEASE*Please*S'il vous plaît*Por favor*Por favor*Bitte*请*お願いします*부디*Silahkan*कृप्या*Пожалуйста*رجاء
 MEMORY*Memory*Souvenir*Recuerdo*Memória*Erinnerung*记忆*記憶*기억*Ingatan *स्मृति*Память*ذكرى
 FLIP_TO_MATCH*Flip to match*Retourner pour correspondre*Voltear para combinar*Virar para combinar*Zum Match umdrehen*翻转搭配*一致するように反転*일치하도록 뒤집기*Balik untuk mencocokkan*मैच के लिए पलटें*Отразить, чтобы соответствовать*الوجه لتتناسب
 SHORT_TERM_MEMORY*Short term memory*Mémoire à court terme*Memoria de corto plazo*Memória de curto prazo*Kurzzeitgedächtnis*短期记忆*短期記憶*단기 기억*Ingatan jangka pendek*अल्पकालिक स्मृति*Краткосрочная память*ذاكرة قصيرة المدي
@@ -467,3 +467,5 @@ NEW_PERSONAL_BEST*New personal best!*Nouveau record personnel!*Nueva mejor perso
 NUMBER_OF_BUTTONS*Number of buttons:*Nombre de boutons:*Numero de botones:*Número de botões:*Anzahl der Tasten:*按钮数量：*ボタンの数：*버튼 수 :*Jumlah tombol:*बटन की संख्या:*Количество кнопок:*عدد الأزرار:
 ARE_YOU_GOLD*Are you gold?*Êtes-vous de l'or?*¿Eres de oro?*Você é ouro?*Bist du Gold?*你是金吗？*あなたは金ですか？*당신은 금입니까?*Apakah kamu emas?*क्या तुम सोना हो?*Ты золото?*هل انت ذهب
 UNLOCK_NEW_FEATURES*Unlock new features*Débloquez de nouvelles fonctionnalités*Desbloquea nuevas funciones*Desbloquear novos recursos*Schalte neue Funktionen frei*解锁新功能*新機能のロックを解除する*새로운 기능 잠금 해제*Buka kunci fitur baru*नई सुविधाओं को अनलॉक करें*Разблокируйте новые функции*افتح الميزات الجديدة
+YES_PLEASE*Yes please*Oui s'il vous plaît*Sí por favor*Sim por favor*Ja bitte*是的，请*はい、お願いします*예, 부탁합니다*Ya silahkan*जी बोलिये*Да, пожалуйста*نعم من فضلك
+NO_THANKS*No thanks*Non merci*No gracias*Não obrigado*Nein danke*不用了，谢谢*結構です*고맙지 만 사양 할게*Tidak, terima kasih*जी नहीं, धन्यवाद*Спасибо, не надо*لا شكرا
