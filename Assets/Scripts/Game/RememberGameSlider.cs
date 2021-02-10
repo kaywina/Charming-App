@@ -15,6 +15,7 @@ public class RememberGameSlider : MonoBehaviour
 
     public GameObject sliderHintObject;
     public Text scoreMultiplierText;
+    public Text numberOfButtonsText;
 
     void OnEnable()
     {
@@ -61,8 +62,10 @@ public class RememberGameSlider : MonoBehaviour
 
         LockObjectsBasedOnRank();
 
+        // ugly hard-coding of UI text values
         int scoreMultiplier = (int)slider.value + 1;
         scoreMultiplierText.text = Localization.GetTranslationByKey("SCORE_MULTIPLIER") + " = " + scoreMultiplier.ToString();
+        numberOfButtonsText.text = (scoreMultiplier + 2).ToString();
     }
 
     private void LockObjectsBasedOnRank()

@@ -376,7 +376,7 @@ NEW_HIGH_SCORE*You got a new high score!*Vous avez un nouveau meilleur score!*Ti
 HIGH_SCORE*High score:*Score élevé:*Puntuación más alta:*Pontuação máxima:*Highscore:*高分：*高得点：*높은 점수:*Skor tinggi:*उच्च स्कोर:*Рекорд:*درجة عالية:
 PREVIOUS_BEST_SCORE*Previous best score:*Meilleur score précédent:*Mejor puntuación anterior:*Melhor pontuação anterior:*Vorherige beste Punktzahl:*之前的最佳成绩：*以前の最高スコア：*이전 최고 점수 :*Skor terbaik sebelumnya:*पिछला सर्वश्रेष्ठ स्कोर:*Предыдущий лучший результат:*أفضل نتيجة سابقة:
 PERFECT*Perfect!*Parfait!*¡Perfecto!*Perfeito!*Perfekt!*完善！*パーフェクト！*완전한!*Sempurna!*उत्तम!*Отлично!*في احسن الاحوال!
-GO*Go!*Aller!*¡Vamos!*Ir!*Gehen!*走！*ゴー！*가다!*Pergilah!*जाओ!*Идти!*اذهب!
+GO*Go*Aller*Vamos*Ir*Gehen*走*ゴー*가다*Pergilah*जाओ*Идти*اذهب
 YOUR_SCORE*Your score:*Ton score:*Tu puntuación:*Sua pontuação:*Ihre Punktzahl:*你的分数：*あなたのスコア：*너의 점수:*Nilai Anda:*अपने स्कोर:*Твой счет:*درجاتك:
 MORE_GAMES_COMING_SOON*More games coming soon!*Plus de jeux à venir bientôt!*Más juegos muy pronto!*Mais jogos em breve!*Weitere Spiele folgen in Kürze!*更多游戏即将推出！*より多くのゲームがすぐに来て！*더 많은 게임이 곧 온다!*Lebih permainan segera hadir!*अधिक खेल शीघ्र आ रहा है!*Другие игры в ближайшее время!*المزيد من الألعاب قريبا!
 YOU_GET*You get*Vous obtenez*Usted obtiene*você começa*Du erhältst*你得到*あなたが得ます*당신은 얻을*Anda mendapatkan*आपको मिला*Ты получаешь*لقد حصلت
@@ -463,3 +463,4 @@ FREE_EXERCISES*Free exercises*Exercices gratuits*Ejercicios gratis*Exercícios g
 SECONDS_PER_ROUND*Seconds per round:*Secondes par tour:*Segundos por ronda:*Segundos por rodada:*Sekunden pro Runde:*每轮秒数:*ラウンドあたりの秒数:*라운드 당 초:*Detik per ronde:*प्रति राउंड प्रति सेकंड:*Секунд на раунд:*ثانية لكل جولة:
 HIGHER_DIFFICULTY_REWARDS*Higher difficulties = more points*Obtenez plus de points à des difficultés plus élevées*Obtén más puntos en mayores dificultades*Obtenha mais pontos em dificuldades maiores*Holen Sie sich mehr Punkte bei höheren Schwierigkeitsgraden*在更高难度下获得更多积分*より高い難易度でより多くのポイントを獲得する*더 높은 난이도에서 더 많은 포인트 획득*Dapatkan lebih banyak poin pada kesulitan yang lebih tinggi*उच्च कठिनाइयों पर अधिक अंक प्राप्त करें*Получите больше очков на более высоких уровнях сложности*احصل على المزيد من النقاط عند الصعوبات الأعلى
 NEW_PERSONAL_BEST*New personal best!*Nouveau record personnel!*Nueva mejor personal!*Novo recorde pessoal!*Neue persönliche Bestleistung!*新人最好！*新しいパーソナルベスト！*새로운 개인 최고!*Pribadi terbaik baru!*नया व्यक्तिगत सर्वश्रेष्ठ!*Новый личный рекорд!*أفضل شخصية جديدة!
+NUMBER_OF_BUTTONS*Number of buttons:*Nombre de boutons:*Numero de botones:*Número de botões:*Anzahl der Tasten:*按钮数量：*ボタンの数：*버튼 수 :*Jumlah tombol:*बटन की संख्या:*Количество кнопок:*عدد الأزرار:
