@@ -10,7 +10,9 @@ public class SwipeLove : SwipeFunction
 
     public override void OnEnable()
     {
-        indexText.text = loveManager.GetTempIndex().ToString();
+        // get the index and adjust because it has been incremented for next day
+
+        indexText.text = GetAdjustedIndex().ToString();
         base.OnEnable();
     }
 
@@ -18,13 +20,28 @@ public class SwipeLove : SwipeFunction
     {
         //Debug.Log("Swile easy love left");
         loveManager.NextLove();
-        indexText.text = loveManager.GetTempIndex().ToString();
+        indexText.text = GetAdjustedIndex().ToString();
     }
 
     public override void SwipeRight()
     {
         //Debug.Log("Swile easy love right");
         loveManager.PreviousLove();
-        indexText.text = loveManager.GetTempIndex().ToString();
+        indexText.text = GetAdjustedIndex().ToString();
+    }
+
+    private int GetAdjustedIndex()
+    {
+        int tempIndex = loveManager.GetTempIndex();
+
+        if (tempIndex < 0)
+        {
+            tempIndex = loveManager.GetMaxLoveIndex() + 1;
+        }
+        else
+        {
+            tempIndex++;
+        }
+        return tempIndex;
     }
 }

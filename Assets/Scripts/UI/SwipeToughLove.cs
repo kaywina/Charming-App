@@ -10,7 +10,7 @@ public class SwipeToughLove : SwipeFunction
 
     public override void OnEnable()
     {
-        indexText.text = loveManager.GetSecondTempIndex().ToString();
+        indexText.text = GetAdjustedSecondIndex().ToString();
         base.OnEnable();
     }
 
@@ -18,14 +18,28 @@ public class SwipeToughLove : SwipeFunction
     {
         //Debug.Log("Swile tough love left");
         loveManager.NextToughLove();
-        indexText.text = loveManager.GetSecondTempIndex().ToString();
+        indexText.text = GetAdjustedSecondIndex().ToString();
     }
 
     public override void SwipeRight()
     {
         //Debug.Log("Swile tough love right");
         loveManager.PreviousToughLove();
-        indexText.text = loveManager.GetSecondTempIndex().ToString();
+        indexText.text = GetAdjustedSecondIndex().ToString();
     }
 
+    private int GetAdjustedSecondIndex()
+    {
+        int secondTempIndex = loveManager.GetSecondTempIndex();
+
+        if (secondTempIndex < 0)
+        {
+            secondTempIndex = loveManager.GetMaxToughLoveIndex() + 1;
+        }
+        else
+        {
+            secondTempIndex++;
+        }
+        return secondTempIndex;
+    }
 }

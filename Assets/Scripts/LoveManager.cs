@@ -32,6 +32,16 @@ public class LoveManager : MonoBehaviour
     private int secondOriginalIndex = 0;
     private int secondTempIndex = 0;
 
+    public int GetMaxLoveIndex()
+    {
+        return maxLoveLocIndex;
+    }
+
+    public int GetMaxToughLoveIndex()
+    {
+        return maxToughLoveLocIndex;
+    }
+
     public void Initialize()
     {
         if (TimeManager.IsNewDay(TimeManager.TimeType.DailyLove))
