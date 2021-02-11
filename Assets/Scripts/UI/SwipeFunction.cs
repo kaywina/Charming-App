@@ -14,7 +14,7 @@ public class SwipeFunction : MonoBehaviour
     public float yLimitTop = 0.075f;
     public float yLimitBottom = 0.62f;
 
-    protected void OnEnable()
+    public virtual void OnEnable()
     {
         startPosition = Vector3.zero;
         endPosition = Vector3.zero;

@@ -71,6 +71,11 @@ public class LoveManager : MonoBehaviour
         TimeManager.SetPrefsForDailyLove();
     }
 
+    public int GetTempIndex()
+    {
+        return tempIndex;
+    }
+
     private void InitializeLove()
     {
         int loveIndex = originalIndex; // original index ensures that only one value is unlocked per day
@@ -124,6 +129,11 @@ public class LoveManager : MonoBehaviour
         
         //Debug.Log("Ending loveIndex for this session is " + loveIndex);
         //Debug.Log("Max easy love unlocked at end of this session is " + PlayerPrefs.GetInt(PLAYER_PREF_NAME_MAX_UNLOCKED));
+    }
+
+    public int GetSecondTempIndex()
+    {
+        return secondTempIndex;
     }
 
     private void InitializeToughLove()
