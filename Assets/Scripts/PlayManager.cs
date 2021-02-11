@@ -9,8 +9,6 @@ public class PlayManager : MonoBehaviour
 
     public PlayPanel playPanel;
 
-    public GameObject gameCostIndicator;
-
     public PlayGame playAttentionGame;
     public PlayGame playRememberGame;
 
@@ -43,15 +41,6 @@ public class PlayManager : MonoBehaviour
 
         playAttentionGame.gameObject.SetActive(false);
         playRememberGame.gameObject.SetActive(false);
-
-        if (UnityIAPController.IsGold())
-        {
-            gameCostIndicator.SetActive(false);
-        }
-        else
-        {
-            gameCostIndicator.SetActive(true);
-        }
     }
 
     public void OnEnable()
