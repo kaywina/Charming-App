@@ -216,6 +216,7 @@ public class AttentionGame : MonoBehaviour
     {
         CancelInvoke("CountdownByOne");
         //Debug.Log("Reset countdown");
+        secondsToCountdown = GetSecondsToCoundDown();
         countdown = secondsToCountdown;
         countdownText.text = "";
         go.SetActive(false);
