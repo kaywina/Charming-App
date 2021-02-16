@@ -11,6 +11,7 @@ public class RememberGame : MonoBehaviour
     public GameObject[] levelButtons;
     public PlayManager playManager;
     public RememberGameSlider difficultySlider;
+    public GameObject instructionsStarry;
     public GameObject rememberComeBack;
     public Text dayText;
     public GameObject correctIndicator;
@@ -34,9 +35,11 @@ public class RememberGame : MonoBehaviour
         CancelInvoke("EndGame");
     }
 
-    public void DisableDifficultySlider()
+    public void DisableInstructionsUI()
     {
+
         difficultySlider.gameObject.SetActive(false);
+        instructionsStarry.SetActive(false);
     }
 
     private void DisableAllButtons()
@@ -274,7 +277,7 @@ public class RememberGame : MonoBehaviour
             return false;
         }
 
-        instance.DisableDifficultySlider(); // disable the slider immediately following first click on a button
+        instance.DisableInstructionsUI(); // disable the slider immediately following first click on a button
         selectedIndex = orderedIndex; // this needs to happen after the playingGame check, to avoid cases where user cicks a button between an incorrect guess and end of game, which results in buttons not showing up on subsequent plays
 
         if (selectedCount != shuffledIndex)

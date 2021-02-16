@@ -150,7 +150,7 @@ public class RememberGameManager : MonoBehaviour
                 starryTextForPerfectGame.SetActive(true);
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
-                rememberGameControls.DisableDifficultySlider();
+                rememberGameControls.DisableInstructionsUI();
                 rememberGameControls.gameObject.SetActive(true);
             }
             else
