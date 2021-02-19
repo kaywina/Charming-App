@@ -7,6 +7,7 @@ public class PlayGame : MonoBehaviour
 {
     public string gameName; // don't change these inspector values in production! (or else people will lose their high score data)
     public PlayManager playManager;
+    public CurrencyIndicator currencyIndicator;
     public Text yourScoreText;
     public Text previousHighScoreText;
     public GameObject perfectIndicator;
@@ -117,6 +118,14 @@ public class PlayGame : MonoBehaviour
     {
         yourScoreText.text = score.ToString();
         highScoreDisplay.SetActive(true);
+        if (newHighScoreFlag)
+        {
+            CurrencyManager.Instance.GiveBonus(GetRewardAmount());
+            currencyIndicator.UpdateIndicatorAnimated();
+            SetNextRewardAmount();
+            nextRewardText.text = GetRewardAmount().ToString();
+        }
+        
     }
 
     public void ShowNewHighScore()
@@ -174,15 +183,12 @@ public class PlayGame : MonoBehaviour
 
         if (newHighScoreFlag)
         {
-            CurrencyManager.Instance.GiveBonus(rewardAmount);
-            SetNextRewardAmount();
             rewardText.text = rewardAmount.ToString();
             rewardObject.SetActive(true);
             beatScoreText.gameObject.SetActive(false);
             playManager.StartFireworks();
             newHighScore.SetActive(true);
             niceTry.SetActive(false);
-            nextRewardText.text = GetRewardAmount().ToString();
             if (perfectGameFlag)
             {
                 perfectIndicator.SetActive(true);
