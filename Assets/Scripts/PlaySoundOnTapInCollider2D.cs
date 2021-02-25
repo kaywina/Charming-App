@@ -9,6 +9,8 @@ public class PlaySoundOnTapInCollider2D : MonoBehaviour
     private Camera mainCamera;
     public SoundManager soundManager;
     public int breathSoundIndex = 0;
+    private bool alreadyPlaying = false;
+    private float noteRepeatRate = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,32 +23,49 @@ public class PlaySoundOnTapInCollider2D : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButton(0))
         {
+
+            if (alreadyPlaying) { return; } // flag used to allow "sliding" from one note to another without lifting button
 
             Vector2 worldMousePos2D = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             if (boxCollider2D.bounds.Contains(worldMousePos2D))
             {
-                soundManager.PlayBreathSoundByIndex(breathSoundIndex);
+                PlaySound();
             }
 
         }
 #endif
 
 #if UNITY_ANDROID || UNITY_IOS
-        if (Input.touchCount == 1)
+        if (Input.touchCount >= 1)
         {
+            
+            if (alreadyPlaying) { return; } // flag used to allow "sliding" from one note to another without lifting finger
+
             // GET TOUCH 0
             Touch touch0 = Input.GetTouch(0);
             Vector2 worldTouchPos2D = (Vector2)mainCamera.ScreenToWorldPoint(touch0.position);
 
             // APPLY ROTATION
-            if (touch0.phase == TouchPhase.Ended && boxCollider2D.bounds.Contains(worldTouchPos2D))
+            if (boxCollider2D.bounds.Contains(worldTouchPos2D))
             {
-                soundManager.PlayBreathSoundByIndex(breathSoundIndex);
+                PlaySound();
             }
         }
 #endif
+    }
+
+    private void PlaySound()
+    {
+        soundManager.PlayBreathSoundByIndex(breathSoundIndex);
+        alreadyPlaying = true;
+        Invoke("SetNotAlreadyPlaying", noteRepeatRate);
+    }
+
+    private void SetNotAlreadyPlaying()
+    {
+        alreadyPlaying = false;
     }
 }
