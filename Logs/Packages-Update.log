@@ -166,3 +166,12 @@ Update Mode: updateDependencies
 
 The following packages were updated:
   com.unity.purchasing from version 2.1.1 to 2.2.1
+
+=== Thu Feb 25 11:18:33 2021
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.ads from version 3.5.2 to 3.6.1
+  com.unity.recorder from version 2.4.0-preview.1 to 2.5.2
