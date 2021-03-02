@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class SendFirstInteractionEvent : MonoBehaviour
 {
+    private string playerPrefName = "FirstInteractionDone";
+
     public void SendEvent()
     {
-        UnityAnalyticsController.SendFirstInteractionEvent();
+        bool hasPref = PlayerPrefs.HasKey(playerPrefName);
+        if (!hasPref)
+        {
+            UnityAnalyticsController.SendFirstInteractionEvent();
+            PlayerPrefs.SetString(playerPrefName, "true");
+            //Debug.Log("Sent first interaction analytics event");
+        }
     }
 }
