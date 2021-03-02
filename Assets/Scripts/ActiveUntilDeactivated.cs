@@ -7,7 +7,7 @@ public class ActiveUntilDeactivated : MonoBehaviour
 
     public string PlayerPrefName = "UniqueStringValue"; // replace with a unique player pref name in inspector
     public GameObject toActivate;
-    public bool deactivated = false;
+    private bool deactivated = false;
 
 
     void Start()
