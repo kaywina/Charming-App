@@ -11,23 +11,28 @@ using Unity.Notifications.iOS;
 
 public class NotificationManager : MonoBehaviour
 {
-#if UNITY_ANDROID
-    private const string CHANNEL_ID = "CharmingAppNotifications";
-#endif
 
     public static string PLAYERPREF_NAME_HOUR = "NotificationHour"; // don't change in production
     public static string PLAYERPREF_NAME_MINUTE = "NotificationMinute"; // don't change in production
-
     private string notificationsPlayerPref = "EnableNotifications"; // don't change in production
+
+#if UNITY_ANDROID
+    private const string CHANNEL_ID = "CharmingAppNotifications";
+    private const int dailyAndroidNotificationID = 1;
+
+#elif UNITY_IOS
+    private const string iOSDailyNotificationID = "CharmingAppDailyNotification";
+    private const string iOSNotificationCategory = "CharmingAppNotification";
+    private const string iOSThreadID = "thread1";
+#endif
 
     private void Start()
     {
-        CancelNotifications(); // always start from scratch
+        CancelDailyNotifications(); // always start from scratch for daily notifications
 
         if (PlayerPrefs.GetString(notificationsPlayerPref) == "false" )
         {
             //Debug.Log("Notifications are disabled; cancel all notifications on start");
-            CancelNotifications();
             return;
         }
         else
@@ -40,7 +45,7 @@ public class NotificationManager : MonoBehaviour
         }
 
         // only show notifications if that setting has been enabled in options
-        ScheduleNotifications();
+        ScheduleDailyNotifications();
     }
 
 #if UNITY_ANDROID
@@ -98,7 +103,7 @@ public class NotificationManager : MonoBehaviour
         notification.FireTime = fireTime;
         notification.RepeatInterval = new TimeSpan(1, 0, 0, 0); // repeat daily
 
-        AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
+        AndroidNotificationCenter.SendNotificationWithExplicitID(notification, CHANNEL_ID, dailyAndroidNotificationID);
         //Debug.Log("Android notification scheduling completed");
         
     }
@@ -136,14 +141,14 @@ public class NotificationManager : MonoBehaviour
             // You can optionally specify a custom identifier which can later be 
             // used to cancel the notification, if you don't set one, a unique 
             // string will be generated automatically.
-            Identifier = "notification_01",
+            Identifier = iOSDailyNotificationID,
             Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE"),
             Body = Localization.GetTranslationByKey("NOTIFICATION_TEXT"),
             Subtitle = Localization.GetTranslationByKey("NOTIFICATION_SUBTITLE"),
             ShowInForeground = true,
             ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
-            CategoryIdentifier = "category_a",
-            ThreadIdentifier = "thread1",
+            CategoryIdentifier = iOSNotificationCategory,
+            ThreadIdentifier = iOSThreadID,
             Trigger = calendarTrigger,
         };
 
@@ -152,17 +157,17 @@ public class NotificationManager : MonoBehaviour
     }
 #endif
 
-    public void CancelNotifications()
+    public void CancelDailyNotifications()
     {
         //Debug.Log("Cancel notifications");
 #if UNITY_ANDROID
-        AndroidNotificationCenter.CancelAllNotifications();
+        AndroidNotificationCenter.CancelNotification(dailyAndroidNotificationID);
 #elif UNITY_IOS
-        iOSNotificationCenter.RemoveAllScheduledNotifications();
+        iOSNotificationCenter.RemoveScheduledNotification(iOSDailyNotificationID);
 #endif
     }
 
-    public void ScheduleNotifications()
+    public void ScheduleDailyNotifications()
     {
 #if UNITY_ANDROID
         CreateAndroidChannel();
@@ -179,22 +184,22 @@ public class NotificationManager : MonoBehaviour
     {
         if (PlayerPrefs.GetString(notificationsPlayerPref) == "false")
         {
-            CancelNotifications();
+            CancelDailyNotifications();
             //Debug.Log("Notifications have been disabled");
         }
         else
         {
-            ScheduleNotifications();
+            ScheduleDailyNotifications();
             //Debug.Log("Notifications have been enabled");
         }        
     }
 
-    public void RescheduleNotifications()
+    public void RescheduleDailyNotifications()
     {
-        CancelNotifications();
+        CancelDailyNotifications();
         if (PlayerPrefs.GetString(notificationsPlayerPref) == "true")
         {
-            ScheduleNotifications();
+            ScheduleDailyNotifications();
             //Debug.Log("Reschedule notifications");
         }
         else

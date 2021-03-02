@@ -48,7 +48,7 @@ public class TimePicker : MonoBehaviour
         // to avoid case where UI shows incorrect time.
         // This means though that if the user closes the app before exiting the options, the new notification time will not be saved.
         SetPlayerPrefs();
-        notificationManager.RescheduleNotifications();
+        notificationManager.RescheduleDailyNotifications();
     }
 
     public void HourUp()
