@@ -161,12 +161,12 @@ public class NotificationManager : MonoBehaviour
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
-        //Debug.Log("iOS notification sent");
+        //Debug.Log("iOS daily notification scheduled");
     }
 
     private void ScheduleRepeatMissedNotificationsIos()
     {
-        //Debug.Log("Schedule repeat missed iOS mindfulness notification");
+        Debug.Log("Schedule repeat missed iOS mindfulness notification");
 
         var calendarTrigger = new iOSNotificationCalendarTrigger()
         {
@@ -190,7 +190,7 @@ public class NotificationManager : MonoBehaviour
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
-        //Debug.Log("iOS notification sent");
+        Debug.Log("iOS missed notification scheduled");
     }
 #endif
 
