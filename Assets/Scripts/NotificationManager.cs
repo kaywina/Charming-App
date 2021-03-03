@@ -170,7 +170,7 @@ public class NotificationManager : MonoBehaviour
 
         var calendarTrigger = new iOSNotificationCalendarTrigger()
         {
-            Hour = (24 * 1) + 12, // 1 days in advance at noon
+            Hour = (24 * 1) + 9, // 1 days in advance at 9am
             Minute = 0,
             Repeats = true
         };
