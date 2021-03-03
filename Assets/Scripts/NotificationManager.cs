@@ -19,9 +19,11 @@ public class NotificationManager : MonoBehaviour
 #if UNITY_ANDROID
     private const string CHANNEL_ID = "CharmingAppNotifications";
     private const int dailyAndroidNotificationID = 1;
+    private const int missedAndroidNotificationID = 2;
 
 #elif UNITY_IOS
     private const string iOSDailyNotificationID = "CharmingAppDailyNotification";
+    private const string iOSMissedNotificationID = "CharmingAppMissedNotification";
     private const string iOSNotificationCategory = "CharmingAppNotification";
     private const string iOSThreadID = "thread1";
 #endif
@@ -29,6 +31,7 @@ public class NotificationManager : MonoBehaviour
     private void Start()
     {
         CancelDailyNotifications(); // always start from scratch for daily notifications
+        CancelMissedNotifications(); // same with "missed" notifications that are sent every three days of inactivity
 
         if (PlayerPrefs.GetString(notificationsPlayerPref) == "false" )
         {
@@ -44,8 +47,13 @@ public class NotificationManager : MonoBehaviour
             }
         }
 
+#if UNITY_ANDROID
+        CreateAndroidChannel();
+#endif
+
         // only show notifications if that setting has been enabled in options
         ScheduleDailyNotifications();
+        ScheduleMissedNotifications();
     }
 
 #if UNITY_ANDROID
@@ -142,9 +150,38 @@ public class NotificationManager : MonoBehaviour
             // used to cancel the notification, if you don't set one, a unique 
             // string will be generated automatically.
             Identifier = iOSDailyNotificationID,
-            Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE"),
-            Body = Localization.GetTranslationByKey("NOTIFICATION_TEXT"),
-            Subtitle = Localization.GetTranslationByKey("NOTIFICATION_SUBTITLE"),
+            Title = Localization.GetTranslationByKey("DAILY_NOTIFICATION_TITLE"),
+            Body = Localization.GetTranslationByKey("DAILY_NOTIFICATION_TEXT"),
+            Subtitle = Localization.GetTranslationByKey("DAILY_NOTIFICATION_SUBTITLE"),
+            ShowInForeground = true,
+            ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
+            CategoryIdentifier = iOSNotificationCategory,
+            ThreadIdentifier = iOSThreadID,
+            Trigger = calendarTrigger,
+        };
+
+        iOSNotificationCenter.ScheduleNotification(notification);
+        //Debug.Log("iOS notification sent");
+    }
+
+    private void ScheduleRepeatMissedNotificationsIos()
+    {
+        //Debug.Log("Schedule repeat missed iOS mindfulness notification");
+
+        var calendarTrigger = new iOSNotificationCalendarTrigger()
+        {
+            Hour = (24 * 1) + 12, // 1 days in advance at noon
+            Minute = 0,
+            Repeats = true
+        };
+
+
+        var notification = new iOSNotification()
+        {
+            Identifier = iOSMissedNotificationID,
+            Title = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE"),
+            Body = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT"),
+            Subtitle = Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE"),
             ShowInForeground = true,
             ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
             CategoryIdentifier = iOSNotificationCategory,
@@ -159,7 +196,7 @@ public class NotificationManager : MonoBehaviour
 
     public void CancelDailyNotifications()
     {
-        //Debug.Log("Cancel notifications");
+        //Debug.Log("Cancel daily notifications");
 #if UNITY_ANDROID
         AndroidNotificationCenter.CancelNotification(dailyAndroidNotificationID);
 #elif UNITY_IOS
@@ -167,14 +204,35 @@ public class NotificationManager : MonoBehaviour
 #endif
     }
 
+    public void CancelMissedNotifications()
+    {
+        //Debug.Log("Cancel missed notifications");
+#if UNITY_ANDROID
+        AndroidNotificationCenter.CancelNotification(missedAndroidNotificationID);
+#elif UNITY_IOS
+        iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID);
+#endif
+    }
+
     public void ScheduleDailyNotifications()
     {
 #if UNITY_ANDROID
-        CreateAndroidChannel();
         ScheduleRepeatDailyNotificationAndroid();
 #elif UNITY_IOS
         // we are registering for notifications on app start (see mobile notifications project settings)
         ScheduleRepeatDailyNotificationsIos();
+#else
+        Debug.Log("Notifications not implemented for this platform");
+#endif
+    }
+
+    public void ScheduleMissedNotifications()
+    {
+#if UNITY_ANDROID
+        ScheduleRepeatMissedNotificationAndroid();
+#elif UNITY_IOS
+        // we are registering for notifications on app start (see mobile notifications project settings)
+        ScheduleRepeatMissedNotificationsIos();
 #else
         Debug.Log("Notifications not implemented for this platform");
 #endif
