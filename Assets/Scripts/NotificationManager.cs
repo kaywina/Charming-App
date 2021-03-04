@@ -19,7 +19,9 @@ public class NotificationManager : MonoBehaviour
 #if UNITY_ANDROID
     private const string CHANNEL_ID = "CharmingAppNotifications";
     private const int dailyAndroidNotificationID = 1;
-    private const int missedAndroidNotificationID = 2;
+    private const int missedAndroidNotificationID_A = 2;
+    private const int missedAndroidNotificationID_B = 3;
+    private const int missedAndroidNotificationID_C = 4;
 
 #elif UNITY_IOS
     private const string iOSDailyNotificationID = "CharmingAppDailyNotification";
@@ -117,6 +119,32 @@ public class NotificationManager : MonoBehaviour
         //Debug.Log("Android notification scheduling completed");
         
     }
+
+    private void ScheduleRepeatMissedNotificationsAndroid()
+    {
+        ScheduleAndroidMissedNotification(2, 12, missedAndroidNotificationID_A); // first notification at noon after 2 days
+        ScheduleAndroidMissedNotification(4, 19, missedAndroidNotificationID_B); // second notifcation at 7pm after 4 days
+        ScheduleAndroidMissedNotification(6, 9, missedAndroidNotificationID_B); // second notifcation at 9am after 6 days
+    }
+
+    private void ScheduleAndroidMissedNotification(int days, int hour, int id)
+    {
+        //Debug.Log("Schedule repeat daily Android mindfulness notification");
+        var notification = new AndroidNotification();
+
+        notification.Title = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE");
+        notification.Text = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT");
+
+        DateTime dayToStart = DateTime.Now.AddDays(days);
+        DateTime fireTime = new DateTime(dayToStart.Year, dayToStart.Month, dayToStart.Day, hour, 0, 0);
+
+        notification.FireTime = fireTime;
+        notification.RepeatInterval = new TimeSpan(3, 0, 0, 0); // repeat daily
+
+        AndroidNotificationCenter.SendNotificationWithExplicitID(notification, CHANNEL_ID, id);
+        Debug.Log("android notification for id = " + id + " scheduled for day = " + fireTime.Day + " and hour = " + hour);
+    }
+
 #endif
 
 #if UNITY_IOS
@@ -206,7 +234,7 @@ public class NotificationManager : MonoBehaviour
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
-        Debug.Log("ios notification for id = " + id + "scheduled for day = " + day + " and hour = " + hour);
+        Debug.Log("ios notification for id = " + id + " scheduled for day = " + day + " and hour = " + hour);
     }
 #endif
 
@@ -224,7 +252,9 @@ public class NotificationManager : MonoBehaviour
     {
         //Debug.Log("Cancel missed notifications");
 #if UNITY_ANDROID
-        AndroidNotificationCenter.CancelNotification(missedAndroidNotificationID);
+        AndroidNotificationCenter.CancelNotification(missedAndroidNotificationID_A);
+        AndroidNotificationCenter.CancelNotification(missedAndroidNotificationID_B);
+        AndroidNotificationCenter.CancelNotification(missedAndroidNotificationID_C);
 #elif UNITY_IOS
         iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID_A);
         iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID_B);
@@ -247,7 +277,7 @@ public class NotificationManager : MonoBehaviour
     public void ScheduleMissedNotifications()
     {
 #if UNITY_ANDROID
-        //ScheduleRepeatMissedNotificationAndroid();
+        ScheduleRepeatMissedNotificationsAndroid();
 #elif UNITY_IOS
         // we are registering for notifications on app start (see mobile notifications project settings)
         ScheduleRepeatMissedNotificationsIos();
