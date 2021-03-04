@@ -23,7 +23,9 @@ public class NotificationManager : MonoBehaviour
 
 #elif UNITY_IOS
     private const string iOSDailyNotificationID = "CharmingAppDailyNotification";
-    private const string iOSMissedNotificationID = "CharmingAppMissedNotification";
+    private const string iOSMissedNotificationID_A = "CharmingAppMissedNotificationA";
+    private const string iOSMissedNotificationID_B = "CharmingAppMissedNotificationB";
+    private const string iOSMissedNotificationID_C = "CharmingAppMissedNotificationC";
     private const string iOSNotificationCategory = "CharmingAppNotification";
     private const string iOSThreadID = "thread1";
 #endif
@@ -166,19 +168,34 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatMissedNotificationsIos()
     {
-        Debug.Log("Schedule repeat missed iOS mindfulness notification");
+        //Debug.Log("Schedule repeat missed iOS mindfulness notification");
+        ScheduleIOSMissedNotification(1, 7, iOSMissedNotificationID_A); // 7am next day
+        ScheduleIOSMissedNotification(2, 8, iOSMissedNotificationID_B); // 8am day after that
+        ScheduleIOSMissedNotification(3, 9, iOSMissedNotificationID_C); // 9am day after that
+    }
+#endif
+
+    private void ScheduleIOSMissedNotification(int days, int hour, string id) // id must be unique for each notification
+    {
+        // DateTime is unique for each IOS missed notifcation
+        DateTime tomorrow = DateTime.Now.AddDays(days);
+        int day = tomorrow.Day;
+        int month = tomorrow.Month;
+        int year = tomorrow.Year;
 
         var calendarTrigger = new iOSNotificationCalendarTrigger()
         {
-            Hour = (24 * 1) + 9, // 1 days in advance at 9am
+            Year = year,
+            Month = month,
+            Day = day,
+            Hour = hour,
             Minute = 0,
-            Repeats = true
+            Repeats = false
         };
-
 
         var notification = new iOSNotification()
         {
-            Identifier = iOSMissedNotificationID,
+            Identifier = id,
             Title = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE"),
             Body = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT"),
             Subtitle = Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE"),
@@ -190,9 +207,8 @@ public class NotificationManager : MonoBehaviour
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
-        Debug.Log("iOS missed notification scheduled");
+        Debug.Log("ios notification for id = " + id + "scheduled for day = " + day + " and hour = " + hour);
     }
-#endif
 
     public void CancelDailyNotifications()
     {
@@ -210,7 +226,9 @@ public class NotificationManager : MonoBehaviour
 #if UNITY_ANDROID
         AndroidNotificationCenter.CancelNotification(missedAndroidNotificationID);
 #elif UNITY_IOS
-        iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID);
+        iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID_A);
+        iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID_B);
+        iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID_C);
 #endif
     }
 
