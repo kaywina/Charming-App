@@ -173,7 +173,6 @@ public class NotificationManager : MonoBehaviour
         ScheduleIOSMissedNotification(2, 8, iOSMissedNotificationID_B); // 8am day after that
         ScheduleIOSMissedNotification(3, 9, iOSMissedNotificationID_C); // 9am day after that
     }
-#endif
 
     private void ScheduleIOSMissedNotification(int days, int hour, string id) // id must be unique for each notification
     {
@@ -209,6 +208,7 @@ public class NotificationManager : MonoBehaviour
         iOSNotificationCenter.ScheduleNotification(notification);
         Debug.Log("ios notification for id = " + id + "scheduled for day = " + day + " and hour = " + hour);
     }
+#endif
 
     public void CancelDailyNotifications()
     {
@@ -247,7 +247,7 @@ public class NotificationManager : MonoBehaviour
     public void ScheduleMissedNotifications()
     {
 #if UNITY_ANDROID
-        ScheduleRepeatMissedNotificationAndroid();
+        //ScheduleRepeatMissedNotificationAndroid();
 #elif UNITY_IOS
         // we are registering for notifications on app start (see mobile notifications project settings)
         ScheduleRepeatMissedNotificationsIos();
