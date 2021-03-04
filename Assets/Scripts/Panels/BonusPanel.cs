@@ -12,10 +12,9 @@ public class BonusPanel : CharmsPanel
     public CurrencyIndicator currencyIndicator;
     public GameObject rewardedAdButton;
     public SetPlayerPrefFromToggle goldTogglePrefab;
-    public Text prizeText;
-    public GameObject strikeout;
-    public GameObject doubleBonusText;
-    public Text totalBonusText;
+    public Text bonusAmountText;
+    public GameObject doubleBonusLabelText;
+    public Text doubleBonusAmountText;
     public ParticleSystem fireworks;
     public GameObject skipButton;
 
@@ -35,9 +34,8 @@ public class BonusPanel : CharmsPanel
 
     IEnumerator Enable()
     {
-        strikeout.SetActive(false);
-        doubleBonusText.SetActive(false);
-        totalBonusText.gameObject.SetActive(false);
+        doubleBonusLabelText.SetActive(false);
+        doubleBonusAmountText.gameObject.SetActive(false);
 
         overlayControls.SetActive(false);
         hasSpun = false;
@@ -92,7 +90,7 @@ public class BonusPanel : CharmsPanel
         
         //Debug.Log("Complete bonus wheel spin");
         bonusAmount = bonus;
-        prizeText.text = "+" + bonus.ToString();
+        bonusAmountText.text = "+" + bonus.ToString();
 
         // get and store playerpref for gold subscribers
         bool isGold = false;
@@ -107,8 +105,7 @@ public class BonusPanel : CharmsPanel
             //Debug.Log("Gold subscribers automatically get double bonus");
             rewardedAdButton.SetActive(false); //this needs to be done before the code below or the double bonus objects don't show up
             GiveDoubleBonus();
-            doubleBonusText.SetActive(true);
-            strikeout.SetActive(true);
+            doubleBonusLabelText.SetActive(true);
         }
         // if not gold show the rewarded ad button and ads are allowed
         /* Unity Ads have been disabled
@@ -136,14 +133,9 @@ public class BonusPanel : CharmsPanel
     {
         // give the bonus again and update relevant UI
         CurrencyManager.Instance.GiveBonus(bonusAmount, false, false); // passing false as second parameter this time since we only need to do that once, and it has already been done when spin was completed
-        totalBonusText.text = "+" + (bonusAmount * 2).ToString();
-        if (totalBonusText != null) { totalBonusText.gameObject.SetActive(true); }
-    }
-
-    public void SkipBonus()
-    {
-        //DeleteBonusWheelPlayerPrefs();
-        gameObject.SetActive(false);
+        doubleBonusAmountText.text = "+" + (bonusAmount * 2).ToString();
+        if (bonusAmountText != null) { bonusAmountText.gameObject.SetActive(false); }
+        if (doubleBonusAmountText != null) { doubleBonusAmountText.gameObject.SetActive(true); }
     }
 
     public int GetStoredBonus()
