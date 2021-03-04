@@ -17,6 +17,7 @@ public class BonusPanel : CharmsPanel
     public Text doubleBonusAmountText;
     public ParticleSystem fireworks;
     public GameObject skipButton;
+    public GameObject animatedArrow;
 
     private bool hasSpun;
     private int bonusAmount;
@@ -75,6 +76,7 @@ public class BonusPanel : CharmsPanel
         if (fireworks != null) { fireworks.Play(); }
         bonusWheel.Spin();
         skipButton.SetActive(true);
+        animatedArrow.SetActive(false);
     }
 
     public void SkipSpinWithTimeScale()
