@@ -40,7 +40,8 @@ public class CurrencyIndicator : MonoBehaviour
             //Debug.Log("Update Indicator Animated");
             newCurrencyAmount = int.Parse(currencyAmountText.text);
             currencyAmountText.color = Color.cyan;
-            InvokeRepeating("IncrementCurrencyIndicator", 0, repeatRate);
+            float initialDelay = 0.5f;
+            InvokeRepeating("IncrementCurrencyIndicator", initialDelay, repeatRate);
             animating = true;
         }
         else
