@@ -122,18 +122,18 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatMissedNotificationsAndroid()
     {
-        ScheduleAndroidMissedNotification(2, 12, missedAndroidNotificationID_A); // first notification at noon after 2 days
-        ScheduleAndroidMissedNotification(4, 19, missedAndroidNotificationID_B); // second notifcation at 7pm after 4 days
-        ScheduleAndroidMissedNotification(6, 9, missedAndroidNotificationID_B); // second notifcation at 9am after 6 days
+        ScheduleAndroidMissedNotification(2, 12, missedAndroidNotificationID_A, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_1")); // first notification at noon after 2 days
+        ScheduleAndroidMissedNotification(4, 19, missedAndroidNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_2")); // second notifcation at 7pm after 4 days
+        ScheduleAndroidMissedNotification(6, 9, missedAndroidNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_3")); // second notifcation at 9am after 6 days
     }
 
-    private void ScheduleAndroidMissedNotification(int days, int hour, int id)
+    private void ScheduleAndroidMissedNotification(int days, int hour, int id, string titleLocKey, string textLocKey)
     {
         //Debug.Log("Schedule repeat daily Android mindfulness notification");
         var notification = new AndroidNotification();
 
-        notification.Title = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE");
-        notification.Text = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT");
+        notification.Title = titleLocKey;
+        notification.Text = textLocKey;
 
         DateTime dayToStart = DateTime.Now.AddDays(days);
         DateTime fireTime = new DateTime(dayToStart.Year, dayToStart.Month, dayToStart.Day, hour, 0, 0);
@@ -197,12 +197,13 @@ public class NotificationManager : MonoBehaviour
     private void ScheduleRepeatMissedNotificationsIos()
     {
         //Debug.Log("Schedule repeat missed iOS mindfulness notification");
-        ScheduleIOSMissedNotification(1, 7, iOSMissedNotificationID_A); // 7am next day
-        ScheduleIOSMissedNotification(2, 8, iOSMissedNotificationID_B); // 8am day after that
-        ScheduleIOSMissedNotification(3, 9, iOSMissedNotificationID_C); // 9am day after that
+
+        ScheduleIOSMissedNotification(1, 7, iOSMissedNotificationID_A, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_1")); // 7am next day
+        ScheduleIOSMissedNotification(2, 8, iOSMissedNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_2")); // 8am day after that
+        ScheduleIOSMissedNotification(3, 9, iOSMissedNotificationID_C, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_3")); // 9am day after that
     }
 
-    private void ScheduleIOSMissedNotification(int days, int hour, string id) // id must be unique for each notification
+    private void ScheduleIOSMissedNotification(int days, int hour, string id, string titleLocKey, string bodyLocKey, string subtitleLocKey) // id must be unique for each notification
     {
         // DateTime is unique for each IOS missed notifcation
         DateTime tomorrow = DateTime.Now.AddDays(days);
@@ -223,9 +224,9 @@ public class NotificationManager : MonoBehaviour
         var notification = new iOSNotification()
         {
             Identifier = id,
-            Title = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE"),
-            Body = Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT"),
-            Subtitle = Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE"),
+            Title = titleLocKey,
+            Body = bodyLocKey,
+            Subtitle = subtitleLocKey,
             ShowInForeground = true,
             ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
             CategoryIdentifier = iOSNotificationCategory,
