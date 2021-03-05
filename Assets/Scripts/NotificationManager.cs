@@ -122,9 +122,9 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatMissedNotificationsAndroid()
     {
-        ScheduleAndroidMissedNotification(2, 12, missedAndroidNotificationID_A, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_1")); // first notification at noon after 2 days
-        ScheduleAndroidMissedNotification(4, 19, missedAndroidNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_2")); // second notifcation at 7pm after 4 days
-        ScheduleAndroidMissedNotification(6, 9, missedAndroidNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_3")); // second notifcation at 9am after 6 days
+        ScheduleAndroidMissedNotification(2, 19, missedAndroidNotificationID_A, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_1")); // first notification at 7pm after 2 days
+        ScheduleAndroidMissedNotification(4, 9, missedAndroidNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_2")); // second notifcation at 9am after 4 days
+        ScheduleAndroidMissedNotification(6, 12, missedAndroidNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_3")); // second notifcation at noon after 6 days
     }
 
     private void ScheduleAndroidMissedNotification(int days, int hour, int id, string titleLocKey, string textLocKey)
