@@ -33,6 +33,7 @@ public class ShareScreenshot : MonoBehaviour
     private string screenshotName;
 
     public GameObject shareBonusIndicator;
+    public ActiveUntilDeactivated shareArrow;
     public GameObject[] hideOnShare;
     public bool showAgainAfterShare = false;
     public GameObject url;
@@ -65,6 +66,7 @@ public class ShareScreenshot : MonoBehaviour
         if (doubleBonusAmountText != null) { doubleBonusAmountText.SetActive(false); }
         if (rewardAmountText != null) { rewardAmountText.text = baseBonusAmount.ToString(); }
         if (strikeout != null) { strikeout.SetActive(false); }
+        if (shareArrow != null) { shareArrow.Reactivate(); }
     }
 
     void OnApplicationFocus(bool focus)
