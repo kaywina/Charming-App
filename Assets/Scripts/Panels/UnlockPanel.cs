@@ -21,6 +21,9 @@ public class UnlockPanel : CharmsPanel
     public GameObject needMoreKeysText;
     public GameObject goForItText;
 
+    public GameObject confirmArrow;
+    public GameObject storeArrow;
+
     // don't need these two variables if the store button is always shown
     //public GameObject notEnoughText;
     //public GameObject storeButton;
@@ -40,8 +43,8 @@ public class UnlockPanel : CharmsPanel
             //if (storeButton != null) { storeButton.SetActive(false); }
             needMoreKeysText.SetActive(false);
             goForItText.SetActive(true);
-
-            
+            confirmArrow.SetActive(true);
+            storeArrow.SetActive(false);
         }
         else
         {
@@ -49,6 +52,8 @@ public class UnlockPanel : CharmsPanel
             //if (storeButton != null) { storeButton.SetActive(true); }
             goForItText.SetActive(false);
             needMoreKeysText.SetActive(true);
+            confirmArrow.SetActive(false);
+            storeArrow.SetActive(true);
         }
 
         
