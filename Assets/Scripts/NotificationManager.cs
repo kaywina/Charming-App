@@ -198,9 +198,9 @@ public class NotificationManager : MonoBehaviour
     {
         //Debug.Log("Schedule repeat missed iOS mindfulness notification");
 
-        ScheduleIOSMissedNotification(1, 7, iOSMissedNotificationID_A, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_1")); // 7am next day
-        ScheduleIOSMissedNotification(2, 8, iOSMissedNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_2")); // 8am day after that
-        ScheduleIOSMissedNotification(3, 9, iOSMissedNotificationID_C, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_3")); // 9am day after that
+        ScheduleIOSMissedNotification(2, 19, iOSMissedNotificationID_A, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_1"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_1")); // 7pm after 2 days
+        ScheduleIOSMissedNotification(4, 9, iOSMissedNotificationID_B, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_2"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_2")); // 9am after 4 days
+        ScheduleIOSMissedNotification(6, 12, iOSMissedNotificationID_C, Localization.GetTranslationByKey("MISSED_NOTIFICATION_TITLE_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_TEXT_3"), Localization.GetTranslationByKey("MISSED_NOTIFICATION_SUBTITLE_3")); // noon after 6 days
     }
 
     private void ScheduleIOSMissedNotification(int days, int hour, string id, string titleLocKey, string bodyLocKey, string subtitleLocKey) // id must be unique for each notification
