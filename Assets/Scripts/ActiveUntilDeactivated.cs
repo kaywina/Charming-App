@@ -6,14 +6,14 @@ public class ActiveUntilDeactivated : MonoBehaviour
 {
 
     public string PlayerPrefName = "UniqueStringValue"; // replace with a unique player pref name in inspector
-    public GameObject toActivate;
+    public ActiveUntilDeactivated toReactivateOnDeactivate;
     private bool deactivated = false;
 
 
     void Start()
     {
 
-        if (toActivate != null) { toActivate.SetActive(false); }
+        if (toReactivateOnDeactivate != null) { toReactivateOnDeactivate.gameObject.SetActive(false); }
 
         if (PlayerPrefs.GetInt(PlayerPrefName) != 0)
         {
@@ -29,7 +29,7 @@ public class ActiveUntilDeactivated : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefName, 1);
         gameObject.SetActive(false);
         deactivated = true;
-        if (toActivate != null) { toActivate.SetActive(true); }
+        if (toReactivateOnDeactivate != null) { toReactivateOnDeactivate.Reactivate(); }
     }
 
     public void Reactivate()
