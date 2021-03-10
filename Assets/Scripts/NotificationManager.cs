@@ -235,7 +235,7 @@ public class NotificationManager : MonoBehaviour
         };
 
         iOSNotificationCenter.ScheduleNotification(notification);
-        Debug.Log("ios notification for id = " + id + " scheduled for day = " + day + " and hour = " + hour);
+        //Debug.Log("ios notification for id = " + id + " scheduled for day = " + day + " and hour = " + hour);
     }
 #endif
 
