@@ -156,7 +156,7 @@ public class NotificationManager : MonoBehaviour
         notification.RepeatInterval = new TimeSpan(3, 0, 0, 0); // repeat daily
 
         AndroidNotificationCenter.SendNotificationWithExplicitID(notification, CHANNEL_ID, id);
-        Debug.Log("android notification for id = " + id + " scheduled for day = " + fireTime.Day + " and hour = " + hour);
+        //Debug.Log("android notification for id = " + id + " scheduled for day = " + fireTime.Day + " and hour = " + hour);
     }
 
 #endif
