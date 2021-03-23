@@ -48,8 +48,11 @@ public class NotificationManager : MonoBehaviour
 
     private void Start()
     {
+        /*
         CancelDailyNotifications(); // always start from scratch for daily notifications
         CancelMissedNotifications(); // same with "missed" notifications that are sent every three days of inactivity
+        */
+        CancelAllScheduledNotifications();
 
         if (PlayerPrefs.GetString(notificationsPlayerPref) == "false" )
         {
@@ -251,11 +254,20 @@ public class NotificationManager : MonoBehaviour
     }
 #endif
 
+    public void CancelAllScheduledNotifications()
+    {
+#if UNITY_ANDROID
+        AndroidNotificationCenter.CancelAllScheduledNotifications();
+#elif UNITY_IOS
+        iOSNotificationCenter.RemoveAllScheduledNotifications();
+#endif
+    }
+
     public void CancelDailyNotifications()
     {
         //Debug.Log("Cancel daily notifications");
 #if UNITY_ANDROID
-        AndroidNotificationCenter.CancelNotification(androidDailyNotificationID);
+        AndroidNotificationCenter.CancelScheduledNotification(androidDailyNotificationID);
 #elif UNITY_IOS
         iOSNotificationCenter.RemoveScheduledNotification(iOSDailyNotificationID);
 #endif
@@ -265,9 +277,9 @@ public class NotificationManager : MonoBehaviour
     {
         //Debug.Log("Cancel missed notifications");
 #if UNITY_ANDROID
-        AndroidNotificationCenter.CancelNotification(androidMissedNotificationID_A);
-        AndroidNotificationCenter.CancelNotification(androidMissedNotificationID_B);
-        AndroidNotificationCenter.CancelNotification(androidMissedNotificationID_C);
+        AndroidNotificationCenter.CancelScheduledNotification(androidMissedNotificationID_A);
+        AndroidNotificationCenter.CancelScheduledNotification(androidMissedNotificationID_B);
+        AndroidNotificationCenter.CancelScheduledNotification(androidMissedNotificationID_C);
 #elif UNITY_IOS
         iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID_A);
         iOSNotificationCenter.RemoveScheduledNotification(iOSMissedNotificationID_B);
