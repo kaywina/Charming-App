@@ -81,6 +81,9 @@ public class NotificationManager : MonoBehaviour
     private void CreateAndroidChannel()
     {
         //Debug.Log("Create Android Channel");
+
+        AndroidNotificationCenter.DeleteNotificationChannel(CHANNEL_ID);
+
         var channel = new AndroidNotificationChannel()
         {
             Id = CHANNEL_ID,
