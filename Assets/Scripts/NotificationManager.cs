@@ -260,7 +260,7 @@ public class NotificationManager : MonoBehaviour
     public void CancelAllScheduledNotifications()
     {
 #if UNITY_ANDROID
-        AndroidNotificationCenter.CancelAllScheduledNotifications();
+        AndroidNotificationCenter.CancelAllNotifications();
 #elif UNITY_IOS
         iOSNotificationCenter.RemoveAllScheduledNotifications();
 #endif
