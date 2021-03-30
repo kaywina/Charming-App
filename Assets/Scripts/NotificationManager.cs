@@ -99,8 +99,8 @@ public class NotificationManager : MonoBehaviour
         //Debug.Log("Schedule repeat daily Android mindfulness notification");
         var notification = new AndroidNotification();
 
-        notification.Title = Localization.GetTranslationByKey("NOTIFICATION_TITLE");
-        notification.Text = Localization.GetTranslationByKey("NOTIFICATION_TEXT");
+        notification.Title = Localization.GetTranslationByKey("DAILY_NOTIFICATION_TITLE");
+        notification.Text = Localization.GetTranslationByKey("DAILY_NOTIFICATION_TEXT");
 
         DateTime now = DateTime.Now;
         DateTime tomorrow = now.AddDays(1);
