@@ -36,6 +36,8 @@ public class NotificationManager : MonoBehaviour
     private string missedNotificationSubtitleLocKeyC = "MISSED_NOTIFICATION_SUBTITLE_3";
 #endif
 
+#if UNITY_ANDROID || UNITY_IOS
+
     private string missedNotificationTitleLocKeyA = "MISSED_NOTIFICATION_TITLE_1";
     private string missedNotificationTitleLocKeyB = "MISSED_NOTIFICATION_TITLE_2";
     private string missedNotificationTitleLocKeyC = "MISSED_NOTIFICATION_TITLE_3";
@@ -43,7 +45,7 @@ public class NotificationManager : MonoBehaviour
     private string missedNotificationTextLocKeyA = "MISSED_NOTIFICATION_TEXT_1";
     private string missedNotificationTextLocKeyB = "MISSED_NOTIFICATION_TEXT_2";
     private string missedNotificationTextLocKeyC = "MISSED_NOTIFICATION_TEXT_3";
-
+#endif
 
 
     private void Start()

@@ -5,6 +5,23 @@ using System.IO;
 
 public class ShareScreenshot : MonoBehaviour
 {
+
+
+    public bool useCustomFileName = false;
+    public string customFileName = "";
+
+    public bool useLocKeyForSubject = false;
+    public string subjectLocKey = "";
+
+    public Button shareButton;
+    public Image shareButtonImage;
+    private bool isFocus = false;
+
+    private string shareSubject, shareMessage, shareLink;
+
+#if UNITY_ANDROID || UNITY_IOS
+    private bool isProcessing = false;
+
     public bool includeImage = true;
     public bool cropImage = false;
 
@@ -18,18 +35,10 @@ public class ShareScreenshot : MonoBehaviour
     private int cropWidth = 0;
     private int cropHeight = 0;
 
-    public bool useCustomFileName = false;
-    public string customFileName = "";
+    private float sceneResetDelayInSeconds = 2f;
 
-    public bool useLocKeyForSubject = false;
-    public string subjectLocKey = "";
+#endif
 
-    public Button shareButton;
-    public Image shareButtonImage;
-    private bool isFocus = false;
-
-    private string shareSubject, shareMessage, shareLink;
-    private bool isProcessing = false;
     private string screenshotName;
 
     public GameObject shareBonusIndicator;
@@ -51,8 +60,6 @@ public class ShareScreenshot : MonoBehaviour
     public int baseBonusAmount = 8;
     private int giveBonusAmount = 0;
     private bool bonusGiven;
-
-    private float sceneResetDelayInSeconds = 2f;
 
     private bool[] alreadyHiddenIndices;
 
@@ -224,6 +231,7 @@ public class ShareScreenshot : MonoBehaviour
         }
     }
 
+#if UNITY_ANDROID || UNITY_IOS
     private IEnumerator TakeSSAndShare()
     {
         isProcessing = true;
@@ -235,7 +243,6 @@ public class ShareScreenshot : MonoBehaviour
             isProcessing = false;
             yield break;
         }
-
         // if we are including the image the continue
         SetUpScene();
 
@@ -267,7 +274,8 @@ public class ShareScreenshot : MonoBehaviour
         UnityAnalyticsController.SendShareAnalyticsEvent(includeImage);
 
         isProcessing = false;
-    }
+}
+#endif
 
     public string SaveTexture2DAsFile(Texture2D tex)
     {
