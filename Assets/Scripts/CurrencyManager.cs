@@ -38,6 +38,8 @@ public class CurrencyManager : MonoBehaviour {
             // so we always show tutorial panel
             tutorialPanel.SetActive(true);
 
+            UnityAnalyticsController.SendEvent("FirstRun");
+
             /* This is no longer required
             if (UnityAdsController.IsAllowAdsSet())
             {

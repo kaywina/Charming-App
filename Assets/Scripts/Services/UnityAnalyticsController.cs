@@ -70,10 +70,18 @@ public class UnityAnalyticsController : MonoBehaviour
     /*
      * User interaction analytics calls
      * */
-    public static void SendFirstInteractionEvent()
+    public static void SendEvent(string eventName)
     {
-        //Debug.Log("Send first interaction analytics event");
-        AnalyticsEvent.FirstInteraction("First_Interaction"); // see SendFirstInteractionEvent.cs on Button_OK under Panel_Welcome
+        switch (eventName)
+        {
+            case "FirstRun":
+                AnalyticsEvent.FirstInteraction(eventName); // send event on first running Charming App
+                //Debug.Log("Send FirstRun analytics event");
+                break;
+            default:
+                Debug.Log("Event name not recognized; do not send Unity Analytics event");
+                break;
+        }
     }
 
     public static void SendAttentionGameLevelCompletedEvent(int level)
