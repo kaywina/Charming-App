@@ -11,11 +11,13 @@ public class AdsOptInButton : MonoBehaviour
     {
         if (optIn)
         {
-            UnityAdsController.AllowAds();
+            Debug.Log("No longer imlemented following change from Unity Ads to Admob");
+            //UnityAdsController.AllowAds();
         }
         else
         {
-            UnityAdsController.DisallowAds();
+            Debug.Log("No longer imlemented following change from Unity Ads to Admob");
+            //UnityAdsController.DisallowAds();
         }
 
         infoPanel.SetActive(true);
