@@ -37,6 +37,7 @@ public class GoToBonusPanelButton : MonoBehaviour
         // otherwise we don't show the bonus wheel
         else
         {
+            GoogleMobileAdsController.ShowInterstitialAd();
             CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
             charmsPanel.SetReturnToMain(true);
             charmsPanel.DisableCharmsPanel();

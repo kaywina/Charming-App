@@ -56,6 +56,7 @@ public class BonusPanel : CharmsPanel
 
     new void OnDisable()
     {
+        GoogleMobileAdsController.ShowInterstitialAd();
         if (overlayControls != null) { overlayControls.SetActive(true); }
         if (fireworks != null) { fireworks.Stop(); }
         base.OnDisable();
