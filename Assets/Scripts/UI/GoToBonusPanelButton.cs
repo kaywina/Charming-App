@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics;
 
 public class GoToBonusPanelButton : MonoBehaviour
 {
@@ -37,6 +36,7 @@ public class GoToBonusPanelButton : MonoBehaviour
         // otherwise we don't show the bonus wheel
         else
         {
+            //Debug.Log("Go directly to main UI");
             GoogleMobileAdsController.ShowInterstitialAd();
             CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
             charmsPanel.SetReturnToMain(true);
