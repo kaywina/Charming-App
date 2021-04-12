@@ -11,6 +11,12 @@ public class GoogleMobileAdsController : MonoBehaviour
 
     public void Start()
     {
+        if (UnityIAPController.IsGold())
+        {
+            Debug.Log("Gold subscriber; do not initialize Google Mobile Ads");
+            return; // no ads for gold users; don't even initialize
+        }
+
         interstitialAd = MobileAds.Instance
             .GetAd<InterstitialAdGameObject>("Interstitial Ad");
 
@@ -26,10 +32,12 @@ public class GoogleMobileAdsController : MonoBehaviour
 
     public static void ShowInterstitialAd()
     {
-        if (!UnityIAPController.IsGold())
+        if (UnityIAPController.IsGold())
         {
-            interstitialAd.ShowIfLoaded();
+            return; // don't show ads for gold users
         }
+
+        interstitialAd.ShowIfLoaded();
     }
 
     public void OnInterstitialAdOpening()
