@@ -54,7 +54,7 @@ public class GoogleMobileAdsController : MonoBehaviour
             return; // no ads for gold users
         }
 
-        bannerAd.Hide();
+        if (bannerAd != null) { bannerAd.Hide(); }
         //Debug.Log("Hide banner ad");
     }
 
