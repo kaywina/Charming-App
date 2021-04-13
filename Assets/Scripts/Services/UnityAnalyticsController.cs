@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Analytics;
 
 public class UnityAnalyticsController : MonoBehaviour
@@ -102,5 +100,20 @@ public class UnityAnalyticsController : MonoBehaviour
             AnalyticsEvent.SocialShare(ShareType.TextOnly, SocialNetwork.None);
             //Debug.Log("Send share anlalytics event for text only");
         }
+    }
+
+    public static void TryOpenDataPrivacyURL()
+    {
+        DataPrivacy.FetchPrivacyUrl(OnDataPrivacyURLReceived, OnDataPrivacyFetchURLFailure);
+    }
+
+    private static void OnDataPrivacyFetchURLFailure(string reason)
+    {
+        Debug.LogWarning("Failed to get data privacy page URL: " + reason);
+    }
+
+    private static void OnDataPrivacyURLReceived(string url)
+    {
+        Application.OpenURL(url);
     }
 }
