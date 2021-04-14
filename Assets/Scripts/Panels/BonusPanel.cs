@@ -21,9 +21,11 @@ public class BonusPanel : CharmsPanel
 
     private bool hasSpun;
     private int bonusAmount;
+    private bool showAdOnDisable = true;
 
     new void OnEnable()
     {
+        showAdOnDisable = true;
         bonusAmount = 0;
         bonusWheel.gameObject.SetActive(true);
         StartCoroutine(Enable());
@@ -56,10 +58,15 @@ public class BonusPanel : CharmsPanel
 
     new void OnDisable()
     {
-        GoogleMobileAdsController.ShowInterstitialAd();
+        if (showAdOnDisable) { GoogleMobileAdsController.ShowInterstitialAd(); }
         if (overlayControls != null) { overlayControls.SetActive(true); }
         if (fireworks != null) { fireworks.Stop(); }
         base.OnDisable();
+    }
+
+    public void SetShowAdOnDisable(bool toSet)
+    {
+        showAdOnDisable = toSet;
     }
 
     public void ReadySpin()
