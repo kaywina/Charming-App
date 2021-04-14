@@ -36,6 +36,7 @@ public class MeditatePanel : CharmsPanel
         else
         {
             DeactivateObjects();
+            GoogleMobileAdsController.ShowInterstitialAd();
             subscribePanel.SetActive(true);
         }
     }
