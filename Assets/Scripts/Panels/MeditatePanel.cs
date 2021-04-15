@@ -7,6 +7,8 @@ public class MeditatePanel : CharmsPanel
     public GameObject charmButtons;
     public GameObject subscribePanel;
 
+    public bool showInterstitialAdOnDisable = true;
+
     // world space models for Meditation screen
     public GameObject[] charms;
 
@@ -14,6 +16,7 @@ public class MeditatePanel : CharmsPanel
 
     new void OnEnable()
     {
+        showInterstitialAdOnDisable = true;
         SetCharmModel(true);
         base.OnEnable();
         charmButtons.SetActive(false);
@@ -36,9 +39,14 @@ public class MeditatePanel : CharmsPanel
         else
         {
             DeactivateObjects();
-            GoogleMobileAdsController.ShowInterstitialAd();
+            if (showInterstitialAdOnDisable) { GoogleMobileAdsController.ShowInterstitialAd(); }
             subscribePanel.SetActive(true);
         }
+    }
+
+    public void SetShowInterstitialAdOnDisable(bool toSet)
+    {
+        showInterstitialAdOnDisable = toSet;
     }
 
     void SetCharmModel(bool enable)
