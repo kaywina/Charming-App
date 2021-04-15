@@ -175,3 +175,13 @@ Update Mode: updateDependencies
 The following packages were updated:
   com.unity.ads from version 3.5.2 to 3.6.1
   com.unity.recorder from version 2.4.0-preview.1 to 2.5.2
+
+=== Thu Apr 15 14:12:40 2021
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.purchasing from version 2.2.2 to 3.0.1
+The following packages were removed:
+  com.unity.device-simulator@2.2.4-preview
