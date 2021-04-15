@@ -93,5 +93,6 @@ public class SwipeThroughObjectArray : SwipeFunction
     public void SetIndex(int toSet)
     {
         index = toSet;
+        SetPageIndicatorText();
     }
 }
