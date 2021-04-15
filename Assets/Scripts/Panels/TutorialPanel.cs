@@ -6,6 +6,8 @@ public class TutorialPanel : CharmsPanel
 {
     bool respectPlayerPref = true;
     public GoToBonusPanelButton goToBonusPanelButton;
+    public GameObject[] pages;
+    public SwipeThroughObjectArray arrowSwipeControls;
 
     /*
     public GameObject welcomeBonusIndicator;
@@ -44,5 +46,22 @@ public class TutorialPanel : CharmsPanel
     public void DoNotRespectPlayerPrefThisTime ()
     {
         respectPlayerPref = false;
+    }
+
+    public void OpenTutorialPageAtIndex(int index)
+    {
+        if (index < 0 || index > pages.Length)
+        {
+            Debug.Log("Invalid index in OpenTutorialPageAtIndex");
+            return;
+        }
+
+        //Debug.Log("Open Tutorial Page Number " + index);
+        for (int i = 0; i < pages.Length; i++)
+        {
+            if (i == index) { pages[i].SetActive(true); }
+            else { pages[i].SetActive(false); }
+        }
+        arrowSwipeControls.SetIndex(index);
     }
 }

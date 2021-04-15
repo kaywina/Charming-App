@@ -12,6 +12,7 @@ public class SubscribePanel : CharmsPanel
     private bool fromLove = false;
     private bool fromMeditate = false;
     private bool fromSecrets = false;
+    private bool fromTutorial = false;
 
     public GameObject charmButtons;
     public GameObject meditationWoldSpace;
@@ -23,6 +24,7 @@ public class SubscribePanel : CharmsPanel
     public CharmsPanel lovePanel;
     public MeditatePanel meditatePanel;
     public SecretsPanel secretsPanel;
+    public TutorialPanel tutorialPanel;
 
     public GameObject promo;
     public GameObject success;
@@ -30,6 +32,7 @@ public class SubscribePanel : CharmsPanel
     private bool optionsRTM;
     private bool loveRTM;
     private bool secretsRTM;
+    private bool tutorialRTM;
 
     public void SetFromVisualOptionsFlag(bool flag)
     {
@@ -59,6 +62,11 @@ public class SubscribePanel : CharmsPanel
     public void SetFromSecretsFlag(bool flag)
     {
         fromSecrets = flag;
+    }
+
+    public void SetFromTutorialFlag(bool flag)
+    {
+        fromTutorial = flag;
     }
 
     new void OnEnable()
@@ -100,6 +108,13 @@ public class SubscribePanel : CharmsPanel
             secretsPanel.SetReturnToMain(false);
             secretsPanel.gameObject.SetActive(false);
         }
+        else if (fromTutorial)
+        {
+            tutorialRTM = tutorialPanel.returnToMain;
+            tutorialPanel.SetReturnToMain(false);
+            tutorialPanel.gameObject.SetActive(false);
+        }
+
         else
         {
             returnToMain = true;
@@ -108,7 +123,6 @@ public class SubscribePanel : CharmsPanel
 
     new void OnDisable()
     {
-        base.OnDisable();
         if (fromOptions) {
             optionsPanel.SetReturnToMain(optionsRTM);
             optionsPanel.gameObject.SetActive(true);
@@ -137,16 +151,28 @@ public class SubscribePanel : CharmsPanel
             secretsPanel.SetReturnToMain(secretsRTM);
             secretsPanel.gameObject.SetActive(true);
         }
+        else if (fromTutorial)
+        {
+            tutorialPanel.SetReturnToMain(tutorialRTM);
+            tutorialPanel.gameObject.SetActive(true);
+            tutorialPanel.OpenTutorialPageAtIndex(4);
+
+        }
         else
         {
             // for case when returning to main ui after non-subscriber is redirected to subscribe panel from exit of meditate panel
             if (charmButtons != null) { charmButtons.SetActive(true); }
         }
 
+        // reset flags
         fromOptions = false;
         fromLove = false;
         fromVisualOptions = false;
         fromAudioOptions = false;
         fromMeditate = false;
+        fromSecrets = false;
+        fromTutorial = false;
+
+        base.OnDisable();
     }
 }

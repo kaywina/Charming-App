@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SwipeThroughObjectArray : SwipeFunction
 {
     public GameObject[] objects;
-    int index = 0;
+    private int index = 0;
 
     public Text currentPageText;
     public Text totalPagesText;
@@ -88,5 +88,10 @@ public class SwipeThroughObjectArray : SwipeFunction
         {
             totalPagesText.text = objects.Length.ToString();
         }
+    }
+
+    public void SetIndex(int toSet)
+    {
+        index = toSet;
     }
 }
