@@ -10,7 +10,6 @@ public class UnlockPanel : CharmsPanel
     public Button buyButton;
     public Text costText;
     public CongratsPanel congratsPanel;
-    public OptionsPanel optionsPanel;
     private static int cost;
     private static GameObject toUnlock;
     private GameObject unlockButton;
@@ -134,7 +133,6 @@ public class UnlockPanel : CharmsPanel
 
     public void HidePanel()
     {
-        optionsPanel.SetReturnToMain(true); // i think there was an edge case bug related to this; should've commented it at the time I fixed it oops
         returnToMain = true;
         base.OnDisable();
         gameObject.SetActive(false);
@@ -168,7 +166,6 @@ public class UnlockPanel : CharmsPanel
             congratsPanel.ShowPanel(isCharm);
         }
         
-        optionsPanel.SetReturnToMain(true);
         gameObject.SetActive(false);
     }
 
