@@ -31,7 +31,7 @@ public class UnlockPanel : CharmsPanel
     new void OnEnable()
     {
         SetHintText(toUnlock.name);
-
+        SetReturnToMain(true);
         base.OnEnable();
         bool canWithdraw = false;
         canWithdraw = CurrencyManager.CanWithdrawAmount(cost);
@@ -123,7 +123,8 @@ public class UnlockPanel : CharmsPanel
 
     new void OnDisable()
     {
-        // do not call base.OnDisable here because we go to congrats panel after not back to main UI
+        SetReturnToMain(false);
+        base.OnDisable();
     }
 
     public void ShowPanel()
