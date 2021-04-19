@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class WhiteNoise : MonoBehaviour
 {
+    [Range(0, 3f)]
+    public float noiseMultiplier = 2;
+
+    [Range(-1, 2f)]
+    public float noiseReducer = 1;
+
     [Range(-1f, 1f)]
-    public float offset;
+    public float noiseOffset;
 
     System.Random rand = new System.Random();
 
     
     // basic static; requires an audio source (can be empty)
-    void OnAudioFilterRead(float[] data, int channels)
+    void OnAudioFilterRead(float[] audioSourceData, int channels)
     {
-        for (int i = 0; i < data.Length; i++)
+        for (int i = 0; i < audioSourceData.Length; i++)
         {
-            data[i] = (float)(rand.NextDouble() * 2.0 - 1.0 + offset);
+            audioSourceData[i] = (float)(rand.NextDouble() * noiseMultiplier - noiseReducer + noiseOffset); // would it be possible to adjust this to have multiple types of white noise?
         }
     }
  }
