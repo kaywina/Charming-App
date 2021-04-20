@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * This only works if the GameObject is enabled in the scene by default
- * 
+ * When testing in Editor, you need to move mouse from game window over to inspector to see the script status (enabled/disabled) updated.
+ * The Editor does not update in real-time, making it appears as though it isn't working when it is.
  * */
 
 public class ToggleComponent : MonoBehaviour
