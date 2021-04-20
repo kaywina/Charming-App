@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LowPassFilterFrequencySlider : PlayerPrefSlider
+public class HighPassFilterFrequencySlider : PlayerPrefSlider
 {
-    public AudioLowPassFilter lowPassFilter;
+    public AudioHighPassFilter highPassFilter;
 
     new private void OnEnable()
     {
         //Debug.Log("OnEnable in LowPassFilterFrequencySlider");
-        lowPassFilter.cutoffFrequency = targetSlider.value;
+        highPassFilter.cutoffFrequency = targetSlider.value;
         base.OnEnable();
     }
 
     public void UpdateValue()
     {
-        lowPassFilter.cutoffFrequency = targetSlider.value;
+        highPassFilter.cutoffFrequency = targetSlider.value;
         UpdatePlayerPrefFromSlider();
     }
 }
