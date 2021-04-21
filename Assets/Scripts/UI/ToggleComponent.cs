@@ -10,7 +10,7 @@ using UnityEngine;
 public class ToggleComponent : SetPlayerPrefFromToggle
 {
     public GameObject targetObject;
-    public enum ComponentType { AudioLowPassFilter, AudioHighPassFilter, AudioDistortionFilter, AudioChorusFilter };
+    public enum ComponentType { WhiteNoise, AudioLowPassFilter, AudioHighPassFilter, AudioDistortionFilter, AudioChorusFilter };
     public ComponentType componentType;
 
     new protected void OnEnable()
@@ -42,6 +42,9 @@ public class ToggleComponent : SetPlayerPrefFromToggle
     private void EnableComponentType()
     {
         switch (componentType) {
+            case ComponentType.WhiteNoise:
+                targetObject.GetComponent<WhiteNoise>().enabled = true;
+                break;
             case ComponentType.AudioLowPassFilter:
                 targetObject.GetComponent<AudioLowPassFilter>().enabled = true;
                 break;
@@ -64,6 +67,9 @@ public class ToggleComponent : SetPlayerPrefFromToggle
     {
         switch (componentType)
         {
+            case ComponentType.WhiteNoise:
+                targetObject.GetComponent<WhiteNoise>().enabled = false;
+                break;
             case ComponentType.AudioLowPassFilter:
                 targetObject.GetComponent<AudioLowPassFilter>().enabled = false;
                 break;
