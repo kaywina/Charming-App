@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public AudioSource wheelPointerSound;
+    public AudioSource whiteNoiseSound;
     public AudioSource[] breathSounds;
     public AudioSource[] musicClips;
 
     private float wheelPointerSoundStartVolume;
+    private float whiteNoiseSoundStartVolume;
     private float[] breathSoundsStartVolumes;
     private float[] musicClipsStartVolumes;
 
@@ -53,6 +55,7 @@ public class SoundManager : MonoBehaviour
 
         // get starting relative volumes for all audio clips
         wheelPointerSoundStartVolume = wheelPointerSound.volume;
+        whiteNoiseSoundStartVolume = whiteNoiseSound.volume;
         breathSoundsStartVolumes = new float[breathSounds.Length];
         musicClipsStartVolumes = new float[musicClips.Length];
 
@@ -153,6 +156,7 @@ public class SoundManager : MonoBehaviour
 
         // Add mute function for other sounds below
         wheelPointerSound.mute = mute;
+        whiteNoiseSound.mute = mute;
     }
 
     private void SetPlayOnMusic(bool doNotPlay)
@@ -297,6 +301,7 @@ public class SoundManager : MonoBehaviour
         if (!CheckVolume(volumeMultiplier)) { return; }
 
         wheelPointerSound.volume = wheelPointerSoundStartVolume * volumeMultiplier;
+        whiteNoiseSound.volume = whiteNoiseSoundStartVolume * volumeMultiplier;
 
         float tempNewVolume = 0;
         for (int i = 0; i < breathSounds.Length; i++)
