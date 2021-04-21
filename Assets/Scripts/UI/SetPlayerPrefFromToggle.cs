@@ -34,7 +34,7 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         SetToggleFromPlayerPref();
     }
@@ -46,15 +46,17 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
         string prefString = PlayerPrefs.GetString(playerPrefName);
         if (prefString == "false")
         {
-            PlayerPrefs.SetString(playerPrefName, "false");
             toggle.isOn = false;
             //Debug.Log("Set PlayerPref " + playerPrefName + " toggle off OnEnable");
         }
-        else
+        else if (prefString == "true")
         {
-            PlayerPrefs.SetString(playerPrefName, "true");
             toggle.isOn = true;
             //Debug.Log("Set PlayerPref  " + playerPrefName + " toggle on OnEnable");
+        }
+        else
+        {
+            Debug.Log("Invalid player pref data");
         }
     }
 

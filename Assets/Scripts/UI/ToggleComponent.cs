@@ -7,21 +7,29 @@ using UnityEngine;
  * The Editor does not update in real-time, making it appears as though it isn't working when it is.
  * */
 
-public class ToggleComponent : MonoBehaviour
+public class ToggleComponent : SetPlayerPrefFromToggle
 {
-    public SetPlayerPrefFromToggle playerPrefToggle;
     public GameObject targetObject;
     public enum ComponentType { AudioLowPassFilter, AudioHighPassFilter, AudioDistortionFilter, AudioChorusFilter };
     public ComponentType componentType;
 
-    void OnEnable()
+    new protected void OnEnable()
     {
-        EnableDisableComponentFromPlayerPrefToggle();
+        base.OnEnable();
+        TurnComponentOnOffFromPlayerPref();
     }
 
-    public void EnableDisableComponentFromPlayerPrefToggle()
+    public void ToggleComponentOnOff()
     {
-        if (playerPrefToggle.GetPlayerPrefValue())
+        base.TogglePlayerPref();
+        TurnComponentOnOffFromPlayerPref();
+
+
+    }
+
+    private void TurnComponentOnOffFromPlayerPref()
+    {
+        if (base.GetPlayerPrefValue())
         {
             EnableComponentType();
         }
