@@ -30,7 +30,7 @@ public class GoogleMobileAdsController : MonoBehaviour
             Debug.Log("Google Mobile Ads initialized");
         });
 
-        interstitialAd.LoadAd();
+        if (interstitialAd != null) { interstitialAd.LoadAd(); }
         //bannerAd.LoadAd();
         //HideBannerAd(); // or else it shows up on app load
     }
@@ -67,7 +67,7 @@ public class GoogleMobileAdsController : MonoBehaviour
             return; // don't show ads for gold users
         }
 
-        interstitialAd.ShowIfLoaded();
+        if (interstitialAd != null) { interstitialAd.ShowIfLoaded(); }
     }
 
     public void OnInterstitialAdOpening()
@@ -86,7 +86,7 @@ public class GoogleMobileAdsController : MonoBehaviour
         {
             taggedObjects[i].SetActive(true);
         }
-        interstitialAd.LoadAd(); // this allows us to re-use the interstital object (otherwise no ad will play next time ShowInterstitialAd is called)
+        if (interstitialAd != null) { interstitialAd.LoadAd(); } // this allows us to re-use the interstital object (otherwise no ad will play next time ShowInterstitialAd is called)
         //Debug.Log("On Ad Closed");
     }
 }

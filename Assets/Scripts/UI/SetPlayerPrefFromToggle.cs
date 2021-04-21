@@ -30,7 +30,8 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
             case "false":
                 return false;
             default:
-                return false;
+                Debug.LogWarning("Hit default case in GetPlayerPrefValue");
+                return toggle.isOn; // use scene object setting as default value; this case should not be hit
         }
     }
 
