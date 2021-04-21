@@ -506,3 +506,5 @@ RANDOM_NOISE*Random Noise*Bruit Aléatoire*Ruido Aleatorio*Ruído Aleatório*Zuf
 LOW_PASS_FILTER*Low pass filter*Filtre passe bas*Filtro de paso bajo*Filtro passa-baixo*Tiefpassfilter*低通滤波器*ローパスフィルタ*저역 통과 필터*Filter lolos rendah*लो पास फिल्टर*Фильтр низких частот*مرشح تمرير منخفض
 HIGH_PASS_FILTER*High pass filter*Filtre passe haut*Filtro de paso alto*Filtro passa-alto*Hochpassfilter*高通滤波器*ハイパスフィルタ*하이 패스 필터*Pass filter tinggi*उच्च पास फिल्टर*Фильтр высоких частот*مرشح دقيق
 DISTORTION_FILTER*Distortion filter*Filtre de distorsion*Filtro de distorsión*Filtro de distorção*Verzerrungsfilter*失真滤镜*ディストーションフィルター*왜곡 필터*Filter distorsi*विरूपण फिल्टर*Фильтр искажения*مرشح التشويه
+FREQUENCY*Frequency*Fréquence*Frecuencia*Frequência*Frequenz*频率*周波数*회수*Frekuensi*आवृत्ति*Частота*تكرر
+RESONANCE*Resonance*Résonance*Resonancia*Ressonância*Resonanz*谐振*共振*반향*Resonansi*गूंज*Резонанс*صدى
