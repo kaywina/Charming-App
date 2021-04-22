@@ -7,6 +7,7 @@ public class GoToBonusPanelButton : MonoBehaviour
     public CurrencyManager currencyManager;
     public GameObject bonusPanel;
     public GameObject infoPanel;
+    public GameObject subscribePanel;
 
     private string playerPrefName = "ShowBonus"; // don't change this in production!
 
@@ -33,14 +34,23 @@ public class GoToBonusPanelButton : MonoBehaviour
             bonusPanel.SetActive(true);
         }
 
-        // otherwise we don't show the bonus wheel
+        // otherwise we don't show the bonus wheel, and show ad + subscrbie panel instead
         else
         {
             //Debug.Log("Go directly to main UI");
             GoogleMobileAdsController.ShowInterstitialAd();
-            CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
-            charmsPanel.SetReturnToMain(true);
-            charmsPanel.DisableCharmsPanel();
+
+            if (UnityIAPController.IsGold())
+            {
+                CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
+                charmsPanel.SetReturnToMain(true);
+                charmsPanel.DisableCharmsPanel();
+            }
+            else
+            {
+                infoPanel.SetActive(false);
+                subscribePanel.SetActive(true);
+            }
         }
     }
 }
