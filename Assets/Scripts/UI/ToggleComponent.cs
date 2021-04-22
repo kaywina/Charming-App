@@ -23,8 +23,6 @@ public class ToggleComponent : SetPlayerPrefFromToggle
     {
         base.TogglePlayerPref();
         TurnComponentOnOffFromPlayerPref();
-
-
     }
 
     private void TurnComponentOnOffFromPlayerPref()

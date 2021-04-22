@@ -5,6 +5,7 @@ using UnityEngine;
 public class LowPassFilterFrequencySlider : PlayerPrefSlider
 {
     public AudioLowPassFilter lowPassFilter;
+    private float defaultFrequency = 5000;
 
     new private void OnEnable()
     {
@@ -16,6 +17,13 @@ public class LowPassFilterFrequencySlider : PlayerPrefSlider
     public void UpdateValue()
     {
         lowPassFilter.cutoffFrequency = targetSlider.value;
+        UpdatePlayerPrefFromSlider();
+    }
+
+    public void ResetToDefault()
+    {
+        lowPassFilter.cutoffFrequency = defaultFrequency;
+        targetSlider.value = defaultFrequency;
         UpdatePlayerPrefFromSlider();
     }
 }

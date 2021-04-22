@@ -6,7 +6,7 @@ public class GoToBonusPanelButton : MonoBehaviour
 {
     public CurrencyManager currencyManager;
     public GameObject bonusPanel;
-    public GameObject infoPanel;
+    public GameObject tutorialPanel;
     public GameObject subscribePanel;
 
     private string playerPrefName = "ShowBonus"; // don't change this in production!
@@ -28,9 +28,9 @@ public class GoToBonusPanelButton : MonoBehaviour
         // if we want to should the bonus wheel
         if (canOpen && shouldOpen)
         {
-            CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
+            CharmsPanel charmsPanel = tutorialPanel.GetComponent<CharmsPanel>();
             charmsPanel.DeactivateObjects();
-            infoPanel.SetActive(false);
+            tutorialPanel.SetActive(false);
             bonusPanel.SetActive(true);
         }
 
@@ -42,13 +42,13 @@ public class GoToBonusPanelButton : MonoBehaviour
 
             if (UnityIAPController.IsGold())
             {
-                CharmsPanel charmsPanel = infoPanel.GetComponent<CharmsPanel>();
+                CharmsPanel charmsPanel = tutorialPanel.GetComponent<CharmsPanel>();
                 charmsPanel.SetReturnToMain(true);
                 charmsPanel.DisableCharmsPanel();
             }
             else
             {
-                infoPanel.SetActive(false);
+                tutorialPanel.SetActive(false);
                 subscribePanel.SetActive(true);
             }
         }

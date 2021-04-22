@@ -5,6 +5,7 @@ using UnityEngine;
 public class HighPassFilterResonanceSlider : PlayerPrefSlider
 {
     public AudioHighPassFilter highPassFilter;
+    private float defaultResonance = 1;
 
     new private void OnEnable()
     {
@@ -16,6 +17,13 @@ public class HighPassFilterResonanceSlider : PlayerPrefSlider
     public void UpdateValue()
     {
         highPassFilter.highpassResonanceQ = targetSlider.value;
+        UpdatePlayerPrefFromSlider();
+    }
+
+    public void ResetToDefault()
+    {
+        highPassFilter.highpassResonanceQ = defaultResonance;
+        targetSlider.value = defaultResonance;
         UpdatePlayerPrefFromSlider();
     }
 }
