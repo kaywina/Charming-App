@@ -85,4 +85,10 @@ public class ToggleComponent : SetPlayerPrefFromToggle
                 break;
         }
     }
+
+    new public void ResetToDefault()
+    {
+        base.ResetToDefault();
+        TurnComponentOnOffFromPlayerPref();
+    }
 }

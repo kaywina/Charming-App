@@ -96,4 +96,18 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
             //Debug.Log("Toggle off the PlayerPref " + playerPrefName);
         }
     }
+
+    protected void ResetToDefault()
+    {
+        if (onByDefault)
+        {
+            PlayerPrefs.SetString(playerPrefName, "true");
+            toggle.isOn = true;
+        }
+        else
+        {
+            PlayerPrefs.SetString(playerPrefName, "false");
+            toggle.isOn = false;
+        }
+    }
 }
