@@ -18,6 +18,7 @@ public class BonusPanel : CharmsPanel
     public ParticleSystem fireworks;
     public GameObject skipButton;
     public GameObject animatedArrow;
+    public GameObject subscribePanel;
 
     private bool hasSpun;
     private int bonusAmount;
@@ -151,5 +152,18 @@ public class BonusPanel : CharmsPanel
     public int GetStoredBonus()
     {
         return bonusAmount;
+    }
+
+    public void LeaveBonusPanel()
+    {
+        if (UnityIAPController.IsGold())
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            subscribePanel.SetActive(true);
+        }
     }
 }
