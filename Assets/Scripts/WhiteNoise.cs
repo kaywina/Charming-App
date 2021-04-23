@@ -15,7 +15,18 @@ public class WhiteNoise : MonoBehaviour
 
     System.Random rand = new System.Random();
 
-    
+    public AudioSource emptyAudioSource;
+
+    private void OnEnable()
+    {
+        emptyAudioSource.Play();
+    }
+
+    private void OnDisable()
+    {
+        emptyAudioSource.Stop();
+    }
+
     // basic static; requires an audio source (can be empty)
     void OnAudioFilterRead(float[] audioSourceData, int channels)
     {
