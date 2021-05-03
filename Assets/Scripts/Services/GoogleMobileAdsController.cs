@@ -23,6 +23,10 @@ public class GoogleMobileAdsController : MonoBehaviour
 
         //bannerAd = MobileAds.Instance.GetAd<BannerAdGameObject>("Banner Ad");
 
+#if UNITY_IOS
+        MobileAds.SetiOSAppPauseOnBackground(true);
+#endif
+
         // Initialize the Mobile Ads SDK.
         MobileAds.Initialize((initStatus) =>
         {
