@@ -11,7 +11,6 @@ public class SwipeThroughObjectArray : SwipeFunction
     public Text currentPageText;
     public Text totalPagesText;
 
-    public bool usingButtons = true;
     public bool allowCycling = true;
 
     new void OnEnable()
