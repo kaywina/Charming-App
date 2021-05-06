@@ -144,9 +144,9 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatMissedNotificationsAndroid()
     {
-        ScheduleAndroidMissedNotification(2, 19, androidMissedNotificationID_A, Localization.GetTranslationByKey(missedNotificationTitleLocKeyA), Localization.GetTranslationByKey(missedNotificationTextLocKeyA)); // first notification at 7pm after 2 days
-        ScheduleAndroidMissedNotification(4, 9, androidMissedNotificationID_B, Localization.GetTranslationByKey(missedNotificationTitleLocKeyB), Localization.GetTranslationByKey(missedNotificationTextLocKeyB)); // second notifcation at 9am after 4 days
-        ScheduleAndroidMissedNotification(6, 12, androidMissedNotificationID_C, Localization.GetTranslationByKey(missedNotificationTitleLocKeyC), Localization.GetTranslationByKey(missedNotificationTextLocKeyC)); // third notifcation at noon after 6 days
+        ScheduleAndroidMissedNotification(3, 19, androidMissedNotificationID_A, Localization.GetTranslationByKey(missedNotificationTitleLocKeyA), Localization.GetTranslationByKey(missedNotificationTextLocKeyA)); // first notification at 7pm after 2 days
+        ScheduleAndroidMissedNotification(7, 9, androidMissedNotificationID_B, Localization.GetTranslationByKey(missedNotificationTitleLocKeyB), Localization.GetTranslationByKey(missedNotificationTextLocKeyB)); // second notifcation at 9am after 4 days
+        ScheduleAndroidMissedNotification(30, 12, androidMissedNotificationID_C, Localization.GetTranslationByKey(missedNotificationTitleLocKeyC), Localization.GetTranslationByKey(missedNotificationTextLocKeyC)); // third notifcation at noon after 6 days
     }
 
     private void ScheduleAndroidMissedNotification(int days, int hour, int id, string titleLocKey, string textLocKey)
@@ -218,9 +218,9 @@ public class NotificationManager : MonoBehaviour
 
     private void ScheduleRepeatMissedNotificationsIos()
     {
-        ScheduleIOSMissedNotification(2, 19, iOSMissedNotificationID_A, Localization.GetTranslationByKey(missedNotificationTitleLocKeyA), Localization.GetTranslationByKey(missedNotificationTextLocKeyA), Localization.GetTranslationByKey(missedNotificationSubtitleLocKeyA)); // 7pm after 2 days
-        ScheduleIOSMissedNotification(4, 9, iOSMissedNotificationID_B, Localization.GetTranslationByKey(missedNotificationTitleLocKeyB), Localization.GetTranslationByKey(missedNotificationTextLocKeyB), Localization.GetTranslationByKey(missedNotificationSubtitleLocKeyB)); // 9am after 4 days
-        ScheduleIOSMissedNotification(6, 12, iOSMissedNotificationID_C, Localization.GetTranslationByKey(missedNotificationTitleLocKeyC), Localization.GetTranslationByKey(missedNotificationTextLocKeyC), Localization.GetTranslationByKey(missedNotificationSubtitleLocKeyC)); // noon after 6 days
+        ScheduleIOSMissedNotification(3, 19, iOSMissedNotificationID_A, Localization.GetTranslationByKey(missedNotificationTitleLocKeyA), Localization.GetTranslationByKey(missedNotificationTextLocKeyA), Localization.GetTranslationByKey(missedNotificationSubtitleLocKeyA)); // 7pm after 2 days
+        ScheduleIOSMissedNotification(7, 9, iOSMissedNotificationID_B, Localization.GetTranslationByKey(missedNotificationTitleLocKeyB), Localization.GetTranslationByKey(missedNotificationTextLocKeyB), Localization.GetTranslationByKey(missedNotificationSubtitleLocKeyB)); // 9am after 4 days
+        ScheduleIOSMissedNotification(30, 12, iOSMissedNotificationID_C, Localization.GetTranslationByKey(missedNotificationTitleLocKeyC), Localization.GetTranslationByKey(missedNotificationTextLocKeyC), Localization.GetTranslationByKey(missedNotificationSubtitleLocKeyC)); // noon after 6 days
     }
 
     private void ScheduleIOSMissedNotification(int days, int hour, string id, string titleLocKey, string bodyLocKey, string subtitleLocKey) // id must be unique for each notification
