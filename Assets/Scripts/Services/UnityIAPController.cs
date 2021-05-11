@@ -461,7 +461,7 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
 
     // Validate the Charming App Gold Subscription
     private void ValidateSubscription(SubscriptionInfo i)
-    {
+    {       
         //Debug.Log("Attempt to validate subscription");
         string productIdFromInfo;
         productIdFromInfo = i.getProductId();
@@ -506,6 +506,12 @@ public class UnityIAPController : MonoBehaviour, IStoreListener
                 Debug.Log("Hit default case in subscription check; this message should not appear");
                 PlayerPrefs.SetString(goldSubscriptionPlayerPref, "false");
                 break;
+        }
+
+
+        if (i.isExpired() == 0) // 0 for ture, 1 for false; 2 for unsupported
+        {
+            PlayerPrefs.SetString(goldSubscriptionPlayerPref, "false");
         }
     }
 
