@@ -18,15 +18,6 @@ public class GoogleMobileAdsController : MonoBehaviour
             return; // no ads for gold users; don't even initialize
         }
 
-        interstitialAd = MobileAds.Instance
-            .GetAd<InterstitialAdGameObject>("Interstitial Ad");
-
-        //bannerAd = MobileAds.Instance.GetAd<BannerAdGameObject>("Banner Ad");
-
-#if UNITY_IOS
-        MobileAds.SetiOSAppPauseOnBackground(true);
-#endif
-
         // Initialize the Mobile Ads SDK.
         MobileAds.Initialize((initStatus) =>
         {
@@ -34,9 +25,20 @@ public class GoogleMobileAdsController : MonoBehaviour
             Debug.Log("Google Mobile Ads initialized");
         });
 
+        interstitialAd = MobileAds.Instance
+            .GetAd<InterstitialAdGameObject>("Interstitial Ad");
+
+#if UNITY_IOS
+        MobileAds.SetiOSAppPauseOnBackground(true);
+#endif
+
         if (interstitialAd != null) { interstitialAd.LoadAd(); }
-        //bannerAd.LoadAd();
-        //HideBannerAd(); // or else it shows up on app load
+
+        /* BANNER AD
+        bannerAd = MobileAds.Instance.GetAd<BannerAdGameObject>("Banner Ad");
+        bannerAd.LoadAd();
+        HideBannerAd(); // or else it shows up on app load
+        */
     }
 
     /*
