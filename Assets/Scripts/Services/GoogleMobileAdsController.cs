@@ -31,7 +31,6 @@ public class GoogleMobileAdsController : MonoBehaviour
 #if UNITY_IOS
         MobileAds.SetiOSAppPauseOnBackground(true);
 #endif
-
         if (interstitialAd != null) { interstitialAd.LoadAd(); }
 
         /* BANNER AD

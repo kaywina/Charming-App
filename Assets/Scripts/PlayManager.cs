@@ -23,9 +23,6 @@ public class PlayManager : MonoBehaviour
 
     public ParticleSystem fireworks;
 
-    private static int gameCostNoGold = 4; // amount to play a game for free users
-    private static int gameCostGold = 0; // amount to play a game for subscribers (set to free) - don't change this in production!
-
     private static int adReward = 8; // amount free users get for watching a rewarded ad
 
     private void Awake()
@@ -46,12 +43,6 @@ public class PlayManager : MonoBehaviour
     public void OnEnable()
     {
         SetupGameSelect();
-    }
-
-    public static int GetGameCost()
-    {
-        if (UnityIAPController.IsGold()) { return gameCostGold; }
-        else { return gameCostNoGold;  }
     }
 
     public void ReturnToGameSelect()
@@ -81,90 +72,26 @@ public class PlayManager : MonoBehaviour
 
     public void OpenGameAttention()
     {
-        if (CheckGameCost(false))
-        {
-            CloseGameSelectMenu();
-            attentionGameManager.gameObject.SetActive(true);
-            playAttentionGame.gameObject.SetActive(true);
-        }
-        else
-        {
-            //Debug.Log("Not enough keys");
-            playPanel.OpenStoreFromGameSelect();
-        }
+        CloseGameSelectMenu();
+        attentionGameManager.gameObject.SetActive(true);
+        playAttentionGame.gameObject.SetActive(true);
     }
 
     public void OpenGameMemory()
     {
-        if (CheckGameCost(false))
-        {
-            CloseGameSelectMenu();
-            rememberGameManager.gameObject.SetActive(true);
-            playRememberGame.gameObject.SetActive(true);
-        }
-        else
-        {
-            //Debug.Log("Not enough keys");
-            playPanel.OpenStoreFromGameSelect();
-        }
+        CloseGameSelectMenu();
+        rememberGameManager.gameObject.SetActive(true);
+        playRememberGame.gameObject.SetActive(true);
     }
 
     public void PlayGameAttention()
     {
-        if (CheckGameCost(true))
-        {
-            attentionGameManager.PlayGame();
-        }
-        else
-        {
-            playAttentionGame.gameObject.SetActive(false);
-            ReturnToGameSelect();
-        }
+        attentionGameManager.PlayGame();
     }
 
     public void PlayGameRemember(bool onInstructions = false)
     {
-        if (CheckGameCost(true))
-        {
-            rememberGameManager.PlayGame(onInstructions);
-        }
-        else
-        {
-            playRememberGame.gameObject.SetActive(false);
-            ReturnToGameSelect();
-        }
-    }
-
-    private bool CheckGameCost(bool withdraw)
-    {
-        if (UnityIAPController.IsGold())
-        {
-            if (CurrencyManager.CanWithdrawAmount(gameCostGold))
-            {
-                if (withdraw) { CurrencyManager.WithdrawAmount(gameCostGold); }
-                //Debug.Log("Can withdraw amount for gold subscriber");
-                return true;
-            }
-            else
-            {
-                //Debug.Log("Not enough currency for gold cost");
-            }
-        }
-        else
-        {
-            if (CurrencyManager.CanWithdrawAmount(gameCostNoGold))
-            {
-                if (withdraw) { CurrencyManager.WithdrawAmount(gameCostNoGold); }
-                //Debug.Log("Can withdraw amount for non-gold subscriber");
-                return true;
-            }
-            else
-            {
-                //Debug.Log("Not enough currency for non-gold cost");
-            }
-        }
-        
-        return false;
+        rememberGameManager.PlayGame(onInstructions);
     }
 
     public Sprite GetSpriteByIndex(int index)
