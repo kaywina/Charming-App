@@ -20,11 +20,13 @@ public class WhiteNoise : MonoBehaviour
     private void OnEnable()
     {
         emptyAudioSource.Play();
+        Screen.sleepTimeout = SleepTimeout.NeverSleep; // prevent device from automatically going to sleep
     }
 
     private void OnDisable()
     {
         emptyAudioSource.Stop();
+        Screen.sleepTimeout = SleepTimeout.SystemSetting; // allow device to go to sleep again
     }
 
     // basic static; requires an audio source (can be empty)

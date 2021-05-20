@@ -28,7 +28,7 @@ public class MeditatePanel : CharmsPanel
     {
         SetCharmModel(false);
 
-        Screen.sleepTimeout = SleepTimeout.SystemSetting;
+        Screen.sleepTimeout = SleepTimeout.SystemSetting; // allow device to go to sleep again
 
         // gold subscribers return to main UI, non-subscribers are directed to subscribe panel
         if (UnityIAPController.IsGold())
