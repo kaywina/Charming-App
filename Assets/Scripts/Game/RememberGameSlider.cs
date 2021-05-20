@@ -11,8 +11,6 @@ public class RememberGameSlider : MonoBehaviour
 
     private float defaultIndex = 2;
 
-    private string playerPrefName = "RememberGameNumberOfButtons"; // don't change this in production
-
     public GameObject sliderHintObject;
     public Text scoreMultiplierText;
     public Text numberOfButtonsText;
@@ -33,13 +31,13 @@ public class RememberGameSlider : MonoBehaviour
     public void Initialize()
     {
         //Debug.Log("Initialize Remember game slider");
-        if (!PlayerPrefs.HasKey(playerPrefName))
+        if (!PlayerPrefs.HasKey(gameRemember.GetPlayerPrefName()))
         {
             slider.value = defaultIndex;
         }
         else
         {
-            slider.value = PlayerPrefs.GetInt(playerPrefName);
+            slider.value = PlayerPrefs.GetInt(gameRemember.GetPlayerPrefName());
         }
 
         SetNumberOfButtonsFromSliderValues(); // this is getting called twice, also from OnValueChanged
@@ -57,7 +55,7 @@ public class RememberGameSlider : MonoBehaviour
         }
         else // this is what should happen
         {
-            PlayerPrefs.SetInt(playerPrefName, (int)slider.value);
+            PlayerPrefs.SetInt(gameRemember.GetPlayerPrefName(), (int)slider.value);
         }
 
         LockObjectsBasedOnRank();

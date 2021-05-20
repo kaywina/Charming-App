@@ -8,6 +8,8 @@ public class RememberGame : MonoBehaviour
     private static RememberGame instance;
     public RememberGameManager rememberManager;
 
+    private string playerPrefName = "RememberGameNumberOfButtons"; // don't change this in production
+
     public GameObject[] levelButtons;
     public PlayManager playManager;
     public RememberGameSlider difficultySlider;
@@ -33,6 +35,11 @@ public class RememberGame : MonoBehaviour
     private void OnDisable()
     {
         CancelInvoke("EndGame");
+    }
+
+    public string GetPlayerPrefName()
+    {
+        return playerPrefName;
     }
 
     public void DisableInstructionsUI()
