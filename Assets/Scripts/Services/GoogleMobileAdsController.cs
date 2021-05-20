@@ -7,7 +7,7 @@ public class GoogleMobileAdsController : MonoBehaviour
 {
 
     static InterstitialAdGameObject interstitialAd;
-    //static BannerAdGameObject bannerAd;
+    static BannerAdGameObject bannerAd;
     private GameObject[] taggedObjects; // used to control enabling/disabling of UI so it doesn't interfere with ad; this only works because interstitial ad is always shown on top of main ui instead of other panels at this point
 
     public void Start()
@@ -33,14 +33,11 @@ public class GoogleMobileAdsController : MonoBehaviour
 #endif
         if (interstitialAd != null) { interstitialAd.LoadAd(); }
 
-        /* BANNER AD
         bannerAd = MobileAds.Instance.GetAd<BannerAdGameObject>("Banner Ad");
         bannerAd.LoadAd();
-        HideBannerAd(); // or else it shows up on app load
-        */
+        HideBannerAd(); // or else it shows up on app load    
     }
 
-    /*
     public static void ShowBannerAd()
     {
         if (UnityIAPController.IsGold())
@@ -63,7 +60,6 @@ public class GoogleMobileAdsController : MonoBehaviour
         if (bannerAd != null) { bannerAd.Hide(); }
         //Debug.Log("Hide banner ad");
     }
-    */
 
     public static void ShowInterstitialAd()
     {

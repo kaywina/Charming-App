@@ -86,6 +86,7 @@ public class BonusPanel : CharmsPanel
         bonusWheel.Spin();
         skipButton.SetActive(true);
         animatedArrow.SetActive(false);
+        GoogleMobileAdsController.ShowBannerAd();
     }
 
     public void SkipSpinWithTimeScale()
@@ -96,6 +97,7 @@ public class BonusPanel : CharmsPanel
 
     public void CompleteSpin(int bonus)
     {
+        GoogleMobileAdsController.HideBannerAd();
         skipButton.SetActive(false);
         Time.timeScale = 1f; // reset timescale in case user chose to use skip button
         
