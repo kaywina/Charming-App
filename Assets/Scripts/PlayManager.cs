@@ -89,9 +89,9 @@ public class PlayManager : MonoBehaviour
         attentionGameManager.PlayGame();
     }
 
-    public void PlayGameRemember(bool onInstructions = false)
+    public void PlayGameRemember()
     {
-        rememberGameManager.PlayGame(onInstructions);
+        rememberGameManager.PlayGame();
     }
 
     public Sprite GetSpriteByIndex(int index)

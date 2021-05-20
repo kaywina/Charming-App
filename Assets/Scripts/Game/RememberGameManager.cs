@@ -134,7 +134,7 @@ public class RememberGameManager : MonoBehaviour
         return shuffledIndexes;
     }
 
-    public void PlayGame(bool onInstructions = false)
+    public void PlayGame()
     {
         //Debug.Log("Play Remember Game");
         rememberPlayGame.Reset();
@@ -165,18 +165,9 @@ public class RememberGameManager : MonoBehaviour
         else // there is no stored data so start fresh
         {
             rememberComeBack.SetActive(false);
-            if (!onInstructions)
-            {
-                //Debug.Log("Coming from the menu select screen, or high score screen");
-                instructions.SetActive(true);
-            }
-            else
-            {
-                //Debug.Log("Playing from instructions screen; setup first daily round");
-                instructions.SetActive(false);
-                rememberGameControls.SetupButtons(false);
-                rememberGameControls.gameObject.SetActive(true);
-            }       
+            instructions.SetActive(false);
+            rememberGameControls.SetupButtons(false);
+            rememberGameControls.gameObject.SetActive(true);
         }
     }
 }
