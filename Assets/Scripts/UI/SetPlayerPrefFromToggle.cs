@@ -110,4 +110,9 @@ public class SetPlayerPrefFromToggle : MonoBehaviour
             toggle.isOn = false;
         }
     }
+
+    public bool KeyExists()
+    {
+        return PlayerPrefs.HasKey(playerPrefName);
+    }
 }

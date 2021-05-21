@@ -63,7 +63,7 @@ public class BreatheControl : MonoBehaviour
         }
 
         // this allows for initial vibration on meditate panel open for slow speed setting
-        if (vibrateToggle.GetPlayerPrefValue())
+        if (vibrateToggle.KeyExists() && vibrateToggle.GetPlayerPrefValue())
         {
             if (GetVibrateFast())
             {
@@ -171,9 +171,8 @@ public class BreatheControl : MonoBehaviour
     public void Breathe(bool breatheIsIn) // true if breathing in; false if breathing out
     {
         //Debug.Log("Breathe");
-
         // For SLOW vibration speed - vibrate every breathe in/out cycle
-        if (vibrateToggle.GetPlayerPrefValue() && !GetVibrateFast())
+        if (vibrateToggle.KeyExists() && vibrateToggle.GetPlayerPrefValue() && !GetVibrateFast())
         {
             Vibrate();
         }
