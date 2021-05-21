@@ -8,6 +8,7 @@ public class BreatheControl : MonoBehaviour
     private float breatheInOutSeconds = 3f;
     private int numberOfBreaths = 0;
     private int breathsUntilBonus = 10;
+    private int breathsUntilAd = 11;
 
     private static string vibratePlayerPrefName = "VibrateSpeed";
     public SetPlayerPrefFromToggle vibrateToggle;
@@ -203,6 +204,10 @@ public class BreatheControl : MonoBehaviour
             float seconds = 5f;
             Invoke("StopFireworks", seconds);
             ShowBonusIndicatorAndGiveBonus();
+            
+        }
+        else if (breatheIn && numberOfBreaths != 0 && numberOfBreaths % breathsUntilAd == 0)
+        {
             GoogleMobileAdsController.ShowInterstitialAd();
         }
     }
