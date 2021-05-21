@@ -203,6 +203,7 @@ public class BreatheControl : MonoBehaviour
             float seconds = 5f;
             Invoke("StopFireworks", seconds);
             ShowBonusIndicatorAndGiveBonus();
+            GoogleMobileAdsController.ShowInterstitialAd();
         }
     }
 
