@@ -156,6 +156,7 @@ public class PlayGame : MonoBehaviour
         // show the high score display
         SetRewardUI(); // this shows different UI depending on if user got a new high score or not
         ShowYourScoreDisplay(score);
+        GoogleMobileAdsController.ShowInterstitialAd();
     }
 
 
