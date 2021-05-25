@@ -13,7 +13,6 @@ public class RememberGame : MonoBehaviour
     public GameObject[] levelButtons;
     public PlayManager playManager;
     public RememberGameSlider difficultySlider;
-    public GameObject instructionsStarry;
     public GameObject rememberComeBack;
     public Text dayText;
     public GameObject correctIndicator;
@@ -46,7 +45,6 @@ public class RememberGame : MonoBehaviour
     {
 
         difficultySlider.gameObject.SetActive(false);
-        instructionsStarry.SetActive(false);
     }
 
     private void DisableAllButtons()
