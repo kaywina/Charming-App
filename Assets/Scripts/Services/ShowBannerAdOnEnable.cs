@@ -6,12 +6,12 @@ public class ShowBannerAdOnEnable : MonoBehaviour
 {
     private void OnEnable()
     {
-        //GoogleMobileAdsController.ShowBannerAd();
+        GoogleMobileAdsController.ShowBannerAd();
     }
 
 
     private void OnDisable()
     {
-        //GoogleMobileAdsController.HideBannerAd();
+        GoogleMobileAdsController.HideBannerAd();
     }
 }
