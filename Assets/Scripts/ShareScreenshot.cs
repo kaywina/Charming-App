@@ -6,6 +6,7 @@ using System.IO;
 public class ShareScreenshot : MonoBehaviour
 {
 
+    public bool hideBannerAd = false;
 
     public bool useCustomFileName = false;
     public string customFileName = "";
@@ -105,6 +106,8 @@ public class ShareScreenshot : MonoBehaviour
         //Debug.Log("Sharing with subject - " + shareSubject);
         shareLink = "www.charmingapp.com";
         shareMessage = string.Format("{0} - {1}", Application.productName, shareLink); // share message is always app name + url
+
+        if (hideBannerAd) { GoogleMobileAdsController.HideBannerAd(); }
         ShareSS();
     }
 
@@ -178,6 +181,8 @@ public class ShareScreenshot : MonoBehaviour
         if (thanksObject != null) { thanksObject.SetActive(true); }
         if (okButton != null) { okButton.SetActive(true); }
         if (currencyIndicator != null) { currencyIndicator.gameObject.SetActive(true); }
+
+        if (hideBannerAd) { GoogleMobileAdsController.ShowBannerAd(); }
     }
 
     private void GiveBonus()
