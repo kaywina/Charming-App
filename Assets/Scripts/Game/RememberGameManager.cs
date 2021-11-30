@@ -13,7 +13,7 @@ public class RememberGameManager : MonoBehaviour
     public GameObject rememberComeBack;
     public GameObject instructions;
     public GameObject sliderHintObject;
-    public GameObject tenIsPerfectObject;
+    public GameObject starryTextForPerfectGame;
 
     public int daysToWin = 10;
 
@@ -139,7 +139,7 @@ public class RememberGameManager : MonoBehaviour
         //Debug.Log("Play Remember Game");
         rememberPlayGame.Reset();
         rememberGameControls.ResetButtons();
-        tenIsPerfectObject.SetActive(false);
+        starryTextForPerfectGame.SetActive(false);
 
         if (HasSavedData())
         {
@@ -147,7 +147,7 @@ public class RememberGameManager : MonoBehaviour
             {
                 //Debug.Log("It's a new day, input your numbers!");
                 sliderHintObject.SetActive(false);
-                tenIsPerfectObject.SetActive(true);
+                starryTextForPerfectGame.SetActive(true);
                 instructions.SetActive(false);
                 rememberGameControls.SetupButtonsFromData();
                 rememberGameControls.DisableDifficultySlider();
