@@ -256,15 +256,17 @@ public class AttentionGame : MonoBehaviour
 
     public void ResetGame()
     {
-        if (indexedButtons != null)
+        if (indexedButtons != null && selectedIndex < indexedButtons.Length)
         {
             indexedButtons[selectedIndex].gameObject.SetActive(true); // set the last clicked button back to active incase it was deactivated as an incorrect choice
         }
+        selectedIndex = 0;
 
         for (int n = 0; n < levelButtons.Length; n++)
         {
             levelButtons[n].SetActive(false);
         }
+
         incorrectIndicator.SetActive(false);
         playingGame = false;
         selectedCount = 0;
